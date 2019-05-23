@@ -124,3 +124,14 @@
     width: 30%;
     margin-left: 3%;
 }
+
+/*List of Accounts*/
+.list-of-accounts-container{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+.list-of-accounts-table{
+    text-align: center;
+}
