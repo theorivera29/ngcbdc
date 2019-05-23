@@ -17,7 +17,6 @@
 
 <body>
     <div class="row dashboard-card-container">
-
         <div class="card account-card-container">
             <h5 class="card-header">Accounts</h5>
             <div class="card-body">
@@ -26,8 +25,6 @@
             <h6 class="card-footer">active accounts</h6>
         </div>
 
-
-
         <div class="card password-card-container">
             <h5 class="card-header">Password Reset</h5>
             <div class="card-body">
@@ -35,8 +32,6 @@
             </div>
             <h6 class="card-footer">requesting for a new password</h6>
         </div>
-
-
 
         <div class="card project-card-container">
             <h5 class="card-header">Project</h5>
