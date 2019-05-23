@@ -92,3 +92,10 @@
     margin-right: 2%;
     margin-bottom: 2%;
 }
+
+/*Materials Engineer - Adding of Something*/
+.adding-table{
+    width: 60% !important;
+    margin-left: 10%;
+    text-align: center;
+}
