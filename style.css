@@ -48,3 +48,12 @@
     width: 100% !important;
     text-align: center;
 }
+
+/*Materials Engineer-Hauling*/
+.date-container{
+    float: right !important;
+}
+
+.container{
+    margin-top: 5%;
+}
