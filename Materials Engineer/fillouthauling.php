@@ -98,7 +98,7 @@
                                 <div class="card-header">
                                     <h5>TRUCK DETAILS</h5>
                                 </div>
-                                <div class="form-group row col-lg-12">
+                                <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
                                     <div class="col-lg-8">
                                         <input class="form-control" type="text" value="">
@@ -117,6 +117,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row form-group save-btn-container">
+                        <div class="col-lg-12">
+                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
                 </form>
