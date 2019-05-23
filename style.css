@@ -48,3 +48,18 @@
     width: 100% !important;
     text-align: center;
 }
+
+/*Materials Engineer- Site Materials*/
+.site-materials-table{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center !important;
+    width: 96% !important;
+}
+
+.site-materials-search{
+    width: 25% !important;
+    margin-top: 3%;
+    margin-left: 2%;
+}
