@@ -31,7 +31,7 @@
                     </div>
                     <div class="row container">
                         <div class="form-group">
-                            <label">Delivered to</label>
+                            <label>Delivered to</label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" value="">
                             </div>
