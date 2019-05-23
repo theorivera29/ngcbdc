@@ -76,3 +76,19 @@
 .account-btn{
     float: right !important;
 }
+
+/*Materials Engineer - Report Page*/
+.reportpage-table{
+    width: 96% !important;
+    margin-top: 3% !important;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+}
+
+#generate-report{
+    float: right !important;
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
