@@ -117,9 +117,6 @@
     text-align: center;
 }
 
-
-
-
 /*Admin-Dashboard*/
 .dashboard-card-container{
     margin-left: 1% !important;
@@ -150,5 +147,17 @@
 }
 
 .list-of-accounts-table{
+    text-align: center;
+}
+
+/*Materials Engineer-View All Task*/
+.view-all-task-container{
+    width: 96%;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.view-all-task-table{
     text-align: center;
 }
