@@ -50,13 +50,19 @@
 }
 
 /*Materials Engineer-Hauling*/
-.date-container{
+.date-container, .formnum-container{
     float: right !important;
 }
 
-.container{
+.hauling-container{
     margin-top: 5%;
 }
+
+.hauling-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
 /*Materials Engineer- Site Materials*/
 .site-materials-table{
     margin-top: 2%;
