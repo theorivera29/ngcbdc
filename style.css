@@ -68,6 +68,12 @@
     padding: 2% !important;
 }
 
+/*Materials Engineer- Hauled Items*/
+.hauled-items-table{
+    width: 100% !important;
+    text-align: center;
+}
+
 /*Materials Engineer- Site Materials*/
 .site-materials-table{
     margin-top: 2%;
