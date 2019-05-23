@@ -99,3 +99,28 @@
     margin-left: 10%;
     text-align: center;
 }
+
+
+
+
+/*Admin-Dashboard*/
+.dashboard-card-container{
+    margin-left: 1% !important;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.account-card-container{
+    width: 30%;
+    margin-left: 1%;
+}
+
+.password-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
+
+.project-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
