@@ -3,3 +3,48 @@
 /*Side Navigation*/
 
 /*Materials Engineer-Dashboard*/
+.add-task-container{
+    margin-left: 5%;
+    margin-top: 5%;
+    height: 100%;
+}
+
+#task-textarea{
+    margin-top: 5%;
+    height: 40%;
+}
+
+#save-task-btn{
+    float: right;
+    margin-top: 5% !important;
+}
+
+.today-task-container{
+    margin-left: 1%;
+    margin-top: 4%;
+    width: 112% !important;
+    height: 100%;
+}
+
+.today-task-table{
+    margin-top: -2% !important;
+    text-align: center;
+    width: 100% !important;
+}
+
+#view-all-task-btn{
+    float: right;
+    margin-top: -2%;
+    margin-bottom: -4%;
+}
+
+.low-in-quantity-container{
+    width: 96% !important;
+    margin-left: 2% !important;
+    margin-top: 5%;
+}
+
+.low-quantity-table{
+    width: 100% !important;
+    text-align: center;
+}
