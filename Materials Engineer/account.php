@@ -20,42 +20,41 @@
                 <h4>User Information</h4>
             </div>
             <div class="card-body">
-                <form class="form" id="form">
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">First name</label>
+                <form class="form">
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label ">First name</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="text" value="">
                         </div>
-                        <label class="col-lg-2 col-form-label form-control-label">Last name</label>
+                        <label class="col-lg-2 col-form-label">Last name</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="text" value="">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Username</label>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Username</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="text" value="">
                         </div>
-                        <label class="col-lg-2 col-form-label form-control-label">Email Address</label>
+                        <label class="col-lg-2 col-form-label ">Email Address</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="email" value="">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Password</label>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" value="">
                         </div>
-                        <label class="col-lg-2 col-form-label form-control-label">Confirm Password</label>
+                        <label class="col-lg-2 col-form-label">Confirm Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" value="">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-9 col-form-label form-control-label"></label>
+                    <div class="row form-group">
                         <div class="col-lg-3">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
                             <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
                 </form>

@@ -77,3 +77,67 @@
     margin-top: 3%;
     margin-left: 2%;
 }
+
+/*Materials Engineer - Account*/
+.account-btn{
+    float: right !important;
+}
+
+/*Materials Engineer - Report Page*/
+.reportpage-table{
+    width: 96% !important;
+    margin-top: 3% !important;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+}
+
+#generate-report{
+    float: right !important;
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+/*Materials Engineer - Adding of Something*/
+.adding-table{
+    width: 60% !important;
+    margin-left: 10%;
+    text-align: center;
+}
+
+
+
+
+/*Admin-Dashboard*/
+.dashboard-card-container{
+    margin-left: 1% !important;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.account-card-container{
+    width: 30%;
+    margin-left: 1%;
+}
+
+.password-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
+
+.project-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
+
+/*List of Accounts*/
+.list-of-accounts-container{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+.list-of-accounts-table{
+    text-align: center;
+}
