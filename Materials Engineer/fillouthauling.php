@@ -60,11 +60,26 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <input  type="text" class="form-control" name="quantity">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="unit">
+                                    </td>
+                                    <td>
+                                        <input  type="text" class="form-control"name="articles">
+                                    </td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <input type="button"
+                                            class="btn btn-lg btn-block btn-outline-secondary" id="addrow"
+                                            value="Add Row" />
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -129,6 +144,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
