@@ -15,18 +15,9 @@
 
 <body>
     <div class="mx-auto mt-5 col-md-9">
-
         <div class="card">
             <div class="card-header">
-                <div class="row col-lg-12">
-                    <div class="col-lg-8">
-                        <h4>Hauling Receipt</h4>
-                    </div>
-                    <div class="col-lg-4">
-                        <button class="btn btn-outline-primary generate-hauling-btn" type="button">Generate Hauling
-                            Receipt</button>
-                    </div>
-                </div>
+                <h4>Hauling Receipt</h4>
             </div>
             <div class="card-body">
                 <form class="form">
