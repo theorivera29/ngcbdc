@@ -38,7 +38,7 @@
                             <h5 class="">Today's To-do Task</h5>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-outline-primary" id="view-all-task-btn" type="button">View All Task</button>
+                            <button class="btn btn-outline-primary" id="view-all-task-btn" type="button" href="viewalltasks.php">View All Task</button>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td><button type="button" class="btn btn-success">Done</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,7 +68,7 @@
 
     <div class="card low-in-quantity-container">
         <h5 class="card-header">Materials Low in Quantity</h5>
-        <table class="table low-quantity-table">
+        <table class="table low-quantity-table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Material Name</th>
