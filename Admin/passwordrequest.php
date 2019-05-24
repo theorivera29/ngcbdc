@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!--Change class name-->
     <div class="card list-of-accounts-container">
         <h5 class="card-header">List of Accounts</h5>
         <table class="table list-of-accounts-table table-striped table-bordered">
