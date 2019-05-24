@@ -171,3 +171,11 @@
 .view-all-task-table{
     text-align: center;
 }
+
+/*Materials Engineer - Adding Of Something*/
+.add-category-table{
+    width: 96% !important;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
