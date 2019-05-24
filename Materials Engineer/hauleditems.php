@@ -16,12 +16,12 @@
 </head>
 
 <body>
-
+<div class="mx-auto mt-5 col-md-10">
     <div class="card">
-        <table class="table hauleditems-table">
+        <table class="table hauled-items-table">
             <thead>
                 <tr>
-                    <th scope="col">Hauling forms</th>
+                    <th scope="col">Hauling Receipt</th>
                     <th scope="col">Date</th>
                     <th scope="col">Project</th>
                     <th scope="col">Deliver To</th>
@@ -39,6 +39,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </body>
 
 </html>

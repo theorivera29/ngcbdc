@@ -68,10 +68,20 @@
     padding: 2% !important;
 }
 
+/*Materials Engineer- View All Task*/
+.all-task-table{
+    width: 100% !important;
+    text-align: center;
+}
+
 /*Materials Engineer- Hauled Items*/
 .hauled-items-table{
     width: 100% !important;
     text-align: center;
+}
+
+.generate-hauling-btn{
+    float: right !important;
 }
 
 /*Materials Engineer- Site Materials*/
