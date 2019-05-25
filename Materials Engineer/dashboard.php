@@ -93,7 +93,7 @@
                                 matinfo.currentQuantity, 
                                 unit.unit_name, 
                                 matinfo.matinfo_notif, 
-                                projects.project_name 
+                                projects.projects_name 
                             FROM
                                 materials
                             INNER JOIN
@@ -108,16 +108,20 @@
                                 projmateng ON projmateng.projmateng_project = projects.projects_id
                             WHERE 
                                 projmateng.projmateng_mateng = $accounts_id";
-                    mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_row($result)) {
                 ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $row[0] ;?></td>
+                    <td><?php echo $row[1] ;?></td>
+                    <td><?php echo $row[2] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                    <td><?php echo $row[4] ;?></td>
+                    <td><?php echo $row[5] ;?></td>
                 </tr>
+                <?php
+                    }
+                ?>
             </tbody>
         </table>
     </div>
