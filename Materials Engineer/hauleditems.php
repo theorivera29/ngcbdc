@@ -18,7 +18,7 @@
 <body>
 <div class="mx-auto mt-5 col-md-10">
     <div class="card">
-        <table class="table hauled-items-table">
+        <table class="table hauled-items-table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Hauling Receipt</th>
@@ -34,7 +34,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td><button type="button" class="btn btn-success">Done</button></td>
                 </tr>
             </tbody>
         </table>
