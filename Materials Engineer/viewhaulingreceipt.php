@@ -14,17 +14,14 @@
 </head>
 
 <body>
-    <div class="mx-auto mt-5 col-md-9">
-
-        <div class="card">
+    <button class="btn btn-warning generate-hauling-btn" type="button">Generate Hauling
+        Receipt</button>
+    <div class="mx-auto">
+        <div class="card view-hauling-receipt-container">
             <div class="card-header">
                 <div class="row col-lg-12">
                     <div class="col-lg-8">
                         <h4>Hauling Receipt</h4>
-                    </div>
-                    <div class="col-lg-4">
-                        <button class="btn btn-outline-primary generate-hauling-btn" type="button">Generate Hauling
-                            Receipt</button>
                     </div>
                 </div>
             </div>
@@ -48,13 +45,13 @@
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Deliver to:</label>
-                        <div class="col-lg-9">
+                        <div class="col-lg-10">
                             <input class="form-control" type="text" value="" disabled>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-9">
+                        <div class="col-lg-10">
                             <input class="form-control" type="text" value="" disabled>
                         </div>
                     </div>
@@ -109,18 +106,18 @@
                                 </div>
                                 <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
+                                    <div class="col-lg-8 form-group">
+                                        <input class="form-control" type="text" value="" disabled>
+                                    </div>
+                                    <label class="col-lg-4 form-group col-form-label">Plate #:</label>
                                     <div class="col-lg-8">
                                         <input class="form-control" type="text" value="" disabled>
                                     </div>
-                                    <label class="col-lg-4 col-form-label">Plate #:</label>
+                                    <label class="col-lg-4 form-group col-form-label">P.O./R.S. #:</label>
                                     <div class="col-lg-8">
                                         <input class="form-control" type="text" value="" disabled>
                                     </div>
-                                    <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="" disabled>
-                                    </div>
-                                    <label class="col-lg-4 col-form-label">Hauler ID:</label>
+                                    <label class="col-lg-4 form-group col-form-label">Hauler ID:</label>
                                     <div class="col-lg-8">
                                         <input class="form-control" type="text" value="" disabled>
                                     </div>
