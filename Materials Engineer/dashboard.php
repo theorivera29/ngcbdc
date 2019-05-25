@@ -1,6 +1,12 @@
 <?php
     include "../db_connection.php";
+<<<<<<< HEAD
+    session_start();
 ?>
+
+=======
+?>
+>>>>>>> 618de790a32c5462f8294539d49da581db38a452
 <!DOCTYPE html>
 
 <html>
@@ -86,14 +92,43 @@
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    $accounts_id = $_SESSION['account_id'];
+                    $sql = "SELECT 
+                                materials.mat_name, 
+                                categories.categories_name, 
+                                matinfo.currentQuantity, 
+                                unit.unit_name, 
+                                matinfo.matinfo_notif, 
+                                projects.projects_name 
+                            FROM
+                                materials
+                            INNER JOIN
+                                categories ON materials.mat_categ = categories.categories_id
+                            INNER JOIN
+                                matinfo ON materials.mat_id = matinfo.matinfo_id
+                            INNER JOIN
+                                unit ON materials.mat_unit = unit.unit_id
+                            INNER JOIN
+                                projects ON matinfo.matinfo_project = projects.projects_id
+                            INNER JOIN
+                                projmateng ON projmateng.projmateng_project = projects.projects_id
+                            WHERE 
+                                projmateng.projmateng_mateng = $accounts_id";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_row($result)) {
+                ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $row[0] ;?></td>
+                    <td><?php echo $row[1] ;?></td>
+                    <td><?php echo $row[2] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                    <td><?php echo $row[4] ;?></td>
+                    <td><?php echo $row[5] ;?></td>
                 </tr>
+                <?php
+                    }
+                ?>
             </tbody>
         </table>
     </div>
