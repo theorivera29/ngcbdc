@@ -2,10 +2,10 @@
     include "db_connection.php";
     include "smtp_connection.php";
 
-<--Admin-->
+//Admin
 
     
-<--Materials Engineer-->
+//Materials Engineer
     
     if (isset($_POST['create_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['formNumber']);
@@ -60,5 +60,5 @@
     }
 
     
-<--View Only-->
+//View Only
 ?>

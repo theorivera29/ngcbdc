@@ -1,3 +1,7 @@
+<?php
+    include "../db_connection.php";
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -23,33 +27,33 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleInputEmail1">First Name</label>
-                        <input type="email" class="form-control" placeholder="Enter first name">
+                        <input name="firstName" type="email" class="form-control" placeholder="Enter first name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Last Name</label>
-                        <input type="text" class="form-control" placeholder="Enter last name">
+                        <input name="lastName" type="text" class="form-control" placeholder="Enter last name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Userame</label>
-                        <input type="text" class="form-control" placeholder="Enter username">
+                        <input name="username" type="text" class="form-control" placeholder="Enter username">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input name="email" type="email" class="form-control" placeholder="Enter email">
                     </div>
                     <span>Account Type:</span>
                     <div class="form-group custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="customRadioInline1"
+                        <input type="radio" id="customRadioInline1" name="accountType"
                             class="custom-control-input">
                         <label class="custom-control-label" for="customRadioInline1">View Only</label>
                     </div>
                     <div class="form-group custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                        <input type="radio" id="customRadioInline2" name="accountType"
                             class="custom-control-input">
                         <label class="custom-control-label" for="customRadioInline2">Materials Engineer</label>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary">Create an Account</button>
+                        <button type="submit" class="btn btn-primary" name="createAccount">Create an Account</button>
                     </div>
                 </form>
             </div>
