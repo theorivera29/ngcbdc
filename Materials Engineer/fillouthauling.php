@@ -58,19 +58,17 @@
                                     <th scope="col">Articles</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="form-control" type="text" name="quantity"></td>
-                                    <td><input class="form-control" type="text" name="unit"></td>
-                                    <td><input class="form-control" type="text" name="articles"></td>
-                                </tr>
+                            <tbody id=haulingTable>
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    </td>
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="articles" placeholder="Articles">
+                                    </td>
                                     <td colspan="5">
-                                        <input type="button"
-                                            class="btn btn-lg btn-block btn-outline-secondary" id="addrow"
-                                            value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -138,7 +136,22 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".add-row").click(function () {
+                var quantity = $("#quantity").val();
+                var unit = $("#unit").val();
+                var articles = $("#articles").val();
+                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles +"</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                $("table tbody").append(markup);
+            });
 
+            $("#haulingTable").on('click','.delete-row',function(){
+       $(this).closest('tr').remove();
+     });
+        });
+    </script>
 </body>
 
 </html>
