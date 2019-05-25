@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -32,6 +35,7 @@
                 <th class="align-middle">Project</th>
             </tr>
         </thead>
+    
         <tbody>
             <tr>
                 <td></td>
