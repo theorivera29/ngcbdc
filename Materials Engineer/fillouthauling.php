@@ -58,7 +58,7 @@
                                     <th scope="col">Articles</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id=haulingTable>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -68,8 +68,7 @@
                                     <td><input class="form-control" type="text" id="articles" placeholder="Articles">
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                            value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -144,16 +143,13 @@
                 var quantity = $("#quantity").val();
                 var unit = $("#unit").val();
                 var articles = $("#articles").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + articles +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles +"</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
 
-            // Find and remove selected table rows
-            $(".delete-row").click(function () {
-                $(this).closest('tr').remove();
-                return false;
-            });
+            $("#haulingTable").on('click','.delete-row',function(){
+       $(this).closest('tr').remove();
+     });
         });
     </script>
 </body>
