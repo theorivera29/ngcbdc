@@ -18,6 +18,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
+    <script src="bootstrap-datetimepicker.min.js"></script>
+
 </head>
 
 <body>
@@ -26,11 +29,10 @@
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
                 <div class="card-body">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                    </div>
+                    <p>Date:</p>
+                    <input type="date" class="form-control add-task-date" name="date">
                     <textarea class="form-control" id="task-textarea"></textarea>
-                    <button type="button" class="btn btn-outline-primary" id="save-task-btn" type="submit">Save</button>
+                    <button type="button" class="btn btn-success" id="save-task-btn" type="submit">Save</button>
                 </div>
             </div>
         </div>
@@ -43,7 +45,8 @@
                             <h5 class="">Today's To-do Task</h5>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-outline-primary" id="view-all-task-btn" type="button" href="viewalltasks.php">View All Task</button>
+                            <button class="btn btn-light" id="view-all-task-btn" type="button"
+                            onclick="window.location.href = 'viewalltasks.php'">View All Task</button>
                         </div>
                     </div>
                 </div>
