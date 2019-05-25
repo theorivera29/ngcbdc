@@ -1,13 +1,8 @@
 <?php
-<<<<<<< HEAD
     include "db_connection.php";
     session_start();
 ?>
 
-=======
-    include "../db_connection.php";
-?>
->>>>>>> 618de790a32c5462f8294539d49da581db38a452
 <!DOCTYPE html>
 
 <html>
