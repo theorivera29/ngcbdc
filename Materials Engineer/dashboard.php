@@ -1,3 +1,8 @@
+<?php
+    include "../db_connection.php";
+    session_start();
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -80,6 +85,30 @@
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    $accounts_id = $_SESSION['account_id'];
+                    $sql = "SELECT 
+                                materials.mat_name, 
+                                categories.categories_name, 
+                                matinfo.currentQuantity, 
+                                unit.unit_name, 
+                                matinfo.matinfo_notif, 
+                                projects.project_name 
+                            FROM
+                                materials
+                            INNER JOIN
+                                categories ON materials.mat_categ = categories.categories_id
+                            INNER JOIN
+                                matinfo ON materials.mat_id = matinfo.matinfo_id
+                            INNER JOIN
+                                unit ON materials.mat_unit = unit.unit_id
+                            INNER JOIN
+                                projects ON matinfo.matinfo_project = projects.projects_id
+                            INNER JOIN
+                                projmateng ON projmateng.projmateng_project = projects.projects_id
+                            WHERE 
+                                projmateng.projmateng_mateng = $accounts_id"
+                ?>
                 <tr>
                     <td></td>
                     <td></td>

@@ -1,3 +1,8 @@
+<?php
+    include "db_connection.php";
+    session_start();
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -15,18 +20,17 @@
 
 <body>
     <div class="">
-        <form>
+        <form action="server.php" method="POST">
             <div class="form-group">
                 <label for="inputUsername">Username</label>
-                <input type="text" class="form-control" id="inputUsername" placeholder="Enter your username">
+                <input type="text" class="form-control" id="inputUsername" name="inputUsername"placeholder="Enter your username">
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password">
+                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Enter your password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="login" class="btn btn-primary">Login</button>
         </form>
     </div>
 </body>
-
 </html>

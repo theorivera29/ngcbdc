@@ -2,10 +2,42 @@
     include "db_connection.php";
     include "smtp_connection.php";
 
-<--Admin-->
+// <--System-->>
+    if (isset($_POST['login'])) {
+        session_start();
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']); 
+        $stmt = $conn->prepare("SELECT accounts_id, accounts_password, accounts_type FROM accounts WHERE accounts_username = ? AND accounts_status ='active';");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($accounts_id, $accounts_password, $accounts_type);
+        $stmt->fetch();
+        if(password_verify($password, $accounts_password)) {
+            $_SESSION['account_id']= $accounts_id;
+            $_SESSION['loggedin' ] = true;
+            $_SESSION['account_type'] = $accounts_type;
+            if (strcmp($accounts_type,"Admin") == 0) {
+                header("location: http://127.0.0.1/NGCB/Admin/admindashboard.php");
+                $stmt->close();                
+            } else if (strcmp($accounts_type,"MatEng") == 0) {
+                header("location: http://127.0.0.1/NGCB/Materials%20Engineer/dashboard.php");    
+                $stmt->close();                            
+            } else {
+                header("location: http://127.0.0.1/NGCB/View%20Only/projects.php");
+                $stmt->close();                                
+            }
+        } else {
+            $_SESSION['login_error'] = true;
+            header("location: http://127.0.0.1/NGCB/index.php");
+            $stmt->close();                
+        } 
+    }
+
+// <--Admin-->
 
     
-<--Materials Engineer-->
+// <--Materials Engineer-->
     
     if (isset($_POST['create_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['formNumber']);
@@ -60,5 +92,5 @@
     }
 
     
-<--View Only-->
+// <--View Only-->
 ?>
