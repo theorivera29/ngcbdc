@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -30,19 +33,27 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
+            <?php 
+                            $sql = "SELECT accounts_id, accounts_username, concat(accounts_fname,' ', accounts_lname) as name,  
+                            accounts_email, accounts_type, accounts_status FROM accounts WHERE accounts_deletable = 'yes';";
+                            $result = mysqli_query($conn, $sql);
+                            while($row = mysqli_fetch_row($result)){
+                        ?>
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $row[0]?></td>
+                    <td><?php echo $row[1]?></td>
+                    <td><?php echo $row[2]?></td>
+                    <td><?php echo $row[3]?></td>
+                    <td><?php echo $row[4]?></td>
+                    <td><?php echo $row[5]?></td>
                     <td><button type="button" class="btn btn-danger">Disable</button></td>
                 </tr>
             </tbody>
+            <?php
+                            }
+            ?>
         </table>
-    </div>
     </div>
 </body>
 

@@ -1,8 +1,12 @@
 <?php
     include "../db_connection.php";
+<<<<<<< HEAD
     session_start();
 ?>
 
+=======
+?>
+>>>>>>> 618de790a32c5462f8294539d49da581db38a452
 <!DOCTYPE html>
 
 <html>
