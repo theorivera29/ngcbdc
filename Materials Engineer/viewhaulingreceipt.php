@@ -34,7 +34,7 @@
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="" disabled>
                             </div>
                         </div>
                     </div>
@@ -42,20 +42,20 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="">
+                                <input class="form-control" type="date" value="" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Deliver to:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" value="" disabled>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" value="" disabled>
                         </div>
                     </div>
                     <div class="card">
@@ -80,13 +80,13 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Requested:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="" disabled>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Hauled by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="" disabled>
                             </div>
                         </div>
                     </div>
@@ -94,11 +94,11 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Warehouseman:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="" disabled>
                             </div>
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="" disabled>
                             </div>
                         </div>
 
@@ -110,19 +110,19 @@
                                 <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="" disabled>
                                     </div>
                                     <label class="col-lg-4 col-form-label">Plate #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="" disabled>
                                     </div>
                                     <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="" disabled>
                                     </div>
                                     <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="" disabled>
                                     </div>
                                 </div>
                             </div>
