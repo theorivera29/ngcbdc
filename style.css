@@ -1,5 +1,4 @@
 /*Index.php*/
-
 .login-wrapper{
     background-color: #800000;
     display: table;
@@ -51,6 +50,13 @@
     border: 2px;
 }
 
+#no-task-text{
+    font-size: 5vmin;
+    color: #D3D3D3;
+    text-align: center;
+    margin-top: 6%;
+}
+
 .card-header{
     background-color: #800000 !important;
     color: #FFF8F0;
@@ -62,10 +68,17 @@
     height: 100%;
 }
 
+#date-label{
+    display: inline-block;
+    float: left;
+}
+
 .add-task-date{
     width: 45% !important;
-    margin-top: -10% !important;
-    margin-left: 10%;
+    display: inline-block;
+    float: left;
+    margin-left: 2%;
+    margin-top: -1%;
 }
 
 #task-textarea{

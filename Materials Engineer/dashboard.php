@@ -24,8 +24,8 @@
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
                 <div class="card-body">
-                    <p>Date:</p>
-                    <input type="date" class="form-control add-task-date" name="date">
+                    <p id="date-label">Date:</p>
+                    <input type="date" class="form-group form-control add-task-date" name="date">
                     <textarea class="form-control" id="task-textarea"></textarea>
                     <button type="button" class="btn btn-success" id="save-task-btn" type="submit">Save</button>
                 </div>
@@ -41,12 +41,15 @@
                         </div>
                         <div class="col-md-4">
                             <button class="btn btn-light" id="view-all-task-btn" type="button"
-                            onclick="window.location.href = 'viewalltasks.php'">View All Task</button>
+                                onclick="window.location.href = 'viewalltasks.php'">View All Task</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table today-task-table">
+                    <div>
+                        <p id="no-task-text">NO TASK FOR TODAY</p>
+                    </div>
+                    <!-- <table class="table today-task-table">
                         <thead>
                             <tr>
                                 <th scope="col">Date</th>
@@ -63,7 +66,7 @@
                                 <td><button type="button" class="btn btn-success">Done</button></td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
             </div>
         </div>
