@@ -68,6 +68,10 @@
     padding: 2% !important;
 }
 
+.add-row-btn{
+    text-align: center !important;
+}
+
 /*Materials Engineer- View All Task*/
 .all-task-table{
     width: 100% !important;
@@ -170,4 +174,12 @@
 
 .view-all-task-table{
     text-align: center;
+}
+
+/*Materials Engineer - Adding Of Something*/
+.add-category-table{
+    width: 96% !important;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
