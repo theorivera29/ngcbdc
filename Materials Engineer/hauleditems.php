@@ -1,3 +1,7 @@
+<?php
+    include "../db_connection.php";
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -28,15 +32,24 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
+            <?php
+        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo FROM  hauling;";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_array($result)) {
+    ?>
             <tbody>
+               
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $row[0]?></td>
+                    <td><?php echo $row[1]?></td>
+                    <td><?php echo $row[2]?></td>
+                    <td><?php echo $row[3]?></td>
                     <td><button type="button" class="btn btn-success">Done</button></td>
                 </tr>
             </tbody>
+                            <?php
+        }
+    ?>
         </table>
     </div>
 </div>
