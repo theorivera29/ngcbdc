@@ -47,10 +47,25 @@
 /*Side Navigation*/
 
 /*Materials Engineer-Dashboard*/
+.card-body{
+    border: 2px;
+}
+
+.card-header{
+    background-color: #800000 !important;
+    color: #FFF8F0;
+}
+
 .add-task-container{
     margin-left: 5%;
     margin-top: 5%;
     height: 100%;
+}
+
+.add-task-date{
+    width: 45% !important;
+    margin-top: -10% !important;
+    margin-left: 10%;
 }
 
 #task-textarea{
