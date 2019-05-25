@@ -22,7 +22,7 @@
 <body>
 <div class="mx-auto mt-5 col-md-10">
     <div class="card">
-        <table class="table hauled-items-table">
+        <table class="table hauled-items-table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Hauling Receipt</th>
@@ -44,7 +44,7 @@
                     <td><?php echo $row[1]?></td>
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
-                    <td></td>
+                    <td><button type="button" class="btn btn-success">Done</button></td>
                 </tr>
             </tbody>
                             <?php
