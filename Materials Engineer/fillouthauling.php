@@ -25,7 +25,7 @@
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="formNo">
                             </div>
                         </div>
                     </div>
@@ -33,20 +33,20 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="">
+                                <input class="form-control" type="date" name="haulingDate">
                             </div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Deliver to:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" name="deliverTo">
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" name="hauledFrom">
                         </div>
                     </div>
                     <div class="card">
@@ -60,24 +60,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><input class="form-control" type="text" name="quantity"></td>
+                                    <td><input class="form-control" type="text" name="unit"></td>
+                                    <td><input class="form-control" type="text" name="articles"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="form-group row col-lg-12">
                         <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Requested:</label>
+                            <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="requestedBy">
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Hauled by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="hauledBy">
                             </div>
                         </div>
                     </div>
@@ -85,11 +85,11 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Warehouseman:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="warehouseman">
                             </div>
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="approvedBy">
                             </div>
                         </div>
 
@@ -101,19 +101,19 @@
                                 <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" name="type">
                                     </div>
                                     <label class="col-lg-4 col-form-label">Plate #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" name="plateNo">
                                     </div>
                                     <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" names="PORS">
                                     </div>
                                     <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" name="haulerID">
                                     </div>
                                 </div>
                             </div>
