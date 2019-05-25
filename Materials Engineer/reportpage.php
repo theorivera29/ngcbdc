@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<button class="btn btn-outline-primary" id="generate-report" type="button">Generate Report</button>
+<button class="btn btn-warning" id="generate-report" type="button">Generate Report</button>
     <table class="table reportpage-table table-striped table-bordered">
         <thead>
             <tr>

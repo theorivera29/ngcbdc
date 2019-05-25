@@ -143,6 +143,11 @@
     text-align: center;
 }
 
+.hauled-items-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
 .generate-hauling-btn{
     float: right !important;
 }
@@ -174,6 +179,11 @@
     margin-left: 2%;
     margin-right: 2%;
     text-align: center;
+}
+
+.reportpage-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
 }
 
 #generate-report{
@@ -242,3 +252,5 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+
+/*Materials Engineer - Project*/
