@@ -16,9 +16,13 @@
     </script>
 </head>
 
-<body>
-    <div class="">
-        <form>
+<body class="login-wrapper">
+    <div class="login-container">
+        <form class="login-form">
+            <div class="form-group">
+                <img src="Images/login.png" id="login-logo-image">
+                <p id="login-text">USER LOGIN</p>
+            </div>
             <div class="form-group">
                 <label for="inputUsername">Username</label>
                 <input type="text" class="form-control" id="inputUsername" placeholder="Enter your username">
@@ -27,7 +31,13 @@
                 <label for="inputPassword">Password</label>
                 <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div>
+                <p class="form-group forgot-password-link"><a href="#">Forgot your password?</a></p>
+            </div>
+            <div class="form-group">
+                <p>Username does not exist</p>
+                <button type="submit" class="btn btn-primary login-btn">Login</button>
+            </div>
         </form>
     </div>
 </body>

@@ -62,12 +62,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input class="form-control" type="text" name="quantity"></td>
-                                    <td><input class="form-control" type="text" name="unit"></td>
-                                    <td><input class="form-control" type="text" name="articles"></td>
-                                </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    </td>
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="articles" placeholder="Articles">
+                                    </td>
+                                    <td colspan="5">
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                            value="Add Row" />
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -132,6 +140,25 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".add-row").click(function () {
+                var quantity = $("#quantity").val();
+                var unit = $("#unit").val();
+                var articles = $("#articles").val();
+                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + articles +
+                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                $("table tbody").append(markup);
+            });
+
+            // Find and remove selected table rows
+            $(".delete-row").click(function () {
+                $(this).closest('tr').remove();
+                return false;
+            });
+        });
+    </script>
 </body>
 
 </html>

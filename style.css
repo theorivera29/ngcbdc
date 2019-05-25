@@ -1,5 +1,49 @@
 /*Index.php*/
 
+.login-wrapper{
+    background-color: #800000;
+    display: table;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+}
+
+.login-container{
+    display: table-cell;
+    vertical-align: middle;
+    background-color: 
+}
+
+.login-form {
+    margin: 0 auto;
+    width: 30%;
+    background-color: #FFF8F0 ;
+    padding: 4%;
+    box-shadow: 5px 5px rgb(128,0,0,0.9);
+    border-radius: 2%;
+}
+ 
+#login-logo-image{
+    width: 40%;
+    margin-left: 30%;
+    margin-top: -50%;
+}
+
+#login-text{
+    text-align: center;
+    font-size: 4vmin;
+}
+
+.forgot-password-link{
+    float: right;
+    font-size: 2vmin;
+}
+
+.login-btn{
+    width: 100%;
+}
+
 /*Side Navigation*/
 
 /*Materials Engineer-Dashboard*/
@@ -66,6 +110,10 @@
 .save-btn-container{
     float: right !important;
     padding: 2% !important;
+}
+
+.add-row-btn{
+    text-align: center !important;
 }
 
 /*Materials Engineer- View All Task*/
@@ -170,4 +218,12 @@
 
 .view-all-task-table{
     text-align: center;
+}
+
+/*Materials Engineer - Adding Of Something*/
+.add-category-table{
+    width: 96% !important;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
