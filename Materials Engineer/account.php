@@ -54,7 +54,7 @@
                     <div class="row form-group">
                         <div class="col-lg-3">
                             <input type="button" class="btn btn-primary" value="Save Changes">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                            <input type="reset" class="btn btn-danger" value="Cancel">
                         </div>
                     </div>
                 </form>
