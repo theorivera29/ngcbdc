@@ -2,7 +2,6 @@
     include "db_connection.php";
     include "smtp_connection.php";
 
-<<<<<<< HEAD
 // <--System-->>
     if (isset($_POST['login'])) {
         session_start();
@@ -39,12 +38,6 @@
 
     
 // <--Materials Engineer-->
-=======
-//Admin
-
-    
-//Materials Engineer
->>>>>>> 618de790a32c5462f8294539d49da581db38a452
     
     if (isset($_POST['create_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['formNumber']);
@@ -99,9 +92,5 @@
     }
 
     
-<<<<<<< HEAD
 // <--View Only-->
-=======
-//View Only
->>>>>>> 618de790a32c5462f8294539d49da581db38a452
 ?>
