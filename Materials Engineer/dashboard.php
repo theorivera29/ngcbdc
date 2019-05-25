@@ -107,7 +107,8 @@
                             INNER JOIN
                                 projmateng ON projmateng.projmateng_project = projects.projects_id
                             WHERE 
-                                projmateng.projmateng_mateng = $accounts_id"
+                                projmateng.projmateng_mateng = $accounts_id";
+                    mysqli_query($conn, $sql);
                 ?>
                 <tr>
                     <td></td>

@@ -5,8 +5,8 @@
 // <--System-->>
     if (isset($_POST['login'])) {
         session_start();
-        $username = mysqli_real_escape_string($conn, $_POST['username']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']); 
+        $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
+        $password = mysqli_real_escape_string($conn, $_POST['inputPassword']); 
         $stmt = $conn->prepare("SELECT accounts_id, accounts_password, accounts_type FROM accounts WHERE accounts_username = ? AND accounts_status ='active';");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -20,7 +20,7 @@
             if (strcmp($accounts_type,"Admin") == 0) {
                 header("location: http://127.0.0.1/NGCB/Admin/admindashboard.php");
                 $stmt->close();                
-            } else if (strcmp($accounts_type,"MatEng") == 0) {
+            } else if (strcmp($accounts_type,"Materials Engineer") == 0) {
                 header("location: http://127.0.0.1/NGCB/Materials%20Engineer/dashboard.php");    
                 $stmt->close();                            
             } else {
