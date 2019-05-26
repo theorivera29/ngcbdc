@@ -17,7 +17,7 @@
     <div class="mx-auto mt-5 col-md-9">
         <div class="card">
             <div class="card-header">
-                <h4>Material Requisition Slip</h4>
+                <h4>Delivered Materials</h4>
             </div>
             <div class="card-body">
                 <form class="form">
@@ -46,22 +46,20 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
+                                    <th scope="col">Particluars</th>
                                     <th scope="col">Unit</th>
-                                    <th scope="col">Particulars</th>
-                                    <th scope="col">Location</th>
-                                    <th scope="col">Remarks</th>
+                                    <th scope="col">Supplied By</th>
                                 </tr>
                             </thead>
-                            <tbody id=requisitionTable>
+                            <tbody id=deliveredTable>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
                                     <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="location" placeholder="Location"></td>
-                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>                                   
+                                    <td><input class="form-control" type="text" id="suppliedBy" placeholder="Supplied By">
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
@@ -69,40 +67,6 @@
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Requested by:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="requestedBy">
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Approved by:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="approvedBy">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requestDate">
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="approvedDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row form-group save-btn-container">
-                        <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
-                        </div>
                     </div>
                 </form>
             </div>
@@ -113,15 +77,14 @@
         $(document).ready(function () {
             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
-                var unit = $("#unit").val();
                 var particulars = $("#particulars").val();
-                var location = $("#location").val();
-                var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var unit = $("#unit").val();
+                var suppliedBy = $("#suppliedBy").val();
+                var markup = "<tr><td>" + quantity +"</td><td>" + particulars + "</td><td>" + unit + "</td><td>" + suppliedBy + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
 
-            $("#requisitionTable").on('click','.delete-row',function(){
+            $("#deliveredTable").on('click','.delete-row',function(){
        $(this).closest('tr').remove();
      });
         });
