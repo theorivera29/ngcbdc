@@ -285,3 +285,37 @@
 }
 
 /*Materials Engineer - Project*/
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    background-color: #800000 !important;
+    color: #FFF8F0 !important;
+}
+
+.card-header-project{
+    background-color: #0267C1 !important;
+}
+
+.project-tabs{
+    width: 100% !important;
+    margin-top: 5%;
+}
+
+.project-tabs-content{
+    margin-top: 3%;
+    width: 40% !important;
+    text-align: center;
+    margin-left: 5%;
+}
+
+.project-container{
+    width: 100%;
+}
+
+/*Materials Engineer - View Inventory*/
+.view-inventory-table{
+    width: 100% !important;
+}
+
+.view-inventory-tabs-content{
+    margin-top: 3%;
+}
