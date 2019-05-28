@@ -18,7 +18,7 @@
             <div class="card-header">
                 <div class="row col-lg-12">
                     <div class="col-lg-8">
-                        <h4>Hauling Receipt</h4>
+                        <h4>Return Hauled Materials</h4>
                     </div>
                 </div>
             </div>
@@ -61,21 +61,39 @@
                                     <th scope="col">Articles</th>
                                     <th scope="col">Returned Quantity</th>
                                     <th scope="col">Returned Date</th>
+                                    <th scope="col">Remaining Quantity</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Returning Quantity</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr data-toggle="collapse" data-target="#accordion"
+                                    class="clickable">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div id="returnedQty"></div>
+                                    </td>
+                                    <td id=returnedDate></td>
+                                    <td id=remainingQty></td>
+                                    <td id="status"></td>
+                                    <td> <input class="form-control" type="text" id="returningQty"
+                                            placeholder="Returning Quantity"></td>
+                                    <td> <input type="button" class="btn btn-md btn-outline-secondary save-row"
+                                            value="Save" /></td>
+                                </tr>
                                 <tr>
-                                    <td>5</td>
-                                    <td>pcs</td>
-                                    <td>Jonelle</td>
-                                    <td>3</td>
-                                    <td>(mm/dd/yyyy)</td>
-                                    <td>INC</td>
-                                    <td> <input class="form-control" type="text" name="haulerID"></td>
-                                    <td> <input type="button" class="btn btn-md btn-outline-secondary" value="Save" /></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td id="accordion" class="collapse">
+                                        <!-- returning qty -->
+                                    </td>
+                                    <td id="accordion" class="collapse">
+                                         <!-- date returned -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -6,11 +6,10 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -48,7 +47,7 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Particulars</th>
-                                    <th scope="col">Location</th>
+                                    <th scope="col">Area of Usage</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
@@ -60,7 +59,7 @@
                                     </td>
                                     <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
                                     <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="location" placeholder="Location"></td>
+                                    <td><input class="form-control" type="text" id="areaofUsage" placeholder="Area of Usage"></td>
                                     <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
@@ -81,20 +80,6 @@
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="approvedBy">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requestDate">
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="approvedDate">
                             </div>
                         </div>
                     </div>
