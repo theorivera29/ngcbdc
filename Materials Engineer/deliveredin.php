@@ -45,8 +45,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Particluars</th>
                                     <th scope="col">Unit</th>
+                                    <th scope="col">Articles</th>
                                     <th scope="col">Supplied By</th>
                                     <th scope="col">From</th>
                                 </tr>
@@ -57,9 +57,9 @@
                                 <tr>
                                     <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="particulars"
-                                            placeholder="Particulars">
                                     <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="articles"
+                                            placeholder="Articles"></td>
                                     <td><input class="form-control" type="text" id="suppliedBy"
                                             placeholder="Supplied By">
                                     </td>
@@ -95,11 +95,11 @@
         $(document).ready(function () {
             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
-                var particulars = $("#particulars").val();
                 var unit = $("#unit").val();
+                var articles = $("#articles").val();
                 var suppliedBy = $("#suppliedBy").val();
                 var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + particulars + "</td><td>" + unit +
+                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + articles +
                     "</td><td>" + suppliedBy +
                     "</td><td>" + selectFrom +
                     "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
