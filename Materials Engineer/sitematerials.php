@@ -37,6 +37,15 @@
         </thead>
     
         <tbody>
+            <?php
+                $sql = "SELECT
+                            materials.mat_name,
+                            categories.categories_name, 
+                            matinfo.matinfo_prevStock,
+                            unit.unit_name,
+                            deliveredin.deliveredin_date,
+                            ";
+            ?>
             <tr>
                 <td></td>
                 <td></td>
@@ -49,6 +58,9 @@
                 <td></td>
                 <td></td>
             </tr>
+            <?php
+
+            ?>
         </tbody>
     </table>
 </body>
