@@ -6,18 +6,17 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../JS/popper/popper.min.js"></script>
+    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"/></script>
 </head>
 
 <body>
     <div class="mx-auto mt-5 col-md-9">
         <div class="card">
             <div class="card-header">
-                <h4>Delivered Materials</h4>
+                <h4>Disposal slip</h4>
             </div>
             <div class="card-body">
                 <form class="form">
@@ -48,8 +47,7 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Particluars</th>
                                     <th scope="col">Unit</th>
-                                    <th scope="col">Supplied By</th>
-                                    <th scope="col">From</th>
+                                    <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
                             <tbody id=deliveredTable>
@@ -58,24 +56,12 @@
                                 <tr>
                                     <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="particulars"
-                                            placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="suppliedBy"
-                                            placeholder="Supplied By">
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <select class="form-control" id="selectFrom">
-                                            <option disabled selected>Choose</option>
-                                                <option>Main Office</option>
-                                                <option>Petty Cash</option>
-                                            </select>
-                                        </div>
+                                    <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>                                   
+                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                            value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -98,18 +84,14 @@
                 var quantity = $("#quantity").val();
                 var particulars = $("#particulars").val();
                 var unit = $("#unit").val();
-                var suppliedBy = $("#suppliedBy").val();
-                var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + particulars + "</td><td>" + unit +
-                    "</td><td>" + suppliedBy +
-                    "</td><td>" + selectFrom +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var remarks = $("#remarks").val();
+                var markup = "<tr><td>" + quantity +"</td><td>" + particulars + "</td><td>" + unit + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
 
-            $("#deliveredTable").on('click', '.delete-row', function () {
-                $(this).closest('tr').remove();
-            });
+            $("#deliveredTable").on('click','.delete-row',function(){
+       $(this).closest('tr').remove();
+     });
         });
     </script>
 </body>
