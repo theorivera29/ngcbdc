@@ -18,7 +18,7 @@
             <div class="card-header">
                 <div class="row col-lg-12">
                     <div class="col-lg-8">
-                        <h4>Hauling Receipt</h4>
+                        <h4>Return Hauled Materials</h4>
                     </div>
                 </div>
             </div>
