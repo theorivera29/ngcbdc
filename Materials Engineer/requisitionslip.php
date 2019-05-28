@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -20,12 +23,12 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="date">
                             </div>
                         </div>
                     </div>
@@ -56,12 +59,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="location" placeholder="Location"></td>
-                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="particulars" type="text" id="particulars" placeholder="Particulars">
+                                    <td><input class="form-control" name="location" type="text" id="location" placeholder="Location"></td>
+                                    <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
@@ -84,23 +87,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requestDate">
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-6">
-                        <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="approvedDate">
-                            </div>
-                        </div>
-                    </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>

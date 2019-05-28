@@ -61,6 +61,66 @@
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
+    if (isset($_POST['create_disposalSlip'])) {
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
+        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
+        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
+        $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
+        $todo_status = "in progress";
+        
+        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+        $stmt->bind_param("s", $unit);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($unit_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
+        $stmt->bind_param("s", $articles);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($mat_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("INSERT INTO disposal (disposal_date, disposal_qty, disposal_unit, disposal_matname, disposal_remarks) VALUES (?, ?, ?, ?, ?);");
+        $stmt->bind_param("siiis", $date, $quantity, $unit_id, $mat_id, $remarks);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/disposalslip.php");     
+    }
+
+    if (isset($_POST['create_requisitionSlip'])) {
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
+        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
+        $particulars = mysqli_real_escape_string($conn, $_POST['particulars']);
+        $location = mysqli_real_escape_string($conn, $_POST['location']);
+        $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
+        $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
+        $approvedBy = mysqli_real_escape_string($conn, $_POST['approvedBy']);
+        
+        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+        $stmt->bind_param("s", $unit);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($unit_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
+        $stmt->bind_param("s", $particulars);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($mat_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("INSERT INTO requisition (requisition_date, requisition_qty, requisition_unit, requisition_matname, requisition_areaOfUsage, requisition_remarks, requisition_reqBy, requisition_approvedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("siiissss", $date, $quantity, $unit_id, $mat_id, $location, $remarks, $requestedBy, $approvedBy);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/requisitionslip.php");     
+    }
+
     if (isset($_POST['update_todo'])) {
         $todo_id = $_POST['todo_id'];
         $todo_status = $_POST['todo_status'];
