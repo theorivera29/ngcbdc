@@ -13,43 +13,31 @@
 </head>
 
 <body>
-    <div class="mx-auto col-md-10">
+<div class="mx-auto mt-5 col-md-10">
         <div class="card">
             <div class="card-header">
-                <div class="row col-lg-12">
-                    <div class="col-lg-8">
-                        <h4>Return Hauled Materials</h4>
-                    </div>
-                </div>
+                <h4>Replace Disposed Materials</h4>
             </div>
             <div class="card-body">
                 <form class="form">
-                    <div class="form-group row formnum-container">
-                        <div class=" col-lg-12">
-                            <label class="col-lg-12 col-form-label">Form No.:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" value="" disabled>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Hauling Date:</label>
+                            <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="" disabled>
+                                <input class="form-control" type="date" name="disposalDate" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled by:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="" disabled>
+                        <label class="col-lg-2 col-form-label">Project:</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="project" disabled>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="" disabled>
+                        <label class="col-lg-2 col-form-label">Location:</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="location" disabled>
                         </div>
                     </div>
                     <div class="card">
@@ -59,27 +47,27 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Articles</th>
-                                    <th scope="col">Returned Quantity</th>
-                                    <th scope="col">Returned Date</th>
-                                    <th scope="col">Remaining Quantity</th>
+                                    <th scope="col">Remarks</th>
+                                    <th scope="col">Quantity Replaced</th>
+                                    <th scope="col">Date Replaced</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Returning Quantity</th>
+                                    <th scope="col">Replacement Quantity</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <tr data-toggle="collapse" data-target="#accordion"
                                     class="clickable">
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>                                   
+                                    <td><input class="form-control" type="text" placeholder="Replacement Quantity">
                                     </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td> <input class="form-control" type="text" id="returningQty"
-                                            placeholder="Returning Quantity"></td>
                                     <td> <input type="button" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
                                 </tr>
@@ -94,7 +82,7 @@
                                          <!-- date returned -->
                                     </td>
                                 </tr>
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </form>
