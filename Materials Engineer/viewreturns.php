@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <table class="table hauling-form-table">
+                        <table class="table hauling-form-table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
