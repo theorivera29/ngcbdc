@@ -6,11 +6,10 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -46,8 +45,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Particluars</th>
                                     <th scope="col">Unit</th>
+                                    <th scope="col">Articles</th>
                                     <th scope="col">Supplied By</th>
                                     <th scope="col">From</th>
                                 </tr>
@@ -58,9 +57,9 @@
                                 <tr>
                                     <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="particulars"
-                                            placeholder="Particulars">
                                     <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="articles"
+                                            placeholder="Articles"></td>
                                     <td><input class="form-control" type="text" id="suppliedBy"
                                             placeholder="Supplied By">
                                     </td>
@@ -91,16 +90,16 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
-                var particulars = $("#particulars").val();
                 var unit = $("#unit").val();
+                var articles = $("#articles").val();
                 var suppliedBy = $("#suppliedBy").val();
                 var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + particulars + "</td><td>" + unit +
+                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + articles +
                     "</td><td>" + suppliedBy +
                     "</td><td>" + selectFrom +
                     "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
