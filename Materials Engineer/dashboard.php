@@ -69,7 +69,7 @@
                                 WHERE 
                                     todoOf = $accounts_id && todo_date = '$date_today' ORDER BY todo_task;";
                         $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0){
+                        if (mysqli_num_rows($result) > 0) {
                     ?>
                     <table class="table today-task-table">
                         <thead>

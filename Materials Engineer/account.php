@@ -22,35 +22,35 @@
                 <h4>User Information</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form class="form" action="../server.php" method="POST">
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label ">First name</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" name="accounts_fname">
                         </div>
                         <label class="col-lg-2 col-form-label">Last name</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" name="accounts_lname">
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label">Username</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" name="accounts_username">
                         </div>
                         <label class="col-lg-2 col-form-label ">Email Address</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="email" value="">
+                            <input class="form-control" type="email" name="accounts_email">
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label">Password</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="password" value="">
+                            <input class="form-control" type="password" name="">
                         </div>
                         <label class="col-lg-2 col-form-label">Confirm Password</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="password" value="">
+                            <input class="form-control" type="password" name="">
                         </div>
                     </div>
                     <div class="row form-group">

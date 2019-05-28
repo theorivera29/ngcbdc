@@ -140,6 +140,87 @@
         }
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");    
     }
+
+    if(isset($_POST['edit_account'])) {
+        $username = mysqli_real_escape_string($conn, $_POST['userid']);
+        session_start();
+        $account_id = "";
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+        $edit_account_date = date("Y-m-d G:i:s");
+        if(isset($_POST['newusername']) && $_POST['newusername'] != null) {
+            $newusername = $_POST['newusername'];
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_username = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $newusername, $account_id);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change account username to '.$newusername;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+            $_SESSION['username'] = $newusername; 
+        }
+        if(isset($_POST['newfname']) && $_POST['newfname'] != null) {
+            $newfname = mysqli_real_escape_string($conn, $_POST['newfname']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_fname = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $newfname, $account_id);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change first name to '.$account_id;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        if(isset($_POST['newlname']) && $_POST['newlname'] != null) {
+            $newlname = mysqli_real_escape_string($conn, $_POST['newlname']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_lname = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $newlname, $account_id);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change last name to '.$newlname;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        if(isset($_POST['newemail']) && $_POST['newemail'] != null) {
+            $newemail = mysqli_real_escape_string($conn, $_POST['newemail']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_email = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $newemail, $account_id);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+        }
+        
+        if(isset($_POST['newpassword']) && $_POST['newpassword'] != null) {
+            $newpassword = mysqli_real_escape_string($conn, $_POST['newpassword']);
+            $hash_password = password_hash($newpassword, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $hash_password, $account_id);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change account password ';
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+        }
+        header("location: http://127.0.0.1/NGCB/Materials%20Engineer/account.php");        
+    }
     
     if (isset($_POST['create_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['formNumber']);
