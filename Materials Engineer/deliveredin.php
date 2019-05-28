@@ -49,6 +49,7 @@
                                     <th scope="col">Particluars</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Supplied By</th>
+                                    <th scope="col">From</th>
                                 </tr>
                             </thead>
                             <tbody id=deliveredTable>
@@ -57,12 +58,24 @@
                                 <tr>
                                     <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>                                   
-                                    <td><input class="form-control" type="text" id="suppliedBy" placeholder="Supplied By">
+                                    <td><input class="form-control" type="text" id="particulars"
+                                            placeholder="Particulars">
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="suppliedBy"
+                                            placeholder="Supplied By">
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select class="form-control" id="selectFrom">
+                                            <option disabled selected>Choose</option>
+                                                <option>Main Office</option>
+                                                <option>Petty Cash</option>
+                                            </select>
+                                        </div>
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                            value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -86,13 +99,17 @@
                 var particulars = $("#particulars").val();
                 var unit = $("#unit").val();
                 var suppliedBy = $("#suppliedBy").val();
-                var markup = "<tr><td>" + quantity +"</td><td>" + particulars + "</td><td>" + unit + "</td><td>" + suppliedBy + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var selectFrom = $("#selectFrom option:selected").val();
+                var markup = "<tr><td>" + quantity + "</td><td>" + particulars + "</td><td>" + unit +
+                    "</td><td>" + suppliedBy +
+                    "</td><td>" + selectFrom +
+                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
 
-            $("#deliveredTable").on('click','.delete-row',function(){
-       $(this).closest('tr').remove();
-     });
+            $("#deliveredTable").on('click', '.delete-row', function () {
+                $(this).closest('tr').remove();
+            });
         });
     </script>
 </body>
