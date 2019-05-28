@@ -24,7 +24,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="disposalDate">
                             </div>
                         </div>
                     </div>
