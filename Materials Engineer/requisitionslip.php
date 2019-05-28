@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -6,10 +9,11 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -19,12 +23,12 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="date">
                             </div>
                         </div>
                     </div>
@@ -47,7 +51,7 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Particulars</th>
-                                    <th scope="col">Area of Usage</th>
+                                    <th scope="col">Location</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
@@ -55,12 +59,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="areaofUsage" placeholder="Area of Usage"></td>
-                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="particulars" type="text" id="particulars" placeholder="Particulars">
+                                    <td><input class="form-control" name="location" type="text" id="location" placeholder="Location"></td>
+                                    <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
@@ -85,7 +89,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -105,7 +109,6 @@
                 var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
-
             $("#requisitionTable").on('click','.delete-row',function(){
        $(this).closest('tr').remove();
      });
