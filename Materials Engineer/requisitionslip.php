@@ -9,10 +9,8 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 </head>
 
@@ -66,9 +64,6 @@
                                     <td><input class="form-control" name="location" type="text" id="location" placeholder="Location"></td>
                                     <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
-                                    <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
-                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -99,20 +94,21 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
+        $(document).ready(function() {
+            $(".add-row").click(function() {
                 var quantity = $("#quantity").val();
                 var unit = $("#unit").val();
                 var particulars = $("#particulars").val();
                 var location = $("#location").val();
                 var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
-            $("#requisitionTable").on('click','.delete-row',function(){
-       $(this).closest('tr').remove();
-     });
+            $("#requisitionTable").on('click', '.delete-row', function() {
+                $(this).closest('tr').remove();
+            });
         });
+
     </script>
 </body>
 
