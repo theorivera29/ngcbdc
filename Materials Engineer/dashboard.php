@@ -9,26 +9,57 @@
 
 <head>
     <title>NGCBDC</title>
-    <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../JS/popper/popper.min.js"></script>
+    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
     <script src="bootstrap-datetimepicker.min.js"></script>
 
 </head>
 
 <body>
+    <div id="content">
+        
+        <span class="slide">
+            <a href="#" class="open" onclick="openSlideMenu()">
+                <i class="fas fa-bars"></i>
+            </a>
+            <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
+            <!-- Example single danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
+        </span>
+
+        <div id="menu" class="nav sidenav">
+            <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i>
+            </a>
+
+        </div>
+
+    </div>
+
     <div class="row">
         <div class="col-sm-5">
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
                 <div class="card-body">
+
                     <p id="date-label">Date:</p>
                     <input type="date" class="form-group form-control add-task-date" name="date">
                     <textarea class="form-control" id="task-textarea"></textarea>
@@ -133,6 +164,16 @@
     </div>
 </body>
 <script>
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';        
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+
+
 </script>
 
 </html>

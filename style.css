@@ -44,6 +44,53 @@
 }
 
 /*Side Navigation*/
+#content{
+    background-color: #E2E5E0 !important;
+}
+
+.nav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top: 60px;
+	transition: 0.7s;
+}
+
+.title{
+    width: 75%;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+.open{
+    margin-left: 3%;
+}
+
+.open:hover{
+    text-decoration: none;
+    color: yellow;
+}
+
+.nav .close {
+	position: absolute;
+	top: 2%;
+	right: 10%;
+    font-size: 5vmin;
+    color: #FFF8F0;
+}
+.nav .close:hover {
+	color: rgb(255, 255, 255);
+}
+
+.slide a {
+	color: #000;
+	font-size: 36px;
+}
 
 /*Materials Engineer-Dashboard*/
 .card-body{
