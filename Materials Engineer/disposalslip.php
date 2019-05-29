@@ -91,7 +91,6 @@
                 var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
-
             $("#deliveredTable").on('click','.delete-row',function(){
        $(this).closest('tr').remove();
      });
