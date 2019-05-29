@@ -33,18 +33,26 @@
         </thead>
     
         <tbody>
+            <?php
+                $sql = "SELECT materials.mat_name, materials.mat_categ, matinfo.matinfo_prevStock, materials.mat_unit, deliveredin.deliveredin_quantity, usagein.usagein_quantity, matinfo.currentQuantity, matinfo.matinfo_project FROM matinfo INNER JOIN materials on matinfo.matinfo_matname = materials.mat_id INNER JOIN deliveredin on deliveredin_matname = materials.mat_id INNER JOIN usagein on usagein_matname = materials.mat_id";
+                $result = mysqli_query($conn, $sql);
+                while($row = mysqli_fetch_row($result)){
+            ?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?php echo $row[0]?></td>
+                <td><?php echo $row[1]?></td>
+                <td><?php echo $row[2]?></td>
+                <td><?php echo $row[3]?></td>
+                <td><?php echo $row[4]?></td>
+                <td><?php echo $row[5]?></td>
+                <td><?php echo $row[6]?></td>
+                <td><?php echo $row[7]?></td>
+                <td><?php echo $row[3]?></td>
+                <td><?php echo $row[0]?></td>
             </tr>
+            <?php
+                }
+            ?>
         </tbody>
     </table>
 </body>
