@@ -14,41 +14,80 @@
     <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
     <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
     <script src="../JS/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
     <script src="bootstrap-datetimepicker.min.js"></script>
 
 </head>
 
 <body>
     <div id="content">
-        
         <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
             <!-- Example single danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
+            <div class="btn-group dropdown-account">
+                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="account.php">Account Settings</a>
+                    <a class="dropdown-item" href="">Logout</a>
+                </div>
+            </div>
         </span>
 
         <div id="menu" class="nav sidenav">
             <a href="#" class="close" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>NGCBDC</h3>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="dashboard.php">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Site</a>
+                        <ul class="collapse list-unstyled" id="siteSubmenu">
+                            <li>
+                                <a href="projects.php">Projects</a>
+                            </li>
+                            <li>
+                                <a href="sitematerials.php">Site Materials</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Hauling</a>
+                        <ul class="collapse list-unstyled" id="haulingSebmenu">
+                            <li>
+                                <a href="fillouthauling.php">Fill out Hauling Receipt</a>
+                            </li>
+                            <li>
+                                <a href="hauleditems.php">View Hauled Materials</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="">Returns/Replacements</a>
+                    </li>
+                    <li>
+                        <a href="reports.php">Reports</a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
 
@@ -59,7 +98,6 @@
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
                 <div class="card-body">
-
                     <p id="date-label">Date:</p>
                     <input type="date" class="form-group form-control add-task-date" name="date">
                     <textarea class="form-control" id="task-textarea"></textarea>
@@ -165,7 +203,7 @@
 </body>
 <script>
     function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';        
+        document.getElementById('menu').style.width = '15%';
     }
 
     function closeSlideMenu() {
@@ -173,7 +211,13 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
+    $(document).ready(function () {
 
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+});
+
+});
 </script>
 
 </html>
