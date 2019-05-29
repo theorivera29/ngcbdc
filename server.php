@@ -44,8 +44,7 @@
         $unit = mysqli_real_escape_string($conn, $_POST['unit']);
         $articles = mysqli_real_escape_string($conn, $_POST['articles']);
         $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
-        $todo_status = "in progress";
-        
+
         $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
         $stmt->bind_param("s", $unit);
         $stmt->execute();
@@ -95,7 +94,7 @@
         $stmt->bind_param("siiissss", $date, $quantity, $unit_id, $mat_id, $location, $remarks, $requestedBy, $approvedBy);
         $stmt->execute();
         $stmt->close();
-        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/requisitionslip.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/requisitionslip.php");     
     }
 
     if (isset($_POST['create_hauling'])) {
@@ -134,6 +133,84 @@
         $stmt->execute();
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
+    }
+
+    if (isset($_POST['update_account'])) {
+        $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+        $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+        if(isset($_POST['firstName']) && $_POST['firstName'] != null) {
+            $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_fname = ? WHERE accounts_id = 1;");
+            $stmt->bind_param("s", $firstName);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        if(isset($_POST['lastName']) && $_POST['lastName'] != null) {
+            $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_lname= ? WHERE accounts_id = 1;");
+            $stmt->bind_param("s", $lastName);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        if(isset($_POST['username']) && $_POST['username'] != null) {
+            $username = mysqli_real_escape_string($conn, $_POST['username']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_username = ? WHERE accounts_id = 1;");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        if(isset($_POST['email']) && $_POST['email'] != null) {
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_email = ? WHERE accounts_id = 1;");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        
+        if(isset($_POST['password']) && $_POST['password'] != null) {
+            $password = mysqli_real_escape_string($conn, $_POST['password']);
+            $hash_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = 1;");
+            $stmt->bind_param("s", $hash_password);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change account password ';
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/disposalslip.php");     
     }
 
     if (isset($_POST['create_todo'])) {

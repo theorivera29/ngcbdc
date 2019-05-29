@@ -22,40 +22,47 @@
                 <h4>User Information</h4>
             </div>
             <div class="card-body">
+               <?php 
+                    $sql = "SELECT 
+                    accounts_fname, accounts_lname, accounts_username, accounts_email, accounts_password FROM accounts
+                    WHERE accounts_username='materials_engineer';";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_row($result);
+                ?>
                 <form class="form" action="../server.php" method="POST">
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label ">First name</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" name="accounts_fname">
+                            <input class="form-control" type="text" value="<?php echo $row[0]?>" name="firstName">
                         </div>
                         <label class="col-lg-2 col-form-label">Last name</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" name="accounts_lname">
+                            <input class="form-control" type="text" value="<?php echo $row[1]?>" name="lastName">
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label">Username</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="text" name="accounts_username">
+                            <input class="form-control" type="text" value="<?php echo $row[2]?>" name="username">
                         </div>
                         <label class="col-lg-2 col-form-label ">Email Address</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="email" name="accounts_email">
+                            <input class="form-control" type="email" value="<?php echo $row[3]?>" name="email">
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label">Password</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="password" name="">
+                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
                         </div>
-                        <label class="col-lg-2 col-form-label">Confirm Password</label>
+           <!--             <label class="col-lg-2 col-form-label">Confirm Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="">
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-3">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" class="btn btn-primary" name="update_account" value="Save Changes">
                             <input type="reset" class="btn btn-danger" value="Cancel">
                         </div>
                     </div>
