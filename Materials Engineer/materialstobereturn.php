@@ -1,6 +1,3 @@
-<?php
-    include "../db_connection.php";
-?>
 <!DOCTYPE html>
 
 <html>
@@ -16,24 +13,29 @@
 </head>
 
 <body>
-    <div class="card view-all-task-container">
-        <h5 class="card-header">All Task</h5>
-        <div class="card-body">
-            <table class="table view-all-task-table table-striped table-bordered">
+    <div class="mx-auto mt-5 col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h4>List of Materials to be Return</h4>
+            </div>
+            <table class="table hauled-items-table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Task</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Form No.</th>
+                        <th scope="col">Hauling Date</th>
+                        <th scope="col">Hauled From</th>
+                        <th scope="col">Hauled By</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td><button type="button" class="btn btn-success">Open</button></td>
                     </tr>
                 </tbody>
             </table>

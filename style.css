@@ -43,7 +43,126 @@
     width: 100%;
 }
 
+/*Navigation*/
+.dropdown-account{
+    float: right;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+.dropdown-settings{
+    margin-left: 20% !important;
+    
+}
+
+.dropdown-toggle::after{
+    margin-left: 0 !important;
+    font-size: 4vmin;
+}
+
+.dropdown-item{
+    font-size: 2vmin !important;
+}
 /*Side Navigation*/
+#content{
+    background-color: #111 !important;
+}
+
+.nav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top: 60px;
+	transition: 0.7s;
+}
+
+.title{
+    width: 75%;
+    margin-left: 2%;
+    margin-top: -2% !important;
+    display: inline-block;
+}
+
+.open{
+    margin-left: 3%;
+    color: #000 !important;
+}
+
+.open:hover{
+    text-decoration: none;
+    color: yellow !important;
+}
+
+.dropdown-toggle collapsed {
+    background-color: yellow;
+}
+
+.nav .close {
+	position: absolute;
+	top: 2%;
+	right: 10%;
+    font-size: 5vmin;
+    color: #FFF8F0;
+}
+.nav .close:hover {
+	color: rgb(255, 255, 255);
+}
+
+.slide a {
+	color: #000;
+	font-size: 36px;
+}
+
+a {
+    color: #FFF8F0 !important;
+    text-decoration: none !important;
+}
+
+#sidebar {
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.sidebar-header{
+    text-align: center;
+}
+
+#sidebar .sidebar-header {
+    padding-bottom: 3%;
+}
+
+#sidebar ul.components {
+    margin-left: 2% !important;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
 
 /*Materials Engineer-Dashboard*/
 .card-body{
