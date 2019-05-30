@@ -1,4 +1,4 @@
-/*Index.php*/
+/*Start of Index.php*/
 .login-wrapper{
     background-color: #800000;
     display: table;
@@ -42,8 +42,10 @@
 .login-btn{
     width: 100%;
 }
+/*End of Index.php*/
 
-/*Navigation*/
+
+/*Start of Navigation*/
 .dropdown-account{
     float: right;
     margin-right: 3%;
@@ -63,7 +65,10 @@
 .dropdown-item{
     font-size: 2vmin !important;
 }
-/*Side Navigation*/
+/*End of Navigation*/
+
+
+/*Start of Side Navigation*/
 #content{
     background-color: #111 !important;
 }
@@ -163,8 +168,49 @@ ul ul #sideNav-a  {
     font-size: 0.9em !important;
     padding-left: 30px !important;
 }
+/*End of Side Navigation*/
 
-/*Materials Engineer-Dashboard*/
+/*Start of Admin Module*/
+/*Start of Admin-Dashboard*/
+.dashboard-card-container{
+    margin-left: 1% !important;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.account-card-container{
+    width: 30%;
+    margin-left: 1%;
+}
+
+.password-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
+
+.project-card-container{
+    width: 30%;
+    margin-left: 3%;
+}
+/*End of Admin-Dashboard*/
+
+
+/*Start of List of Accounts*/
+.list-of-accounts-container{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+.list-of-accounts-table{
+    text-align: center;
+}
+/*End of List of Accounts*/
+/*End of Admin Module*/
+
+
+/*Start of Materials Engineer Module*/
+/*Start of Materials Engineer-Dashboard*/
 .card-body{
     border: 2px;
 }
@@ -239,150 +285,10 @@ ul ul #sideNav-a  {
     width: 100% !important;
     text-align: center;
 }
+/* End of Materials Engineer-Dashboard*/
 
-/*Materials Engineer-Hauling*/
-.date-container, .formnum-container{
-    float: right !important;
-}
 
-.hauling-container{
-    margin-top: 5%;
-}
-
-.hauling-form-table{
-    width: 100% !important;
-    text-align: center;
-}
-
-.save-btn-container{
-    float: right !important;
-    padding: 2% !important;
-}
-
-.add-row-btn{
-    text-align: center !important;
-}
-
-/*Materials Engineer - View Hauling*/
-.view-hauling-receipt-container{
-    width: 70%;
-    margin: auto;
-    margin-top: 2%;
-    margin-bottom: 3%;
-}
-
-.generate-hauling-btn{
-    margin-left: 82%;
-    margin-top: 2%;
-}
-
-.hauling-form-card{
-    margin-left: 10%;
-}
-
-/*Materials Engineer- View All Task*/
-.all-task-table{
-    width: 100% !important;
-    text-align: center;
-}
-
-/*Materials Engineer- Hauled Items*/
-.hauled-items-table{
-    width: 100% !important;
-    text-align: center;
-}
-
-.hauled-items-table > thead > tr > th{
-    background-color: #124E78;
-    color: #FFF8F0;
-}
-/*Materials Engineer- Site Materials*/
-.site-materials-table{
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 2%;
-    text-align: center !important;
-    width: 96% !important;
-}
-
-.site-materials-table > thead > tr > th{
-    background-color: #124E78;
-    color: #FFF8F0;
-}
-
-.site-materials-search{
-    width: 25% !important;
-    margin-top: 3%;
-    margin-left: 2%;
-}
-
-/*Materials Engineer - Account*/
-.account-btn{
-    float: right !important;
-}
-
-/*Materials Engineer - Report Page*/
-.reportpage-table{
-    width: 96% !important;
-    margin-top: 3% !important;
-    margin-left: 2%;
-    margin-right: 2%;
-    text-align: center;
-}
-
-.reportpage-table > thead > tr > th{
-    background-color: #124E78;
-    color: #FFF8F0;
-}
-
-#generate-report{
-    float: right !important;
-    margin-top: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
-}
-
-/*Materials Engineer - Adding of Something*/
-.adding-table{
-    width: 60% !important;
-    margin-left: 10%;
-    text-align: center;
-}
-
-/*Admin-Dashboard*/
-.dashboard-card-container{
-    margin-left: 1% !important;
-    margin-top: 5%;
-    text-align: center;
-}
-
-.account-card-container{
-    width: 30%;
-    margin-left: 1%;
-}
-
-.password-card-container{
-    width: 30%;
-    margin-left: 3%;
-}
-
-.project-card-container{
-    width: 30%;
-    margin-left: 3%;
-}
-
-/*List of Accounts*/
-.list-of-accounts-container{
-    width: 96%;
-    margin-left: 2%;
-    margin-top: 3%;
-}
-
-.list-of-accounts-table{
-    text-align: center;
-}
-
-/*Materials Engineer-View All Task*/
+/*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
     width: 96%;
     margin-top: 3%;
@@ -393,16 +299,10 @@ ul ul #sideNav-a  {
 .view-all-task-table{
     text-align: center;
 }
+/*End of Materials Engineer-View All Task*/
 
-/*Materials Engineer - Adding Of Something*/
-.add-category-table{
-    width: 96% !important;
-    margin-top: 5%;
-    margin-left: 2%;
-    margin-right: 2%;
-}
 
-/*Materials Engineer - Project*/
+/*Start of Materials Engineer - Project*/
 .navigation{
     display: flex;
     flex-wrap: wrap;
@@ -435,8 +335,46 @@ ul ul #sideNav-a  {
 .project-container{
     width: 100%;
 }
+/*End of Materials Engineer - Project*/
 
-/*Materials Engineer - View Inventory*/
+
+/*Start of *Materials Engineer - Stockard*/
+.delivered-in-container{
+    width: 100% !important;
+}
+
+.stockcard-tabs-content{
+    margin-top: 3%;
+    width: 100% !important;
+    text-align: center;
+    width: 100%;
+}
+
+/*End of Materials Engineer - Stockard*/
+
+/*Start of Materials Engineer- Site Materials*/
+.site-materials-table{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center !important;
+    width: 96% !important;
+}
+
+.site-materials-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
+.site-materials-search{
+    width: 25% !important;
+    margin-top: 3%;
+    margin-left: 2%;
+}
+/*End of Materials Engineer- Site Materials*/
+
+
+/Start of Materials Engineer - View Inventory*/
 .view-inventory-table{
     width: 100% !important;
 }
@@ -445,7 +383,52 @@ ul ul #sideNav-a  {
     margin-top: 3%;
 }
 
-/*Materials Engineer - returnsOrReplaced*/
+
+/*Start of Materials Engineer-Hauling*/
+.date-container, .formnum-container{
+    float: right !important;
+}
+
+.hauling-container{
+    margin-top: 5%;
+}
+
+.hauling-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+.save-btn-container{
+    float: right !important;
+    padding: 2% !important;
+}
+
+.add-row-btn{
+    text-align: center !important;
+}
+/*End of Materials Engineer-Hauling*/
+
+
+/*Start of Materials Engineer - View Hauling*/
+.view-hauling-receipt-container{
+    width: 70%;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+.generate-hauling-btn{
+    margin-left: 82%;
+    margin-top: 2%;
+}
+
+.hauling-form-card{
+    margin-left: 10%;
+}
+/*End of Materials Engineer - View Hauling*/
+
+
+/*Start of Materials Engineer - returnsOrReplaced*/
 .return-container{
     width: 100% !important;
 }
@@ -459,15 +442,55 @@ ul ul #sideNav-a  {
 .replace-container{
     width: 100% !important;
 }
+/*End of Materials Engineer - returnsOrReplaced*/
 
-/*Materials Engineer - Stockard*/
-.delivered-in-container{
-    width: 100% !important;
-}
 
-.stockcard-tabs-content{
-    margin-top: 3%;
-    width: 100% !important;
+
+/*Start of Materials Engineer - Report Page*/
+.reportpage-table{
+    width: 96% !important;
+    margin-top: 3% !important;
+    margin-left: 2%;
+    margin-right: 2%;
     text-align: center;
-    width: 100%;
 }
+
+.reportpage-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
+#generate-report{
+    float: right !important;
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+/*End of Materials Engineer - Report Page*/
+
+
+/*State of Materials Engineer - Account*/
+.account-btn{
+    float: right !important;
+}
+/*End of Materials Engineer - Account*/
+
+/*Start of Materials Engineer - Adding of Something*/
+.adding-table{
+    width: 60% !important;
+    margin-left: 10%;
+    text-align: center;
+}
+/*End of Materials Engineer - Adding of Something*/
+
+/*Start of Materials Engineer - Adding Of Something*/
+.add-category-table{
+    width: 96% !important;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+/*End of Materials Engineer - Adding Of Something*/
+/*End of Materials Engineer Module*/
+
+
