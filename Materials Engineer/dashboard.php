@@ -37,8 +37,8 @@
                     aria-haspopup="true" aria-expanded="false">
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" id="sideNav-a" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" id="sideNav-a"href="">Logout</a>
+                    <a class="dropdown-item" href="account.php">Account Settings</a>
+                    <a class="dropdown-item" href="">Logout</a>
                 </div>
             </div>
         </span>
