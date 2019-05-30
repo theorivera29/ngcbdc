@@ -202,6 +202,23 @@
             ]
         });
     });
+
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+
+    $(document).ready(function () {
+
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+});
+
+});
 </script>
 
 </html>
