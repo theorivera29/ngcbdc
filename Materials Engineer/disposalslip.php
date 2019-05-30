@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -19,7 +22,7 @@
                 <h4>Disposal slip</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
@@ -54,11 +57,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="articles" placeholder="Articles"></td>                                   
-                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="articles" type="text" id="articles" placeholder="Articles"></td>                                   
+                                    <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
@@ -69,7 +72,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" class="btn btn-primary" name="create_disposalSlip" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -88,7 +91,6 @@
                 var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
-
             $("#deliveredTable").on('click','.delete-row',function(){
        $(this).closest('tr').remove();
      });

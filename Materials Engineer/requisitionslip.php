@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -19,12 +22,12 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="date">
                             </div>
                         </div>
                     </div>
@@ -47,7 +50,7 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Particulars</th>
-                                    <th scope="col">Area of Usage</th>
+                                    <th scope="col">Location</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
@@ -55,15 +58,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="particulars" placeholder="Particulars">
-                                    <td><input class="form-control" type="text" id="areaofUsage" placeholder="Area of Usage"></td>
-                                    <td><input class="form-control" type="text" id="remarks" placeholder="Remarks">
-                                    </td>
-                                    <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="particulars" type="text" id="particulars" placeholder="Particulars">
+                                    <td><input class="form-control" name="location" type="text" id="location" placeholder="Location"></td>
+                                    <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                 </tr>
                             </tfoot>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -95,21 +95,21 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
+        $(document).ready(function() {
+            $(".add-row").click(function() {
                 var quantity = $("#quantity").val();
                 var unit = $("#unit").val();
                 var particulars = $("#particulars").val();
                 var location = $("#location").val();
                 var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + particulars + "</td><td>" + location + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
             });
-
-            $("#requisitionTable").on('click','.delete-row',function(){
-       $(this).closest('tr').remove();
-     });
+            $("#requisitionTable").on('click', '.delete-row', function() {
+                $(this).closest('tr').remove();
+            });
         });
+
     </script>
 </body>
 
