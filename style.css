@@ -444,3 +444,18 @@ ul ul #sideNav-a  {
 .view-inventory-tabs-content{
     margin-top: 3%;
 }
+
+/*Materials Engineer - returnsOrReplaced*/
+.return-container{
+    width: 100% !important;
+}
+
+.returns-or-replace-content{
+    margin-top: 3%;
+    width: 100% !important;
+    text-align: center;
+}
+
+.replace-container{
+    width: 100% !important;
+}
