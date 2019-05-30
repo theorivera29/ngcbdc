@@ -459,3 +459,15 @@ ul ul #sideNav-a  {
 .replace-container{
     width: 100% !important;
 }
+
+/*Materials Engineer - Stockard*/
+.delivered-in-container{
+    width: 100% !important;
+}
+
+.stockcard-tabs-content{
+    margin-top: 3%;
+    width: 100% !important;
+    text-align: center;
+    width: 100%;
+}
