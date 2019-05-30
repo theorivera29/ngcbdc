@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
     <script src="../JS/popper/popper.min.js"></script>
-    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"/></script>
+    <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
