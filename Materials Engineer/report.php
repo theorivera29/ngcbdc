@@ -11,7 +11,7 @@
 
 <head>
     <title>NGCBDC</title>
-    <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
+    <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
