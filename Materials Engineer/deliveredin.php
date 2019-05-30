@@ -68,7 +68,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" id="selectFrom">
+                                            <select class="form-control" name="from" id="selectFrom">
                                             <option disabled selected>Choose</option>
                                                 <option>Main Office</option>
                                                 <option>Petty Cash</option>

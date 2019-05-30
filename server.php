@@ -218,6 +218,7 @@
         $unit = mysqli_real_escape_string($conn, $_POST['unit']);
         $articles = mysqli_real_escape_string($conn, $_POST['articles']);
         $suppliedBy = mysqli_real_escape_string($conn, $_POST['suppliedBy']);
+        $from = mysqli_real_escape_string($conn, $_POST['from']);
 
         $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
         $stmt->bind_param("s", $unit);
@@ -233,8 +234,8 @@
         $stmt->bind_result($mat_id);
         $stmt->fetch();
         
-        $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_quantity, deliveredin_unit, suppliedBy, deliveredin_matname) VALUES (?, ?, ?, ?, ?);");
-        $stmt->bind_param("siisi", $date, $quantity, $unit_id, $suppliedBy, $mat_id);
+        $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_quantity, deliveredin_unit, suppliedBy, deliveredin_matname, deliveredin_from) VALUES (?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("siisis", $date, $quantity, $unit_id, $suppliedBy, $mat_id, $from);
         $stmt->execute();
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/deliveredin.php");     
