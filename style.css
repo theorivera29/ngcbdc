@@ -68,7 +68,7 @@
     background-color: #111 !important;
 }
 
-.nav {
+.navigation {
 	height: 100%;
 	width: 0;
 	position: fixed;
@@ -102,23 +102,23 @@
     background-color: yellow;
 }
 
-.nav .close {
+.navigation .close {
 	position: absolute;
 	top: 2%;
 	right: 10%;
     font-size: 5vmin;
     color: #FFF8F0;
 }
-.nav .close:hover {
+.navigation .close:hover {
 	color: rgb(255, 255, 255);
 }
 
-.slide a {
+.slide #sideNav-a {
 	color: #000;
 	font-size: 36px;
 }
 
-a {
+#sideNav-a {
     color: #FFF8F0 !important;
     text-decoration: none !important;
 }
@@ -145,7 +145,7 @@ a {
     padding: 10px;
 }
 
-#sidebar ul li a {
+#sidebar ul li #sideNav-a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
@@ -155,11 +155,11 @@ a {
     background: #fff;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active > #sideNav-a , #sideNav-a [aria-expanded="true"] {
     color: #fff;
 }
 
-ul ul a {
+ul ul #sideNav-a  {
     font-size: 0.9em !important;
     padding-left: 30px !important;
 }
@@ -403,6 +403,13 @@ ul ul a {
 }
 
 /*Materials Engineer - Project*/
+.navigation{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
     background-color: #800000 !important;
