@@ -11,9 +11,9 @@
 
 <head>
     <title>NGCBDC</title>
+    <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
@@ -37,8 +37,8 @@
                     aria-haspopup="true" aria-expanded="false">
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" id="sideNav-a" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" id="sideNav-a"href="">Logout</a>
+                    <a class="dropdown-item" href="account.php">Account Settings</a>
+                    <a class="dropdown-item" href="">Logout</a>
                 </div>
             </div>
         </span>
