@@ -13,18 +13,19 @@
 </head>
 
 <body>
-    <div class="mx-auto mt-5 col-md-9">
+    <div class="mx-auto mt-5 col-md-10">
         <div class="card">
             <div class="card-header">
                 <h4>Delivered Materials</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form class="form needs-validation" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="deliveredDate" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -55,21 +56,28 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity" required>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
                                     <td><input class="form-control" type="text" id="articles"
-                                            placeholder="Articles"></td>
+                                            placeholder="Articles" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
                                     <td><input class="form-control" type="text" id="suppliedBy"
-                                            placeholder="Supplied By">
+                                            placeholder="Supplied By" required>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" id="selectFrom">
-                                            <option disabled selected>Choose</option>
-                                                <option>Main Office</option>
-                                                <option>Petty Cash</option>
+                                            <select class="form-control" id="selectFrom" required>
+                                                <option value="">Choose</option>
+                                                <option value="1">Main Office</option>
+                                                <option value="2">Petty Cash</option>
                                             </select>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </td>
                                     <td colspan="5">
@@ -82,7 +90,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -110,6 +118,22 @@
                 $(this).closest('tr').remove();
             });
         });
+
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 </body>
 
