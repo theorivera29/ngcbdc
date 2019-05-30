@@ -51,6 +51,9 @@
                                     AND 
                                         projects.projects_status = 'open';";
                             $result = mysqli_query($conn, $sql);
+                            ?> 
+                        <form action="../server.php" method="POST">
+                            <?php
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
@@ -67,13 +70,16 @@
                                     <span>
                                         <h5>End Date: <?php echo $row[3] ;?></h5>
                                     </span>
-                                    <button type="button" class="btn btn-info" id="view-inventory-btn"
-                                        type="button"  onclick="window.location.href = 'viewInventory.php'">View inventory</button>
+                                    <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                    <button type="submit" class="btn btn-info" id="view-inventory-btn" onclick="window.location.href='viewInventory.php'" name="viewInventory">View inventory</button>
                                 </div>
                             </div>
                         </div>
                         <?php
                             }
+                        ?> 
+                        </form>
+                        <?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -89,6 +95,9 @@
                                     AND 
                                         projects.projects_status = 'closed';";
                             $result1 = mysqli_query($conn, $sql);
+                        ?>  
+                        <form action="../server.php" method="POST">
+                        <?php
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -104,14 +113,15 @@
                                     <span>
                                         <h5>End Date: <?php echo $row1[3] ;?></h5>
                                     </span>
-                                    <button type="button" class="btn btn-info" id="view-inventory-btn"
-                                        type="button">View inventory</button>
+                                    <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                    <button type="submit"class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
                                 </div>
                             </div>
                         </div>
                         <?php
                             }   
-                        ?>           
+                        ?>    
+                        </form>       
                     </div>
                 </div>
             </div>

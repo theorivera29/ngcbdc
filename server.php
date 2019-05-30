@@ -142,7 +142,7 @@
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        if(isset($_POST['firstName']) && $_POST['firstName'] != null) {
+        if (isset($_POST['firstName']) && $_POST['firstName'] != null) {
             $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_fname = ? WHERE accounts_id = 1;");
             $stmt->bind_param("s", $firstName);
@@ -155,7 +155,7 @@
             $stmt->execute();
             $stmt->close();*/
         }
-        if(isset($_POST['lastName']) && $_POST['lastName'] != null) {
+        if (isset($_POST['lastName']) && $_POST['lastName'] != null) {
             $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_lname= ? WHERE accounts_id = 1;");
             $stmt->bind_param("s", $lastName);
@@ -168,7 +168,7 @@
             $stmt->execute();
             $stmt->close();*/
         }
-        if(isset($_POST['username']) && $_POST['username'] != null) {
+        if (isset($_POST['username']) && $_POST['username'] != null) {
             $username = mysqli_real_escape_string($conn, $_POST['username']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_username = ? WHERE accounts_id = 1;");
             $stmt->bind_param("s", $username);
@@ -181,7 +181,7 @@
             $stmt->execute();
             $stmt->close();*/
         }
-        if(isset($_POST['email']) && $_POST['email'] != null) {
+        if (isset($_POST['email']) && $_POST['email'] != null) {
             $email = mysqli_real_escape_string($conn, $_POST['email']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_email = ? WHERE accounts_id = 1;");
             $stmt->bind_param("s", $email);
@@ -195,7 +195,7 @@
             $stmt->close();*/
         }
         
-        if(isset($_POST['password']) && $_POST['password'] != null) {
+        if (isset($_POST['password']) && $_POST['password'] != null) {
             $password = mysqli_real_escape_string($conn, $_POST['password']);
             $hash_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = 1;");
@@ -216,7 +216,7 @@
     if (isset($_POST['create_todo'])) {
         session_start();
         $account_id = "";
-        if(isset($_SESSION['account_id'])) {
+        if (isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
         }
         $todo_date = mysqli_real_escape_string($conn, $_POST['todo_date']);
@@ -243,7 +243,7 @@
         $todo_task = $_POST['todo_task'];
         session_start();
         $account_id = "";
-        if(isset($_SESSION['account_id'])) {
+        if (isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
         }
         $update_todo_date = date("Y-m-d G:i:s");
@@ -257,15 +257,15 @@
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");    
     }
 
-    if(isset($_POST['edit_account'])) {
+    if (isset($_POST['edit_account'])) {
         $username = mysqli_real_escape_string($conn, $_POST['userid']);
         session_start();
         $account_id = "";
-        if(isset($_SESSION['account_id'])) {
+        if (isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
         }
         $edit_account_date = date("Y-m-d G:i:s");
-        if(isset($_POST['newusername']) && $_POST['newusername'] != null) {
+        if (isset($_POST['newusername']) && $_POST['newusername'] != null) {
             $newusername = $_POST['newusername'];
             $stmt = $conn->prepare("UPDATE accounts SET accounts_username = ? WHERE accounts_id = ?;");
             $stmt->bind_param("si", $newusername, $account_id);
@@ -279,7 +279,7 @@
             $stmt->close();
             $_SESSION['username'] = $newusername; 
         }
-        if(isset($_POST['newfname']) && $_POST['newfname'] != null) {
+        if (isset($_POST['newfname']) && $_POST['newfname'] != null) {
             $newfname = mysqli_real_escape_string($conn, $_POST['newfname']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_fname = ? WHERE accounts_id = ?;");
             $stmt->bind_param("si", $newfname, $account_id);
@@ -293,7 +293,7 @@
             $stmt->close();
         }
 
-        if(isset($_POST['newlname']) && $_POST['newlname'] != null) {
+        if (isset($_POST['newlname']) && $_POST['newlname'] != null) {
             $newlname = mysqli_real_escape_string($conn, $_POST['newlname']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_lname = ? WHERE accounts_id = ?;");
             $stmt->bind_param("si", $newlname, $account_id);
@@ -307,7 +307,7 @@
             $stmt->close();
         }
 
-        if(isset($_POST['newemail']) && $_POST['newemail'] != null) {
+        if (isset($_POST['newemail']) && $_POST['newemail'] != null) {
             $newemail = mysqli_real_escape_string($conn, $_POST['newemail']);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_email = ? WHERE accounts_id = ?;");
             $stmt->bind_param("si", $newemail, $account_id);
@@ -321,7 +321,7 @@
             $stmt->close();
         }
         
-        if(isset($_POST['newpassword']) && $_POST['newpassword'] != null) {
+        if (isset($_POST['newpassword']) && $_POST['newpassword'] != null) {
             $newpassword = mysqli_real_escape_string($conn, $_POST['newpassword']);
             $hash_password = password_hash($newpassword, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
@@ -336,6 +336,10 @@
             $stmt->close();
         }
         header("location: http://127.0.0.1/NGCB/Materials%20Engineer/account.php");        
+    }
+
+    if (isset($_POST['viewInventory'])) {
+        $project_id = $_POST['project_id'];
     }
     
 // <--View Only-->
