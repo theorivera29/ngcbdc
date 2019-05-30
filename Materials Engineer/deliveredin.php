@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -19,12 +22,12 @@
                 <h4>Delivered Materials</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="requisitionDate">
+                                <input class="form-control" type="date" name="date">
                             </div>
                         </div>
                     </div>
@@ -55,17 +58,17 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" type="text" id="articles"
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="articles" type="text" id="articles"
                                             placeholder="Articles"></td>
-                                    <td><input class="form-control" type="text" id="suppliedBy"
+                                    <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
                                             placeholder="Supplied By">
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" id="selectFrom">
+                                            <select class="form-control" name="from" id="selectFrom">
                                             <option disabled selected>Choose</option>
                                                 <option>Main Office</option>
                                                 <option>Petty Cash</option>
@@ -82,7 +85,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
