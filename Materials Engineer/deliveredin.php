@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -19,7 +22,7 @@
                 <h4>Delivered Materials</h4>
             </div>
             <div class="card-body">
-                <form class="form needs-validation" novalidate>
+                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
@@ -56,23 +59,23 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity" required>
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity" required>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td><input class="form-control" type="text" id="unit" placeholder="Unit" required>
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td><input class="form-control" type="text" id="articles"
+                                    <td><input class="form-control" name="articles" type="text" id="articles"
                                             placeholder="Articles" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td><input class="form-control" type="text" id="suppliedBy"
+                                    <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
                                             placeholder="Supplied By" required>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" id="selectFrom" required>
+                                            <select class="form-control" name="from" id="selectFrom" required>
                                                 <option value="">Choose</option>
                                                 <option value="1">Main Office</option>
                                                 <option value="2">Petty Cash</option>
@@ -90,7 +93,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
