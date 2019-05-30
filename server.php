@@ -209,8 +209,35 @@
             $stmt->execute();
             $stmt->close();*/
         }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/accounts.php");     
+    }
+
+    if (isset($_POST['create_deliveredin'])) {
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
+        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
+        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
+        $suppliedBy = mysqli_real_escape_string($conn, $_POST['suppliedBy']);
+
+        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+        $stmt->bind_param("s", $unit);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($unit_id);
+        $stmt->fetch();
         
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/disposalslip.php");     
+        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
+        $stmt->bind_param("s", $articles);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($mat_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_quantity, deliveredin_unit, suppliedBy, deliveredin_matname) VALUES (?, ?, ?, ?, ?);");
+        $stmt->bind_param("siisi", $date, $quantity, $unit_id, $suppliedBy, $mat_id);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/deliveredin.php");     
     }
 
     if (isset($_POST['create_todo'])) {
