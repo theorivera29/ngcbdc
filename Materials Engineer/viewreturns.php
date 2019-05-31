@@ -1,3 +1,6 @@
+<?php
+    include "../db_connection.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -93,13 +96,18 @@
                     </div>
                 </div>
             </div>
+        <?php
+        $sql = "SELECT hauling.hauling_date, hauling.hauling_no, hauling.hauling_hauledBy, hauling.hauling_hauledFrom, hauling.hauling_quantity, hauling.hauling_unit, hauling.hauling_matname, returns.return_returnedqty, returns.return_date, returns.return_returningqty, hauling.hauling_status FROM hauling INNER JOIN returns ON hauling.hauling_id = returns.return_id WHERE hauling.hauling_no=1;";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_row($result)){
+    ?>
             <div class="card-body">
-                <form class="form">
+                <form action="../server.php" method="POST">
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="" disabled>
+                                <input class="form-control" type="text" value="<?php echo $row[1]?>" disabled>
                             </div>
                         </div>
                     </div>
@@ -107,20 +115,20 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Hauling Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="" disabled>
+                                <input class="form-control" type="date" value="<?php echo $row[0]?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled by:</label>
                         <div class="col-lg-10">
-                            <input class="form-control" type="text" value="" disabled>
+                            <input class="form-control" type="text" value="<?php echo $row[2]?>" disabled>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
                         <div class="col-lg-10">
-                            <input class="form-control" type="text" value="" disabled>
+                            <input class="form-control" type="text" value="<?php echo $row[3]?>" disabled>
                         </div>
                     </div>
                     <div class="card">
@@ -141,29 +149,17 @@
                             <tbody>
                                 <tr data-toggle="collapse" data-target="#accordion"
                                     class="clickable">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td> <input class="form-control" type="text" id="returningQty"
+                                    <td><?php echo $row[4]?></td>
+                                    <td><?php echo $row[5]?></td>
+                                    <td><?php echo $row[6]?></td>
+                                    <td><?php echo $row[7]?></td>
+                                    <td><?php echo $row[8]?></td>
+                                    <td><?php echo $row[4] - $row[7]?></td>
+                                    <td><?php echo $row[10]?></td>
+                                    <td> <input class="form-control" name="returningQuantity" type="text" id="returningQuantity"
                                             placeholder="Returning Quantity"></td>
-                                    <td> <input type="button" class="btn btn-md btn-outline-secondary save-row"
+                                    <td> <input type="submit" name="return_hauling" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td id="accordion" class="collapse">
-                                        <!-- returning qty -->
-                                    </td>
-                                    <td id="accordion" class="collapse">
-                                         <!-- date returned -->
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -171,6 +167,9 @@
                 </form>
             </div>
         </div>
+    <?php
+        }
+    ?>
     </div>
 </body>
 <script>
