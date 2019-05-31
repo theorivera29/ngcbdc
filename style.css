@@ -65,7 +65,7 @@
 }
 /*Side Navigation*/
 #content{
-    background-color: #111 !important;
+    background-color: #5B211E !important;
 }
 
 .navigation {
@@ -75,7 +75,7 @@
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #111;
+	background-color: #0D304F !important;
 	overflow-x: hidden;
 	padding-top: 60px;
 	transition: 0.7s;
@@ -86,18 +86,22 @@
     margin-left: 2%;
     margin-top: -2% !important;
     display: inline-block;
-    color: #D3D3D3 !important;
+    color: #FBF5F3 !important;
     font-size: 4.5vmin;
+}
+
+#ngcbdc-logo{
+    width: 60%;
 }
 
 .open{
     margin-left: 3%;
-    color: #000 !important;
+    color: #FFFFFF !important;
 }
 
 .open:hover{
     text-decoration: none;
-    color: yellow !important;
+    color: #FFFFFF !important;
 }
 
 .dropdown-toggle collapsed {
@@ -120,17 +124,16 @@
 }
 
 .slide #sideNav-a {
-	color: #000;
 	font-size: 36px;
 }
 
 #sideNav-a {
-    color: #FFF8F0 !important;
+    color: #FFFFFF !important;
     text-decoration: none !important;
 }
 
 #sidebar {
-    color: #fff;
+    color: #ffffff;
     transition: all 0.3s;
 }
 
@@ -147,18 +150,19 @@
 }
 
 #sidebar ul p {
-    color: #fff;
+    color: #fffFFF;
     padding: 10px;
 }
 
 #sidebar ul li #sideNav-a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 2.5vmin;
     display: block;
 }
 
-#sidebar ul li a:hover {
+#sidebar ul li #sideNav-a:hover {
     background: #fff;
+    color: #0D304F !important;
 }
 
 #sidebar ul li.active > #sideNav-a , #sideNav-a [aria-expanded="true"] {
@@ -183,7 +187,7 @@ ul ul #sideNav-a  {
 }
 
 .card-header{
-    background-color: #800000 !important;
+    background-color: #0D304F !important;
     color: #FFF8F0;
 }
 
