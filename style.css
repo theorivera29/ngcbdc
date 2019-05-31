@@ -44,24 +44,49 @@
 }
 
 /*Navigation*/
-.dropdown-account{
+body{
+    overflow-y: hidden !important;
+}
+
+.title{
+    margin-left: 2%;
+    margin-top: 1% !important;
+    margin-bottom: 1% !important;
+    display: inline-block;
+    color: #FBF5F3 !important;
+    font-size: 2.8vmin;
+}
+
+.active-user{
+    display: inline-block;
+    margin-top: 1% !important;
+    color: #FFFFFF;
+    font-size: 2vmin;
+}
+
+.account-container{
     float: right;
-    margin-right: 3%;
     margin-top: 1%;
+    margin-right: 2%;
+}
+
+.dropdown-account{
+    display: inline-block;
 }
 
 .dropdown-settings{
-    margin-left: 20% !important;
     color: #D3D3D3 !important;
 }
 
 .dropdown-toggle::after{
-    margin-left: 0 !important;
-    font-size: 4vmin;
+    float: right;
+    margin-top: 1% !important;
+    font-size: 3vmin;
 }
 
 .dropdown-item{
     font-size: 2vmin !important;
+    background: #FFFFFF;
 }
 /*Side Navigation*/
 #content{
@@ -75,19 +100,13 @@
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #0D304F !important;
+	background-color: #5B211E !important;
 	overflow-x: hidden;
-	padding-top: 60px;
-	transition: 0.7s;
-}
+	padding-top: 4%;
+    transition: 0.5s;
+    border-right: 2px #DCB149;
+    border-right-style: double;
 
-.title{
-    width: 75%;
-    margin-left: 2%;
-    margin-top: -2% !important;
-    display: inline-block;
-    color: #FBF5F3 !important;
-    font-size: 4.5vmin;
 }
 
 #ngcbdc-logo{
@@ -97,15 +116,12 @@
 .open{
     margin-left: 3%;
     color: #FFFFFF !important;
+    font-size: 3vmin;
 }
 
 .open:hover{
     text-decoration: none;
-    color: #FFFFFF !important;
-}
-
-.dropdown-toggle collapsed {
-    background-color: yellow;
+    color: #EFF1F3 !important;
 }
 
 .dropdown-menu{
@@ -117,14 +133,16 @@
 	top: 2%;
 	right: 10%;
     font-size: 5vmin;
-    color: #FFF8F0;
+    color:#FFFFFF;
+    z-index: 1;
 }
 .navigation .close:hover {
-	color: rgb(255, 255, 255);
+	color: #DCB149;
 }
 
 .slide #sideNav-a {
-	font-size: 36px;
+    font-size: 3vmin;
+    color: #FFFFFF;
 }
 
 #sideNav-a {
@@ -133,7 +151,7 @@
 }
 
 #sidebar {
-    color: #ffffff;
+    color: #FFFFFF;
     transition: all 0.3s;
 }
 
@@ -150,23 +168,20 @@
 }
 
 #sidebar ul p {
-    color: #fffFFF;
     padding: 10px;
+    color: #FFFFFF;
 }
 
 #sidebar ul li #sideNav-a {
-    padding: 10px;
+    padding: 4%;
     font-size: 2.5vmin;
     display: block;
+    color: #FFFFFF;
 }
 
 #sidebar ul li #sideNav-a:hover {
-    background: #fff;
+    background: #FFFFFF;
     color: #0D304F !important;
-}
-
-#sidebar ul li.active > #sideNav-a , #sideNav-a [aria-expanded="true"] {
-    color: #fff;
 }
 
 ul ul #sideNav-a  {
@@ -187,8 +202,8 @@ ul ul #sideNav-a  {
 }
 
 .card-header{
-    background-color: #0D304F !important;
-    color: #FFF8F0;
+    background-color: #DCB149 !important;
+    color: #0D304F;
 }
 
 .add-task-container{

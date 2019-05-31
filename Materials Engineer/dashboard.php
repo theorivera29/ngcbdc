@@ -27,24 +27,26 @@
 <body>
     <div id="content">
         <span class="slide">
-            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
+            <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-            <!-- Example single danger button -->
-            <div class="btn-group dropdown-account">
-                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" href="">Logout</a>
+            <div class="account-container">
+                <h5 class="active-user">JAM SPICA</h5>
+                <div class="btn-group dropdown-account">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="account.php">Account Settings</a>
+                        <a class="dropdown-item" href="">Logout</a>
+                    </div>
                 </div>
             </div>
         </span>
 
         <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
+            <a href="#" class="close" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
             <nav id="sidebar">
@@ -90,9 +92,7 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
-
     </div>
 
     <div class="row">
