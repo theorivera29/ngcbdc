@@ -99,7 +99,7 @@
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="formNo" required>
+                                <input class="form-control" type="text" name="formNo" pattern="[0-9]{11}" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
@@ -116,14 +116,14 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Deliver to:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="deliverTo" required>
+                            <input class="form-control" type="text" name="deliverTo" pattern="[A-Za-z]" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="hauledFrom" required>
+                            <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z]" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                             <tfoot>
                                 <tr id="haulingRow">
                                     <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                            placeholder="Quantity">
+                                            placeholder="Quantity" pattern="[0-9]{11}">
                                     </td>
                                     <td><div class="form-group">
                                             <select class="form-control" name="articles" id="articles">
@@ -164,14 +164,14 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="requestedBy" required>
+                                <input class="form-control" type="text" name="requestedBy" pattern="[A-Za-z]" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Hauled by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="hauledBy" required>
+                                <input class="form-control" type="text" name="hauledBy" pattern="[A-Za-z]" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
@@ -180,12 +180,12 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Warehouseman:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="warehouseman" required>
+                                <input class="form-control" type="text" name="warehouseman" pattern="[A-Za-z]" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="approvedBy" required>
+                                <input class="form-control" type="text" name="approvedBy" pattern="[A-Za-z]" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
@@ -198,22 +198,22 @@
                                 <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="type" required>
+                                        <input class="form-control" type="text" name="type" pattern="[A-Za-z]" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </div>
                                     <label class="col-lg-4 col-form-label">Plate #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="plateNo" required>
+                                        <input class="form-control" type="text" name="plateNo" pattern="[A-Za-z]{3}-?[0-9]{4}" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </div>
                                     <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="PORS" required>
+                                        <input class="form-control" type="text" name="PORS" pattern="[0-9]"required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </div>
                                     <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="haulerID" required>
+                                        <input class="form-control" type="text" name="haulerID" pattern="[0-9]"required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </div>
                                 </div>
