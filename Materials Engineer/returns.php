@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form class="form needs-validation" novalidate>
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
@@ -150,8 +150,10 @@
                                     <td></td>
                                     <td></td>
                                     <td> <input class="form-control" type="text" id="returningQty"
-                                            placeholder="Returning Quantity"></td>
-                                    <td> <input type="button" class="btn btn-md btn-outline-secondary save-row"
+                                            placeholder="Returning Quantity" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                        </td>
+                                    <td> <input type="submit" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
                                 </tr>
                                 <tr>
@@ -174,6 +176,22 @@
     </div>
 </body>
 <script>
+     $(function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
