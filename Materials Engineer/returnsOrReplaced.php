@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../JS/popper/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -229,67 +230,74 @@
                 <div class="col-xs-12 project-tabs">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                            role="tab" aria-controls="nav-home" aria-selected="true">DELIVERED IN</a>
+                            role="tab" aria-controls="nav-home" aria-selected="true">RETURN</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                            role="tab" aria-controls="nav-profile" aria-selected="false">USAGE IN</a>
+                            role="tab" aria-controls="nav-profile" aria-selected="false">REPLACE</a>
                     </div>
 
                 </div>
-                <div class="stockcard-tabs-content">
-                    <div class="tab-content" id="nav-tabContent">
+                <div class="returns-or-replace-content">
+                    <div class="tab-content" id="nav-tabContent return-container">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <div class="delivered-in-container">
-                                <table
-                                    class="table view-all-task-table table-striped table-bordered delivered-in-table">
+                            <div class="card return-container">
+                                <div class="card-header">
+                                    <h4>List of Materials to be Return</h4>
+                                </div>
+                                <table class="table hauled-items-table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Supplied By</th>
+                                            <th scope="col">Form No.</th>
+                                            <th scope="col">Hauling Date</th>
+                                            <th scope="col">Hauled From</th>
+                                            <th scope="col">Hauled By</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td><button type="button" class="btn btn-success">Open</button></td>
                                         </tr>
                                     </tbody>
-                                </table>
                                 </table>
                             </div>
+
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="usage-in-container">
-                                <table class="table view-all-task-table table-striped table-bordered">
+                            <div class="card replace-container">
+                                <div class="card-header">
+                                    <h4>List of Materials to be Replaced</h4>
+                                </div>
+                                <table class="table hauled-items-table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Pulled By</th>
-                                            <th scope="col">Area of Usage</th>
+                                            <th scope="col">Disposal Date</th>
+                                            <th scope="col">Project</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><button type="button" class="btn btn-success">Open</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 </body>
