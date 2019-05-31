@@ -416,13 +416,14 @@ ul ul #sideNav-a  {
 
 /*List of Accounts*/
 .list-of-accounts-container{
-    width: 96%;
-    margin-left: 2%;
-    margin-top: 3%;
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
 }
 
-.list-of-accounts-table{
-    text-align: center;
+.list-of-accounts-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
 }
 
 /*Materials Engineer-View All Task*/
