@@ -246,6 +246,18 @@ ul ul #sideNav-a  {
     text-align: center;
 }
 
+/*Materials Engineer-Disposal Slip*/
+.disposal-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+/*Materials Engineer-Deliveredin*/
+.deliveredin-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
 /*Materials Engineer-Hauling*/
 .date-container, .formnum-container{
     float: right !important;
