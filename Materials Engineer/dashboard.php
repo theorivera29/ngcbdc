@@ -49,7 +49,7 @@
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
+                    <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
 
                 <ul class="list-unstyled components">
@@ -57,8 +57,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -70,8 +70,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -104,7 +104,8 @@
                         <p id="date-label">Date:</p>
                         <input type="date" class="form-group form-control add-task-date" name="todo_date">
                         <textarea class="form-control" id="task-textarea" name="todo_task"></textarea>
-                        <button type="submit" class="btn btn-success" id="save-task-btn" name="create_todo">Save</button>
+                        <button type="submit" class="btn btn-success" id="save-task-btn"
+                            name="create_todo">Save</button>
                     </div>
                 </form>
             </div>
@@ -125,7 +126,7 @@
                 </div>
                 <div class="card-body">
                     <form action="../server.php" method="POST">
-                    <?php
+                        <?php
                         $date_today = date("Y-m-d");
                         $sql = "SELECT 
                                     todo_id,
@@ -140,50 +141,52 @@
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                     ?>
-                    <table class="table today-task-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Task</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <?php 
+                        <table class="table today-task-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <?php 
                             while($row = mysqli_fetch_row($result)) {
                         ?>
-                        <tbody>
-                            <tr>
-                                <td><?php echo $row[1] ;?></td>
-                                <td><?php echo $row[2] ;?></td>
-                                <td><?php echo $row[3] ;?></td>
-                                <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
-                                <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
-                                <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
-                                <?php
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $row[1] ;?></td>
+                                    <td><?php echo $row[2] ;?></td>
+                                    <td><?php echo $row[3] ;?></td>
+                                    <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
+                                    <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
+                                    <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
+                                    <?php
                                     if(strcmp($row[3], "in progress") == 0) {
                                 ?>
-                                <td><button type="submit" name="update_todo" class="btn btn-success">Done</button></td>
-                                <?php
+                                    <td><button type="submit" name="update_todo" class="btn btn-success">Done</button>
+                                    </td>
+                                    <?php
                                     } else {
                                 ?>
-                                <td><button type="submit" name="update_todo" class="btnbtn-danger">Clear</button></td>
-                                <?php
+                                    <td><button type="submit" name="update_todo" class="btnbtn-danger">Clear</button>
+                                    </td>
+                                    <?php
                                     }
                                 ?>
-                            </tr>
-                        </tbody>
-                        <?php
+                                </tr>
+                            </tbody>
+                            <?php
                             }
                         ?>
-                    </table>
-                    <?php
+                        </table>
+                        <?php
                         } else {
                     ?>
-                    <div>
-                        <p id="no-task-text">NO TASK FOR TODAY</p>
-                    </div>
-                    <?php
+                        <div>
+                            <p id="no-task-text">NO TASK FOR TODAY</p>
+                        </div>
+                        <?php
                         }
                     ?>
                     </form>
@@ -258,11 +261,11 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-});
+    });
 </script>
 
 </html>
