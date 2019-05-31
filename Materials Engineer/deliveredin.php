@@ -24,8 +24,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="deliveredDate" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <input class="form-control" type="date" name="deliveredDate">
                             </div>
                         </div>
                     </div>
@@ -55,33 +54,34 @@
                             <tbody id=deliveredTable>
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td><input class="form-control" type="text" id="quantity" placeholder="Quantity" required>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                <tr id=deliveredRow>
+                                    <td><input class="form-control" type="text" id="quantity" pattern="[0-9]"
+                                            placeholder="Quantity" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td><input class="form-control" type="text" id="unit" placeholder="Unit" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td><input class="form-control" type="text" id="articles"
-                                            placeholder="Articles" required>
+                                    <td><input class="form-control" type="text" id="articles" placeholder="Articles"
+                                            required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td><input class="form-control" type="text" id="suppliedBy"
                                             placeholder="Supplied By" required>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" id="selectFrom" required>
-                                                <option value="">Choose</option>
-                                                <option value="1">Main Office</option>
-                                                <option value="2">Petty Cash</option>
+                                                <option value="" selected disabled >Choose</option>
+                                                <option value="Main Office">Main Office</option>
+                                                <option value="Petty Cash">Petty Cash</option>
                                             </select>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                        <input type="submit" class="btn btn-md btn-outline-secondary add-row"
                                             value="Add Row" />
                                     </td>
                                 </tr>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                            <input type="" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -101,7 +101,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".add-row").click(function () {
+             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
                 var unit = $("#unit").val();
                 var articles = $("#articles").val();
@@ -111,15 +111,15 @@
                     "</td><td>" + suppliedBy +
                     "</td><td>" + selectFrom +
                     "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                $("table tbody").append(markup);
+              
+                    $("table tbody").append(markup);
             });
-
             $("#deliveredTable").on('click', '.delete-row', function () {
                 $(this).closest('tr').remove();
             });
         });
 
-        (function () {
+        $(function () {
             'use strict';
             window.addEventListener('load', function () {
                 var forms = document.getElementsByClassName('needs-validation');
