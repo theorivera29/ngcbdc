@@ -340,23 +340,16 @@ ul ul #sideNav-a  {
     color: #FFF8F0;
 }
 /*Materials Engineer- Site Materials*/
-.site-materials-table{
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 2%;
-    text-align: center !important;
-    width: 96% !important;
+.site-materials-container{
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
 }
 
-.site-materials-table > thead > tr > th{
-    background-color: #124E78;
-    color: #FFF8F0;
-}
-
-.site-materials-search{
-    width: 25% !important;
-    margin-top: 3%;
-    margin-left: 2%;
+.site-materials-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
+    width: 90%;
 }
 
 /*Materials Engineer - Account*/
@@ -414,7 +407,7 @@ ul ul #sideNav-a  {
     margin-left: 3%;
 }
 
-/*List of Accounts*/
+/*Admin - List of Accounts*/
 .list-of-accounts-container{
     width: 90%;
     margin: auto;
