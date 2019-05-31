@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -50,8 +50,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -63,8 +63,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -87,7 +87,7 @@
         </div>
 
     </div>
-    
+
     <div class="mx-auto mt-5 col-md-10">
         <div class="card">
             <div class="card-header">
@@ -99,8 +99,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="deliveredDate" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <input class="form-control" type="date" name="deliveredDate">
                             </div>
                         </div>
                     </div>
@@ -121,8 +120,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Articles</th>
+                                    <th scope="col">Unit</th>
                                     <th scope="col">Supplied By</th>
                                     <th scope="col">From</th>
                                 </tr>
@@ -131,32 +130,34 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity" required>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
-                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit" required>
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity"
+                                            placeholder="Quantity" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td><input class="form-control" name="articles" type="text" id="articles"
                                             placeholder="Articles" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"
+                                            required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
                                     <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
                                             placeholder="Supplied By" required>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" name="from" id="selectFrom" required>
-                                                <option value="">Choose</option>
-                                                <option value="1">Main Office</option>
-                                                <option value="2">Petty Cash</option>
+                                                <option value="" selected disabled>Choose</option>
+                                                <option value="Main Office">Main Office</option>
+                                                <option value="Petty Cash">Petty Cash</option>
                                             </select>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                        <input type="submit" class="btn btn-md btn-outline-secondary add-row"
                                             value="Add Row" />
                                     </td>
                                 </tr>
@@ -165,7 +166,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
+                            <input type="button" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -178,15 +179,19 @@
         $(document).ready(function () {
             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
-                var unit = $("#unit").val();
                 var articles = $("#articles").val();
+                var unit = $("#unit").val();
                 var suppliedBy = $("#suppliedBy").val();
                 var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + articles +
+                var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
                     "</td><td>" + suppliedBy +
                     "</td><td>" + selectFrom +
                     "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                $("table tbody").append(markup);
+
+                if ((quantity !='') && (articles !='') && (unit !='') && (suppliedBy !='') && (
+                        selectFrom !='')) {
+                    $("table tbody").append(markup);
+                }
             });
 
             $("#deliveredTable").on('click', '.delete-row', function () {
@@ -194,7 +199,7 @@
             });
         });
 
-        (function () {
+        $(function () {
             'use strict';
             window.addEventListener('load', function () {
                 var forms = document.getElementsByClassName('needs-validation');
@@ -211,21 +216,21 @@
         })();
 
         function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';
-    }
+            document.getElementById('menu').style.width = '15%';
+        }
 
-    function closeSlideMenu() {
-        document.getElementById('menu').style.width = '0';
-        document.getElementById('content').style.marginLeft = '0';
-    }
+        function closeSlideMenu() {
+            document.getElementById('menu').style.width = '0';
+            document.getElementById('content').style.marginLeft = '0';
+        }
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
 
-});
+        });
     </script>
 </body>
 

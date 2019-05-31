@@ -120,8 +120,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Articles</th>
+                                    <th scope="col">Unit</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
@@ -131,9 +131,8 @@
                                 <tr>
                                     <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
                                     </td>
-                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td>
                                     <td><input class="form-control" name="articles" type="text" id="articles" placeholder="Articles"></td>                                   
-                                    <td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td><td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
@@ -157,8 +156,8 @@
         $(document).ready(function () {
             $(".add-row").click(function () {
                 var quantity = $("#quantity").val();
-                var unit = $("#unit").val();
                 var articles = $("#articles").val();
+                var unit = $("#unit").val();
                 var remarks = $("#remarks").val();
                 var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 $("table tbody").append(markup);
