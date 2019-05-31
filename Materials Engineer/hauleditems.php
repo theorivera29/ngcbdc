@@ -115,7 +115,7 @@
                     <td><?php echo $row[1]?></td>
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
-                    <td><button type="button" class="btn btn-success">Done</button></td>
+                    <td><button type="button" class="btn btn-success">View</button></td>
                 </tr>
             </tbody>
                             <?php
