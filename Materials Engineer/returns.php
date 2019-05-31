@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -47,8 +47,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -60,8 +60,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -139,8 +139,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr data-toggle="collapse" data-target="#accordion"
-                                    class="clickable">
+                                <tr data-toggle="collapse" data-target="#accordion" class="clickable">
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -152,7 +151,7 @@
                                     <td> <input class="form-control" type="text" id="returningQty"
                                             placeholder="Returning Quantity" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
-                                        </td>
+                                    </td>
                                     <td> <input type="submit" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
                                 </tr>
@@ -164,7 +163,7 @@
                                         <!-- returning qty -->
                                     </td>
                                     <td id="accordion" class="collapse">
-                                         <!-- date returned -->
+                                        <!-- date returned -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -176,21 +175,21 @@
     </div>
 </body>
 <script>
-     $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+    $(function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
@@ -203,11 +202,11 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
-});
 </script>
 
 </html>
