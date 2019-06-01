@@ -137,12 +137,15 @@
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label">New Password</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="password" name="">
+                            <input class="form-control" type="password" name="pass" id="pass">
                         </div>
                         <label class="col-lg-2 col-form-label">Confirm Password</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="password" name="">
+                            <input class="form-control" type="password" name="confpass" id="confpass">
                         </div>
+                        <div class="form-group">
+                            <span class="error" style="color:red"></span><br />
+						</div>
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-3">
@@ -170,6 +173,36 @@
 $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
 });
+
+var allowsubmit = false;
+		$(function(){
+			$('#confpass').keyup(function(e){
+				var pass = $('#pass').val();
+				var confpass = $(this).val();
+				if(pass == confpass){
+					$('.error').text('');
+					allowsubmit = true;
+				}else{
+					$('.error').text('Password not matching');
+					allowsubmit = false;
+				}
+			});
+			
+			$('#form').submit(function(){
+			
+				var pass = $('#pass').val();
+				var confpass = $('#confpass').val();
+ 
+				if(pass == confpass){
+					allowsubmit = true;
+				}
+				if(allowsubmit){
+					return true;
+				}else{
+					return false;
+				}
+			});
+		});
 
 });
 </script>
