@@ -23,6 +23,76 @@
 </head>
 
 <body>
+<div id="content">
+        <span class="slide">
+            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
+                <i class="fas fa-bars"></i>
+            </a>
+            <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
+            <!-- Example single danger button -->
+            <div class="btn-group dropdown-account">
+                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="account.php">Account Settings</a>
+                    <a class="dropdown-item" href="">Logout</a>
+                </div>
+            </div>
+        </span>
+
+        <div id="menu" class="navigation sidenav">
+            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i>
+            </a>
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>NGCBDC</h3>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="dashboard.php" id="sideNav-a">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <ul class="collapse list-unstyled" id="siteSubmenu">
+                            <li>
+                                <a href="projects.php" id="sideNav-a">Projects</a>
+                            </li>
+                            <li>
+                                <a href="sitematerials.php" id="sideNav-a">Site Materials</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <ul class="collapse list-unstyled" id="haulingSebmenu">
+                            <li>
+                                <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
+                            </li>
+                            <li>
+                                <a href="hauleditems.php" id="sideNav-a">View Hauled Materials</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                    </li>
+                    <li>
+                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </div>
+
     <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
@@ -123,9 +193,6 @@
                                     AND 
                                         projects.projects_status = 'open';";
                             $result = mysqli_query($conn, $sql);
-                            ?> 
-                        <form action="../server.php" method="POST">
-                            <?php
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
@@ -142,21 +209,13 @@
                                     <span>
                                         <h5>End Date: <?php echo $row[3] ;?></h5>
                                     </span>
-<<<<<<< HEAD
-                                    <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
-                                    <button type="submit" class="btn btn-info" id="view-inventory-btn" onclick="window.location.href='viewInventory.php'" name="viewInventory">View inventory</button>
-=======
                                     <button type="button" class="btn btn-info" id="view-inventory-btn" type="button"
-                                        onclick="window.location.href = 'viewInventory.php'">View inventory</button>
->>>>>>> 11df3953ca5eaa3767656c8e2e9c45d613b3a060
+                                        onclick="window.location.href = 'reportpage.php'">View Report</button>
                                 </div>
                             </div>
                         </div>
                         <?php
                             }
-                        ?> 
-                        </form>
-                        <?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -172,9 +231,6 @@
                                     AND 
                                         projects.projects_status = 'closed';";
                             $result1 = mysqli_query($conn, $sql);
-                        ?>  
-                        <form action="../server.php" method="POST">
-                        <?php
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -190,15 +246,14 @@
                                     <span>
                                         <h5>End Date: <?php echo $row1[3] ;?></h5>
                                     </span>
-                                    <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
-                                    <button type="submit"class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
+                                    <button type="button" class="btn btn-info" id="view-inventory-btn"
+                                        type="button">View inventory</button>
                                 </div>
                             </div>
                         </div>
                         <?php
                             }   
-                        ?>    
-                        </form>       
+                        ?>           
                     </div>
                 </div>
             </div>

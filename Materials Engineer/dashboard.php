@@ -11,9 +11,9 @@
 
 <head>
     <title>NGCBDC</title>
+    <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="Images/NGCB_logo.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
@@ -27,7 +27,7 @@
 <body>
     <div id="content">
         <span class="slide">
-            <a href="#" class="open" onclick="openSlideMenu()">
+            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
@@ -43,8 +43,8 @@
             </div>
         </span>
 
-        <div id="menu" class="nav sidenav">
-            <a href="#" class="close" onclick="closeSlideMenu()">
+        <div id="menu" class="navigation sidenav">
+            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
             <nav id="sidebar">
@@ -54,39 +54,39 @@
 
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="dashboard.php">Dashboard</a>
+                        <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
                         <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">Site</a>
+                            class="dropdown-toggle" id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
-                                <a href="projects.php">Projects</a>
+                                <a href="projects.php" id="sideNav-a">Projects</a>
                             </li>
                             <li>
-                                <a href="sitematerials.php">Site Materials</a>
+                                <a href="sitematerials.php" id="sideNav-a">Site Materials</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="active">
                         <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">Hauling</a>
+                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
-                                <a href="fillouthauling.php">Fill out Hauling Receipt</a>
+                                <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
                             </li>
                             <li>
-                                <a href="hauleditems.php">View Hauled Materials</a>
+                                <a href="hauleditems.php" id="sideNav-a">View Hauled Materials</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="">Returns/Replacements</a>
+                        <a href="" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
-                        <a href="reports.php">Reports</a>
+                        <a href="reports.php" id="sideNav-a">Reports</a>
                     </li>
                 </ul>
             </nav>
