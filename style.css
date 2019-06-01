@@ -334,6 +334,8 @@ ul ul #sideNav-a  {
     float: right !important;
 }
 
+
+
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
     width: 96%;
@@ -448,6 +450,14 @@ ul ul #sideNav-a  {
 .category-title{
     text-align: center;
     margin-top: 3%;
+}
+
+/*Start of Materials Engineer-Hauled Items*/
+.hauled-items-container{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5% !important;
+    text-align: center;
 }
 
 /*Start of Materials Engineer-Hauling*/
