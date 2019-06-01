@@ -13,13 +13,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script rel="stylesheet" src="../Libraries/dataTables.select.min.js" crossorigin="anonymous"></script>
-    <script rel="stylesheet" src="../Libraries/jquery-3.3.1.js" crossorigin="anonymous"></script>
-    <script rel="stylesheet" src="../Libraries/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -51,8 +52,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -64,8 +65,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -88,7 +89,7 @@
         </div>
 
     </div>
-    
+
     <section id="tabs">
         <div class="container">
             <div class="row">
@@ -104,13 +105,13 @@
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <table id="example" class="table table-striped table-bordered view-inventory-table">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th>Particulars</th>
-                                        <th>Category</th>     
+                                        <th>Category</th>
                                         <th>Previous Material Stock</th>
                                         <th>Unit</th>
                                         <th>Delivered Material as of May 2019</th>
@@ -124,12 +125,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <div class="form-group custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                <label class="custom-control-label" for="customCheck1"></label>
-                                            </div>
-                                        </td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -142,45 +138,20 @@
                                         <td></td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Particulars</th>
-                                        <th>Category</th>     
-                                        <th>Previous Material Stock</th>
-                                        <th>Unit</th>
-                                        <th>Delivered Material as of May 2019</th>
-                                        <th>Material pulled out as of May 2019</th>
-                                        <th>Unit</th>
-                                        <th>Accumulated Materials Delivered</th>
-                                        <th>Material on site as of May 2019</th>
-                                        <th>Unit</th>
-                                        <th>Project</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="card project-container">
-                            <h5 class="card-header card-header-project">PROJECT NAME</h5>
-                            <div class="card-body">
-                                <span>
-                                    <h5>Address</h5>
-                                </span>
-                                <span>
-                                    <h5>Start Date:</h5>
-                                </span>
-                                <span>
-                                    <h5>End Date:</h5>
-                                </span>
-                                <button type="button" class="btn btn-info" id="view-inventory-btn" type="button">View
-                                    inventory</button>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="card ">
+                                <h5 class="card-header">Category Name</h5>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-info" id="open-category-btn"
+                                        type="button" onclick="window.location.href='materialCategories.php'">View</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -214,11 +185,27 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-});
+    });
 </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+    });
+</script>
+
 
 </html>

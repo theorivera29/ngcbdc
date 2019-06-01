@@ -420,15 +420,36 @@ ul ul #sideNav-a  {
 /*End of Materials Engineer- Site Materials*/
 
 
-/Start of Materials Engineer - View Inventory*/
-.view-inventory-table{
-    width: 100% !important;
+/*Start of Materials Engineer - View Inventory*/
+.view-inventory-tabs-container{
+    width: 107%;
+    margin: auto;
 }
 
+.view-inventory-tabs-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+.view-inventory-tabs-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
+}
 .view-inventory-tabs-content{
     margin-top: 3%;
+    margin-left: -8%;
+    
 }
 
+#open-category-btn{
+    margin-left: 25% !important;
+}
+
+/*Materials Engineer - Material Categories*/
+.category-title{
+    text-align: center;
+    margin-top: 3%;
+}
 
 /*Start of Materials Engineer-Hauling*/
 .date-container, .formnum-container{

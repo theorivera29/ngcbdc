@@ -31,6 +31,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
+<<<<<<< HEAD
             <!-- Example single danger button -->
             <div class="btn-group dropdown-account">
                 <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
@@ -39,6 +40,25 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="account.php">Account Settings</a>
                     <a class="dropdown-item" href="">Logout</a>
+=======
+            <div class="account-container">
+            <?php 
+                        $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_row($result);
+            ?>
+                <h5 class="active-user">
+                <?php echo $row[1]." ".$row[2]; ?>
+                </h5>
+                <div class="btn-group dropdown-account">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="account.php">Account Settings</a>
+                        <a class="dropdown-item" href="">Logout</a>
+                    </div>
+>>>>>>> c40e811695abf6e750cbf9c5c2c970a4958e7c22
                 </div>
             </div>
         </span>

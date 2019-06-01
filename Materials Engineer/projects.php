@@ -142,13 +142,8 @@
                                     <span>
                                         <h5>End Date: <?php echo $row[3] ;?></h5>
                                     </span>
-<<<<<<< HEAD
                                     <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
                                     <button type="submit" class="btn btn-info" id="view-inventory-btn" onclick="window.location.href='viewInventory.php'" name="viewInventory">View inventory</button>
-=======
-                                    <button type="button" class="btn btn-info" id="view-inventory-btn" type="button"
-                                        onclick="window.location.href = 'viewInventory.php'">View inventory</button>
->>>>>>> 11df3953ca5eaa3767656c8e2e9c45d613b3a060
                                 </div>
                             </div>
                         </div>
