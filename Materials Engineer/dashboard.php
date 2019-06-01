@@ -32,7 +32,14 @@
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
             <div class="account-container">
-                <h5 class="active-user">JAM SPICA</h5>
+            <?php 
+                        $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_row($result);
+            ?>
+                <h5 class="active-user">
+                <?php echo $row[1]." ".$row[2]; ?>
+                </h5>
                 <div class="btn-group dropdown-account">
                     <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
