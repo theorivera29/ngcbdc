@@ -58,7 +58,7 @@
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
+                    <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
                 <ul class="list-unstyled components">
                     <li>
@@ -114,10 +114,15 @@
                         <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID"
                             required>
                         <div class="invalid-feedback">Please fill out this field.</div>
-                        <textarea class="form-control" id="task-textarea" name="todo_task" required></textarea>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                        <button type="submit" class="btn btn-success" id="save-task-btn"
-                            name="create_todo">Save</button>
+                        <textarea class="form-control" id="task-textarea" name="todo_task" minlength="2" maxlength="45"
+                            pattern="[A-Za-z0-9.,/!-+=()<>@#%^&*]{45}" required></textarea>
+                        <div class="container-counter">
+                            <span id="characters">45</span><span id="char"> characters</span>
+                        </div>
+                        <div class="task-submitbtn-container">
+                            <button type="submit" class="btn btn-success" id="save-task-btn"
+                                name="create_todo">Save</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -127,16 +132,16 @@
             <div class="card today-task-container">
                 <div class="card-header container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 ">
                             <h5 class="">Today's To-do Task</h5>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <button class="btn btn-light" id="view-all-task-btn" type="button"
                                 onclick="window.location.href = 'viewalltasks.php'">View All Task</button>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body todo-task-header">
 
                     <?php
                         $date_today = date("Y-m-d");
@@ -343,6 +348,24 @@
         var today = year + '-' + month + '-' + day;
         $('#dateID').attr('min', today);
 
+        var maxLength = 45;
+        $('textarea').keyup(function () {
+            var length = $(this).val().length;
+            var length = maxLength - length;
+            $('#characters').text(length);
+        });
+
+        $('#task-textarea').keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+            }
+        });
+
+        $('#task-textarea').keyup(function () {
+            var txt = $('#comment').val();
+            $('#comment').val(txt.replace(/[\n\r]+/g, " "));
+
+        });
     });
 
     $(function () {
