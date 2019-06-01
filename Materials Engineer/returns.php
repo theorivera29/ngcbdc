@@ -103,8 +103,25 @@
                     </div>
                 </div>
             </div>
-            <?php
-        $sql = "SELECT hauling.hauling_date, hauling.hauling_no, hauling.hauling_hauledBy, hauling.hauling_hauledFrom, hauling.hauling_quantity, hauling.hauling_unit, hauling.hauling_matname, returns.return_returnedqty, returns.return_date, returns.return_returningqty, hauling.hauling_status FROM hauling INNER JOIN returns ON hauling.hauling_id = returns.return_id WHERE hauling.hauling_no=1;";
+        <?php
+        $sql = "SELECT 
+                    hauling.hauling_date, 
+                    hauling.hauling_no, 
+                    hauling.hauling_hauledBy, 
+                    hauling.hauling_hauledFrom, 
+                    hauling.hauling_quantity, 
+                    hauling.hauling_unit, 
+                    hauling.hauling_matname, 
+                    returns.returns_returnedqty, 
+                    returns.returns_date, 
+                    returns.returns_returningqty, 
+                    hauling.hauling_status 
+                FROM 
+                    hauling 
+                INNER JOIN 
+                    returns ON hauling.hauling_id = returns.returns_id 
+                WHERE 
+                    hauling.hauling_no=1;";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_row($result)){
     ?>
@@ -183,6 +200,9 @@
                     </div>
                 </form>
             </div>
+        <?php
+            }
+        ?>
         </div>
         <?php
         }

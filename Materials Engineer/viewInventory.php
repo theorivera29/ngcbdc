@@ -124,6 +124,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    $sql = "SELECT 
+                                                materials.mat_name,
+                                                categories.categories_name,
+                                                matinfo.matinfo_prevStock,
+                                                unit.unit_name,
+                                                deliveredin.deliveredin_quantity,
+                                                usagein.usagein_quantity,
+                                                (matinfo.matinfo_prevStock + deliveredin.deliveredin_quantity),
+                                                (matinfo.matinfo_prevStock + deliveredin.deliveredin_quantity - usagein.usagein_quantity)
+                                            FROM
+                                                materials
+                                            INNER JOIN 
+                                                categories ON materials.mat_categ = categories.categories_id
+                                            INNER JOIN 
+                                                unit ON materials.mat_unit = unit.unit_id
+                                            INNER JOIN
+                                                deliveredin ON materials.mat_id = deliveredin.deliveredin_matname
+                                            INNER JOIN
+                                                usagein ON materials.mat_id = usagein.usagein_matname
+                                            INNER JOIN
+                                                matinfo ON materials.mat_id = matinfo.matinfo_matname;";
+                                ?>
                                     <tr>
                                         <td></td>
                                         <td></td>
@@ -137,6 +160,9 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
+                                <?php
+
+                                ?>
                                 </tbody>
                             </table>
                         </div>

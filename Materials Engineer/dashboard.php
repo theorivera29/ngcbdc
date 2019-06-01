@@ -2,7 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-    $accounts_id = $_SESSION['account_id'];    
+    $accounts_id = $_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 <body>
     <div id="content">
         <span class="slide">
-            <a href="#" class="open" onclick="openSlideMenu()">
+            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
@@ -53,20 +53,20 @@
         </span>
 
         <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" onclick="closeSlideMenu()">
+            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <img src="../Images/login2.png" id="ngcbdc-logo">
+                    <h3>NGCBDC</h3>
                 </div>
                 <ul class="list-unstyled components">
                     <li>
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -89,7 +89,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
+                        <a href="" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="addingOfMaterials.php" id="sideNav-a">Adding of Materials</a>
@@ -99,7 +99,9 @@
                     </li>
                 </ul>
             </nav>
+
         </div>
+
     </div>
 
     <div class="row">
@@ -134,8 +136,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="../server.php" method="POST">
-                        <?php
+                    
+                    <?php
                         $date_today = date("Y-m-d");
                         $sql = "SELECT 
                                     todo_id,
@@ -150,57 +152,54 @@
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                     ?>
-                        <table class="table today-task-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Task</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <?php 
+                    <table class="table today-task-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Task</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <?php 
                             while($row = mysqli_fetch_row($result)) {
                         ?>
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $row[1] ;?></td>
-                                    <td><?php echo $row[2] ;?></td>
-                                    <td><?php echo $row[3] ;?></td>
-                                    <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
-                                    <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
-                                    <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
-                                    <?php
+                        <form action="../server.php" method="POST">
+                        <tbody>
+                            <tr>
+                                <td><?php echo $row[1] ;?></td>
+                                <td><?php echo $row[2] ;?></td>
+                                <td><?php echo $row[3] ;?></td>
+                                <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
+                                <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
+                                <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
+                                <?php
                                     if(strcmp($row[3], "in progress") == 0) {
                                 ?>
-                                    <td><button type="submit" name="update_todo" data-toggle="modal"
-                                            data-target="#done-task-modal" class="btn btn-success">Done</button>
-                                    </td>
-                                    <?php
+                                <td><button type="submit" name="update_todo" class="btn btn-success">Done</button></td>
+                                <?php
                                     } else {
                                 ?>
-                                    <td><button type="submit" name="update_todo" data-toggle="modal"
-                                            data-target="#clear-task-modal" class="btnbtn-danger">Clear</button>
-                                    </td>
-                                    <?php
+                                <td><button type="submit" name="update_todo" class="btnbtn-danger">Clear</button></td>
+                                <?php
                                     }
                                 ?>
-                                </tr>
-                            </tbody>
-                            <?php
+                            </tr>
+                        </tbody>
+                        </form>
+                        <?php
                             }
                         ?>
-                        </table>
-                        <?php
+                    </table>
+                    <?php
                         } else {
                     ?>
-                        <div>
-                            <p id="no-task-text">NO TASK FOR TODAY</p>
-                        </div>
-                        <?php
+                    <div>
+                        <p id="no-task-text">NO TASK FOR TODAY</p>
+                    </div>
+                    <?php
                         }
                     ?>
-                    </form>
                 </div>
             </div>
         </div>
@@ -259,48 +258,6 @@
             </tbody>
         </table>
     </div>
-
-    <div class="modal fade" id="done-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you are done with this task?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="clear-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to clear this task?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 <script>
     function openSlideMenu() {
@@ -314,11 +271,9 @@
 
     $(document).ready(function () {
 
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-
-    });
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+});
 
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
