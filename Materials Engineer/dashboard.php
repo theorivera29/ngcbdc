@@ -65,8 +65,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -111,7 +111,8 @@
                 <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="card-body">
                         <p id="date-label">Date:</p>
-                        <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID" required>
+                        <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID"
+                            required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                         <textarea class="form-control" id="task-textarea" name="todo_task" required></textarea>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -136,7 +137,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    
+
                     <?php
                         $date_today = date("Y-m-d");
                         $sql = "SELECT 
@@ -165,27 +166,33 @@
                             while($row = mysqli_fetch_row($result)) {
                         ?>
                         <form action="../server.php" method="POST">
-                        <tbody>
-                            <tr>
-                                <td><?php echo $row[1] ;?></td>
-                                <td><?php echo $row[2] ;?></td>
-                                <td><?php echo $row[3] ;?></td>
-                                <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
-                                <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
-                                <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
-                                <?php
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $row[1] ;?></td>
+                                    <td><?php echo $row[2] ;?></td>
+                                    <td><?php echo $row[3] ;?></td>
+                                    <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
+                                    <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
+                                    <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
+                                    <?php
                                     if(strcmp($row[3], "in progress") == 0) {
                                 ?>
-                                <td><button type="submit" name="update_todo" class="btn btn-success">Done</button></td>
-                                <?php
+                                    <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#done-task-modal">Done
+                                        </button></td>
+                                    <?php
                                     } else {
                                 ?>
-                                <td><button type="submit" name="update_todo" class="btnbtn-danger">Clear</button></td>
-                                <?php
+                                    <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#clear-task-modal">Clear
+                                        </button></td>
+                                    </td>
+                                    <?php
                                     }
                                 ?>
-                            </tr>
-                        </tbody>
+                                </tr>
+                            </tbody>
                         </form>
                         <?php
                             }
@@ -258,6 +265,50 @@
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="done-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h4>Are you sure you are done with this task?</h4>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    NAME NG TASK
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="clear-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h4>Are you sure you want to clear this task?</h4>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    NAME NG TASK
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <script>
     function openSlideMenu() {
@@ -271,45 +322,45 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
-
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-
-    $(document).ready(function () {
-            //Display Only Date till today // 
-            var dtToday = new Date();
-            var month = dtToday.getMonth() + 1;
-            var day = dtToday.getDate();
-            var year = dtToday.getFullYear();
-            if (month < 10)
-                month = '0' + month.toString();
-            if (day < 10)
-                day = '0' + day.toString();
-
-            var today = year + '-' + month + '-' + day;
-            $('#dateID').attr('min', today);
-
-        });
-    
-        $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
                 });
-            }, false);
-        })();
+
+                $('#myModal').on('shown.bs.modal', function () {
+                    $('#myInput').trigger('focus')
+                })
+
+                $(document).ready(function () {
+                    //Display Only Date till today // 
+                    var dtToday = new Date();
+                    var month = dtToday.getMonth() + 1;
+                    var day = dtToday.getDate();
+                    var year = dtToday.getFullYear();
+                    if (month < 10)
+                        month = '0' + month.toString();
+                    if (day < 10)
+                        day = '0' + day.toString();
+
+                    var today = year + '-' + month + '-' + day;
+                    $('#dateID').attr('min', today);
+
+                });
+
+                $(function () {
+                    'use strict';
+                    window.addEventListener('load', function () {
+                        var forms = document.getElementsByClassName('needs-validation');
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
 </script>
 
 </html>
