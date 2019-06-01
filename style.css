@@ -438,7 +438,6 @@ ul ul #sideNav-a  {
 .view-inventory-tabs-content{
     margin-top: 3%;
     margin-left: -8%;
-    
 }
 
 #open-category-btn{
@@ -542,10 +541,19 @@ ul ul #sideNav-a  {
 /*End of Materials Engineer - Account*/
 
 /*Start of Materials Engineer - Adding of Something*/
-.adding-table{
-    width: 60% !important;
-    margin-left: 10%;
+.adding-category-tabs-content{
+    margin-top: 3%;
+    width: 100%;
+}
+
+.added-category-list{
+    width: 100% !important;
     text-align: center;
+}
+
+.adding-category-list{
+    width: 100% !important;
+    margin-top: 50% !important;    
 }
 /*End of Materials Engineer - Adding of Something*/
 
