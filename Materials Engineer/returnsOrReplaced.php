@@ -200,6 +200,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
+        $('table.display').DataTable();
     });
 </script>
 </html>
