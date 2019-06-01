@@ -58,7 +58,7 @@
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
+                <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
                 <ul class="list-unstyled components">
                     <li>
