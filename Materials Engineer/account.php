@@ -100,7 +100,7 @@
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_row($result);
                 ?>
-                <form class="form" action="../server.php" method="POST">
+                <form class="form " action="../server.php" method="POST">
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label ">First name</label>
                         <div class="col-lg-4">
@@ -126,10 +126,16 @@
                         <div class="col-lg-4">
                             <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
                         </div>
-           <!--             <label class="col-lg-2 col-form-label">Confirm Password</label>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">New Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="">
-                        </div>-->
+                        </div>
+                        <label class="col-lg-2 col-form-label">Confirm Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" name="">
+                        </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-3">

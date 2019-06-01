@@ -88,202 +88,489 @@
 
     </div>
 
-    <div class="mx-auto mt-5 col-md-9">
-        <div class="card">
-            <div class="card-header">
-                <h4>Hauling Receipt</h4>
-            </div>
-            <div class="card-body">
-                <form action="../server.php" method="POST" class="needs-validation" novalidate>
-                    <div class="form-group row formnum-container">
-                        <div class=" col-lg-12">
-                            <label class="col-lg-12 col-form-label">Form No.:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="formNo" pattern="[0-9]{11}" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
+    <!-- <section id="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 project-tabs">
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            role="tab" aria-controls="nav-home" aria-selected="true">RETURN</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">REPLACE</a>
                     </div>
-                    <div class="form-group row date-container">
-                        <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" name="date" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Deliver to:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" name="deliverTo" pattern="[A-Za-z]" required>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z]" required>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <table class="table hauling-form-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Articles</th>
-                                    <th scope="col">Unit</th>
-                                </tr>
-                            </thead>
-                            <tbody id="haulingTable">
-                            </tbody>
-                            <tfoot>
-                                <tr id="haulingRow">
-                                    <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                            placeholder="Quantity" pattern="[0-9]{11}">
-                                    </td>
-                                    <td><div class="form-group">
-                                            <select class="form-control" name="articles" id="articles">
-                                                <option value="" selected disabled>Choose an Article</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td><input class="form-control" name="unit" type="text" id="unit"
-                                            placeholder="Unit">
-                                    </td>
-                                    <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                            value="Add Row" />
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Requested by:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="requestedBy" pattern="[A-Za-z]" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Hauled by:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="hauledBy" pattern="[A-Za-z]" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <div class="form-group col-lg-6">
-                            <label class="col-lg-12 col-form-label">Warehouseman:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="warehouseman" pattern="[A-Za-z]" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                            <label class="col-lg-12 col-form-label">Approved by:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="approvedBy" pattern="[A-Za-z]" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
 
-                        <div class="form-group row col-lg-6">
-                            <div class="card hauling-form-card">
+                </div>
+                <div class="returns-or-replace-content">
+                    <div class="tab-content" id="nav-tabContent return-container">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <div class="card return-container">
                                 <div class="card-header">
-                                    <h5>TRUCK DETAILS</h5>
+                                    <h4>List of Materials to be Return</h4>
                                 </div>
-                                <div class="card-body form-group row col-lg-12">
-                                    <label class="col-lg-4 col-form-label">Type:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="type" pattern="[A-Za-z]" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <label class="col-lg-4 col-form-label">Plate #:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="plateNo" pattern="[A-Za-z]{3}-?[0-9]{4}" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="PORS" pattern="[0-9]"required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <label class="col-lg-4 col-form-label">Hauler ID:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="haulerID" pattern="[0-9]"required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
+                                <table class="table hauled-items-table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Form No.</th>
+                                            <th scope="col">Hauling Date</th>
+                                            <th scope="col">Hauled From</th>
+                                            <th scope="col">Hauled By</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><button type="button" class="btn btn-success">Open</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="card replace-container">
+                                <div class="card-header">
+                                    <h4>List of Materials to be Replaced</h4>
                                 </div>
+                                <table class="table hauled-items-table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Disposal Date</th>
+                                            <th scope="col">Project</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><button type="button" class="btn btn-success">Open</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
-                    <div class="row form-group save-btn-container">
-                        <div class="col-lg-12">
-                            <input type="submit" name="create_hauling" class="btn btn-success" value="Save">
-                            <input type="reset" class="btn btn-danger" value="Cancel">
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section> -->
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
-                var quantity = $("#quantity").val();
-                var unit = $("#unit").val();
-                var articles = $("#articles").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                if ((quantity != '') && (articles != '') && (unit != '')) {
-                    $("table tbody").append(markup);
-                    $("#haulingRow input[type=text]").val('');
-                    $("#haulingRow select").val('');
-                }
-            });
+    <section id="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 project-tabs">
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-return"
+                            role="tab" aria-controls="nav-home" aria-selected="true">TO BE RETURN</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-permanent"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">PERMANENTLY HAULED</a>
+                    </div>
 
-            $("#haulingTable").on('click', '.delete-row', function () {
-                $(this).closest('tr').remove();
-            });
-        });
+                </div>
+                <div class="returns-or-replace-content">
+                    <div class="tab-content" id="nav-tabContent return-container">
+                        <div class="tab-pane fade show active" id="nav-return" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Hauling Receipt (To Be Return)</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                                        <div class="form-group row formnum-container">
+                                            <div class=" col-lg-12">
+                                                <label class="col-lg-12 col-form-label">Form No.:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="formNo"
+                                                        pattern="[0-9]{11}" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row date-container">
+                                            <div class="col-lg-12">
+                                                <label class="col-lg-12 col-form-label">Date:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="date" name="date" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-lg-12">
+                                            <label class="col-lg-2 col-form-label">Deliver to:</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="deliverTo"
+                                                    pattern="[A-Za-z]" required>
+                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-lg-12">
+                                            <label class="col-lg-2 col-form-label">Hauled from:</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="hauledFrom"
+                                                    pattern="[A-Za-z]" required>
+                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <table class="table hauling-form-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Articles</th>
+                                                        <th scope="col">Unit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="haulingTable">
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr id="haulingRow">
+                                                        <td><input class="form-control" name="quantity" type="text"
+                                                                id="quantity" placeholder="Quantity"
+                                                                pattern="[0-9]{11}">
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="articles"
+                                                                    id="articles">
+                                                                    <option value="" selected disabled>Choose an Article
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td><input class="form-control" name="unit" type="text"
+                                                                id="unit" placeholder="Unit">
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <input type="button"
+                                                                class="btn btn-md btn-outline-secondary add-row"
+                                                                value="Add Row" />
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="form-group row col-lg-12">
+                                            <div class="form-group col-lg-6">
+                                                <label class="col-lg-12 col-form-label">Requested by:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="requestedBy"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="col-lg-12 col-form-label">Hauled by:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="hauledBy"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-lg-12">
+                                            <div class="form-group col-lg-6">
+                                                <label class="col-lg-12 col-form-label">Warehouseman:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="warehouseman"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                                <label class="col-lg-12 col-form-label">Approved by:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="approvedBy"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
 
-        $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
+                                            <div class="form-group row col-lg-6">
+                                                <div class="card hauling-form-card">
+                                                    <div class="card-header">
+                                                        <h5>TRUCK DETAILS</h5>
+                                                    </div>
+                                                    <div class="card-body form-group row col-lg-12">
+                                                        <label class="col-lg-4 col-form-label">Type:</label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="type"
+                                                                pattern="[A-Za-z]" required>
+                                                            <div class="invalid-feedback">Please fill out this field.
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-lg-4 col-form-label">Plate #:</label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="plateNo"
+                                                                pattern="[A-Za-z]{3}-?[0-9]{4}" required>
+                                                            <div class="invalid-feedback">Please fill out this field.
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="PORS"
+                                                                pattern="[0-9]" required>
+                                                            <div class="invalid-feedback">Please fill out this field.
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-lg-4 col-form-label">Hauler ID:</label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="haulerID"
+                                                                pattern="[0-9]" required>
+                                                            <div class="invalid-feedback">Please fill out this field.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group save-btn-container">
+                                            <div class="col-lg-12">
+                                                <input type="submit" name="create_hauling" class="btn btn-success"
+                                                    value="Save">
+                                                <input type="reset" class="btn btn-danger" value="Cancel">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-permanent" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="card replace-container">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Hauling Receipt (Permanently Hauled)</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                                            <div class="form-group row formnum-container">
+                                                <div class=" col-lg-12">
+                                                    <label class="col-lg-12 col-form-label">Form No.:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="text" name="formNo"
+                                                            pattern="[0-9]{11}" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row date-container">
+                                                <div class="col-lg-12">
+                                                    <label class="col-lg-12 col-form-label">Date:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="date" name="date" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row col-lg-12">
+                                                <label class="col-lg-2 col-form-label">Deliver to:</label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="text" name="deliverTo"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row col-lg-12">
+                                                <label class="col-lg-2 col-form-label">Hauled from:</label>
+                                                <div class="col-lg-9">
+                                                    <input class="form-control" type="text" name="hauledFrom"
+                                                        pattern="[A-Za-z]" required>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <table class="table hauling-form-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Articles</th>
+                                                            <th scope="col">Unit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="haulingTable">
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr id="haulingRow">
+                                                            <td><input class="form-control" name="quantity" type="text"
+                                                                    id="quantity" placeholder="Quantity"
+                                                                    pattern="[0-9]{11}">
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="articles"
+                                                                        id="articles">
+                                                                        <option value="" selected disabled>Choose an
+                                                                            Article
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td><input class="form-control" name="unit" type="text"
+                                                                    id="unit" placeholder="Unit">
+                                                            </td>
+                                                            <td colspan="5">
+                                                                <input type="button"
+                                                                    class="btn btn-md btn-outline-secondary add-row"
+                                                                    value="Add Row" />
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                            <div class="form-group row col-lg-12">
+                                                <div class="form-group col-lg-6">
+                                                    <label class="col-lg-12 col-form-label">Requested by:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="text" name="requestedBy"
+                                                            pattern="[A-Za-z]" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label class="col-lg-12 col-form-label">Hauled by:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="text" name="hauledBy"
+                                                            pattern="[A-Za-z]" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row col-lg-12">
+                                                <div class="form-group col-lg-6">
+                                                    <label class="col-lg-12 col-form-label">Warehouseman:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="text" name="warehouseman"
+                                                            pattern="[A-Za-z]" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                    <label class="col-lg-12 col-form-label">Approved by:</label>
+                                                    <div class="col-lg-12">
+                                                        <input class="form-control" type="text" name="approvedBy"
+                                                            pattern="[A-Za-z]" required>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row col-lg-6">
+                                                    <div class="card hauling-form-card">
+                                                        <div class="card-header">
+                                                            <h5>TRUCK DETAILS</h5>
+                                                        </div>
+                                                        <div class="card-body form-group row col-lg-12">
+                                                            <label class="col-lg-4 col-form-label">Type:</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="type"
+                                                                    pattern="[A-Za-z]" required>
+                                                                <div class="invalid-feedback">Please fill out this
+                                                                    field.
+                                                                </div>
+                                                            </div>
+                                                            <label class="col-lg-4 col-form-label">Plate #:</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="plateNo"
+                                                                    pattern="[A-Za-z]{3}-?[0-9]{4}" required>
+                                                                <div class="invalid-feedback">Please fill out this
+                                                                    field.
+                                                                </div>
+                                                            </div>
+                                                            <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="PORS"
+                                                                    pattern="[0-9]" required>
+                                                                <div class="invalid-feedback">Please fill out this
+                                                                    field.
+                                                                </div>
+                                                            </div>
+                                                            <label class="col-lg-4 col-form-label">Hauler ID:</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="haulerID"
+                                                                    pattern="[0-9]" required>
+                                                                <div class="invalid-feedback">Please fill out this
+                                                                    field.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group save-btn-container">
+                                                <div class="col-lg-12">
+                                                    <input type="submit" name="create_hauling" class="btn btn-success"
+                                                        value="Save">
+                                                    <input type="reset" class="btn btn-danger" value="Cancel">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".add-row").click(function () {
+                        var quantity = $("#quantity").val();
+                        var unit = $("#unit").val();
+                        var articles = $("#articles").val();
+                        var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" +
+                            unit +
+                            "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                        if ((quantity != '') && (articles != '') && (unit != '')) {
+                            $("table tbody").append(markup);
+                            $("#haulingRow input[type=text]").val('');
+                            $("#haulingRow select").val('');
                         }
-                        form.classList.add('was-validated');
-                    }, false);
+                    });
+
+                    $("#haulingTable").on('click', '.delete-row', function () {
+                        $(this).closest('tr').remove();
+                    });
                 });
-            }, false);
-        })();
 
-        function openSlideMenu() {
-            document.getElementById('menu').style.width = '15%';
-        }
+                $(function () {
+                    'use strict';
+                    window.addEventListener('load', function () {
+                        var forms = document.getElementsByClassName('needs-validation');
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
 
-        function closeSlideMenu() {
-            document.getElementById('menu').style.width = '0';
-            document.getElementById('content').style.marginLeft = '0';
-        }
+                function openSlideMenu() {
+                    document.getElementById('menu').style.width = '15%';
+                }
 
-        $(document).ready(function () {
+                function closeSlideMenu() {
+                    document.getElementById('menu').style.width = '0';
+                    document.getElementById('content').style.marginLeft = '0';
+                }
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+                $(document).ready(function () {
 
-        });
-    </script>
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                    });
+
+                });
+            </script>
 </body>
 
 </html>
