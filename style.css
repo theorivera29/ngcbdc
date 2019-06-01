@@ -579,9 +579,17 @@ textarea{
 /*End of Materials Engineer - Report Page*/
 
 
-/*State of Materials Engineer - Account*/
-.account-btn{
+/*Start of Materials Engineer - Account*/
+.accnt-btn{
     float: right !important;
+}
+
+.save-accnt-btn{
+    display: inline-block;
+}
+
+.cancel-accnt-btn{
+    display: inline-block;
 }
 /*End of Materials Engineer - Account*/
 

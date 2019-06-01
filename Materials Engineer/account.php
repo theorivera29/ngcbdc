@@ -1,6 +1,10 @@
 <?php
     include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -147,11 +151,11 @@
                             <span class="error" style="color:red"></span><br />
 						</div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-lg-3">
-                            <input type="submit" class="btn btn-primary" name="update_account" value="Save Changes">
-                            <input type="reset" class="btn btn-danger" value="Cancel">
-                        </div>
+                    <div class="row form-group accnt-btn">
+                        
+                            <input type="submit" class="btn btn-success save-accnt-btn" name="update_account" value="Save Changes">
+                            <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
+                        
                     </div>
                 </form>
             </div>
