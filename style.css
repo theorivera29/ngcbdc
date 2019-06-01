@@ -254,7 +254,22 @@ ul ul #sideNav-a  {
 .add-task-container{
     margin-left: 5%;
     margin-top: 5%;
-    height: 100%;
+    height: 50vh;
+}
+
+.container-counter{
+    margin-left: 80%;
+    color: green !important;
+    font-size: 2vmin;
+}
+
+textarea{
+    resize: none !important;
+}
+
+.task-submitbtn-container{
+    float: right !important;
+    margin-top: 3% !important;
 }
 
 #date-label{
@@ -284,7 +299,11 @@ ul ul #sideNav-a  {
     margin-left: 1%;
     margin-top: 4%;
     width: 112% !important;
-    height: 100%;
+    height: 50vh;
+}
+
+.todo-task-header{
+    overflow-y: scroll;
 }
 
 .today-task-table{
@@ -333,6 +352,8 @@ ul ul #sideNav-a  {
 .date-container, .formnum-container{
     float: right !important;
 }
+
+
 
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
@@ -450,6 +471,14 @@ ul ul #sideNav-a  {
     margin-top: 3%;
 }
 
+/*Start of Materials Engineer-Hauled Items*/
+.hauled-items-container{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5% !important;
+    text-align: center;
+}
+
 /*Start of Materials Engineer-Hauling*/
 .date-container, .formnum-container{
     float: right !important;
@@ -501,11 +530,14 @@ ul ul #sideNav-a  {
 .returns-or-replace-content{
     margin-top: 3%;
     width: 100% !important;
-    text-align: center;
 }
 
 .replace-container{
     width: 100% !important;
+}
+
+.returns-table{
+    text-align: center;
 }
 /*End of Materials Engineer - returnsOrReplaced*/
 
@@ -543,12 +575,14 @@ ul ul #sideNav-a  {
 /*Start of Materials Engineer - Adding of Something*/
 .adding-category-tabs-content{
     margin-top: 3%;
-    width: 100%;
+    margin-left: 5%;
+    text-align: center;
 }
 
 .added-category-list{
     width: 100% !important;
     text-align: center;
+    width: 100%;
 }
 
 .added-category-list > thead > tr > th{
@@ -559,6 +593,7 @@ ul ul #sideNav-a  {
 .adding-category-list{
     width: 100% !important;
     margin-top: 5%;  
+
 }
 
 .adding-category-list > thead > tr > th{
