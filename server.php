@@ -250,6 +250,7 @@
         }
         $todo_date = mysqli_real_escape_string($conn, $_POST['todo_date']);
         $todo_task = mysqli_real_escape_string($conn, $_POST['todo_task']);
+        echo $todo_task;
         $todo_status = "in progress";
         $stmt = $conn->prepare("INSERT INTO todo (todo_date, todo_task, todo_status, todoOf) VALUES (?, ?, ?, ?);");
         $stmt->bind_param("sssi", $todo_date, $todo_task, $todo_status, $account_id);
@@ -262,7 +263,7 @@
         $stmt->bind_param("ssi", $create_todo_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
+        // header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
 
