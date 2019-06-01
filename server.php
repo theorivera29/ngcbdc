@@ -391,7 +391,7 @@
 
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDCMaterials%20Engineer/viewinventory.php?projects_id=$projects_id");     
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");     
     }
     
     if (isset($_POST['return_hauling'])) {
@@ -412,6 +412,11 @@
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
+    if (isset($_POST['materialCategories'])) {
+        $categories_id = $_POST['categories_id'];
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");     
+    }
 
 // <--View Only-->
 ?>

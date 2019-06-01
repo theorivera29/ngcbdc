@@ -1,6 +1,10 @@
 <?php
     include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];    
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -114,26 +118,109 @@
                     <th class="align-middle">Project</th>
                 </tr>
             </thead>
-            <?php
-                $sql = "SELECT materials.mat_name, materials.mat_categ, matinfo.matinfo_prevStock, materials.mat_unit, deliveredin.deliveredin_quantity, usagein.usagein_quantity, matinfo.currentQuantity, matinfo.matinfo_project FROM matinfo INNER JOIN materials on matinfo.matinfo_matname = materials.mat_id INNER JOIN deliveredin on deliveredin_matname = materials.mat_id INNER JOIN usagein on usagein_matname = materials.mat_id";
-                $result = mysqli_query($conn, $sql);
-                while($row = mysqli_fetch_row($result)){
-            ?>
-            <tr>
-                <td><?php echo $row[0]?></td>
-                <td><?php echo $row[1]?></td>
-                <td><?php echo $row[2]?></td>
-                <td><?php echo $row[3]?></td>
-                <td><?php echo $row[4]?></td>
-                <td><?php echo $row[5]?></td>
-                <td><?php echo $row[6]?></td>
-                <td><?php echo $row[7]?></td>
-                <td><?php echo $row[3]?></td>
-                <td><?php echo $row[0]?></td>
-            </tr>
-            <?php
-                }
-            ?>
+            <tbody>
+                <?php
+                    $sql_categ = "SELECT
+                                    projmateng_project
+                                FROM
+                                    projmateng
+                                WHERE
+                                    projmateng_mateng = $accounts_id;";
+                    $result = mysqli_query($conn, $sql_categ);
+                    $id_array = array();
+                    while($row_categ = mysqli_fetch_assoc($result)){
+                        $id_array[] = $row_categ;
+                    }
+
+                    foreach($id_array as $data) {
+                        $projects_id = $data['projmateng_project'];
+                        $sql_categ = "SELECT DISTINCT
+                                        categories_name
+                                    FROM
+                                        materials
+                                    INNER JOIN
+                                        categories ON categories.categories_id = materials.mat_categ
+                                    INNER JOIN
+                                        matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                    WHERE
+                                        matinfo.matinfo_project = $projects_id;";
+                        $result = mysqli_query($conn, $sql_categ);
+                        $categories = array();
+                        while($row_categ = mysqli_fetch_assoc($result)){
+                            $categories[] = $row_categ;
+                        }
+                        
+                        foreach($categories as $data) {
+                            $categ = $data['categories_name'];
+                            
+                            $sql = "SELECT 
+                                        materials.mat_id,
+                                        materials.mat_name,
+                                        categories.categories_name,
+                                        matinfo.matinfo_prevStock,
+                                        unit.unit_name
+                                    FROM
+                                        materials
+                                    INNER JOIN 
+                                        categories ON materials.mat_categ = categories.categories_id
+                                    INNER JOIN 
+                                        unit ON materials.mat_unit = unit.unit_id
+                                    INNER JOIN
+                                        matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                    WHERE 
+                                        categories.categories_name = '$categ' 
+                                    AND 
+                                        matinfo.matinfo_project = $projects_id
+                                    ORDER BY 1;";
+                            $result = mysqli_query($conn, $sql);
+                            while($row = mysqli_fetch_row($result)){
+                                $sql1 = "SELECT 
+                                            SUM(deliveredin.deliveredin_quantity) 
+                                        FROM 
+                                            deliveredin
+                                        INNER JOIN 
+                                            matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                        WHERE 
+                                            matinfo.matinfo_matname = '$row[0]';";
+                                $result1 = mysqli_query($conn, $sql1);
+                                $row1 = mysqli_fetch_row($result1);
+                                $sql2 = "SELECT 
+                                            SUM(usagein.usagein_quantity) 
+                                        FROM 
+                                            usagein
+                                        INNER JOIN 
+                                            matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                                        WHERE 
+                                            matinfo.matinfo_matname = '$row[0]';";
+                                $result2 = mysqli_query($conn, $sql2);
+                                $row2 = mysqli_fetch_row($result2);
+                                $sql3 = "SELECT
+                                            projects_name
+                                        FROM
+                                            projects
+                                        WHERE
+                                            projects_id = $projects_id;";
+                                $result3 = mysqli_query($conn, $sql3);
+                                $row3 = mysqli_fetch_row($result3);
+                ?>
+                <tr>
+                    <td><?php echo $row[1] ;?></td>
+                    <td><?php echo $row[2] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                    <td><?php echo $row[4] ;?></td>
+                    <td><?php echo $row1[0] ;?></td>
+                    <td><?php echo $row2[0] ;?></td>
+                    <td><?php echo $row[3]+$row1[0] ;?></td>
+                    <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
+                    <td><?php echo $row[4] ;?></td>
+                    <td><?php echo $row3[0] ;?></td>
+                </tr>
+                <?php
+                            }
+                        }
+                    }
+                ?>
+            </tbody>
         </table>
     </div>
 </body>
