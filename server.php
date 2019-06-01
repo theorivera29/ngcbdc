@@ -437,19 +437,18 @@
     if (isset($_POST['return_hauling'])) {
         
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
-        
+
         $stmt = $conn->prepare("SELECT return_returnedqty FROM returns WHERE return_id = 1;");
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($currentReturnedQty);
         $stmt->fetch();
-        $newQuantity = $currentReturnedQty+$returningQuantity;
+        $newQuantity = $returningQuantity+$currentReturnedQty;
         $stmt = $conn->prepare("UPDATE returns SET return_returnedqty = ? WHERE return_id = 1;");
         $stmt->bind_param("i", $newQuantity);
         $stmt->execute();
         $stmt->close();
-        echo $newQuantity;
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returns.php");     
     }
 
 
