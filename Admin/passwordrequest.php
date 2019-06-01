@@ -121,7 +121,12 @@
         </table>
     </div>
 </body>
+
 <script>
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+    });
+
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -132,11 +137,9 @@
     }
 
     $(document).ready(function () {
-
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
-
     });
 </script>
 
