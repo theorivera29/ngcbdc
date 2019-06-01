@@ -218,6 +218,19 @@ ul ul #sideNav-a  {
 }
 /*End of Admin-Dashboard*/
 
+/*Admin - Create an Account*/
+.account-creation-container{
+    margin-bottom: 3%;
+}
+
+.label-styles{
+    font-weight: bold;
+}
+
+#create-accnt-btn{
+    float: right;
+}
+
 
 /*Start of List of Accounts*/
 .list-of-accounts-container{
