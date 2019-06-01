@@ -115,7 +115,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total Quantity</th>
                                     <th scope="col">Articles</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Remarks</th>
@@ -148,10 +148,10 @@
                                     <td></td>
                                     <td></td>
                                     <td id="accordion" class="collapse">
-                                        <!-- returning qty -->
+                                        <!-- replacing qty -->
                                     </td>
                                     <td id="accordion" class="collapse">
-                                         <!-- date returned -->
+                                         <!-- date replaced -->
                                     </td>
                                 </tr>
                                 </tbody>
