@@ -184,7 +184,7 @@
                                     } else {
                                 ?>
                                     <td>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#clear-task-modal">Clear
                                         </button></td>
                                     </td>
@@ -322,45 +322,44 @@
 
     $(document).ready(function () {
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-                $('#myModal').on('shown.bs.modal', function () {
-                    $('#myInput').trigger('focus')
-                })
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
 
-                $(document).ready(function () {
-                    //Display Only Date till today // 
-                    var dtToday = new Date();
-                    var month = dtToday.getMonth() + 1;
-                    var day = dtToday.getDate();
-                    var year = dtToday.getFullYear();
-                    if (month < 10)
-                        month = '0' + month.toString();
-                    if (day < 10)
-                        day = '0' + day.toString();
+        //Display Only Date till today // 
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
 
-                    var today = year + '-' + month + '-' + day;
-                    $('#dateID').attr('min', today);
+        var today = year + '-' + month + '-' + day;
+        $('#dateID').attr('min', today);
 
-                });
+    });
 
-                $(function () {
-                    'use strict';
-                    window.addEventListener('load', function () {
-                        var forms = document.getElementsByClassName('needs-validation');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
+    $(function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 </html>
