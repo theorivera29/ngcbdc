@@ -287,6 +287,27 @@
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");    
     }
 
+    if (isset($_POST['update_todo_all'])) {
+        $todo_id = $_POST['todo_id'];
+        $todo_status = $_POST['todo_status'];
+        $todo_task = $_POST['todo_task'];
+        session_start();
+        $account_id = "";
+        echo $todo_id;
+        if (isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+        $update_todo_date = date("Y-m-d G:i:s");
+        if (strcmp($todo_status, "in progress") == 0) {
+            mysqli_query($conn, "UPDATE todo SET todo_status = 'done' WHERE todo_id = $todo_id");
+            mysqli_query($conn, "INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES ('$update_todo_date', 'Updated todo task '.$todo_task.' to done', $account_id);");
+        } else {
+            mysqli_query($conn, "DELETE FROM todo WHERE todo_id = $todo_id");
+            mysqli_query($conn, "INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES ('$update_todo_date', 'Cleared todo task '.$todo_task, $account_id);");
+        }
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewalltasks.php");    
+    }
+
     if (isset($_POST['edit_account'])) {
         $username = mysqli_real_escape_string($conn, $_POST['userid']);
         session_start();
@@ -365,11 +386,12 @@
             $stmt->execute();
             $stmt->close();
         }
-        header("location: http://127.0.0.1/NGCB/Materials%20Engineer/account.php");        
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/account.php");        
     }
 
     if (isset($_POST['viewInventory'])) {
-        $project_id = $_POST['project_id'];
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDCMaterials%20Engineer/viewinventory.php?projects_id=$projects_id");     
     }
     
     if (isset($_POST['return_hauling'])) {

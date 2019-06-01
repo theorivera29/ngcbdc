@@ -1,6 +1,10 @@
 <?php
     include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -91,7 +95,21 @@
     <div class="card view-all-task-container">
         <h5 class="card-header">All Task</h5>
         <div class="card-body">
-            <table class="table view-all-task-table table-striped table-bordered">
+            <?php
+                $sql = "SELECT 
+                            todo_id,
+                            todo_date,
+                            todo_task,
+                            todo_status,
+                            todoOf 
+                        FROM 
+                            todo 
+                        WHERE 
+                            todoOf = $accounts_id ORDER BY todo_task;";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+            ?>
+            <table class="table today-task-table">
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -100,15 +118,45 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
+                <?php 
+                    while($row = mysqli_fetch_row($result)) {
+                ?>
+                <form action="../server.php" method="POST">
                 <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $row[1] ;?></td>
+                        <td><?php echo $row[2] ;?></td>
+                        <td><?php echo $row[3] ;?></td>
+                        <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
+                        <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
+                        <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
+                        <?php
+                            if(strcmp($row[3], "in progress") == 0) {
+                        ?>
+                        <td><button type="submit" name="update_todo_all" class="btn btn-success">Done</button></td>
+                        <?php
+                            } else {
+                        ?>
+                        <td><button type="submit" name="update_todo_all" class="btnbtn-danger">Clear</button></td>
+                        <?php
+                            }
+                        ?>
                     </tr>
                 </tbody>
+                </form>
+                <?php
+                    }
+                ?>
             </table>
+            <?php
+                } else {
+            ?>
+            <div>
+                <p id="no-task-text">NO TASK</p>
+            </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
 </body>

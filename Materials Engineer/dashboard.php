@@ -31,16 +31,6 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-<<<<<<< HEAD
-            <!-- Example single danger button -->
-            <div class="btn-group dropdown-account">
-                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" href="">Logout</a>
-=======
             <div class="account-container">
             <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
@@ -58,7 +48,6 @@
                         <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="">Logout</a>
                     </div>
->>>>>>> c40e811695abf6e750cbf9c5c2c970a4958e7c22
                 </div>
             </div>
         </span>
@@ -144,7 +133,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="../server.php" method="POST">
+                    
                     <?php
                         $date_today = date("Y-m-d");
                         $sql = "SELECT 
@@ -172,6 +161,7 @@
                         <?php 
                             while($row = mysqli_fetch_row($result)) {
                         ?>
+                        <form action="../server.php" method="POST">
                         <tbody>
                             <tr>
                                 <td><?php echo $row[1] ;?></td>
@@ -193,6 +183,7 @@
                                 ?>
                             </tr>
                         </tbody>
+                        </form>
                         <?php
                             }
                         ?>
@@ -206,7 +197,6 @@
                     <?php
                         }
                     ?>
-                    </form>
                 </div>
             </div>
         </div>
