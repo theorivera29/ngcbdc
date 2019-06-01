@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -50,8 +50,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -63,8 +63,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -76,7 +76,7 @@
                     </li>
 
                     <li>
-                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
@@ -119,7 +119,7 @@
         while($row = mysqli_fetch_row($result)){
     ?>
             <div class="card-body">
-                <form action="../server.php" method="POST">
+                <form class="form needs-validation" novalidate>
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
@@ -178,6 +178,17 @@
                                     <td> <input type="submit" name="return_hauling" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td id="accordion" class="collapse">
+                                        <!-- returning qty -->
+                                    </td>
+                                    <td id="accordion" class="collapse">
+                                        <!-- date returned -->
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -190,6 +201,22 @@
     </div>
 </body>
 <script>
+    $(function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -201,11 +228,11 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
-});
 </script>
 
 </html>

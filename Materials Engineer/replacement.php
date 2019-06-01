@@ -73,7 +73,7 @@
                     </li>
 
                     <li>
-                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
@@ -90,7 +90,7 @@
                 <h4>Replace Disposed Materials</h4>
             </div>
             <div class="card-body">
-                <form class="form">
+                <form class="form needs-validation" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
@@ -116,8 +116,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Articles</th>
+                                    <th scope="col">Unit</th>
                                     <th scope="col">Remarks</th>
                                     <th scope="col">Quantity Replaced</th>
                                     <th scope="col">Date Replaced</th>
@@ -137,9 +137,10 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>                                   
-                                    <td><input class="form-control" type="text" placeholder="Replacement Quantity">
+                                    <td><input class="form-control" type="text" placeholder="Replacement Quantity" required>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
-                                    <td> <input type="button" class="btn btn-md btn-outline-secondary save-row"
+                                    <td> <input type="submit" class="btn btn-md btn-outline-secondary save-row"
                                             value="Save" /></td>
                                 </tr>
                                 <tr>
@@ -162,6 +163,22 @@
     </div>
 </body>
 <script>
+    $(function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }

@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -50,8 +50,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -63,8 +63,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -76,7 +76,7 @@
                     </li>
 
                     <li>
-                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
@@ -87,19 +87,20 @@
         </div>
 
     </div>
-    
-    <div class="mx-auto mt-5 col-md-9">
+
+    <div class="mx-auto mt-5 col-md-10">
         <div class="card">
             <div class="card-header">
                 <h4>Disposal slip</h4>
             </div>
             <div class="card-body">
-                <form action="../server.php" method="POST">
+                <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="disposalDate">
+                                <input class="form-control" type="date" name="disposalDate" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -116,7 +117,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <table class="table hauling-form-table">
+                        <table class="table disposal-form-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
@@ -125,17 +126,27 @@
                                     <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
-                            <tbody id=deliveredTable>
+                            <tbody id="disposalTable">
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td><input class="form-control" name="quantity" type="text" id="quantity" placeholder="Quantity">
+                                <tr id="disposalRow">
+                                    <td><input class="form-control" name="quantity" type="text" id="quantity"
+                                            placeholder="Quantity" pattern="[0-9]">
                                     </td>
-                                    <td><input class="form-control" name="articles" type="text" id="articles" placeholder="Articles"></td>                                   
-                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"></td><td><input class="form-control" name="remarks" type="text" id="remarks" placeholder="Remarks">
+                                    <td><div class="form-group">
+                                            <select class="form-control" name="articles" id="articles">
+                                                <option value="" selected disabled>Choose an Article</option>
+                                            </select>
+                                        </div>    
+                                    </td>
+                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit">
+                                    </td>
+                                    <td><input class="form-control" name="remarks" type="text" id="remarks"
+                                            placeholder="Remarks">
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                            value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -143,7 +154,8 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-primary" name="create_disposalSlip" value="Save Changes">
+                            <input type="submit" class="btn btn-primary" name="create_disposalSlip"
+                                value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -151,7 +163,7 @@
             </div>
         </div>
     </div>
- 
+
     <script>
         $(document).ready(function () {
             $(".add-row").click(function () {
@@ -159,30 +171,53 @@
                 var articles = $("#articles").val();
                 var unit = $("#unit").val();
                 var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity +"</td><td>" + unit + "</td><td>" + articles + "</td><td>" + remarks + "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                $("table tbody").append(markup);
+                var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
+                    "</td><td>" + remarks +
+                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+
+                if ((quantity != '') && (articles != '') && (unit != '') && (remarks != '')) {
+                    $("table tbody").append(markup);
+                    $("#disposalRow input[type=text]").val('');
+                    $("#disposalRow select").val('');
+                }
             });
-            $("#deliveredTable").on('click','.delete-row',function(){
-       $(this).closest('tr').remove();
-     });
+            $("#disposalTable").on('click', '.delete-row', function () {
+                $(this).closest('tr').remove();
+            });
         });
 
+        $(function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
         function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';
-    }
+            document.getElementById('menu').style.width = '15%';
+        }
 
-    function closeSlideMenu() {
-        document.getElementById('menu').style.width = '0';
-        document.getElementById('content').style.marginLeft = '0';
-    }
+        function closeSlideMenu() {
+            document.getElementById('menu').style.width = '0';
+            document.getElementById('content').style.marginLeft = '0';
+        }
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
 
-});
+        });
     </script>
 </body>
 
