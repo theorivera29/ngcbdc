@@ -24,7 +24,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-            <div class="account-container">
+<!--            <div class="account-container">
                 <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
                         $result = mysqli_query($conn, $sql);
@@ -42,7 +42,7 @@
                         <a class="dropdown-item" href="">Logout</a>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </span>
 
         <div id="menu" class="navigation sidenav">
@@ -199,7 +199,7 @@
                                                 <label class="col-lg-12 col-form-label">Form No.:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="formNo"
-                                                        pattern="[0-9]{11}" required>
+                                                          required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -217,7 +217,7 @@
                                             <label class="col-lg-2 col-form-label">Deliver to:</label>
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="deliverTo"
-                                                    pattern="[A-Za-z]" required>
+                                                     required>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
@@ -225,7 +225,7 @@
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="hauledFrom"
-                                                    pattern="[A-Za-z]" required>
+                                                     required>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
@@ -244,16 +244,19 @@
                                                     <tr id="haulingRow">
                                                         <td><input class="form-control" name="quantity" type="text"
                                                                 id="quantity" placeholder="Quantity"
-                                                                pattern="[0-9]{11}">
+                                                                 >
                                                         </td>
                                                         <td>
-                                                            <div class="form-group">
+                                                            <!--<div class="form-group">
                                                                 <select class="form-control" name="articles"
                                                                     id="articles">
                                                                     <option value="" selected disabled>Choose an Article
                                                                     </option>
                                                                 </select>
-                                                            </div>
+                                                            </div>-->
+                                                            <input class="form-control" name="articles" type="text"
+                                                                id="quantity" placeholder="Articles"
+                                                                 >
                                                         </td>
                                                         <td><input class="form-control" name="unit" type="text"
                                                                 id="unit" placeholder="Unit">
@@ -272,7 +275,7 @@
                                                 <label class="col-lg-12 col-form-label">Requested by:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="requestedBy"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -280,7 +283,7 @@
                                                 <label class="col-lg-12 col-form-label">Hauled by:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="hauledBy"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -290,13 +293,13 @@
                                                 <label class="col-lg-12 col-form-label">Warehouseman:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="warehouseman"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                                 <label class="col-lg-12 col-form-label">Approved by:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="approvedBy"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -310,28 +313,28 @@
                                                         <label class="col-lg-4 col-form-label">Type:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="type"
-                                                                pattern="[A-Za-z]" required>
+                                                                 required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Plate #:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="plateNo"
-                                                                pattern="[A-Za-z]{3}-?[0-9]{4}" required>
+                                                                  required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="PORS"
-                                                                pattern="[0-9]" required>
+                                                                 required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="haulerID"
-                                                                pattern="[0-9]" required>
+                                                                 required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </div>
@@ -341,7 +344,7 @@
                                         </div>
                                         <div class="row form-group save-btn-container">
                                             <div class="col-lg-12">
-                                                <input type="submit" name="create_hauling" class="btn btn-success"
+                                                <input type="submit" name="create_toBeReturnedHauling" class="btn btn-success"
                                                     value="Save">
                                                 <input type="reset" class="btn btn-danger" value="Cancel">
                                             </div>
@@ -363,7 +366,7 @@
                                                     <label class="col-lg-12 col-form-label">Form No.:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="formNo"
-                                                            pattern="[0-9]{11}" required>
+                                                              required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
@@ -381,7 +384,7 @@
                                                 <label class="col-lg-2 col-form-label">Deliver to:</label>
                                                 <div class="col-lg-9">
                                                     <input class="form-control" type="text" name="deliverTo"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -389,7 +392,7 @@
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
                                                 <div class="col-lg-9">
                                                     <input class="form-control" type="text" name="hauledFrom"
-                                                        pattern="[A-Za-z]" required>
+                                                         required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
@@ -408,17 +411,19 @@
                                                         <tr id="haulingRow">
                                                             <td><input class="form-control" name="quantity" type="text"
                                                                     id="quantity" placeholder="Quantity"
-                                                                    pattern="[0-9]{11}">
+                                                                     >
                                                             </td>
                                                             <td>
-                                                                <div class="form-group">
+                                                                <!--<div class="form-group">
                                                                     <select class="form-control" name="articles"
                                                                         id="articles">
                                                                         <option value="" selected disabled>Choose an
                                                                             Article
                                                                         </option>
                                                                     </select>
-                                                                </div>
+                                                                </div>-->
+                                                                <input class="form-control" name="quantity" type="text"
+                                                                    id="quantity" placeholder="Quantity">
                                                             </td>
                                                             <td><input class="form-control" name="unit" type="text"
                                                                     id="unit" placeholder="Unit">
@@ -437,7 +442,7 @@
                                                     <label class="col-lg-12 col-form-label">Requested by:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="requestedBy"
-                                                            pattern="[A-Za-z]" required>
+                                                             required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
@@ -445,7 +450,7 @@
                                                     <label class="col-lg-12 col-form-label">Hauled by:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="hauledBy"
-                                                            pattern="[A-Za-z]" required>
+                                                             required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
@@ -455,13 +460,13 @@
                                                     <label class="col-lg-12 col-form-label">Warehouseman:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="warehouseman"
-                                                            pattern="[A-Za-z]" required>
+                                                             required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                     <label class="col-lg-12 col-form-label">Approved by:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="approvedBy"
-                                                            pattern="[A-Za-z]" required>
+                                                             required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
@@ -475,7 +480,7 @@
                                                             <label class="col-lg-4 col-form-label">Type:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="type"
-                                                                    pattern="[A-Za-z]" required>
+                                                                     required>
                                                                 <div class="invalid-feedback">Please fill out this
                                                                     field.
                                                                 </div>
@@ -483,7 +488,7 @@
                                                             <label class="col-lg-4 col-form-label">Plate #:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="plateNo"
-                                                                    pattern="[A-Za-z]{3}-?[0-9]{4}" required>
+                                                                      required>
                                                                 <div class="invalid-feedback">Please fill out this
                                                                     field.
                                                                 </div>
@@ -491,7 +496,7 @@
                                                             <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="PORS"
-                                                                    pattern="[0-9]" required>
+                                                                     required>
                                                                 <div class="invalid-feedback">Please fill out this
                                                                     field.
                                                                 </div>
@@ -499,7 +504,7 @@
                                                             <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="haulerID"
-                                                                    pattern="[0-9]" required>
+                                                                     required>
                                                                 <div class="invalid-feedback">Please fill out this
                                                                     field.
                                                                 </div>
@@ -510,7 +515,7 @@
                                             </div>
                                             <div class="row form-group save-btn-container">
                                                 <div class="col-lg-12">
-                                                    <input type="submit" name="create_hauling" class="btn btn-success"
+                                                    <input type="submit" name="create_permanentHauling" class="btn btn-success"
                                                         value="Save">
                                                     <input type="reset" class="btn btn-danger" value="Cancel">
                                                 </div>
