@@ -107,6 +107,7 @@
                     <th scope="col">Hauling Date</th>
                     <th scope="col">Hauled From</th>
                     <th scope="col">Hauled By</th>
+                    <th scope="col">Hauling Type</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
