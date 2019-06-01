@@ -76,7 +76,7 @@
                     </li>
 
                     <li>
-                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
@@ -99,7 +99,8 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="deliveredDate">
+                                <input class="form-control" type="date" name="deliveredDate" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -116,7 +117,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <table class="table hauling-form-table">
+                        <table class="table deliveredin-form-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Quantity</th>
@@ -126,38 +127,37 @@
                                     <th scope="col">From</th>
                                 </tr>
                             </thead>
-                            <tbody id=deliveredTable>
+                            <tbody id="deliveredTable">
                             </tbody>
                             <tfoot>
-                                <tr>
+                                <tr id="deliveredRow">
                                     <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                            placeholder="Quantity" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
-                                    <td><input class="form-control" name="articles" type="text" id="articles"
-                                            placeholder="Articles" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
-                                    <td><input class="form-control" name="unit" type="text" id="unit" placeholder="Unit"
-                                            required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
-                                    <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
-                                            placeholder="Supplied By" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                            placeholder="Quantity">
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="from" id="selectFrom" required>
+                                            <select class="form-control" name="articles" id="articles">
+                                                <option value="" selected disabled>Choose an Article</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td><input class="form-control" name="unit" type="text" id="unit"
+                                            placeholder="Unit">
+                                    </td>
+                                    <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
+                                            placeholder="Supplied By">
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select class="form-control" name="from" id="selectFrom">
                                                 <option value="" selected disabled>Choose</option>
                                                 <option value="Main Office">Main Office</option>
                                                 <option value="Petty Cash">Petty Cash</option>
                                             </select>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </td>
                                     <td colspan="5">
-                                        <input type="submit" class="btn btn-md btn-outline-secondary add-row"
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
                                             value="Add Row" />
                                     </td>
                                 </tr>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
+                            <input type="submit" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -188,9 +188,11 @@
                     "</td><td>" + selectFrom +
                     "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
-                if ((quantity !='') && (articles !='') && (unit !='') && (suppliedBy !='') && (
-                        selectFrom !='')) {
+                if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '') && (
+                        selectFrom != '')) {
                     $("table tbody").append(markup);
+                    $("#deliveredRow input[type=text]").val('');
+                    $("#deliveredRow select").val('');
                 }
             });
 

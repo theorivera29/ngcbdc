@@ -44,33 +44,57 @@
 }
 /*End of Index.php*/
 
+/*Navigation*/
+body{
+    overflow-x: hidden !important;
+}
 
-/*Start of Navigation*/
-.dropdown-account{
+.title{
+    margin-left: 2%;
+    margin-top: 1% !important;
+    margin-bottom: 1% !important;
+    display: inline-block;
+    color: #FBF5F3 !important;
+    font-size: 2.8vmin;
+}
+
+.active-user{
+    display: inline-block;
+    margin-top: 1% !important;
+    color: #FFFFFF;
+    font-size: 2vmin;
+}
+
+.account-container{
     float: right;
-    margin-right: 3%;
     margin-top: 1%;
+    margin-right: 2%;
+}
+
+.dropdown-account{
+    display: inline-block;
 }
 
 .dropdown-settings{
-    margin-left: 20% !important;
     color: #D3D3D3 !important;
 }
 
 .dropdown-toggle::after{
-    margin-left: 0 !important;
-    font-size: 4vmin;
+    float: right;
+    margin-top: 1% !important;
+    font-size: 3vmin;
 }
 
 .dropdown-item{
     font-size: 2vmin !important;
+    background: #FFFFFF;
 }
 /*End of Navigation*/
 
 
 /*Start of Side Navigation*/
 #content{
-    background-color: #111 !important;
+    background-color: #5B211E !important;
 }
 
 .navigation {
@@ -80,33 +104,28 @@
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #111;
+	background-color: #5B211E !important;
 	overflow-x: hidden;
-	padding-top: 60px;
-	transition: 0.7s;
+	padding-top: 4%;
+    transition: 0.5s;
+    border-right: 2px #DCB149;
+    border-right-style: double;
+
 }
 
-.title{
-    width: 75%;
-    margin-left: 2%;
-    margin-top: -2% !important;
-    display: inline-block;
-    color: #D3D3D3 !important;
-    font-size: 4.5vmin;
+#ngcbdc-logo{
+    width: 60%;
 }
 
 .open{
     margin-left: 3%;
-    color: #000 !important;
+    color: #FFFFFF !important;
+    font-size: 3vmin;
 }
 
 .open:hover{
     text-decoration: none;
-    color: yellow !important;
-}
-
-.dropdown-toggle collapsed {
-    background-color: yellow;
+    color: #EFF1F3 !important;
 }
 
 .dropdown-menu{
@@ -118,24 +137,25 @@
 	top: 2%;
 	right: 10%;
     font-size: 5vmin;
-    color: #FFF8F0;
+    color:#FFFFFF;
+    z-index: 1;
 }
 .navigation .close:hover {
-	color: rgb(255, 255, 255);
+	color: #DCB149;
 }
 
 .slide #sideNav-a {
-	color: #000;
-	font-size: 36px;
+    font-size: 3vmin;
+    color: #FFFFFF;
 }
 
 #sideNav-a {
-    color: #FFF8F0 !important;
+    color: #FFFFFF !important;
     text-decoration: none !important;
 }
 
 #sidebar {
-    color: #fff;
+    color: #FFFFFF;
     transition: all 0.3s;
 }
 
@@ -152,22 +172,20 @@
 }
 
 #sidebar ul p {
-    color: #fff;
     padding: 10px;
+    color: #FFFFFF;
 }
 
 #sidebar ul li #sideNav-a {
-    padding: 10px;
-    font-size: 1.1em;
+    padding: 4%;
+    font-size: 2.5vmin;
     display: block;
+    color: #FFFFFF;
 }
 
-#sidebar ul li a:hover {
-    background: #fff;
-}
-
-#sidebar ul li.active > #sideNav-a , #sideNav-a [aria-expanded="true"] {
-    color: #fff;
+#sidebar ul li #sideNav-a:hover {
+    background: #FFFFFF;
+    color: #0D304F !important;
 }
 
 ul ul #sideNav-a  {
@@ -229,8 +247,8 @@ ul ul #sideNav-a  {
 }
 
 .card-header{
-    background-color: #800000 !important;
-    color: #FFF8F0;
+    background-color: #DCB149 !important;
+    color: #0D304F;
 }
 
 .add-task-container{
@@ -293,6 +311,28 @@ ul ul #sideNav-a  {
 }
 /* End of Materials Engineer-Dashboard*/
 
+/*Materials Engineer-Disposal Slip*/
+.disposal-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+/*Materials Engineer-Deliveredin*/
+.deliveredin-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+/*Materials Engineer- Requisition*/
+.requisition-form-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+/*Materials Engineer-Hauling*/
+.date-container, .formnum-container{
+    float: right !important;
+}
 
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
@@ -372,10 +412,10 @@ ul ul #sideNav-a  {
     color: #FFF8F0;
 }
 
-.site-materials-search{
-    width: 25% !important;
-    margin-top: 3%;
-    margin-left: 2%;
+.site-materials-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
+    width: 90%;
 }
 /*End of Materials Engineer- Site Materials*/
 
@@ -415,17 +455,16 @@ ul ul #sideNav-a  {
 /*End of Materials Engineer-Hauling*/
 
 
-/*Start of Materials Engineer - View Hauling*/
-.view-hauling-receipt-container{
-    width: 70%;
+/*Admin - List of Accounts*/
+.list-of-accounts-container{
+    width: 90%;
     margin: auto;
-    margin-top: 2%;
-    margin-bottom: 3%;
+    margin-top: 5%;
 }
 
-.generate-hauling-btn{
-    margin-left: 82%;
-    margin-top: 2%;
+.list-of-accounts-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
 }
 
 .hauling-form-card{

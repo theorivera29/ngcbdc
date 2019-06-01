@@ -25,13 +25,12 @@
 
 <body>
 
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-            <!-- Example single danger button -->
             <div class="btn-group dropdown-account">
                 <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -49,7 +48,7 @@
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
+                    <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
 
                 <ul class="list-unstyled components">
@@ -57,8 +56,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -70,8 +69,8 @@
                     </li>
 
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSebmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -83,18 +82,16 @@
                     </li>
 
                     <li>
-                        <a href="" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
                     </li>
                 </ul>
             </nav>
-
         </div>
-
     </div>
-    
+
     <table id="example" class="table table-striped table-bordered add-category-table">
         <thead>
             <tr>
@@ -150,11 +147,11 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-});
+    });
 </script>
 
 </html>
