@@ -353,6 +353,8 @@ textarea{
     float: right !important;
 }
 
+
+
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
     width: 96%;
@@ -469,6 +471,14 @@ textarea{
     margin-top: 3%;
 }
 
+/*Start of Materials Engineer-Hauled Items*/
+.hauled-items-container{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5% !important;
+    text-align: center;
+}
+
 /*Start of Materials Engineer-Hauling*/
 .date-container, .formnum-container{
     float: right !important;
@@ -520,11 +530,14 @@ textarea{
 .returns-or-replace-content{
     margin-top: 3%;
     width: 100% !important;
-    text-align: center;
 }
 
 .replace-container{
     width: 100% !important;
+}
+
+.returns-table{
+    text-align: center;
 }
 /*End of Materials Engineer - returnsOrReplaced*/
 
@@ -562,12 +575,14 @@ textarea{
 /*Start of Materials Engineer - Adding of Something*/
 .adding-category-tabs-content{
     margin-top: 3%;
-    width: 100%;
+    margin-left: 5%;
+    text-align: center;
 }
 
 .added-category-list{
     width: 100% !important;
     text-align: center;
+    width: 100%;
 }
 
 .added-category-list > thead > tr > th{
@@ -578,6 +593,7 @@ textarea{
 .adding-category-list{
     width: 100% !important;
     margin-top: 5%;  
+
 }
 
 .adding-category-list > thead > tr > th{
