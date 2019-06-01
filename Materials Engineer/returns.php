@@ -152,7 +152,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total Quantity</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Articles</th>
                                     <th scope="col">Returned Quantity</th>
