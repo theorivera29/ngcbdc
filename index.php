@@ -1,3 +1,8 @@
+<?php
+    include "db_connection.php";
+    session_start();
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -13,20 +18,58 @@
     </script>
 </head>
 
-<body>
-    <div class="">
-        <form>
+<body class="login-wrapper">
+    <div class="login-container">
+        <form class="login-form needs-validation" action="server.php" method="POST" novalidate>
+            <div class="form-group">
+                <img src="Images/login.png" id="login-logo-image">
+                <p id="login-text">USER LOGIN</p>
+            </div>
             <div class="form-group">
                 <label for="inputUsername">Username</label>
-                <input type="text" class="form-control" id="inputUsername" placeholder="Enter your username">
+                <input type="text" class="form-control" id="inputUsername" name="inputUsername"
+                    placeholder="Enter your username" required>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password">
+                <input type="password" class="form-control" id="inputPassword" name="inputPassword"
+                    placeholder="Enter your password" required>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div>
+                <p class="form-group forgot-password-link"><a href="#">Forgot your password?</a></p>
+            </div>
+            <div class="form-group">
+                <p>
+                    <?php
+                        if(isset($_SESSION['login_error'])) {
+                            echo "Incorrect username or password.";
+                            unset($_SESSION['login_error']);
+                        }
+                    ?>
+                </p>
+                <button type="submit" name="login" class="btn btn-primary login-btn">Login</button>
+            </div>
         </form>
     </div>
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 </body>
 
 </html>
