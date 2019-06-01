@@ -1,6 +1,3 @@
-<?php
-    include "../db_connection.php";
-?>
 <!DOCTYPE html>
 
 <html>
@@ -9,12 +6,14 @@
     <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 
-
-    <!-- data tables -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -98,46 +97,105 @@
         </div>
     </div>
 
-    <div class="site-materials-container">
-        <table class="table site-materials-table table-striped table-bordered" id="mydatatable">
-            <thead>
-                <tr>
-                    <th class="align-middle">Particulars</th>
-                    <th class="align-middle">Category</th>
-                    <th class="align-middle">Previous Material Stock</th>
-                    <th class="align-middle">Unit</th>
-                    <th class="align-middle">Delivered Material as of</th>
-                    <th class="align-middle">Material Pulled Out as of</th>
-                    <th class="align-middle">Accumulated Materials Delivered</th>
-                    <th class="align-middle">Material on Site as of</th>
-                    <th class="align-middle">Unit</th>
-                    <th class="align-middle">Project</th>
-                </tr>
-            </thead>
-            <?php
-                $sql = "SELECT materials.mat_name, materials.mat_categ, matinfo.matinfo_prevStock, materials.mat_unit, deliveredin.deliveredin_quantity, usagein.usagein_quantity, matinfo.currentQuantity, matinfo.matinfo_project FROM matinfo INNER JOIN materials on matinfo.matinfo_matname = materials.mat_id INNER JOIN deliveredin on deliveredin_matname = materials.mat_id INNER JOIN usagein on usagein_matname = materials.mat_id";
-                $result = mysqli_query($conn, $sql);
-                while($row = mysqli_fetch_row($result)){
-            ?>
-            <tr>
-                <td><?php echo $row[0]?></td>
-                <td><?php echo $row[1]?></td>
-                <td><?php echo $row[2]?></td>
-                <td><?php echo $row[3]?></td>
-                <td><?php echo $row[4]?></td>
-                <td><?php echo $row[5]?></td>
-                <td><?php echo $row[6]?></td>
-                <td><?php echo $row[7]?></td>
-                <td><?php echo $row[3]?></td>
-                <td><?php echo $row[0]?></td>
-            </tr>
-            <?php
-                }
-            ?>
-        </table>
-    </div>
-</body>
+    <section id="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 project-tabs">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                role="tab" aria-controls="nav-home" aria-selected="true">CATEGORIES</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                                role="tab" aria-controls="nav-profile" aria-selected="false">MATERIALS</a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="adding-category-tabs-content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active adding-category-container" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <table class="table added-category-list table-striped table-bordered" id="mydatatable1">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table adding-category-list table-striped table-bordered" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="checkbox-category">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="card ">
+                                <h5 class="card-header">Category Name</h5>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-info" id="open-category-btn" type="button"
+                                        onclick="window.location.href='materialCategories.php'">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+</body>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            order: [
+                [1, 'asc']
+            ]
+        });
+    });
+
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+
+    $(document).ready(function () {
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
@@ -153,5 +211,6 @@
         $('#mydatatable').DataTable();
     });
 </script>
+
 
 </html>
