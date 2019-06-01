@@ -551,9 +551,24 @@ ul ul #sideNav-a  {
     text-align: center;
 }
 
+.added-category-list > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
 .adding-category-list{
     width: 100% !important;
-    margin-top: 50% !important;    
+    margin-top: 5%;  
+}
+
+.adding-category-list > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
+#checkbox-category{
+    margin-left: 40%;
+    margin-top: -2%;
 }
 /*End of Materials Engineer - Adding of Something*/
 

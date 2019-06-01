@@ -32,13 +32,13 @@
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
             <div class="account-container">
-            <?php 
+                <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_row($result);
             ?>
                 <h5 class="active-user">
-                <?php echo $row[1]." ".$row[2]; ?>
+                    <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
                     <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
@@ -60,7 +60,6 @@
                 <div class="sidebar-header">
                     <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
-
                 <ul class="list-unstyled components">
                     <li>
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
@@ -77,11 +76,10 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Hauling</a>
-                        <ul class="collapse list-unstyled" id="haulingSebmenu">
+                        <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
                             </li>
@@ -90,9 +88,11 @@
                             </li>
                         </ul>
                     </li>
-
                     <li>
                         <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
+                    </li>
+                    <li>
+                        <a href="addingOfMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>

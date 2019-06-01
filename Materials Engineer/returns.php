@@ -20,31 +20,39 @@
 <body>
     <div id="content">
         <span class="slide">
-            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
+            <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-            <!-- Example single danger button -->
-            <div class="btn-group dropdown-account">
-                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" href="">Logout</a>
+            <div class="account-container">
+                <?php 
+                        $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_row($result);
+            ?>
+                <h5 class="active-user">
+                    <?php echo $row[1]." ".$row[2]; ?>
+                </h5>
+                <div class="btn-group dropdown-account">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="account.php">Account Settings</a>
+                        <a class="dropdown-item" href="">Logout</a>
+                    </div>
                 </div>
             </div>
         </span>
 
         <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
+            <a href="#" class="close" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
+                    <img src="../Images/login2.png" id="ngcbdc-logo">
                 </div>
-
                 <ul class="list-unstyled components">
                     <li>
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
@@ -61,11 +69,10 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Hauling</a>
-                        <ul class="collapse list-unstyled" id="haulingSebmenu">
+                        <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
                             </li>
@@ -74,18 +81,18 @@
                             </li>
                         </ul>
                     </li>
-
                     <li>
                         <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
+                    </li>
+                    <li>
+                        <a href="addingOfMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
                     </li>
                 </ul>
             </nav>
-
         </div>
-
     </div>
     <div class="mx-auto col-md-10">
         <div class="card">
@@ -96,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        <?php
+            <?php
         $sql = "SELECT hauling.hauling_date, hauling.hauling_no, hauling.hauling_hauledBy, hauling.hauling_hauledFrom, hauling.hauling_quantity, hauling.hauling_unit, hauling.hauling_matname, returns.return_returnedqty, returns.return_date, returns.return_returningqty, hauling.hauling_status FROM hauling INNER JOIN returns ON hauling.hauling_id = returns.return_id WHERE hauling.hauling_no=1;";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_row($result)){
@@ -147,8 +154,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr data-toggle="collapse" data-target="#accordion"
-                                    class="clickable">
+                                <tr data-toggle="collapse" data-target="#accordion" class="clickable">
                                     <td><?php echo $row[4]?></td>
                                     <td><?php echo $row[5]?></td>
                                     <td><?php echo $row[6]?></td>
@@ -156,10 +162,10 @@
                                     <td><?php echo $row[8]?></td>
                                     <td><?php echo $row[4] - $row[7]?></td>
                                     <td><?php echo $row[10]?></td>
-                                    <td> <input class="form-control" name="returningQuantity" type="text" id="returningQuantity"
-                                            placeholder="Returning Quantity"></td>
-                                    <td> <input type="submit" name="return_hauling" class="btn btn-md btn-outline-secondary save-row"
-                                            value="Save" /></td>
+                                    <td> <input class="form-control" name="returningQuantity" type="text"
+                                            id="returningQuantity" placeholder="Returning Quantity"></td>
+                                    <td> <input type="submit" name="return_hauling"
+                                            class="btn btn-md btn-outline-secondary save-row" value="Save" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -178,7 +184,7 @@
                 </form>
             </div>
         </div>
-    <?php
+        <?php
         }
     ?>
     </div>
@@ -215,7 +221,6 @@
             $('#sidebar').toggleClass('active');
         });
     });
-
 </script>
 
 </html>
