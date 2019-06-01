@@ -263,7 +263,7 @@
         $stmt->bind_param("ssi", $create_todo_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        // header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
 
