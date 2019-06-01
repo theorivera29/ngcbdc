@@ -1,3 +1,10 @@
+<?php
+    include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -114,19 +121,19 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active adding-category-container" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <table class="table added-category-list table-striped table-bordered" id="mydatatable1">
-                                <thead>
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
+                            <thead>
                                     <tr>
                                         <th>Category</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td>2</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <table class="table adding-category-list table-striped table-bordered" id="mydatatable">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -135,12 +142,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="checkbox-category">
-                                            </div>
-                                        </td>
                                         <td></td>
+                                        <td>2</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -149,8 +152,8 @@
                             <div class="card ">
                                 <h5 class="card-header">Category Name</h5>
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-info" id="open-category-btn" type="button"
-                                        onclick="window.location.href='materialCategories.php'">View</button>
+                                    <button type="button" class="btn btn-info" id="open-category-btn"
+                                        type="button" onclick="window.location.href='materialCategories.php'">View</button>
                                 </div>
                             </div>
                         </div>
@@ -209,6 +212,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
+    });
+    $(document).ready(function () {
+        $('table.display').DataTable();
     });
 </script>
 

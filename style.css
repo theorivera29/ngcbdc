@@ -543,12 +543,14 @@ ul ul #sideNav-a  {
 /*Start of Materials Engineer - Adding of Something*/
 .adding-category-tabs-content{
     margin-top: 3%;
-    width: 100%;
+    margin-left: 5%;
+    text-align: center;
 }
 
 .added-category-list{
     width: 100% !important;
     text-align: center;
+    width: 100%;
 }
 
 .added-category-list > thead > tr > th{
@@ -559,6 +561,7 @@ ul ul #sideNav-a  {
 .adding-category-list{
     width: 100% !important;
     margin-top: 5%;  
+
 }
 
 .adding-category-list > thead > tr > th{
