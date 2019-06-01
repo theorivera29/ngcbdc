@@ -108,12 +108,15 @@
         <div class="col-sm-5">
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
-                <form action="../server.php" method="POST">
+                <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="card-body">
                         <p id="date-label">Date:</p>
-                        <input type="date" class="form-group form-control add-task-date" name="todo_date">
-                        <textarea class="form-control" id="task-textarea" name="todo_task"></textarea>
-                        <button type="submit" class="btn btn-success" id="save-task-btn" name="create_todo">Save</button>
+                        <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <textarea class="form-control" id="task-textarea" name="todo_task" required></textarea>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <button type="submit" class="btn btn-success" id="save-task-btn"
+                            name="create_todo">Save</button>
                     </div>
                 </form>
             </div>
@@ -272,7 +275,41 @@ $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
 });
 
-});
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    $(document).ready(function () {
+            //Display Only Date till today // 
+            var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var today = year + '-' + month + '-' + day;
+            $('#dateID').attr('min', today);
+
+        });
+    
+        $(function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
 </script>
 
 </html>
