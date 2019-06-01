@@ -2,7 +2,11 @@
     include "../db_connection.php";
     session_start();
 
+<<<<<<< HEAD
     $accounts_id = $_SESSION['account_id'];    
+=======
+    $accounts_id = $_SESSION['account_id'];
+>>>>>>> 3acd5519d097d891a70e6570e927cd5301902155
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +24,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -116,60 +123,49 @@
                     <div class="tab-content" id="nav-tabContent return-container">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <div class="card return-container">
-                                <div class="card-header">
-                                    <h4>List of Materials to be Return</h4>
-                                </div>
-                                <table class="table hauled-items-table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Form No.</th>
-                                            <th scope="col">Hauling Date</th>
-                                            <th scope="col">Hauled From</th>
-                                            <th scope="col">Hauled By</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
 
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><button type="button" class="btn btn-success">Open</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table returns-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Form No.</th>
+                                        <th scope="col">Hauling Date</th>
+                                        <th scope="col">Hauled From</th>
+                                        <th scope="col">Hauled By</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="button" class="btn btn-success">Open</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="card replace-container">
-                                <div class="card-header">
-                                    <h4>List of Materials to be Replaced</h4>
-                                </div>
-                                <table class="table hauled-items-table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Disposal Date</th>
-                                            <th scope="col">Project</th>
-                                            <th scope="col">Location</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><button type="button" class="btn btn-success">Open</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
+                            <table class="table hauled-items-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Disposal</th>
+                                        <th scope="col">Project</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="button" class="btn btn-success">Open</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -195,5 +191,20 @@
 
     });
 </script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
+    });
+</script>
 </html>

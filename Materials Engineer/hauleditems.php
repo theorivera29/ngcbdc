@@ -2,8 +2,13 @@
     include "../db_connection.php";
     session_start();
 
+<<<<<<< HEAD
     $accounts_id = $_SESSION['account_id'];    
+=======
+    $accounts_id = $_SESSION['account_id'];
+>>>>>>> 3acd5519d097d891a70e6570e927cd5301902155
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -18,10 +23,15 @@
     <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
     <script src="../JS/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -97,13 +107,9 @@
             </nav>
         </div>
     </div>
-    
-<div class="mx-auto mt-5 col-md-10">
-    <div class="card">
-    <div class="card-header">
-                <h4>Hauling Receipt</h4>
-            </div>
-        <table class="table hauled-items-table table-striped table-bordered">
+
+    <div class="hauled-items-container">
+        <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
                     <th scope="col">Form No.</th>
@@ -115,26 +121,26 @@
                 </tr>
             </thead>
             <?php
-        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo FROM  hauling;";
-        $result = mysqli_query($conn, $sql);
-        while($row = mysqli_fetch_array($result)) {
-    ?>
+                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_array($result)) {
+                    ?>
             <tbody>
-               
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
+                    <td><?php echo $row[4]?></td>
                     <td><button type="button" class="btn btn-success">View</button></td>
                 </tr>
             </tbody>
-                            <?php
-        }
-    ?>
+            <?php
+                        }
+                    ?>
         </table>
     </div>
-</div>
+
 </body>
 <script>
     function openSlideMenu() {
@@ -148,11 +154,26 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-});
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+    });
 </script>
 
 </html>
