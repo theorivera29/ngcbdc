@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../JS/popper/popper.min.js"></script>
+    <script src="../js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
@@ -206,6 +206,10 @@
             $("#deliveredTable").on('click', '.delete-row', function () {
                 $(this).closest('tr').remove();
             });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
         });
 
         $(function () {
@@ -232,14 +236,6 @@
             document.getElementById('menu').style.width = '0';
             document.getElementById('content').style.marginLeft = '0';
         }
-
-        $(document).ready(function () {
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-
-        });
     </script>
 </body>
 
