@@ -2,7 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-    $accounts_id = $_SESSION['account_id'];    
+    $accounts_id = $_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -27,74 +27,32 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
-            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
-                <i class="fas fa-bars"></i>
+            <a href="#" class="open" onclick="window.location.href='projects.php'">
+                <i class="fas fa-arrow-circle-left"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-            <!-- Example single danger button -->
-            <div class="btn-group dropdown-account">
-                <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="account.php">Account Settings</a>
-                    <a class="dropdown-item" href="">Logout</a>
+            <div class="account-container">
+                <?php 
+                        $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_row($result);
+            ?>
+                <h5 class="active-user">
+                    <?php echo $row[1]." ".$row[2]; ?>
+                </h5>
+                <div class="btn-group dropdown-account">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="account.php">Account Settings</a>
+                        <a class="dropdown-item" href="">Logout</a>
+                    </div>
                 </div>
             </div>
         </span>
-
-        <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i>
-            </a>
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>NGCBDC</h3>
-                </div>
-
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="dashboard.php" id="sideNav-a">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Site</a>
-                        <ul class="collapse list-unstyled" id="siteSubmenu">
-                            <li>
-                                <a href="projects.php" id="sideNav-a">Projects</a>
-                            </li>
-                            <li>
-                                <a href="sitematerials.php" id="sideNav-a">Site Materials</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="active">
-                        <a href="#haulingSebmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Hauling</a>
-                        <ul class="collapse list-unstyled" id="haulingSebmenu">
-                            <li>
-                                <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
-                            </li>
-                            <li>
-                                <a href="hauleditems.php" id="sideNav-a">View Hauled Materials</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
-                    </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-
     </div>
 
     <section id="tabs">
@@ -112,9 +70,10 @@
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab">
-                            <table class="table view-inventory-tabs-table table-striped table-bordered" id="mydatatable">
+                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
+                            role="tabpanel" aria-labelledby="nav-home-tab">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered"
+                                id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th>Particulars</th>

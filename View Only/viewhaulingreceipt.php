@@ -1,3 +1,10 @@
+<?php
+    include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -11,9 +18,39 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 
 <body>
+<div id="content">
+        <span class="slide">
+            <a href="#" class="open" id="sideNav-a" onclick="window.location.href='hauleditems.php'">
+                <i class="fas fa-arrow-circle-left"></i>
+            </a>
+            <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
+            <div class="account-container">
+                <?php 
+                        $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_row($result);
+            ?>
+                <h5 class="active-user">
+                    <?php echo $row[1]." ".$row[2]; ?>
+                </h5>
+                <div class="btn-group dropdown-account">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+    </div>
+
     <div class="mx-auto mt-5 col-md-9">
         <div class="card">
             <div class="card-header">

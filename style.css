@@ -218,6 +218,19 @@ ul ul #sideNav-a  {
 }
 /*End of Admin-Dashboard*/
 
+/*Admin - Create an Account*/
+.account-creation-container{
+    margin-bottom: 3%;
+}
+
+.label-styles{
+    font-weight: bold;
+}
+
+#create-accnt-btn{
+    float: right;
+}
+
 
 /*Start of List of Accounts*/
 .list-of-accounts-container{
@@ -566,9 +579,17 @@ textarea{
 /*End of Materials Engineer - Report Page*/
 
 
-/*State of Materials Engineer - Account*/
-.account-btn{
+/*Start of Materials Engineer - Account*/
+.accnt-btn{
     float: right !important;
+}
+
+.save-accnt-btn{
+    display: inline-block;
+}
+
+.cancel-accnt-btn{
+    display: inline-block;
 }
 /*End of Materials Engineer - Account*/
 
