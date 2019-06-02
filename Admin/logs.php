@@ -102,12 +102,14 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- dito po ilalagay php code  -->
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
+                <!-- dito po ilalagay closing na php code para di magulo yung datatables thanks!  -->
             </tbody>
 
         </table>

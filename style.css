@@ -492,6 +492,11 @@ textarea{
     text-align: center;
 }
 
+.hauled-items-container thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
+}
+
 /*Start of Materials Engineer-Hauling*/
 .date-container, .formnum-container{
     float: right !important;
@@ -543,6 +548,11 @@ textarea{
 .returns-or-replace-content{
     margin-top: 3%;
     width: 100% !important;
+}
+
+.returns-or-replace-content thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
 }
 
 .replace-container{

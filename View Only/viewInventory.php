@@ -69,7 +69,7 @@
                     </nav>
                 </div>
                 <div class="view-inventory-tabs-content">
-                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
                             <table class="table view-inventory-tabs-table table-striped table-bordered"
@@ -89,7 +89,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                     $projects_id = $_GET['projects_id'];
                                     $sql_categ = "SELECT DISTINCT
                                                     categories_name
@@ -160,7 +160,7 @@
                                         <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
                                     </tr>
-                                <?php
+                                    <?php
                                         }
                                     }
                                 ?>
@@ -189,7 +189,9 @@
                                     <div class="card-body">
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
                                         <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn" onclick="window.location.href='materialCategories.php'">View</button>
+                                        <button type="submit" name="materialCategories" class="btn btn-info"
+                                            id="open-category-btn"
+                                            onclick="window.location.href='materialCategories.php'">View</button>
                                     </div>
                                 </form>
                             </div>
@@ -204,28 +206,13 @@
     </section>
 
 </body>
-    
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
-        });
-    
-        $('#example').DataTable({
-            columnDefs: [{
-                orderable: false,
-                className: 'select-checkbox',
-                targets: 0
-            }],
-            select: {
-                style: 'os',
-                selector: 'td:first-child'
-            },
-            order: [
-                [1, 'asc']
-            ]
         });
     });
 
@@ -237,7 +224,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
 </script>
 
 
