@@ -98,7 +98,7 @@
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/requisitionslip.php");     
     }
 
-    if (isset($_POST['create_hauling'])) {
+    if (isset($_POST['create_toBeReturnedHauling'])) {
         $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
@@ -114,6 +114,7 @@
         $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
         $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
         $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
+        $status = "To be returned";
                             
         $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
         $stmt->bind_param("s", $unit);
@@ -129,8 +130,47 @@
         $stmt->bind_result($mat_id);
         $stmt->fetch();
             
-        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $stmt->bind_param("isssiiissssssii", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID);
+        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
+    }
+
+    if (isset($_POST['create_permanentHauling'])) {
+        $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
+        $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
+        $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
+        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
+        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
+        $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
+        $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
+        $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
+        $approvedBy = mysqli_real_escape_string($conn, $_POST['approvedBy']);
+        $type = mysqli_real_escape_string($conn, $_POST['type']);
+        $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
+        $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
+        $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
+        $status = "Permanently Hauled";
+                            
+        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+        $stmt->bind_param("s", $unit);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($unit_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
+        $stmt->bind_param("s", $articles);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($mat_id);
+        $stmt->fetch();
+            
+        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
         $stmt->execute();
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
@@ -391,27 +431,31 @@
 
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDCMaterials%20Engineer/viewinventory.php?projects_id=$projects_id");     
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");     
     }
     
     if (isset($_POST['return_hauling'])) {
         
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
-        
+
         $stmt = $conn->prepare("SELECT return_returnedqty FROM returns WHERE return_id = 1;");
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($currentReturnedQty);
         $stmt->fetch();
-        $newQuantity = $currentReturnedQty+$returningQuantity;
+        $newQuantity = $returningQuantity+$currentReturnedQty;
         $stmt = $conn->prepare("UPDATE returns SET return_returnedqty = ? WHERE return_id = 1;");
         $stmt->bind_param("i", $newQuantity);
         $stmt->execute();
         $stmt->close();
-        echo $newQuantity;
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returns.php");     
     }
 
+    if (isset($_POST['materialCategories'])) {
+        $categories_id = $_POST['categories_id'];
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");     
+    }
 
 // <--View Only-->
 ?>
