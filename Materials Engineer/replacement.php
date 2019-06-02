@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../JS/popper/popper.min.js"></script>
+    <script src="../js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
@@ -176,7 +176,7 @@
         </div>
     </div>
 </body>
-<script>
+<script type="text/javascript">
     $(function () {
         'use strict';
         window.addEventListener('load', function () {
