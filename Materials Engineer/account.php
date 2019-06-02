@@ -16,12 +16,13 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="../JS/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -104,7 +105,7 @@
                 <h4>User Information</h4>
             </div>
             <div class="card-body">
-               <?php 
+                <?php 
                     $sql = "SELECT 
                     accounts_fname, accounts_lname, accounts_username, accounts_email, accounts_password FROM accounts
                     WHERE accounts_username='materials_engineer';";
@@ -149,20 +150,21 @@
                         </div>
                         <div class="form-group">
                             <span class="error" style="color:red"></span><br />
-						</div>
+                        </div>
                     </div>
                     <div class="row form-group accnt-btn">
-                        
-                            <input type="submit" class="btn btn-success save-accnt-btn" name="update_account" value="Save Changes">
-                            <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
-                        
+
+                        <input type="submit" class="btn btn-success save-accnt-btn" name="update_account"
+                            value="Save Changes">
+                        <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </body>
-<script>
+<script type="text/javascript">
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -174,40 +176,41 @@
 
     $(document).ready(function () {
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-});
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
 
-var allowsubmit = false;
-		$(function(){
-			$('#confpass').keyup(function(e){
-				var pass = $('#pass').val();
-				var confpass = $(this).val();
-				if(pass == confpass){
-					$('.error').text('');
-					allowsubmit = true;
-				}else{
-					$('.error').text('Password not matching');
-					allowsubmit = false;
-				}
-			});
-			
-			$('#form').submit(function(){
-			
-				var pass = $('#pass').val();
-				var confpass = $('#confpass').val();
- 
-				if(pass == confpass){
-					allowsubmit = true;
-				}
-				if(allowsubmit){
-					return true;
-				}else{
-					return false;
-				}
-			});
-		});
+        var allowsubmit = false;
+        $(function () {
+            $('#confpass').keyup(function (e) {
+                var pass = $('#pass').val();
+                var confpass = $(this).val();
+                if (pass == confpass) {
+                    $('.error').text('');
+                    allowsubmit = true;
+                } else {
+                    $('.error').text('Password not matching');
+                    allowsubmit = false;
+                }
+            });
 
-});
+            $('#form').submit(function () {
+
+                var pass = $('#pass').val();
+                var confpass = $('#confpass').val();
+
+                if (pass == confpass) {
+                    allowsubmit = true;
+                }
+                if (allowsubmit) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+    });
 </script>
+
 </html>
