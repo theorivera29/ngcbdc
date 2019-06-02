@@ -2,7 +2,11 @@
     include "../db_connection.php";
     session_start();
 
+<<<<<<< HEAD
+    $accounts_id = $_SESSION['account_id'];
+=======
     $accounts_id = $_SESSION['account_id'];    
+>>>>>>> b4489c9d9204b6378cecfa6a67325811aea16ad5
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +52,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
