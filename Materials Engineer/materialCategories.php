@@ -1,6 +1,10 @@
 <?php
     include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];    
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -114,28 +118,63 @@
                     <th scope="col">Unit</th>
                 </tr>
             </thead>
-            <?php 
-                $sql = "SELECT accounts_id, accounts_username, concat(accounts_fname,' ', accounts_lname) as name,  
-                accounts_email, accounts_type, accounts_status FROM accounts WHERE accounts_deletable = 'yes';";
+            <tbody>
+            <?php
+                $projects_id = $_GET['projects_id'];
+                $categories_id = $_GET['categories_id'];
+                    
+                $sql = "SELECT 
+                            materials.mat_id,
+                            materials.mat_name,
+                            matinfo.matinfo_prevStock,
+                            unit.unit_name
+                        FROM
+                            materials
+                        INNER JOIN 
+                            categories ON materials.mat_categ = categories.categories_id
+                        INNER JOIN 
+                            unit ON materials.mat_unit = unit.unit_id
+                        INNER JOIN
+                            matinfo ON materials.mat_id = matinfo.matinfo_matname
+                        WHERE 
+                        materials.mat_categ = $categories_id
+                        AND 
+                        matinfo.matinfo_project = '$projects_id'
+                        ORDER BY 1;";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
-            ?>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    $sql1 = "SELECT 
+                                SUM(deliveredin.deliveredin_quantity) FROM deliveredin
+                            INNER JOIN 
+                                matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                            WHERE 
+                                matinfo.matinfo_matname = '$row[0]';";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $row1 = mysqli_fetch_row($result1);
+                    $sql2 = "SELECT 
+                                SUM(usagein.usagein_quantity) FROM usagein
+                                INNER JOIN 
+                                matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                            WHERE 
+                                matinfo.matinfo_matname = '$row[0]';";
+                    $result2 = mysqli_query($conn, $sql2);
+                    $row2 = mysqli_fetch_row($result2);
+                ?>
+                    <tr>
+                        <td><?php echo $row[1] ;?></td>
+                        <td><?php echo $row[2] ;?></td>
+                        <td><?php echo $row[3] ;?></td>
+                        <td><?php echo $row1[0] ;?></td>
+                        <td><?php echo $row2[0] ;?></td>
+                        <td><?php echo $row[3] ;?></td>
+                        <td><?php echo $row[2]+$row1[0] ;?></td>
+                        <td><?php echo $row[2]+$row1[0]-$row2[0] ;?></td>
+                        <td><?php echo $row[3] ;?></td>
+                    </tr>
+                <?php
+                    }
+                ?>
             </tbody>
-            <?php
-                }
-            ?>
         </table>
     </div>
 </body>

@@ -76,66 +76,122 @@
                                         <th>Category</th>
                                         <th>Previous Material Stock</th>
                                         <th>Unit</th>
-                                        <th>Delivered Material as of May 2019</th>
-                                        <th>Material pulled out as of May 2019</th>
+                                        <th>Delivered Material as of <?php echo date("F Y"); ?></th>
+                                        <th>Material pulled out as of <?php echo date("F Y"); ?></th>
                                         <th>Unit</th>
                                         <th>Accumulated Materials Delivered</th>
-                                        <th>Material on site as of May 2019</th>
+                                        <th>Material on site as of <?php echo date("F Y"); ?></th>
                                         <th>Unit</th>
-                                        <th>Project</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $sql = "SELECT 
-                                                materials.mat_name,
-                                                categories.categories_name,
-                                                matinfo.matinfo_prevStock,
-                                                unit.unit_name,
-                                                deliveredin.deliveredin_quantity,
-                                                usagein.usagein_quantity,
-                                                (matinfo.matinfo_prevStock + deliveredin.deliveredin_quantity),
-                                                (matinfo.matinfo_prevStock + deliveredin.deliveredin_quantity - usagein.usagein_quantity)
-                                            FROM
-                                                materials
-                                            INNER JOIN 
-                                                categories ON materials.mat_categ = categories.categories_id
-                                            INNER JOIN 
-                                                unit ON materials.mat_unit = unit.unit_id
-                                            INNER JOIN
-                                                deliveredin ON materials.mat_id = deliveredin.deliveredin_matname
-                                            INNER JOIN
-                                                usagein ON materials.mat_id = usagein.usagein_matname
-                                            INNER JOIN
-                                                matinfo ON materials.mat_id = matinfo.matinfo_matname;";
+                                <?php
+                                    $projects_id = $_GET['projects_id'];
+                                    $sql_categ = "SELECT DISTINCT
+                                                    categories_name
+                                                FROM
+                                                    materials
+                                                INNER JOIN
+                                                    categories ON categories.categories_id = materials.mat_categ
+                                                INNER JOIN
+                                                    matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                                WHERE
+                                                    matinfo.matinfo_project = $projects_id;";
+                                    $result = mysqli_query($conn, $sql_categ);
+                                    $categories = array();
+                                    while($row_categ = mysqli_fetch_assoc($result)){
+                                        $categories[] = $row_categ;
+                                    }
+
+                                    foreach($categories as $data) {
+                                        $categ = $data['categories_name'];
+                                        
+                                        $sql = "SELECT 
+                                                    materials.mat_id,
+                                                    materials.mat_name,
+                                                    categories.categories_name,
+                                                    matinfo.matinfo_prevStock,
+                                                    unit.unit_name
+                                                FROM
+                                                    materials
+                                                INNER JOIN 
+                                                    categories ON materials.mat_categ = categories.categories_id
+                                                INNER JOIN 
+                                                    unit ON materials.mat_unit = unit.unit_id
+                                                INNER JOIN
+                                                    matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                                WHERE 
+                                                    categories.categories_name = '$categ' 
+                                                AND 
+                                                matinfo.matinfo_project = '$projects_id'
+                                                ORDER BY 1;";
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_row($result)){
+                                            $sql1 = "SELECT 
+                                                        SUM(deliveredin.deliveredin_quantity) FROM deliveredin
+                                                    INNER JOIN 
+                                                        matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                                    WHERE 
+                                                        matinfo.matinfo_matname = '$row[0]';";
+                                            $result1 = mysqli_query($conn, $sql1);
+                                            $row1 = mysqli_fetch_row($result1);
+                                            $sql2 = "SELECT 
+                                                        SUM(usagein.usagein_quantity) FROM usagein
+                                                        INNER JOIN 
+                                                        matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                                                    WHERE 
+                                                        matinfo.matinfo_matname = '$row[0]';";
+                                            $result2 = mysqli_query($conn, $sql2);
+                                            $row2 = mysqli_fetch_row($result2);
                                 ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><?php echo $row[4] ;?></td>
+                                        <td><?php echo $row1[0] ;?></td>
+                                        <td><?php echo $row2[0] ;?></td>
+                                        <td><?php echo $row[4] ;?></td>
+                                        <td><?php echo $row[3]+$row1[0] ;?></td>
+                                        <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
+                                        <td><?php echo $row[4] ;?></td>
                                     </tr>
-                                    <?php
-
+                                <?php
+                                        }
+                                    }
                                 ?>
                                 </tbody>
                             </table>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <?php
+                                $sql = "SELECT DISTINCT
+                                            categories.categories_id,
+                                            categories_name
+                                        FROM
+                                            materials
+                                        INNER JOIN
+                                            categories ON categories.categories_id = materials.mat_categ
+                                        INNER JOIN
+                                            matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                        WHERE
+                                            matinfo.matinfo_matname = $projects_id;";
+                                $result = mysqli_query($conn, $sql);
+                                while($row = mysqli_fetch_row($result)){
+                            ?>
                             <div class="card ">
-                                <h5 class="card-header">Category Name</h5>
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-info" id="open-category-btn" type="button"
-                                        onclick="window.location.href='materialCategories.php'">View</button>
-                                </div>
+                                <form action="../server.php" method="POST">
+                                    <h5 class="card-header"><?php echo $row[1];?></h5>
+                                    <div class="card-body">
+                                        <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
+                                        <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
+                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn" onclick="window.location.href='materialCategories.php'">View</button>
+                                    </div>
+                                </form>
                             </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

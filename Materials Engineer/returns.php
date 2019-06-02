@@ -1,5 +1,8 @@
 <?php
     include "../db_connection.php";
+    session_start();
+
+    $accounts_id = $_SESSION['account_id'];    
 ?>
 <!DOCTYPE html>
 
@@ -19,7 +22,7 @@
 
 <body>
     <div id="content">
-        <span class="slide">
+<!--        <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
@@ -43,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </span>
+        </span>-->
 
         <div id="menu" class="navigation sidenav">
             <a href="#" class="close" onclick="closeSlideMenu()">
@@ -112,21 +115,21 @@
                     hauling.hauling_quantity, 
                     hauling.hauling_unit, 
                     hauling.hauling_matname, 
-                    returns.returns_returnedqty, 
-                    returns.returns_date, 
-                    returns.returns_returningqty, 
+                    returns.return_returnedqty, 
+                    returns.return_date, 
+                    returns.return_returningqty, 
                     hauling.hauling_status 
                 FROM 
                     hauling 
                 INNER JOIN 
-                    returns ON hauling.hauling_id = returns.returns_id 
+                    returns ON hauling.hauling_id = returns.return_id 
                 WHERE 
                     hauling.hauling_no=1;";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_row($result)){
     ?>
             <div class="card-body">
-                <form class="form needs-validation" novalidate>
+                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
@@ -204,9 +207,6 @@
             }
         ?>
         </div>
-        <?php
-        }
-    ?>
     </div>
 </body>
 <script type="text/javascript">
