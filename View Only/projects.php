@@ -43,7 +43,7 @@
                         aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
@@ -95,18 +95,12 @@
                                         projects.projects_id
                                     FROM
                                         projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
                                     WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
                                         projects.projects_status = 'open';";
                             $result = mysqli_query($conn, $sql);
-                            ?>
-                        <form action="../server.php" method="POST">
-                            <?php
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
+                            <form action="../server.php" method="POST">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card project-container">
@@ -121,17 +115,17 @@
                                         <span>
                                             <h5>End Date: <?php echo $row[3] ;?></h5>
                                         </span>
-                                        <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                        <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                         <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                             onclick="window.location.href='viewInventory.php'" name="viewInventory">View
                                             inventory</button>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                             <?php
                             }
                         ?>
-                        </form>
                         <?php
                             $sql = "SELECT
                                         projects.projects_name,
@@ -141,18 +135,12 @@
                                         projects.projects_id
                                     FROM
                                         projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
                                     WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
                                         projects.projects_status = 'closed';";
                             $result1 = mysqli_query($conn, $sql);
-                        ?>
-                        <form action="../server.php" method="POST">
-                            <?php
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
+                        <form action="../server.php" method="POST">
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                 aria-labelledby="nav-profile-tab">
                                 <div class="card project-container">
@@ -167,16 +155,16 @@
                                         <span>
                                             <h5>End Date: <?php echo $row1[3] ;?></h5>
                                         </span>
-                                        <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                        <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                         <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                             name="viewInventory">View inventory</button>
                                     </div>
                                 </div>
                             </div>
+                        </form>
                             <?php
                             }   
                         ?>
-                        </form>
                     </div>
                 </div>
             </div>
