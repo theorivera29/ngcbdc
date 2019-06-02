@@ -2,7 +2,11 @@
     include "../db_connection.php";
     session_start();
 
+<<<<<<< HEAD
     $accounts_id = $_SESSION['account_id'];
+=======
+    $accounts_id = $_SESSION['account_id'];    
+>>>>>>> 30395501cdd6279899b568dd6037d63209f04c0b
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +24,10 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -140,14 +148,15 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table hauled-items-table table-striped table-bordered display" id="mydatatable">
+                            <table class="table hauled-items-table table-striped table-bordered display"
+                                id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Disposal</th>
                                         <th scope="col">Project</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Action</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,11 +175,6 @@
         </div>
     </section>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
@@ -190,4 +194,5 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 </script>
+
 </html>

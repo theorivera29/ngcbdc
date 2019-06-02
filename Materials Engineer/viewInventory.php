@@ -20,6 +20,10 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -85,7 +89,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                     $projects_id = $_GET['projects_id'];
                                     $sql_categ = "SELECT DISTINCT
                                                     categories_name
@@ -156,7 +160,7 @@
                                         <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
                                     </tr>
-                                <?php
+                                    <?php
                                         }
                                     }
                                 ?>
@@ -185,7 +189,9 @@
                                     <div class="card-body">
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
                                         <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn" onclick="window.location.href='materialCategories.php'">View</button>
+                                        <button type="submit" name="materialCategories" class="btn btn-info"
+                                            id="open-category-btn"
+                                            onclick="window.location.href='materialCategories.php'">View</button>
                                     </div>
                                 </form>
                             </div>
@@ -201,10 +207,6 @@
 
 </body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
