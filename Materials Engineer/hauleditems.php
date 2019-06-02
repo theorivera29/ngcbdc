@@ -2,11 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-<<<<<<< HEAD
     $accounts_id = $_SESSION['account_id'];    
-=======
-    $accounts_id = $_SESSION['account_id'];
->>>>>>> 3acd5519d097d891a70e6570e927cd5301902155
 ?>
 
 <!DOCTYPE html>
