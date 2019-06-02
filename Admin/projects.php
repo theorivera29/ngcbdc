@@ -24,6 +24,12 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js">
+    </script>
 </head>
 
 <body>
@@ -264,8 +270,11 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Materials Engineer Involved</label>
                             </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
+                            <select id="multiselect" multiple="multiple">
+                                <option value="http://ipv4.download.thinkbroadband.com/5MB.zip">Option 1</option>
+                                <option value="http://ipv4.download.thinkbroadband.com/10MB.zip">Option 2</option>
+                                <option value="http://ipv4.download.thinkbroadband.com/20MB.zip">Option 3</option>
+                                <option value="http://ipv4.download.thinkbroadband.com/50MB.zip">Option 4</option>
                             </select>
                         </div>
                     </form>
@@ -297,6 +306,14 @@
             $('#sidebar').toggleClass('active');
         });
 
+    });
+
+    $(document).ready(function () {
+        $('#multiselect').multiselect({
+            buttonWidth: '160px',
+            includeSelectAllOption: true,
+            nonSelectedText: 'Select an Option'
+        });
     });
 </script>
 
