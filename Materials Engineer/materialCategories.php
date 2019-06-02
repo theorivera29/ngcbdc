@@ -21,11 +21,15 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -101,7 +105,7 @@
             </nav>
         </div>
     </div>
-    
+
     <h4 class="category-title">NAME OF CATEGORY</h4>
     <div class="list-of-accounts-container">
         <table class="table list-of-accounts-table table-striped table-bordered" id="mydatatable">
@@ -119,7 +123,7 @@
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $projects_id = $_GET['projects_id'];
                 $categories_id = $_GET['categories_id'];
                     
@@ -160,17 +164,17 @@
                     $result2 = mysqli_query($conn, $sql2);
                     $row2 = mysqli_fetch_row($result2);
                 ?>
-                    <tr>
-                        <td><?php echo $row[1] ;?></td>
-                        <td><?php echo $row[2] ;?></td>
-                        <td><?php echo $row[3] ;?></td>
-                        <td><?php echo $row1[0] ;?></td>
-                        <td><?php echo $row2[0] ;?></td>
-                        <td><?php echo $row[3] ;?></td>
-                        <td><?php echo $row[2]+$row1[0] ;?></td>
-                        <td><?php echo $row[2]+$row1[0]-$row2[0] ;?></td>
-                        <td><?php echo $row[3] ;?></td>
-                    </tr>
+                <tr>
+                    <td><?php echo $row[1] ;?></td>
+                    <td><?php echo $row[2] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                    <td><?php echo $row1[0] ;?></td>
+                    <td><?php echo $row2[0] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                    <td><?php echo $row[2]+$row1[0] ;?></td>
+                    <td><?php echo $row[2]+$row1[0]-$row2[0] ;?></td>
+                    <td><?php echo $row[3] ;?></td>
+                </tr>
                 <?php
                     }
                 ?>
@@ -178,10 +182,6 @@
         </table>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
