@@ -89,7 +89,7 @@
                         <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
-                        <a href="addingOfMaterials.php" id="sideNav-a">Adding of Materials</a>
+                        <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
@@ -131,12 +131,6 @@
                         <label class="col-lg-2 col-form-label ">Email Address</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="email" value="<?php echo $row[3]?>" name="email">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 col-form-label">Password</label>
-                        <div class="col-lg-4">
-                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
                         </div>
                     </div>
                     <div class="row form-group">

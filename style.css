@@ -655,10 +655,19 @@ textarea{
 .adding-category-list{
     width: 100% !important;
     margin-top: 5%;  
-
 }
 
-.adding-category-list > thead > tr > th{
+.adding-of-materials-content{
+    width: 100%;
+    margin-top: 2%;
+}
+
+.new-category-table{
+    width: 100% !important;
+    text-align: center;
+}
+
+.new-category-table > thead > tr > th{
     background-color: #124E78;
     color: #FFF8F0;
 }
