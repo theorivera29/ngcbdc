@@ -93,8 +93,17 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    <li class="active">
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
+                            </li>
+                            <li>
+                                <a href="previousReports.php" id="sideNav-a">Previous Reports</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -148,9 +157,8 @@
                                     <span>
                                         <h5>End Date: <?php echo $row[3] ;?></h5>
                                     </span>
-                                    <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                    <button type="submit" name="viewReport" class="btn btn-info" id="view-inventory-btn"
-                                        onclick="window.location.href = 'reportpage.php'">View Report</button>
+                                    <button type="button" class="btn btn-info" id="view-inventory-btn" type="button"
+                                        onclick="window.location.href = 'currentReportPage.php'">View Report</button>
                                 </div>
                             </div>
                         </div>
