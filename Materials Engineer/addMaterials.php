@@ -99,6 +99,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row form-group save-btn-container">
+                        <div class="col-lg-12">
+                            <input type="submit" class="btn btn-primary" 
+                                value="Save Changes">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                        </div>
+                    </div>
     </div>
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="card ">

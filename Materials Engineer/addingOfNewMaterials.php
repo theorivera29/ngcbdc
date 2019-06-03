@@ -122,56 +122,72 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
-                            <table class="table new-category-table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="add-category">
-                                </tbody>
-                                <tfoot>
-                                    <tr id="haulingRow">
-                                        <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                                placeholder="Category Name">
-                                        </td>
-                                        <td colspan="5">
-                                            <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                                value="Add Row" />
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <form class="needs-validation" novalidate>
+                                <table class="table new-category-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-categ-table">
+                                    </tbody>
+                                    <tfoot>
+                                        <tr id="add-categ-row">
+                                            <td><input class="form-control" name="category" type="text" id="category"
+                                                    placeholder="Category Name">
+                                            </td>
+                                            <td colspan="5">
+                                                <input type="button" class="btn btn-md btn-outline-secondary addCat-row"
+                                                    value="Add Row" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row form-group save-btn-container">
+                                    <div class="col-lg-12">
+                                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table new-category-table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Material</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="add-category">
-                                </tbody>
-                                <tfoot>
-                                    <tr id="haulingRow">
-                                        <td><select class="custom-select" id="inputGroupSelect01">
-                                                <option selected>Choose Category</option>
-                                                <option value=""></option>
-                                            </select>
-                                        </td>
-                                        <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                                placeholder="Material Name">
-                                        </td>
-                                        <td colspan="5">
-                                            <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                                value="Add Row" />
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <form class="needs-validation" novalidate>
+                                <table class="table new-category-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Material</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-material-table">
+                                    </tbody>
+                                    <tfoot>
+                                        <tr id="add-material-row">
+                                            <td><select class="custom-select" id="category1">
+                                                    <option selected>Choose Category</option>
+                                                    <option value="1"></option>
+                                                </select>
+                                            </td>
+                                            <td><input class="form-control" name="material" type="text" id="material"
+                                                    placeholder="Material Name">
+                                            </td>
+                                            <td colspan="5">
+                                                <input type="button" class="btn btn-md btn-outline-secondary addMat-row"
+                                                    value="Add Row" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row form-group save-btn-container">
+                                    <div class="col-lg-12">
+                                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -202,21 +218,33 @@
     }
 
     $(document).ready(function () {
-        $(".add-row").click(function () {
-            var quantity = $("#quantity").val();
-            var unit = $("#unit").val();
-            var articles = $("#articles").val();
-            var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" +
-                unit +
+        $(".addCat-row").click(function () {
+            var category = $("#category").val();
+            var markup = "<tr><td>" + category +
                 "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-            if ((quantity != '') && (articles != '') && (unit != '')) {
+            if ((category != '')) {
                 $("table tbody").append(markup);
-                $("#haulingRow input[type=text]").val('');
-                $("#haulingRow select").val('');
+                $("#add-categ-row input[type=text]").val('');
             }
         });
 
-        $("#haulingTable").on('click', '.delete-row', function () {
+        $("#add-categ-table").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
+        });
+
+        $(".addMat-row").click(function () {
+            var category = $("#category1").val();
+            var material = $("#material").val();
+            var markup = "<tr><td>" + category + "</td><td>" + material +
+                "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((category != '') && (material != '')) {
+                $("table tbody").append(markup);
+                $("#add-material-row input[type=text]").val('');
+                $("#add-material-row select").val('');
+            }
+        });
+
+        $("#add-material-table").on('click', '.delete-row', function () {
             $(this).closest('tr').remove();
         });
 
