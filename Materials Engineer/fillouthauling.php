@@ -89,7 +89,7 @@
                         <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
                     </li>
                     <li>
-                        <a href="addingOfMaterials.php" id="sideNav-a">Adding of Materials</a>
+                        <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li>
                         <a href="reports.php" id="sideNav-a">Reports</a>
