@@ -2,11 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-<<<<<<< HEAD
-    $accounts_id = $_SESSION['account_id'];    
-=======
     $accounts_id = $_SESSION['account_id'];
->>>>>>> 2a8d87e7835c4ca285bb6c133b3765b64835e2fa
 ?>
 
 <!DOCTYPE html>
@@ -20,14 +16,9 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -52,7 +43,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                        <a class="dropdown-item" href="">Logout</a>
                     </div>
                 </div>
             </div>
@@ -108,83 +99,72 @@
         </div>
     </div>
 
-    <section id="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 project-tabs">
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                            role="tab" aria-controls="nav-home" aria-selected="true">RETURN</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                            role="tab" aria-controls="nav-profile" aria-selected="false">REPLACE</a>
-                    </div>
-
-                </div>
-                <div class="returns-or-replace-content">
-                    <div class="tab-content" id="nav-tabContent return-container">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab">
-
-                            <table class="table returns-table table-striped table-bordered display" id="mydatatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Form No.</th>
-                                        <th scope="col">Hauling Date</th>
-                                        <th scope="col">Hauled From</th>
-                                        <th scope="col">Hauled By</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-success">Open</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+    <div class="mx-auto mt-5 col-md-11">
+        <div class="card">
+            <div class="card-header">
+                <h4>User Information</h4>
+            </div>
+            <div class="card-body">
+                <?php 
+                    $sql = "SELECT 
+                    accounts_fname, accounts_lname, accounts_username, accounts_email, accounts_password FROM accounts
+                    WHERE accounts_username='materials_engineer';";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_row($result);
+                ?>
+                <form class="form " action="../server.php" method="POST">
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label ">First name</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[0]?>" name="firstName">
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table hauled-items-table table-striped table-bordered display"
-                                id="mydatatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Disposal</th>
-                                        <th scope="col">Project</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-success">Open</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <label class="col-lg-2 col-form-label">Last name</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[1]?>" name="lastName">
                         </div>
                     </div>
-                </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Username</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[2]?>" name="username">
+                        </div>
+                        <label class="col-lg-2 col-form-label ">Email Address</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="email" value="<?php echo $row[3]?>" name="email">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">New Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" name="pass" id="pass">
+                        </div>
+                        <label class="col-lg-2 col-form-label">Confirm Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" name="confpass" id="confpass">
+                        </div>
+                        <div class="form-group">
+                            <span class="error" style="color:red"></span><br />
+                        </div>
+                    </div>
+                    <div class="row form-group accnt-btn">
+
+                        <input type="submit" class="btn btn-success save-accnt-btn" name="update_account"
+                            value="Save Changes">
+                        <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
+
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#mydatatable').DataTable();
-        $('table.display').DataTable();
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -193,6 +173,44 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
+    $(document).ready(function () {
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
+        var allowsubmit = false;
+        $(function () {
+            $('#confpass').keyup(function (e) {
+                var pass = $('#pass').val();
+                var confpass = $(this).val();
+                if (pass == confpass) {
+                    $('.error').text('');
+                    allowsubmit = true;
+                } else {
+                    $('.error').text('Password not matching');
+                    allowsubmit = false;
+                }
+            });
+
+            $('#form').submit(function () {
+
+                var pass = $('#pass').val();
+                var confpass = $('#confpass').val();
+
+                if (pass == confpass) {
+                    allowsubmit = true;
+                }
+                if (allowsubmit) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+    });
 </script>
 
 </html>

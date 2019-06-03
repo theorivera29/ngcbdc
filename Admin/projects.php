@@ -20,10 +20,12 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js">
     </script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -102,7 +104,7 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
+                    <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal" onclick="window.location.href = 'addProject.php'">Add Project</button>
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
@@ -220,7 +222,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-
                 </div>
             </div>
         </div>
@@ -260,12 +261,13 @@
                             <input name="end_Data" type="date" class="form-control" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Materials Engineer Involved</label>
-                            </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
+                        <div>
+                            <label class="label-styles">Materials Engineer Involved</label>
+                            
+                            <select id="multiselect" multiple="multiple">
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>CARYL MARIE</option>
                             </select>
                         </div>
                     </form>
@@ -297,6 +299,14 @@
             $('#sidebar').toggleClass('active');
         });
 
+    });
+
+    $(document).ready(function () {
+        $('#multiselect').multiselect({
+            buttonWidth: '100%',
+            includeSelectAllOption: true,
+            nonSelectedText: 'Select an Option'
+        });
     });
 </script>
 
