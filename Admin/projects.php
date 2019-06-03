@@ -268,31 +268,33 @@
         }   
     ?>
                         <div class="input-group mb-3">
-                                <?php
+                            <?php
                                     $sqlmateng = "SELECT 
                                     CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts;";
                                     $resultmateng = mysqli_query($conn, $sqlmateng);
                                     while($rowmateng = mysqli_fetch_row($resultmateng)){
                                 ?>
-                                <div>
-                                <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>"/>    
-                                <span><?php echo $rowmateng[0]?> </span> 
-                                </div>
-                                <?php
+                            <div>
+                                <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>" />
+                                <span>
+                                    <?php echo $rowmateng[0]?> </span>
+                            </div>
+                            <?php
                                     }
                                 ?>
-                        <div>
-                            <label class="label-styles">Materials Engineer Involved</label>
-                            <select id="multiselect" multiple="multiple">
-                                <option>JAM SPICA ROCAFORT</option>
-                                <option>JAM SPICA ROCAFORT</option>
-                                <option>CARYL MARIE</option>
-                            </select>
+                            <div>
+                                <label class="label-styles">Materials Engineer Involved</label>
+                                <select id="multiselect" multiple="multiple">
+                                    <option>JAM SPICA ROCAFORT</option>
+                                    <option>JAM SPICA ROCAFORT</option>
+                                    <option>CARYL MARIE</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" name="edit_project" class="btn btn-success" value="Save">
-                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        <div class="modal-footer">
+                            <input type="submit" name="edit_project" class="btn btn-success" value="Save">
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        </div>
                     </div>
                 </form>
             </div>
