@@ -159,6 +159,23 @@
                                         <input type="reset" class="btn btn-secondary" value="Cancel">
                                     </div>
                                 </div>
+
+                                <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                    id="mydatatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>3</td>
+                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
+                                                    value="Edit" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -176,7 +193,7 @@
                                     <tfoot>
                                         <tr id="add-material-row">
                                             <td><select class="custom-select" id="category1">
-                                                    <option selected>Choose Category</option>
+                                                    <option value="" selected disabled>Choose Category</option>
                                                     <option value="1"></option>
                                                 </select>
                                             </td>
@@ -196,6 +213,26 @@
                                         <input type="reset" class="btn btn-secondary" value="Cancel">
                                     </div>
                                 </div>
+                                <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                    id="mydatatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Material Name</th>
+                                            <th>Unit</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>33</td>
+                                            <td>33</td>
+                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
+                                                    value="Edit" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </form>
                         </div>
                     </div>
@@ -232,7 +269,7 @@
             var markup = "<tr><td>" + category +
                 "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((category != '')) {
-                $("table tbody").append(markup);
+                $("table #add-categ-table").append(markup);
                 $("#add-categ-row input[type=text]").val('');
             }
         });
@@ -247,7 +284,7 @@
             var markup = "<tr><td>" + category + "</td><td>" + material +
                 "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((category != '') && (material != '')) {
-                $("table tbody").append(markup);
+                $("table #add-material-table").append(markup);
                 $("#add-material-row input[type=text]").val('');
                 $("#add-material-row select").val('');
             }
