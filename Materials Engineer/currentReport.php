@@ -93,8 +93,17 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    <li class="active">
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
+                            </li>
+                            <li>
+                                <a href="previousReports.php" id="sideNav-a">Previous Reports</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -133,6 +142,7 @@
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
+                        <form action="../server.php" method="POST">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
                             <div class="card project-container">
@@ -148,10 +158,11 @@
                                         <h5>End Date: <?php echo $row[3] ;?></h5>
                                     </span>
                                     <button type="button" class="btn btn-info" id="view-inventory-btn" type="button"
-                                        onclick="window.location.href = 'reportpage.php'">View Report</button>
+                                        onclick="window.location.href = 'currentReportPage.php'">View Report</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                         <?php
                             }
                             $sql = "SELECT
@@ -171,6 +182,7 @@
                             $result1 = mysqli_query($conn, $sql);
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
+                        <form action="../server.php" method="POST">
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="card project-container">
                                 <h5 class="card-header card-header-project"><?php echo $row1[0] ;?></h5>
@@ -184,11 +196,12 @@
                                     <span>
                                         <h5>End Date: <?php echo $row1[3] ;?></h5>
                                     </span>
-                                    <button type="button" class="btn btn-info" id="view-inventory-btn"
-                                        type="button">View inventory</button>
+                                    <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                    <button type="submit" class="btn btn-info" id="view-inventory-btn">View inventory</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                         <?php
                             }   
                         ?>

@@ -92,8 +92,17 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    <li class="active">
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
+                            </li>
+                            <li>
+                                <a href="previousReports.php" id="sideNav-a">Previous Reports</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -178,8 +187,7 @@
                             $result1 = mysqli_query($conn, $sql);
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
-                            
-                            <form action="../server.php" method="POST">
+                        <form action="../server.php" method="POST">                        
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                 aria-labelledby="nav-profile-tab">
                                 <div class="card project-container">
@@ -200,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
+                        </form>
                             <?php
                             }   
                         ?>

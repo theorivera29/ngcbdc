@@ -2,7 +2,11 @@
     include "../db_connection.php";
     session_start();
 
+<<<<<<< HEAD
+    $accounts_id = $_SESSION['account_id'];    
+=======
     $accounts_id = $_SESSION['account_id'];
+>>>>>>> 2a8d87e7835c4ca285bb6c133b3765b64835e2fa
 ?>
 
 <!DOCTYPE html>
@@ -96,8 +100,17 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    <li class="active">
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
+                            </li>
+                            <li>
+                                <a href="previousReports.php" id="sideNav-a">Previous Reports</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>

@@ -2,11 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-<<<<<<< HEAD
-    $accounts_id = $_SESSION['account_id'];    
-=======
     $accounts_id = $_SESSION['account_id'];
->>>>>>> 2a8d87e7835c4ca285bb6c133b3765b64835e2fa
 ?>
 
 <!DOCTYPE html>
@@ -117,77 +113,40 @@
         </div>
     </div>
 
-    <section id="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 project-tabs">
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                            role="tab" aria-controls="nav-home" aria-selected="true">RETURN</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                            role="tab" aria-controls="nav-profile" aria-selected="false">REPLACE</a>
-                    </div>
+    <div class="hauled-items-container">
+        <h5>Project Name</h5>
+        <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
+            <thead>
+                <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_array($result)) {
+                    ?>
+                <tr>
+                    <td><?php echo $row[0]?></td>
+                    <td><?php echo $row[1]?></td>
+                    <td><button type="button" class="btn btn-success" onclick="window.location.href = 'viewPreviousReport.php'">View</button></td>
+                </tr>
+            
+            <?php
+                        }
+                    ?>
+            </tbody>
+        </table>
+    </div>
 
-                </div>
-                <div class="returns-or-replace-content">
-                    <div class="tab-content" id="nav-tabContent return-container">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab">
-
-                            <table class="table returns-table table-striped table-bordered display" id="mydatatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Form No.</th>
-                                        <th scope="col">Hauling Date</th>
-                                        <th scope="col">Hauled From</th>
-                                        <th scope="col">Hauled By</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-success">Open</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table hauled-items-table table-striped table-bordered display"
-                                id="mydatatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Disposal</th>
-                                        <th scope="col">Project</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-success">Open</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
-        $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
