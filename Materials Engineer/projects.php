@@ -176,8 +176,7 @@
                             $result1 = mysqli_query($conn, $sql);
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
-                            
-                            <form action="../server.php" method="POST">
+                        <form action="../server.php" method="POST">                        
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                 aria-labelledby="nav-profile-tab">
                                 <div class="card project-container">
@@ -198,7 +197,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
+                        </form>
                             <?php
                             }   
                         ?>

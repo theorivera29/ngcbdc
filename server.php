@@ -449,6 +449,11 @@
             header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
         }
     }
+
+    if (isset($_POST['viewReport'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/reportpage.php?projects_id=$projects_id");    
+    }
     
     if (isset($_POST['return_hauling'])) {
         
