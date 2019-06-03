@@ -103,14 +103,38 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-success">Accept</button><button type="button"
-                            class="btn btn-danger">Reject</button></td>
-                </tr>
+                <?php
+                    $sql = "SELECT
+                                accounts.accounts_id,
+                                accounts.accounts_username,
+                                CONCAT(accounts.accounts_fname, ' ', accounts.accounts_lname),
+                                accounts.accounts_email,
+                                accounts.accounts_type
+                            FROM
+                                accounts
+                            INNER JOIN
+                                request ON request.req_username = accounts.accounts_id
+                            WHERE
+                                request.req_status = 'pending';";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_row($result)) {
+                ?>
+                <form acion="../server.php" method="POST">
+                    <tr>
+                        <td><?php echo $row[1] ;?></td>
+                        <td><?php echo $row[2] ;?></td>
+                        <td><?php echo $row[3] ;?></td>
+                        <td><?php echo $row[4] ;?></td>
+                        <td>
+                            <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
+                            <button type="submit" name="requestAccept" class="btn btn-success">Accept</button>
+                            <button type="submit" name="requestReject" class="btn btn-danger">Reject</button>
+                        </td>
+                    </tr>
+                </form>
+                <?php
+                    }
+                ?>
             </tbody>
 
         </table>

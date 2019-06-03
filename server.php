@@ -19,7 +19,7 @@
             $_SESSION['loggedin' ] = true;
             $_SESSION['account_type'] = $accounts_type;
             if (strcmp($accounts_type,"Admin") == 0) {
-                header("location: http://127.0.0.1/NGCBDC/Admin/admindashboard.php");
+                header("location: http://127.0.0.1/NGCBDC/Admin/dashboard.php");
                 $stmt->close();                
             } else if (strcmp($accounts_type,"Materials Engineer") == 0) {
                 header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");    
@@ -36,8 +36,66 @@
     }
 
 // <--Admin-->
+    if (isset($_POST['requestAccept'])) {
+        $request_accountID = $_POST['accounts_id'];
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $generated_password = substr(str_shuffle($characters), 0, 8);
+        $password = password_hash($generated_password, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("SELECT accounts_email, CONCAT(accounts_fname, ' ', accounts_lname) FROM accounts WHERE accounts_id = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($request_email, $request_name); 
+        $stmt->fetch();
+        $stmt->close();
+        $accept_date = date("Y-m-d G:i:s");
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $password, $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $accept_date, $logs_message, $logs_of);
+        $logs_message = 'Accepted request to reset password of '.$request_name;
+        $logs_of = 1;
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        try {
+            $mail->addAddress($request_email, $request_name);
+            $mail->isHTML(true);                                  
+            $mail->Subject = 'Password Reset';
+            $mail->Body    = 'Hello '.$request_name.' Your request to reset your password has been approved. Please use the temporary password below to login.
+                            Please change your password after logging in. <br /> <br /> Password: <b>'.$generated_password.'</b>';
+            $mail->send();
+        } catch (Exception $e) {}
+        header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
+    }
 
-    
+    if (isset($_POST['requestReject'])) {
+        $request_accountID = $_POST['accounts_id'];
+        $stmt = $conn->prepare("SELECT CONCAT(accounts_fname, ' ', accounts_lname) FROM accounts WHERE accounts_id = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($request_name);
+        $stmt->fetch();
+        $reject_date = date("Y-m-d G:i:s");        
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $reject_date, $logs_message, $logs_of);
+        $logs_message = 'Rejected request to reset password of '.$request_name;
+        $logs_of = 1;
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
+    }
+
 // <--Materials Engineer-->
     if (isset($_POST['create_disposalSlip'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
