@@ -110,8 +110,8 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
                 </div>
+
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
                         <?php
@@ -153,6 +153,8 @@
                                         <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                             onclick="window.location.href='viewInventory.php'" name="viewInventory">View
                                             inventory</button>
+                                        <button type="button" class="btn btn-info" id=""
+                                            onclick="window.location.href='addMaterials.php'" name="">Add Materials</button>
                                     </div>
                                 </div>
                             </div>
