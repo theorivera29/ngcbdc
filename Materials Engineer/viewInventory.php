@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="window.location.href='projects.php'">
                 <i class="fas fa-arrow-circle-left"></i>
@@ -48,7 +48,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
@@ -210,24 +210,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-
-        });
     });
 
-    function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';
-    }
-
-    function closeSlideMenu() {
-        document.getElementById('menu').style.width = '0';
-        document.getElementById('content').style.marginLeft = '0';
-    }
-
-    });
 </script>
-
 
 </html>

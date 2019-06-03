@@ -2,7 +2,7 @@
     include "../db_connection.php";
     session_start();
 
-    $accounts_id = $_SESSION['account_id'];    
+    $accounts_id = $_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
@@ -116,12 +116,13 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
+            <tbody>
             <?php
                         $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
-            <tbody>
+            
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
@@ -130,10 +131,11 @@
                     <td><?php echo $row[4]?></td>
                     <td><button type="button" class="btn btn-success">View</button></td>
                 </tr>
-            </tbody>
+            
             <?php
                         }
                     ?>
+            </tbody>
         </table>
     </div>
 

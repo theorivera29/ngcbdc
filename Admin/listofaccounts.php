@@ -48,7 +48,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
@@ -104,13 +104,14 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
+            <tbody>
             <?php 
                 $sql = "SELECT accounts_id, accounts_username, concat(accounts_fname,' ', accounts_lname) as name,  
                 accounts_email, accounts_type, accounts_status FROM accounts WHERE accounts_deletable = 'yes';";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
             ?>
-            <tbody>
+            
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
@@ -120,10 +121,11 @@
                     <td><?php echo $row[5]?></td>
                     <td><button type="button" class="btn btn-danger">Disable</button></td>
                 </tr>
-            </tbody>
+            
             <?php
                 }
             ?>
+            </tbody>
         </table>
     </div>
 </body>
