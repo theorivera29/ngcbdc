@@ -431,7 +431,23 @@
 
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");     
+        session_start();
+
+        $accounts_id = $_SESSION['account_id'];   
+        $sql = "SELECT
+                    accounts_type
+                FROM
+                    accounts
+                WHERE 
+                    accounts_id = $accounts_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        
+        if (strcmp($row[0], "Materials Engineer") == 0) {
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");    
+        } else {
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
+        }
     }
     
     if (isset($_POST['return_hauling'])) {
@@ -454,7 +470,24 @@
     if (isset($_POST['materialCategories'])) {
         $categories_id = $_POST['categories_id'];
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");     
+
+        session_start();
+
+        $accounts_id = $_SESSION['account_id'];   
+        $sql = "SELECT
+                    accounts_type
+                FROM
+                    accounts
+                WHERE 
+                    accounts_id = $accounts_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        
+        if (strcmp($row[0], "Materials Engineer") == 0) {
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id"); 
+        } else {
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");  
+        }    
     }
 
 // <--View Only-->

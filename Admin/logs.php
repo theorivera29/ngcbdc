@@ -48,7 +48,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
@@ -102,12 +102,14 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- dito po ilalagay php code  -->
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
+                <!-- dito po ilalagay closing na php code para di magulo yung datatables thanks!  -->
             </tbody>
 
         </table>

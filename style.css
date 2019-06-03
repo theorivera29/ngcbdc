@@ -459,7 +459,12 @@ textarea{
     margin-left: 2%;
     margin-right: 2%;
     text-align: center !important;
+}
+
+.site-materials-container{
     width: 96% !important;
+    margin-left: 2% !important;
+    margin-top: 3% !important;
 }
 
 .site-materials-table > thead > tr > th{
@@ -467,11 +472,6 @@ textarea{
     color: #FFF8F0;
 }
 
-.site-materials-table thead tr{
-    background-color: #0D304F;
-    color: #FFFFFF;
-    width: 90%;
-}
 /*End of Materials Engineer- Site Materials*/
 
 
@@ -511,6 +511,11 @@ textarea{
     margin-left: 5%;
     margin-top: 5% !important;
     text-align: center;
+}
+
+.hauled-items-container thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
 }
 
 /*Start of Materials Engineer-Hauling*/
@@ -574,6 +579,11 @@ textarea{
 .returns-or-replace-content{
     margin-top: 3%;
     width: 100% !important;
+}
+
+.returns-or-replace-content thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
 }
 
 .replace-container{
