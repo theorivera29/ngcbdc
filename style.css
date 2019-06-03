@@ -110,7 +110,6 @@ body{
     transition: 0.5s;
     border-right: 2px #DCB149;
     border-right-style: double;
-
 }
 
 #ngcbdc-logo{
@@ -416,12 +415,29 @@ textarea{
     width: 100%;
 }
 
+.add-btn{
+    float: right;
+    margin-top: 1%;
+}
+
 .add-project-btn{
     margin-top: 1%;
     float: right !important;
 }
 /*End of Materials Engineer - Project*/
 
+/*Materials Engineer - Add Materials*/
+.adding-materials-container{
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-top: 3% !important;
+    text-align: center;
+}
+
+.adding-materials-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
 
 /*Start of *Materials Engineer - Stockard*/
 .delivered-in-container{
@@ -618,7 +634,7 @@ textarea{
 }
 /*End of Materials Engineer - Account*/
 
-/*Start of Materials Engineer - Adding of Something*/
+/*Start of Materials Engineer - Adding of Materials*/
 .adding-category-tabs-content{
     margin-top: 3%;
     margin-left: 5%;
