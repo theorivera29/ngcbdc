@@ -91,8 +91,17 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="reports.php" id="sideNav-a">Reports</a>
+                    <li class="active">
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
+                            </li>
+                            <li>
+                                <a href="previousReports.php" id="sideNav-a">Previous Reports</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
