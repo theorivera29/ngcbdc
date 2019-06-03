@@ -24,6 +24,7 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
@@ -104,46 +105,87 @@
         </div>
     </div>
 
-    <div class="hauled-items-container">
-        <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
-            <thead>
-                <tr>
-                    <th scope="col">Form No.</th>
-                    <th scope="col">Hauling Date</th>
-                    <th scope="col">Hauled From</th>
-                    <th scope="col">Hauled By</th>
-                    <th scope="col">Hauling Type</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
-                        $result = mysqli_query($conn, $sql);
-                        while($row = mysqli_fetch_array($result)) {
-                    ?>
-            
-                <tr>
-                    <td><?php echo $row[0]?></td>
-                    <td><?php echo $row[1]?></td>
-                    <td><?php echo $row[2]?></td>
-                    <td><?php echo $row[3]?></td>
-                    <td><?php echo $row[4]?></td>
-                    <td><button type="button" class="btn btn-success">View</button></td>
-                </tr>
-            
-            <?php
-                        }
-                    ?>
-            </tbody>
-        </table>
-    </div>
+    <section id="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 project-tabs">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                role="tab" aria-controls="nav-home" aria-selected="true">ADD NEW CATEGORY</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                                role="tab" aria-controls="nav-profile" aria-selected="false">ADD NEW MATERIAL</a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="adding-of-materials-content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
+                            role="tabpanel" aria-labelledby="nav-home-tab">
+                            <table class="table new-category-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="add-category">
+                                </tbody>
+                                <tfoot>
+                                    <tr id="haulingRow">
+                                        <td><input class="form-control" name="quantity" type="text" id="quantity"
+                                                placeholder="Category Name">
+                                        </td>
+                                        <td colspan="5">
+                                            <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                                value="Add Row" />
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <table class="table new-category-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Material</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="add-category">
+                                </tbody>
+                                <tfoot>
+                                    <tr id="haulingRow">
+                                        <td><select class="custom-select" id="inputGroupSelect01">
+                                                <option selected>Choose Category</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </td>
+                                        <td><input class="form-control" name="quantity" type="text" id="quantity"
+                                                placeholder="Material Name">
+                                        </td>
+                                        <td colspan="5">
+                                            <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                                value="Add Row" />
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
+
+        $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
@@ -158,6 +200,31 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
+    $(document).ready(function () {
+        $(".add-row").click(function () {
+            var quantity = $("#quantity").val();
+            var unit = $("#unit").val();
+            var articles = $("#articles").val();
+            var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" +
+                unit +
+                "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity != '') && (articles != '') && (unit != '')) {
+                $("table tbody").append(markup);
+                $("#haulingRow input[type=text]").val('');
+                $("#haulingRow select").val('');
+            }
+        });
+
+        $("#haulingTable").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 </script>
+
 
 </html>
