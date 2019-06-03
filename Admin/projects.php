@@ -104,7 +104,7 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
+                    <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal" onclick="window.location.href = 'addProject.php'">Add Project</button>
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
@@ -222,7 +222,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-
                 </div>
             </div>
         </div>
@@ -262,15 +261,13 @@
                             <input name="end_Data" type="date" class="form-control" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Materials Engineer Involved</label>
-                            </div>
+                        <div>
+                            <label class="label-styles">Materials Engineer Involved</label>
+                            
                             <select id="multiselect" multiple="multiple">
-                                <option value="http://ipv4.download.thinkbroadband.com/5MB.zip">Option 1</option>
-                                <option value="http://ipv4.download.thinkbroadband.com/10MB.zip">Option 2</option>
-                                <option value="http://ipv4.download.thinkbroadband.com/20MB.zip">Option 3</option>
-                                <option value="http://ipv4.download.thinkbroadband.com/50MB.zip">Option 4</option>
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>CARYL MARIE</option>
                             </select>
                         </div>
                     </form>
@@ -306,7 +303,7 @@
 
     $(document).ready(function () {
         $('#multiselect').multiselect({
-            buttonWidth: '160px',
+            buttonWidth: '100%',
             includeSelectAllOption: true,
             nonSelectedText: 'Select an Option'
         });

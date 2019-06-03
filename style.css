@@ -415,6 +415,11 @@ textarea{
 .project-container{
     width: 100%;
 }
+
+.add-project-btn{
+    margin-top: 1%;
+    float: right !important;
+}
 /*End of Materials Engineer - Project*/
 
 
@@ -537,8 +542,18 @@ textarea{
 .hauling-form-card{
     margin-left: 10%;
 }
-/*End of Materials Engineer - View Hauling*/
+/*End of Admin - List of Accounts*/
+/*Start of Admin - Projects*/
+#edit-project-modal{
+    width: 100% !important;
+}
 
+/*Start of Admin - Create Project*/
+.add-project-container{
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 3%;
+}
 
 /*Start of Materials Engineer - returnsOrReplaced*/
 .return-container{
