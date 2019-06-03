@@ -114,14 +114,12 @@
     </div>
 
     <div class="hauled-items-container">
+        <h5>Project Name</h5>
         <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
-                    <th scope="col">Form No.</th>
-                    <th scope="col">Hauling Date</th>
-                    <th scope="col">Hauled From</th>
-                    <th scope="col">Hauled By</th>
-                    <th scope="col">Hauling Type</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Year</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -131,14 +129,10 @@
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
-            
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
-                    <td><?php echo $row[2]?></td>
-                    <td><?php echo $row[3]?></td>
-                    <td><?php echo $row[4]?></td>
-                    <td><button type="button" class="btn btn-success">View</button></td>
+                    <td><button type="button" class="btn btn-success" onclick="window.location.href = 'viewPreviousReport.php'">View</button></td>
                 </tr>
             
             <?php

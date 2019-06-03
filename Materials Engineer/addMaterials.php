@@ -109,8 +109,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
 </body>
 <script type="text/javascript">
     $(document).ready(function () {

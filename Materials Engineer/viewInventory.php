@@ -67,11 +67,6 @@
                                 role="tab" aria-controls="nav-profile" aria-selected="false">CATEGORY</a>
                         </div>
                     </nav>
-                    <div class="add-btn">
-                        <button type="submit" class="btn btn-info" id="" name="" data-toggle="modal"
-                                            data-target="#done-task-modal">Add Material</button>
-                        <button type="submit" class="btn btn-info" name="">Add Category</button>
-                    </div>
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
