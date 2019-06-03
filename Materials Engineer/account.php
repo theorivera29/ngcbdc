@@ -134,12 +134,6 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="col-lg-2 col-form-label">Password</label>
-                        <div class="col-lg-4">
-                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
-                        </div>
-                    </div>
-                    <div class="row form-group">
                         <label class="col-lg-2 col-form-label">New Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="pass" id="pass">
