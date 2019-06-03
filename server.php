@@ -19,7 +19,7 @@
             $_SESSION['loggedin' ] = true;
             $_SESSION['account_type'] = $accounts_type;
             if (strcmp($accounts_type,"Admin") == 0) {
-                header("location: http://127.0.0.1/NGCBDC/Admin/admindashboard.php");
+                header("location: http://127.0.0.1/NGCBDC/Admin/dashboard.php");
                 $stmt->close();                
             } else if (strcmp($accounts_type,"Materials Engineer") == 0) {
                 header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");    
@@ -36,8 +36,139 @@
     }
 
 // <--Admin-->
+    if (isset($_POST['requestAccept'])) {
+        $request_accountID = $_POST['accounts_id'];
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $generated_password = substr(str_shuffle($characters), 0, 8);
+        $password = password_hash($generated_password, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("SELECT accounts_email, CONCAT(accounts_fname, ' ', accounts_lname) FROM accounts WHERE accounts_id = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($request_email, $request_name); 
+        $stmt->fetch();
+        $stmt->close();
+        $accept_date = date("Y-m-d G:i:s");
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $password, $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $accept_date, $logs_message, $logs_of);
+        $logs_message = 'Accepted request to reset password of '.$request_name;
+        $logs_of = 1;
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        try {
+            $mail->addAddress($request_email, $request_name);
+            $mail->isHTML(true);                                  
+            $mail->Subject = 'Password Reset';
+            $mail->Body    = 'Hello '.$request_name.' Your request to reset your password has been approved. Please use the temporary password below to login.
+                            Please change your password after logging in. <br /> <br /> Password: <b>'.$generated_password.'</b>';
+            $mail->send();
+        } catch (Exception $e) {}
+        header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
+    }
 
+    if (isset($_POST['requestReject'])) {
+        $request_accountID = $_POST['accounts_id'];
+        $stmt = $conn->prepare("SELECT CONCAT(accounts_fname, ' ', accounts_lname) FROM accounts WHERE accounts_id = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($request_name);
+        $stmt->fetch();
+        $reject_date = date("Y-m-d G:i:s");        
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $reject_date, $logs_message, $logs_of);
+        $logs_message = 'Rejected request to reset password of '.$request_name;
+        $logs_of = 1;
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
+        $stmt->bind_param("i", $request_accountID);
+        $stmt->execute();
+        $stmt->close();
+        header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
+    }
+
+if (isset($_POST['edit_project'])) {/*
+        $edit_account_date = date("Y-m-d G:i:s");*/
+        $mateng = $_POST['mateng'];
+        $newProjectName = mysqli_real_escape_string($conn, $_POST['newProjectName']);
+        $newAddress = mysqli_real_escape_string($conn, $_POST['newAddress']);
+        $newStartDate = mysqli_real_escape_string($conn, $_POST['newStartDate']);
+        $newEndDate = mysqli_real_escape_string($conn, $_POST['newEndDate']);
+        $one = 1;
+        if (isset($_POST['newProjectName'])) {
+            $newProjectName = mysqli_real_escape_string($conn, $_POST['newProjectName']);
+            $stmt = $conn->prepare("UPDATE projects SET projects_name = ? WHERE projects_id = 1;");
+            $stmt->bind_param("s", $newProjectName);
+            $stmt->execute();
+            $stmt->close();
+    /*        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change account username to '.$newusername;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();
+            $_SESSION['username'] = $newusername; */
+        }
+        if (isset($_POST['newAddress'])) {
+            $newAddress = mysqli_real_escape_string($conn, $_POST['newAddress']);
+            $stmt = $conn->prepare("UPDATE projects SET projects_address = ? WHERE projects_id = 1;");
+            $stmt->bind_param("s",$newAddress);
+            $stmt->execute();
+            $stmt->close();
+            /*$stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change first name to '.$account_id;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close()*/;
+        }
+
+        if (isset($_POST['newStartDate'])) {
+            $newStartDate = mysqli_real_escape_string($conn, $_POST['newStartDate']);
+            $stmt = $conn->prepare("UPDATE projects SET projects_sdate = ? WHERE projects_id = 1;");
+            $stmt->bind_param("s", $newStartDate);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change last name to '.$newlname;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+
+        if (isset($_POST['newEndDate'])) {
+            $newEndDate = mysqli_real_escape_string($conn, $_POST['newEndDate']);
+            $stmt = $conn->prepare("UPDATE projects SET projects_edate = ? WHERE projects_id = 1;");
+            $stmt->bind_param("s", $newEndDate);
+            $stmt->execute();
+            $stmt->close();
+        }
     
+            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = 1 AND projmateng_mateng = 1;");
+            $stmt->execute();
+            $stmt->close();
+    
+            for($x = 0; $x < sizeof($mateng); $x++){
+                $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng)
+                    VALUES (?, ?);");
+                $stmt->bind_param("ii", $one, $mateng[$x]);
+                $stmt->execute();
+                $stmt->close();
+                
+                }
+        header("location: http://127.0.0.1/NGCBDC/Admin/projects.php");        
+    }
+
 // <--Materials Engineer-->
     if (isset($_POST['create_disposalSlip'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
@@ -250,7 +381,7 @@
             $stmt->execute();
             $stmt->close();*/
         }
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/accounts.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/account.php");     
     }
 
     if (isset($_POST['create_deliveredin'])) {
@@ -448,6 +579,11 @@
         } else {
             header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
         }
+    }
+
+    if (isset($_POST['viewReport'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/reportpage.php?projects_id=$projects_id");    
     }
     
     if (isset($_POST['return_hauling'])) {

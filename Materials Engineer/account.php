@@ -121,7 +121,7 @@
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_row($result);
                 ?>
-                <form class="form " action="../server.php" method="POST">
+                <form action="../server.php" method="POST">
                     <div class="row form-group">
                         <label class="col-lg-2 col-form-label ">First name</label>
                         <div class="col-lg-4">

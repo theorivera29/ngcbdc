@@ -90,7 +90,17 @@
         <div class="card account-card-container">
             <h5 class="card-header">Accounts</h5>
             <div class="card-body">
-                <p></p>
+                <?php
+                    $sql_accounts = "SELECT
+                                COUNT(accounts_id)
+                            FROM
+                                accounts
+                            WHERE
+                                NOT accounts_deletable = 'no';";
+                    $result_accounts = mysqli_query($conn, $sql_accounts);
+                    $row_accounts = mysqli_fetch_row($result_accounts);
+                ?>
+                <p><?php echo $row_accounts[0];?></p>
             </div>
             <h6 class="card-footer">active accounts</h6>
         </div>
@@ -98,7 +108,17 @@
         <div class="card password-card-container">
             <h5 class="card-header">Password Reset</h5>
             <div class="card-body">
-                <p></p>
+                <?php
+                    $sql_request = "SELECT
+                                COUNT(req_id)
+                            FROM
+                                request
+                            WHERE
+                                req_status = 'pending';";
+                    $result_request = mysqli_query($conn, $sql_request);
+                    $row_request = mysqli_fetch_row($result_request);
+                ?>
+                <p><?php echo $row_request[0];?></p>
             </div>
             <h6 class="card-footer">requesting for a new password</h6>
         </div>
@@ -106,7 +126,17 @@
         <div class="card project-card-container">
             <h5 class="card-header">Project</h5>
             <div class="card-body">
-                <p></p>
+                <?php
+                    $sql_projects = "SELECT
+                                COUNT(projects_id)
+                            FROM
+                                projects
+                            WHERE
+                                projects_status = 'open';";
+                    $result_projects = mysqli_query($conn, $sql_projects);
+                    $row_projects = mysqli_fetch_row($result_projects);
+                ?>
+                <p><?php echo $row_projects[0];?></p>
             </div>
             <h6 class="card-footer">number of projects</h6>
         </div>
