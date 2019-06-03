@@ -2,8 +2,9 @@
     include "../db_connection.php";
     session_start();
 
-    $accounts_id = $_SESSION['account_id'];    
+    $accounts_id = $_SESSION['account_id'];
 ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -42,7 +43,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
-                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                        <a class="dropdown-item" href="">Logout</a>
                     </div>
                 </div>
             </div>
@@ -98,109 +99,70 @@
         </div>
     </div>
 
-    <button class="btn btn-warning" id="generate-report" type="button">Generate Report</button>
-    <table class="table reportpage-table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th class="align-middle">Particulars</th>
-                <th class="align-middle">Previous Material Stock</th>
-                <th class="align-middle">Unit</th>
-                <th class="align-middle">Delivered Material as of</th>
-                <th class="align-middle">Material Pulled Out as of</th>
-                <th class="align-middle">Unit</th>
-                <th class="align-middle">Accumulated Materials Delivered</th>
-                <th class="align-middle">Material on Site as of</th>
-                <th class="align-middle">Unit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $projects_id = $_GET['projects_id'];
-            $sql_categ = "SELECT DISTINCT
-                            categories_name
-                        FROM
-                            materials
-                        INNER JOIN
-                            categories ON categories.categories_id = materials.mat_categ
-                        INNER JOIN
-                            matinfo ON materials.mat_id = matinfo.matinfo_matname
-                        WHERE
-                            matinfo.matinfo_project = $projects_id;";
-            $result = mysqli_query($conn, $sql_categ);
-            $categories = array();
-            while($row_categ = mysqli_fetch_assoc($result)){
-                $categories[] = $row_categ;
-            }
+    <div class="mx-auto mt-5 col-md-11">
+        <div class="card">
+            <div class="card-header">
+                <h4>User Information</h4>
+            </div>
+            <div class="card-body">
+                <?php 
+                    $sql = "SELECT 
+                    accounts_fname, accounts_lname, accounts_username, accounts_email, accounts_password FROM accounts
+                    WHERE accounts_username='materials_engineer';";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_row($result);
+                ?>
+                <form class="form " action="../server.php" method="POST">
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label ">First name</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[0]?>" name="firstName">
+                        </div>
+                        <label class="col-lg-2 col-form-label">Last name</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[1]?>" name="lastName">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Username</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="text" value="<?php echo $row[2]?>" name="username">
+                        </div>
+                        <label class="col-lg-2 col-form-label ">Email Address</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="email" value="<?php echo $row[3]?>" name="email">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 col-form-label">New Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" name="pass" id="pass">
+                        </div>
+                        <label class="col-lg-2 col-form-label">Confirm Password</label>
+                        <div class="col-lg-4">
+                            <input class="form-control" type="password" name="confpass" id="confpass">
+                        </div>
+                        <div class="form-group">
+                            <span class="error" style="color:red"></span><br />
+                        </div>
+                    </div>
+                    <div class="row form-group accnt-btn">
 
-            foreach($categories as $data) {
-                $categ = $data['categories_name'];
-                
-                $sql = "SELECT 
-                            materials.mat_id,
-                            materials.mat_name,
-                            categories.categories_name,
-                            matinfo.matinfo_prevStock,
-                            unit.unit_name
-                        FROM
-                            materials
-                        INNER JOIN 
-                            categories ON materials.mat_categ = categories.categories_id
-                        INNER JOIN 
-                            unit ON materials.mat_unit = unit.unit_id
-                        INNER JOIN
-                            matinfo ON materials.mat_id = matinfo.matinfo_matname
-                        WHERE 
-                            categories.categories_name = '$categ' 
-                        AND 
-                        matinfo.matinfo_project = '$projects_id'
-                        ORDER BY 1;";
-                $result = mysqli_query($conn, $sql);
-                while($row = mysqli_fetch_row($result)){
-                    $sql1 = "SELECT 
-                                SUM(deliveredin.deliveredin_quantity) FROM deliveredin
-                            INNER JOIN 
-                                matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
-                            WHERE 
-                                matinfo.matinfo_matname = '$row[0]';";
-                    $result1 = mysqli_query($conn, $sql1);
-                    $row1 = mysqli_fetch_row($result1);
-                    $sql2 = "SELECT 
-                                SUM(usagein.usagein_quantity) FROM usagein
-                                INNER JOIN 
-                                matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
-                            WHERE 
-                                matinfo.matinfo_matname = '$row[0]';";
-                    $result2 = mysqli_query($conn, $sql2);
-                    $row2 = mysqli_fetch_row($result2);
-        ?>
-            <tr>
-                <td><?php echo $row[2] ;?></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><?php echo $row[1] ;?></td>
-                <td><?php echo $row[3] ;?></td>
-                <td><?php echo $row[4] ;?></td>
-                <td><?php echo $row1[0] ;?></td>
-                <td><?php echo $row2[0] ;?></td>
-                <td><?php echo $row[4] ;?></td>
-                <td><?php echo $row[3]+$row1[0] ;?></td>
-                <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
-                <td><?php echo $row[4] ;?></td>
-            </tr>
-            <?php
-                }
-            }
-        ?>
-        </tbody>
-    </table>
+                        <input type="submit" class="btn btn-success save-accnt-btn" name="update_account"
+                            value="Save Changes">
+                        <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     function openSlideMenu() {
@@ -216,6 +178,36 @@
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
+        });
+
+        var allowsubmit = false;
+        $(function () {
+            $('#confpass').keyup(function (e) {
+                var pass = $('#pass').val();
+                var confpass = $(this).val();
+                if (pass == confpass) {
+                    $('.error').text('');
+                    allowsubmit = true;
+                } else {
+                    $('.error').text('Password not matching');
+                    allowsubmit = false;
+                }
+            });
+
+            $('#form').submit(function () {
+
+                var pass = $('#pass').val();
+                var confpass = $('#confpass').val();
+
+                if (pass == confpass) {
+                    allowsubmit = true;
+                }
+                if (allowsubmit) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         });
 
     });

@@ -110,7 +110,6 @@ body{
     transition: 0.5s;
     border-right: 2px #DCB149;
     border-right-style: double;
-
 }
 
 #ngcbdc-logo{
@@ -415,8 +414,30 @@ textarea{
 .project-container{
     width: 100%;
 }
+
+.add-btn{
+    float: right;
+    margin-top: 1%;
+}
+
+.add-project-btn{
+    margin-top: 1%;
+    float: right !important;
+}
 /*End of Materials Engineer - Project*/
 
+/*Materials Engineer - Add Materials*/
+.adding-materials-container{
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-top: 3% !important;
+    text-align: center;
+}
+
+.adding-materials-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
 
 /*Start of *Materials Engineer - Stockard*/
 .delivered-in-container{
@@ -438,7 +459,12 @@ textarea{
     margin-left: 2%;
     margin-right: 2%;
     text-align: center !important;
+}
+
+.site-materials-container{
     width: 96% !important;
+    margin-left: 2% !important;
+    margin-top: 3% !important;
 }
 
 .site-materials-table > thead > tr > th{
@@ -446,11 +472,6 @@ textarea{
     color: #FFF8F0;
 }
 
-.site-materials-table thead tr{
-    background-color: #0D304F;
-    color: #FFFFFF;
-    width: 90%;
-}
 /*End of Materials Engineer- Site Materials*/
 
 
@@ -537,8 +558,18 @@ textarea{
 .hauling-form-card{
     margin-left: 10%;
 }
-/*End of Materials Engineer - View Hauling*/
+/*End of Admin - List of Accounts*/
+/*Start of Admin - Projects*/
+#edit-project-modal{
+    width: 100% !important;
+}
 
+/*Start of Admin - Create Project*/
+.add-project-container{
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 3%;
+}
 
 /*Start of Materials Engineer - returnsOrReplaced*/
 .return-container{
@@ -603,7 +634,7 @@ textarea{
 }
 /*End of Materials Engineer - Account*/
 
-/*Start of Materials Engineer - Adding of Something*/
+/*Start of Materials Engineer - Adding of Materials*/
 .adding-category-tabs-content{
     margin-top: 3%;
     margin-left: 5%;

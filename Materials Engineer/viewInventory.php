@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="window.location.href='projects.php'">
                 <i class="fas fa-arrow-circle-left"></i>
@@ -67,6 +67,11 @@
                                 role="tab" aria-controls="nav-profile" aria-selected="false">CATEGORY</a>
                         </div>
                     </nav>
+                    <div class="add-btn">
+                        <button type="submit" class="btn btn-info" id="" name="" data-toggle="modal"
+                                            data-target="#done-task-modal">Add Material</button>
+                        <button type="submit" class="btn btn-info" name="">Add Category</button>
+                    </div>
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
@@ -210,24 +215,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-
-        });
     });
 
-    function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';
-    }
-
-    function closeSlideMenu() {
-        document.getElementById('menu').style.width = '0';
-        document.getElementById('content').style.marginLeft = '0';
-    }
-
-    });
 </script>
-
 
 </html>

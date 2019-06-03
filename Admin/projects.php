@@ -97,7 +97,7 @@
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ONGOING</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
+                    <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal" onclick="window.location.href = 'addProject.php'">Add Project</button>
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
@@ -221,7 +221,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-
                 </div>
             </div>
         </div>
@@ -282,6 +281,13 @@
                                 <?php
                                     }
                                 ?>
+                        <div>
+                            <label class="label-styles">Materials Engineer Involved</label>
+                            <select id="multiselect" multiple="multiple">
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>JAM SPICA ROCAFORT</option>
+                                <option>CARYL MARIE</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -314,7 +320,7 @@
 
     $(document).ready(function() {
         $('#multiselect').multiselect({
-            buttonWidth: '160px',
+            buttonWidth: '100%',
             includeSelectAllOption: true,
             nonSelectedText: 'Select an Option'
         });
