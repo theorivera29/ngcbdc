@@ -58,6 +58,7 @@
     <section id="tabs">
         <div class="container">
             <div class="row">
+            <h4 class="project-title">NAME OF PROJECT</h4>
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">

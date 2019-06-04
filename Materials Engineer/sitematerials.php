@@ -114,6 +114,7 @@
     </div>
 
     <div class="site-materials-container">
+        <h5 class="card-header">All Materials in Site</h5>
         <table class="table site-materials-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>

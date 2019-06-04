@@ -118,6 +118,7 @@
     </div>
 
     <div class="hauled-items-container">
+    <h4 class="card-header">Hauled Materials</h4>
         <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>

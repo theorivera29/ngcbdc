@@ -59,7 +59,8 @@
     </div>
 
     <div class="adding-materials-container">
-        <h5>List of All Materials Added</h5>
+    <h4 class="project-title">NAME OF PROJECT</h4>
+        <h5 class=" card-header">List of All Materials Added</h5>
         <table class="table adding-materials-table table-striped table-bordered display" id="mydatatable">
             <thead>
                 <tr>
@@ -76,7 +77,7 @@
                 </tr>
             </tbody>
         </table>
-        <h5>List of All Materials</h5>
+        <h5 class=" card-header list-of-material">List of All Materials</h5>
         <table class="table adding-materials-table table-striped table-bordered display" id="mydatatable">
             <thead>
                 <tr>
