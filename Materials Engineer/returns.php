@@ -22,7 +22,7 @@
 
 <body>
     <div id="content">
-<!--        <span class="slide">
+       <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </span>-->
+        </span>
 
         <div id="menu" class="navigation sidenav">
             <a href="#" class="close" onclick="closeSlideMenu()">
