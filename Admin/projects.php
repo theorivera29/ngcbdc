@@ -192,7 +192,7 @@
                                             </h5>
                                         </span>
                                         <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
-                                        <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
+                                        <button type="submit" class="btn btn-danger" id="" name="">Delete</button>
                                     </div>
                                 </div>
                             </div>
