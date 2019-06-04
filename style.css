@@ -324,6 +324,11 @@ textarea{
     width: 100% !important;
 }
 
+.today-task-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
 #view-all-task-btn{
     float: right;
     margin-top: -2%;
@@ -334,11 +339,21 @@ textarea{
     width: 96% !important;
     margin-left: 2% !important;
     margin-top: 5%;
+    margin-bottom: 2% !important;
 }
 
 .low-quantity-table{
     width: 100% !important;
     text-align: center;
+}
+
+.low-quantity-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
+.card-header{
+    margin-bottom: 2% !important;
 }
 /* End of Materials Engineer-Dashboard*/
 
@@ -499,6 +514,16 @@ textarea{
     margin-left: 25% !important;
 }
 
+.project-title{
+    text-align: center;
+    width: 100% !important;
+    margin-top: 3%;
+}
+
+.list-of-material{
+    margin-top: 3% !important;
+}
+
 /*Materials Engineer - Material Categories*/
 .category-title{
     text-align: center;
@@ -511,6 +536,7 @@ textarea{
     margin-left: 5%;
     margin-top: 5% !important;
     text-align: center;
+    margin-bottom: 2% !important;
 }
 
 .hauled-items-container thead tr{
