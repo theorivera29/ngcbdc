@@ -88,7 +88,7 @@
 
     <div class="row dashboard-card-container">
         <div class="card account-card-container">
-            <h5 class="card-header">Accounts</h5>
+            <h5 class="card-header"><a href="account.php">Accounts</a></h5>
             <div class="card-body">
                 <?php
                     $sql_accounts = "SELECT
@@ -106,7 +106,7 @@
         </div>
 
         <div class="card password-card-container">
-            <h5 class="card-header">Password Reset</h5>
+            <h5 class="card-header"><a href="passwordrequest.php">Password Reset</a></h5>
             <div class="card-body">
                 <?php
                     $sql_request = "SELECT
@@ -124,7 +124,7 @@
         </div>
 
         <div class="card project-card-container">
-            <h5 class="card-header">Project</h5>
+            <h5 class="card-header"><a href="projects.php">Project</a></h5>
             <div class="card-body">
                 <?php
                     $sql_projects = "SELECT
