@@ -14,20 +14,16 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js">
     </script>
 </head>
 
@@ -48,8 +44,7 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -72,8 +67,7 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Account</a>
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                             <li>
                                 <a href="accountcreation.php" id="sideNav-a">Create Account</a>
@@ -97,7 +91,7 @@
         </div>
     </div>
     <div class="add-project-container">
-        <form class="needs-validation" novalidate>
+        <form action="../server.php" method="POST" novalidate>
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
                 <input name="projectName" type="email" class="form-control" placeholder="Enter project name" required>
@@ -110,38 +104,51 @@
             </div>
             <div class="form-group">
                 <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="start_Date" type="date" class="form-control" required>
+                <input name="startDate" type="date" class="form-control" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="endDate" class="label-styles">END DATE:</label>
-                <input name="end_Data" type="date" class="form-control" required>
+                <input name="endDate" type="date" class="form-control" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+<!--                <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Materials Engineer
                         Involved</label>
+                </div>-->
+                <?php
+                    $sqlmateng = "SELECT 
+                    CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
+                    $resultmateng = mysqli_query($conn, $sqlmateng);
+                    while($rowmateng = mysqli_fetch_row($resultmateng)){
+                ?>
+                <div>
+                    <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>" />
+                    <span>
+                        <?php echo $rowmateng[0]?> </span>
                 </div>
-                <select id="multiselect" multiple="multiple">
+                <?php
+                    }
+                ?>
+<!--                <select id="multiselect" multiple="multiple">
                     <option>JAM SPICA ROCAFORT</option>
-                </select>
+                </select>-->
             </div>
-        
 
-        <div class="add-project-btn">
-            <button type="button" class="btn btn-success">Save</button>
-            <input type="reset" class="btn btn-danger" value="Cancel">
-        </div>
+            <div class="add-project-btn">
+                <button type="submit" name="create_project" class="btn btn-success">Save</button>
+                <input type="reset" class="btn btn-danger" value="Cancel">
+            </div>
         </form>
     </div>
 </body>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#mydatatable').DataTable();
 
-        $('#sidebarCollapse').on('click', function () {
+        $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
     });
@@ -155,13 +162,14 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#multiselect').multiselect({
             buttonWidth: '75%',
             includeSelectAllOption: true,
             nonSelectedText: 'Select materials engineer'
         });
     });
+
 </script>
 
 </html>

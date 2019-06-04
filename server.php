@@ -96,6 +96,37 @@
         header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
     }
 
+    if (isset($_POST['create_project'])) {
+        $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
+        $address = mysqli_real_escape_string($conn, $_POST['address']);
+        $startDate = mysqli_real_escape_string($conn, $_POST['startDate']);
+        $endDate = mysqli_real_escape_string($conn, $_POST['endDate']);
+        $projectStatus = 'open';
+        $one = 1;
+        $mateng = $_POST['mateng'];
+
+        $stmt = $conn->prepare("INSERT INTO projects (projects_name, projects_address, projects_sdate, projects_edate, projects_status) VALUES (?, ?, ?, ?, ?);");
+        $stmt->bind_param("sssss", $projectName, $address, $startDate, $endDate, $projectStatus);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
+    
+/*            $stmt = $conn->prepare("SELECT projects_id FROM projects WHERE projects_name = ?;");
+            $stmt->bind_param("s", $projects_name);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($account_id);
+            $stmt->fetch();*/
+            for($x = 0; $x < sizeof($mateng); $x++){
+           
+            $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng) VALUES (?, ?);");
+            $stmt->bind_param("ii", $one, $mateng[$x]);
+            $stmt->execute();
+            $stmt->close();
+                
+                }
+    }
+
 if (isset($_POST['edit_project'])) {/*
         $edit_account_date = date("Y-m-d G:i:s");*/
         $mateng = $_POST['mateng'];
@@ -154,7 +185,7 @@ if (isset($_POST['edit_project'])) {/*
             $stmt->close();
         }
     
-            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = 1 AND projmateng_mateng = 1;");
+            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = 1;");
             $stmt->execute();
             $stmt->close();
     
