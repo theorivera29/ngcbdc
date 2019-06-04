@@ -77,6 +77,7 @@
     </div>
 
     <div class="list-of-accounts-container">
+    <h4 class="card-header">Hauled Materials</h4>
         <table class="table list-of-accounts-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
