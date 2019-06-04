@@ -87,7 +87,13 @@
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
-                        <?php
+
+
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+
+                            <div class="card project-container">
+                                <?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -101,10 +107,8 @@
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
-                            <form action="../server.php" method="POST">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                aria-labelledby="nav-home-tab">
-                                <div class="card project-container">
+
+                                <form action="../server.php" method="POST">
                                     <h5 class="card-header card-header-project"><?php echo $row[0] ;?></h5>
                                     <div class="card-body">
                                         <span>
@@ -121,13 +125,19 @@
                                             onclick="window.location.href='viewInventory.php'" name="viewInventory">View
                                             inventory</button>
                                     </div>
-                                </div>
-                            </div>
-                            </form>
-                            <?php
+                                </form>
+                                <?php
                             }
                         ?>
-                        <?php
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="card project-container">
+                                <?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -141,10 +151,7 @@
                             $result1 = mysqli_query($conn, $sql);
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
-                        <form action="../server.php" method="POST">
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                aria-labelledby="nav-profile-tab">
-                                <div class="card project-container">
+                                <form action="../server.php" method="POST">
                                     <h5 class="card-header card-header-project"><?php echo $row1[0] ;?></h5>
                                     <div class="card-body">
                                         <span>
@@ -160,12 +167,13 @@
                                         <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                             name="viewInventory">View inventory</button>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
-                            <?php
+                                </form>
+                                <?php
                             }   
                         ?>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
