@@ -350,16 +350,14 @@
                                                                      >
                                                             </td>
                                                             <td>
-                                                                <!--<div class="form-group">
+                                                                <div class="form-group">
                                                                     <select class="form-control" name="articles"
                                                                         id="articles">
                                                                         <option value="" selected disabled>Choose an
                                                                             Article
                                                                         </option>
                                                                     </select>
-                                                                </div>-->
-                                                                <input class="form-control" name="quantity" type="text"
-                                                                    id="quantity" placeholder="Quantity">
+                                                                </div>
                                                             </td>
                                                             <td><input class="form-control" name="unit" type="text"
                                                                     id="unit" placeholder="Unit">
