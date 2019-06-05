@@ -21,7 +21,8 @@
 <body>
     <div id="content">
         <span class="slide">
-            <a href="#" class="open" onclick="window.location.href='viewInventory.php'">
+        <!--Change onlick back button, kasi may error-->
+            <a href="#" class="open" name="" onclick="window.location.href='viewInventory.php'">
                 <i class="fas fa-arrow-circle-left"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
