@@ -13,14 +13,19 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-        <script src="../js/jquery/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
     <div id="content">
-       <span class="slide">
+        <span class="slide">
             <a href="#" class="open" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
@@ -104,134 +109,54 @@
             </nav>
         </div>
     </div>
-    <div class="mx-auto col-md-10">
-        <div class="card">
-            <div class="card-header">
-                <div class="row col-lg-12">
-                    <div class="col-lg-8">
-                        <h4>Return Hauled Materials</h4>
-                    </div>
-                </div>
-            </div>
-        <?php
-        $sql = "SELECT 
-                    hauling.hauling_date, 
-                    hauling.hauling_no, 
-                    hauling.hauling_hauledBy, 
-                    hauling.hauling_hauledFrom, 
-                    hauling.hauling_quantity, 
-                    hauling.hauling_unit, 
-                    hauling.hauling_matname, 
-                    returns.return_returnedqty, 
-                    returns.return_date, 
-                    returns.return_returningqty, 
-                    hauling.hauling_status 
-                FROM 
-                    hauling 
-                INNER JOIN 
-                    returns ON hauling.hauling_id = returns.return_id 
-                WHERE 
-                    hauling.hauling_no=1;";
-        $result = mysqli_query($conn, $sql);
-        while($row = mysqli_fetch_row($result)){
-    ?>
-            <div class="card-body">
-                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
-                    <div class="form-group row formnum-container">
-                        <div class=" col-lg-12">
-                            <label class="col-lg-12 col-form-label">Form No.:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" value="<?php echo $row[1]?>" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row date-container">
-                        <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Hauling Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" value="<?php echo $row[0]?>" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled by:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="<?php echo $row[2]?>" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="<?php echo $row[3]?>" disabled>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Total Quantity</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Articles</th>
-                                    <th scope="col">Returned Quantity</th>
-                                    <th scope="col">Returned Date</th>
-                                    <th scope="col">Remaining Quantity</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Returning Quantity</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr data-toggle="collapse" data-target="#accordion" class="clickable">
-                                    <td><?php echo $row[4]?></td>
-                                    <td><?php echo $row[5]?></td>
-                                    <td><?php echo $row[6]?></td>
-                                    <td><?php echo $row[7]?></td>
-                                    <td><?php echo $row[8]?></td>
-                                    <td><?php echo $row[4] - $row[7]?></td>
-                                    <td><?php echo $row[10]?></td>
-                                    <td> <input class="form-control" name="returningQuantity" type="text"
-                                            id="returningQuantity" placeholder="Returning Quantity"></td>
-                                    <td> <input type="submit" name="return_hauling"
-                                            class="btn btn-md btn-outline-secondary save-row" value="Save" /></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td id="accordion" class="collapse">
-                                        <!-- returning qty -->
-                                    </td>
-                                    <td id="accordion" class="collapse">
-                                        <!-- date returned -->
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
-        <?php
-            }
-        ?>
-        </div>
+    
+    <table class="table returns-table table-striped table-bordered display" id="mydatatable">
+        <thead>
+            <tr>
+                <th scope="col">Form No.</th>
+                <th scope="col">Hauling Date</th>
+                <th scope="col">Hauled From</th>
+                <th scope="col">Hauled By</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $sql = "SELECT
+                            hauling.hauling_no,
+                            hauling.hauling_date,
+                            hauling.hauling_hauledFrom,
+                            hauling.hauling_hauledBy
+                        FROM
+                            hauling
+                        WHERE";
+            ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button type="button" class="btn btn-success"
+                        onclick="window.location.href = 'returnHauledMaterial.php'">Open</button></td>
+            </tr>
+
+            <?php
+
+            ?>
+        </tbody>
+    </table>
     </div>
+
 </body>
 <script type="text/javascript">
-    $(function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
@@ -241,13 +166,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
-    $(document).ready(function () {
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
 </script>
 
 </html>

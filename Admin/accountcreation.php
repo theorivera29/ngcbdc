@@ -82,13 +82,14 @@
             </nav>
         </div>
     </div>
+    <form class="needs-validation" novalidate id="createAccountForm" action="../server.php" method="POST">
     <div class="mx-auto mt-5 col-md-11 account-creation-container">
         <div class="card">
             <div class="card-header">
                 <h4>Create Account</h4>
             </div>
             <div class="card-body">
-                <form class="needs-validation" novalidate id="createAccountForm">
+                
                     <div class="form-group">
                         <label for="firstName" class="label-styles">First Name</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
@@ -102,13 +103,29 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="label-styles">Userame</label>
+                        <label for="username" class="label-styles">Username</label>
+                        <h5>
+                            <?php
+                                if(isset($_SESSION['username_error'])) {
+                                    echo "Username is already taken.";
+                                    unset($_SESSION['username_error']);
+                                }
+                            ?>
+                        </h5>
                         <input name="username" id="username" type="text" class="form-control"
                             placeholder="Enter username" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="label-styles">Email</label>
+                        <h5>
+                            <?php
+                                if(isset($_SESSION['email_error'])) {
+                                    echo "Email is already taken.";
+                                    unset($_SESSION['email_error']);
+                                }
+                            ?>
+                        </h5>    
                         <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
                             required>
                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -128,11 +145,10 @@
                         <div class="invalid-feedback">Please choose an account type.</div>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn"
-                            name="createAccount">Create an Account</button>
+                        <button type="button" class="btn btn-success add-acct" id="create-accnt-btn">Create an Account</button>
                     </div>
 
-                </form>
+                
             </div>
         </div>
     </div>
@@ -147,13 +163,24 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Yes</button>
+                    <button type="submit" name="createAccount" class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                 </div>
             </div>
         </div>
     </div>
+
+    </form>
+
+    <?php
+        if(isset($_SESSION['create_success'])) {
+            ?>
+                <!--HAHAHA-->MODAL TO
+            <?php
+            unset($_SESSION['create_success']);
+        }
+    ?>
 </body>
 
 <script type="text/javascript">

@@ -88,7 +88,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>

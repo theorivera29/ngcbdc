@@ -30,9 +30,62 @@
             }
         } else {
             $_SESSION['login_error'] = true;
-            header("location: http://127.0.0.1/NGCBDC/index.php");
             $stmt->close();                
+            header("location: http://127.0.0.1/NGCBDC/index.php");
         } 
+    }
+
+    if (isset($_POST['createAccount'])) {
+        $ctr = 0;
+        session_start();
+        $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+        $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $accountType = mysqli_real_escape_string($conn, $_POST['accountType']);
+        $stmt = $conn->prepare("SELECT COUNT(accounts_username ) FROM accounts WHERE accounts_username = ?;");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($count_username);
+        $stmt->fetch();
+        
+        if ($count_username != 0) {
+            $_SESSION['username_error'] = true;
+            $ctr++;
+        }
+
+        $stmt = $conn->prepare("SELECT COUNT(accounts_email ) FROM accounts WHERE accounts_email = ?;");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($count_email);
+        $stmt->fetch();
+
+        if ($count_email != 0) {
+            $_SESSION['email_error'] = true;
+            $ctr++;
+        }
+
+        if ($ctr == 0) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $generated_password = substr(str_shuffle($characters), 0, 8);
+            $password = password_hash($generated_password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO accounts (accounts_fname, accounts_lname, accounts_username, accounts_password, accounts_type, accounts_email, accounts_deletable, accounts_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+            $stmt->bind_param("ssssssss", $firstName, $lastName, $username, $generated_password, $accountType, $email, $accountsDeletable, $accountsStatus);
+            $accountsDeletable = "yes";
+            $accountsStatus = "active";
+            $stmt->execute();
+            $create_date = date("Y-m-d G:i:s");
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
+            $logs_message = 'Created account of '.$firstName.' '.$lastName;
+            $logs_of = 1;
+            $stmt->execute();
+            $stmt->close();
+            $_SESSION['create_success'] = true;
+        }
+        header("location: http://127.0.0.1/NGCBDC/Admin/accountcreation.php");  
     }
 
 // <--Admin-->
@@ -686,6 +739,16 @@ if (isset($_POST['edit_project'])) {/*
         } else {
             header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");  
         }    
+    }
+
+    
+    if (isset($_POST['newCategory'])) {
+        $category = array();
+        $category = $_POST['category'];
+        echo $category[0];
+        foreach ($category as $data) {
+            echo $data['category'];
+        }
     }
 
 // <--View Only-->
