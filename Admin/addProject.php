@@ -1,8 +1,5 @@
 <?php
-    include "../db_connection.php";
-    session_start();
-
-    $accounts_id = $_SESSION['account_id'];
+    include "../session.php";
 ?>
 
 <!DOCTYPE html>
