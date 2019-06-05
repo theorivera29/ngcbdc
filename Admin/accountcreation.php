@@ -157,6 +157,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="creation-successful-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h4>You have successfully created an Account.</h4>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript">
