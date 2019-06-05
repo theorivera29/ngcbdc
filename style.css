@@ -226,7 +226,11 @@ ul ul #sideNav-a  {
     font-weight: bold;
 }
 
+<<<<<<< Updated upstream
 .create-accnt-btn{
+=======
+#create-accnt-btn{
+>>>>>>> Stashed changes
     float: right;
 }
 
