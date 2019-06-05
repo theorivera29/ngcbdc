@@ -83,15 +83,11 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
-
-
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-
                             <div class="card project-container">
                                 <?php
                             $sql = "SELECT
@@ -131,10 +127,6 @@
                         ?>
                             </div>
                         </div>
-
-
-
-
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="card project-container">
                                 <?php
@@ -173,7 +165,6 @@
                         ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
