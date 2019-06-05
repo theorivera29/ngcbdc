@@ -128,7 +128,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form class="needs-validation" novalidate>
+                            <form class="needs-validation" novalidate action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
                                         <tr>
@@ -140,7 +140,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr id="add-categ-row">
-                                            <td><input class="form-control" name="category" type="text" id="category"
+                                            <td><input class="form-control" name="category[]" type="text" id="category"
                                                     placeholder="Category Name">
                                             </td>
                                             <td colspan="5">
@@ -152,10 +152,11 @@
                                 </table>
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
-                                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                                        <button type="submit" name="newCategory" class="btn btn-primary">Save Changes</button>
                                         <input type="reset" class="btn btn-secondary" value="Cancel">
                                     </div>
                                 </div>
+                            </form>
 
                                 <table class="table view-inventory-tabs-table table-striped table-bordered display"
                                     id="mydatatable">
@@ -166,11 +167,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            $sql = "SELECT
+                                                        categories_id,
+                                                        categories_name
+                                                    FROM
+                                                        categories
+                                                    ORDER BY 1;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
                                         <tr>
-                                            <td>3</td>
+                                            <td><?php echo $row[1];?></td>
                                             <td><input type="button" class="btn btn-md btn-outline-secondary"
                                                     value="Edit" /></td>
                                         </tr>
+                                        <?php
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </form>
@@ -221,13 +235,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            $sql = "SELECT
+                                                        categories.categories_name,
+                                                        materials.mat_name,
+                                                        unit.unit_name
+                                                    FROM
+                                                        materials
+                                                    INNER JOIN
+                                                        categories ON materials.mat_categ = categories.categories_id
+                                                    INNER JOIN
+                                                        unit ON materials.mat_unit = unit.unit_id;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
                                         <tr>
-                                            <td>3</td>
-                                            <td>33</td>
-                                            <td>33</td>
+                                            <td><?php echo $row[0];?></td>
+                                            <td><?php echo $row[1];?></td>
+                                            <td><?php echo $row[2];?></td>
                                             <td><input type="button" class="btn btn-md btn-outline-secondary"
                                                     value="Edit" /></td>
                                         </tr>
+                                        <?php
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </form>

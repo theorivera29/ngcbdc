@@ -121,7 +121,16 @@
             </tr>
         </thead>
         <tbody>
-
+            <?php
+                $sql = "SELECT
+                            hauling.hauling_no,
+                            hauling.hauling_date,
+                            hauling.hauling_hauledFrom,
+                            hauling.hauling_hauledBy
+                        FROM
+                            hauling
+                        WHERE";
+            ?>
             <tr>
                 <td></td>
                 <td></td>
@@ -130,6 +139,10 @@
                 <td><button type="button" class="btn btn-success"
                         onclick="window.location.href = 'returnHauledMaterial.php'">Open</button></td>
             </tr>
+
+            <?php
+
+            ?>
         </tbody>
     </table>
     </div>

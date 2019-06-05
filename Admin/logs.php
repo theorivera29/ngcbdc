@@ -108,7 +108,7 @@
                     FROM 
                     logs
                     INNER JOIN accounts ON logs.logs_logsOf  = accounts.accounts_id
-                    ORDER BY 1 DESC;";
+                    ORDER BY logs.logs_datetime ASC;";
                     $result = mysqli_query($conn, $sql);
                     while($row = mysqli_fetch_row($result)){
                 ?>
