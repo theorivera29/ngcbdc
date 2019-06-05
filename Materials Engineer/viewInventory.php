@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="window.location.href='projects.php'">
                 <i class="fas fa-arrow-circle-left"></i>
@@ -58,7 +58,7 @@
     <section id="tabs">
         <div class="container">
             <div class="row">
-            <h4 class="project-title">NAME OF PROJECT</h4>
+                <h4 class="project-title">NAME OF PROJECT</h4>
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -150,7 +150,9 @@
                                             $row2 = mysqli_fetch_row($result2);
                                 ?>
                                     <tr>
-                                        <td><?php echo $row[1] ;?></td>
+                                        <td><button type="button" class="btn btn-info"
+                                                onclick="window.location.href = 'stockcard.php'"><?php echo $row[1] ;?></button>
+                                        </td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
@@ -212,7 +214,6 @@
     $(document).ready(function () {
         $('#mydatatable').DataTable();
     });
-
 </script>
 
 </html>

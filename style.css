@@ -262,6 +262,10 @@ ul ul #sideNav-a  {
     background-color: #DCB149 !important;
     color: #0D304F;
 }
+]
+.card-header:hover{
+    text-decoration: none !important;
+}
 
 .add-task-container{
     margin-left: 5%;
