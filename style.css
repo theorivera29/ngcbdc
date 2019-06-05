@@ -226,11 +226,7 @@ ul ul #sideNav-a  {
     font-weight: bold;
 }
 
-<<<<<<< Updated upstream
-.create-accnt-btn{
-=======
 #create-accnt-btn{
->>>>>>> Stashed changes
     float: right;
 }
 
@@ -435,7 +431,8 @@ textarea{
 }
 
 .project-container{
-    width: 100%;
+    width: 150%;
+    margin-left: 40%;
 }
 
 .add-btn{

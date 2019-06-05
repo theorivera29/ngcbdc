@@ -87,11 +87,7 @@
         </div>
     </div>
     <div class="add-project-container">
-<<<<<<< Updated upstream
-        <form action="../server.php" method="POST" novalidate>
-=======
-        <form class="needs-validation" novalidate>
->>>>>>> Stashed changes
+        <form action="../server.php" method="POST" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
                 <input name="projectName" type="email" class="form-control" placeholder="Enter project name" required>
@@ -136,17 +132,10 @@
                 </select>-->
             </div>
 
-<<<<<<< Updated upstream
             <div class="add-project-btn">
                 <button type="submit" name="create_project" class="btn btn-success">Save</button>
                 <input type="reset" class="btn btn-danger" value="Cancel">
             </div>
-=======
-        <div class="add-project-btn">
-            <button type="button" class="btn btn-success">Save</button>
-            <input type="reset" class="btn btn-danger" value="Cancel">
-        </div>
->>>>>>> Stashed changes
         </form>
     </div>
 </body>
@@ -169,21 +158,13 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
-<<<<<<< Updated upstream
     $(document).ready(function() {
-=======
-    $(document).ready(function () {
->>>>>>> Stashed changes
         $('#multiselect').multiselect({
             buttonWidth: '75%',
             includeSelectAllOption: true,
             nonSelectedText: 'Select materials engineer'
         });
     });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 </script>
 
 </html>
