@@ -131,7 +131,7 @@
                         <div class="invalid-feedback">Please choose an account type.</div>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn"
+                        <button type="button" class="btn btn-success add-acct" id="create-accnt-btn"
                             name="createAccount">Create an Account</button>
                     </div>
 
@@ -150,7 +150,7 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Yes</button>
+                    <button type="submit" class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                 </div>
@@ -191,7 +191,7 @@
         window.addEventListener('load', function () {
             var forms = document.getElementsByClassName('needs-validation');
             var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
+                form.addEventListener('button', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
