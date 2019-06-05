@@ -56,8 +56,8 @@
     </div>
 
     <section id="tabs">
-        <div class="container">
-            <div class="row">
+        <div class="view-inventory-container">
+            <div class="row view-inventory-row">
                 <h4 class="project-title">NAME OF PROJECT</h4>
                 <div class="col-xs-12 project-tabs">
                     <nav>
@@ -70,7 +70,7 @@
                     </nav>
                 </div>
                 <div class="view-inventory-tabs-content">
-                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-content view-inventory-content" id="nav-tabContent">
                         <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
                             <table class="table view-inventory-tabs-table table-striped table-bordered"
@@ -186,10 +186,10 @@
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
-                            <div class="card ">
+                            <div class="card category-card">
                                 <form action="../server.php" method="POST">
                                     <h5 class="card-header"><?php echo $row[1];?></h5>
-                                    <div class="card-body">
+                                    <div class="card-body category-card-body">
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
                                         <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
                                         <button type="submit" name="materialCategories" class="btn btn-info"

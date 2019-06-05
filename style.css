@@ -495,13 +495,17 @@ textarea{
 
 
 /*Start of Materials Engineer - View Inventory*/
-.view-inventory-tabs-container{
-    width: 107%;
+.view-inventory-container{
+    width: 96%;
+    text-align: center;
     margin: auto;
 }
 
+.view-inventory-tabs-container{
+   
+}
+
 .view-inventory-tabs-table{
-    width: 100% !important;
     text-align: center;
 }
 
@@ -509,9 +513,27 @@ textarea{
     background-color: #0D304F;
     color: #FFFFFF;
 }
+
+.view-inventory-row{
+}
+
+.view-inventory-content{
+    width: 100% !important;
+}
+
 .view-inventory-tabs-content{
     margin-top: 3%;
-    margin-left: -8%;
+
+}
+
+.category-card{
+    width: 100%;
+    box-shadow: 0 0 4px black;
+}
+
+.category-card-body{
+
+    padding: 20% !important;
 }
 
 #open-category-btn{
@@ -609,6 +631,7 @@ textarea{
 .returns-or-replace-content{
     margin-top: 3%;
     width: 100% !important;
+    text-align: center;
 }
 
 .returns-or-replace-content thead tr{

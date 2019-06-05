@@ -42,7 +42,6 @@
                         aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
@@ -92,44 +91,50 @@
                 <h4>Create Account</h4>
             </div>
             <div class="card-body">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" novalidate id="createAccountForm">
                     <div class="form-group">
                         <label for="firstName" class="label-styles">First Name</label>
-                        <input name="firstName" type="email" class="form-control" placeholder="Enter first name"
-                            required>
+                        <input name="firstName" id="firstName" type="text" class="form-control"
+                            placeholder="Enter first name" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="label-styles">Last Name</label>
-                        <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required>
+                        <input name="lastName" id="lastName" type="text" class="form-control"
+                            placeholder="Enter last name" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="username" class="label-styles">Userame</label>
-                        <input name="username" type="text" class="form-control" placeholder="Enter username" required>
+                        <input name="username" id="username" type="text" class="form-control"
+                            placeholder="Enter username" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="label-styles">Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+                        <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
+                            required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    <h5 class="form-group" class="label-styles">Account Type:</h5>
-                    <div class="form-group custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="accountType" class="custom-control-input"
-                            required>
-                        <label class="custom-control-label" for="customRadioInline1">View Only</label>
+                    <div class="form-group">
+                        <h5 class="form-group" class="label-styles">Account Type:</h5>
+                        <div class="form-group custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="accountType" class="custom-control-input"
+                                value="View Only" required>
+                            <label class="custom-control-label" for="customRadioInline1">View Only</label>
+                        </div>
+                        <div class="form-group custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="accountType" class="custom-control-input"
+                                value="Materials Engineer" required>
+                            <label class="custom-control-label" for="customRadioInline2">Materials Engineer</label>
+                        </div>
+                        <div class="invalid-feedback">Please choose an account type.</div>
                     </div>
-                    <div class="form-group custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="accountType" class="custom-control-input"
-                            required>
-                        <label class="custom-control-label" for="customRadioInline2">Materials Engineer</label>
-                    </div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
                     <div>
-                        <button type="submit" class="btn btn-success" id="create-accnt-btn" name="createAccount"
-                            data-toggle="modal" data-target="#create-accnt-modal">Create an Account</button>
+                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn"
+                            name="createAccount">Create an Account</button>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -141,8 +146,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <h4>Are you sure you want to create this account?</h4>
+                    <h4>Are you sure you want to create this account?</h4>
                     </button>
                 </div>
                 <div class="modal-footer">
@@ -168,6 +172,17 @@
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
+        });
+
+        $(".add-acct").click(function () {
+            var fname = $("#firstName").val();
+            var lname = $("#lastName").val();
+            var uname = $("#username").val();
+            var email = $("input[name=email]").val();
+            var selectFrom = $("input[name=accountType]:checked").val();
+            if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
+                    $("#create-accnt-modal").appendTo("body").modal('show');
+            }
         });
     });
 
