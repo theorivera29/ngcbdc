@@ -96,7 +96,11 @@
         </div>
     </div>
     <div class="add-project-container">
+<<<<<<< Updated upstream
         <form class="needs-validation" novalidate>
+=======
+        <form action="../server.php" method="POST" class="needs-validation" novalidate>
+>>>>>>> Stashed changes
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
                 <input name="projectName" type="email" class="form-control" placeholder="Enter project name" required>
@@ -128,10 +132,17 @@
             </div>
         
 
+<<<<<<< Updated upstream
         <div class="add-project-btn">
             <button type="button" class="btn btn-success">Save</button>
             <input type="reset" class="btn btn-danger" value="Cancel">
         </div>
+=======
+            <div class="add-project-btn">
+                <button type="button" name="create_project" class="btn btn-success">Save</button>
+                <input type="reset" class="btn btn-danger" value="Cancel">
+            </div>
+>>>>>>> Stashed changes
         </form>
     </div>
 </body>
@@ -154,6 +165,7 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
+<<<<<<< Updated upstream
     $(document).ready(function () {
         $('#multiselect').multiselect({
             buttonWidth: '75%',
@@ -161,6 +173,32 @@
             nonSelectedText: 'Select materials engineer'
         });
     });
+=======
+    // $(document).ready(function() {
+    //     $('#multiselect').multiselect({
+    //         buttonWidth: '75%',
+    //         includeSelectAllOption: true,
+    //         nonSelectedText: 'Select materials engineer'
+    //     });
+    // });
+
+    $(function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('button', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+>>>>>>> Stashed changes
 </script>
 
 </html>
