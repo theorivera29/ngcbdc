@@ -45,7 +45,6 @@
                     <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
@@ -90,18 +89,23 @@
     </div>
 
     <section id="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 project-tabs">
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ONGOING</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
-                    </div>
-                    <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal" onclick="window.location.href = 'addProject.php'">Add Project</button>
-                </div>
-                <div class="project-tabs-content">
-                    <div class="tab-content" id="nav-tabContent">
-                        <?php
+
+        <div class="col-xs-12 project-tabs">
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ONGOING</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
+            </div>
+            <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal" onclick="window.location.href = 'addProject.php'">Add Project</button>
+        </div>
+
+        <div class="project-tabs-content">
+
+            <div class="tab-content" id="nav-tabContent">
+                <form action="../server.php" method="POST">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="card project-container">
+                          <h1>Open</h1>
+                           <!-- <?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -113,43 +117,49 @@
                                     WHERE
                                         projects.projects_status = 'open';";
                             $result = mysqli_query($conn, $sql);
-                            ?>
-                        <form action="../server.php" method="POST">
-                            <?php
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <div class="card project-container">
-                                    <h5 class="card-header card-header-project">
-                                        <?php echo $row[0] ;?>
+                            <h5 class="card-header card-header-project">
+                                <?php echo $row[0] ;?>
+                                ukinam
+                            </h5>
+                            <div class="card-body">
+                                <span>
+                                    <h5>
+                                        <?php echo $row[1] ;?>
                                     </h5>
-                                    <div class="card-body">
-                                        <span>
-                                            <h5>
-                                                <?php echo $row[1] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>Start Date:
-                                                <?php echo $row[2] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>End Date:
-                                                <?php echo $row[3] ;?>
-                                            </h5>
-                                        </span>
-                                        <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
-                                        <button type="button" class="btn btn-success" name="" data-toggle="modal" data-target="#edit-project-modal">Edit</button>
-                                        <button type="submit" class="btn btn-danger" name="" data-toggle="modal" data-target="#close-project-modal">Close Project</button>
-                                    </div>
-                                </div>
+                                </span>
+                                <span>
+                                    <h5>Start Date:
+                                        <?php echo $row[2] ;?>
+                                    </h5>
+                                </span>
+                                <span>
+                                    <h5>End Date:
+                                        <?php echo $row[3] ;?>
+                                    </h5>
+                                </span>
+                                <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-project-modal">Edit</button>
+                                <button type="submit" name="close_project">Close Project</button>
+                                 <button type="submit" class="btn btn-danger" name="" data-toggle="modal" data-target="#close-project-modal">Close  Project</button>
                             </div>
+
                             <?php
                             }
-                        ?>
-                        </form>
-                        <?php
+                        ?>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="tab-content" id="nav-tabContent">
+                <form action="../server.php" method="POST">
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="card project-container">
+                           <h1>closed</h1>
+                            <!--<?php
                             $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
@@ -158,50 +168,42 @@
                                         projects.projects_id
                                     FROM
                                         projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
                                     WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
                                         projects.projects_status = 'closed';";
                             $result1 = mysqli_query($conn, $sql);
-                        ?>
-                        <form action="../server.php" method="POST">
-                            <?php
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <div class="card project-container">
-                                    <h5 class="card-header card-header-project">
-                                        <?php echo $row1[0] ;?>
-                                    </h5>
-                                    <div class="card-body">
-                                        <span>
-                                            <h5>
-                                                <?php echo $row1[1] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>Start Date:
-                                                <?php echo $row1[2] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>End Date:
-                                                <?php echo $row1[3] ;?>
-                                            </h5>
-                                        </span>
-                                        <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
-                                        <button type="submit" class="btn btn-danger" id="" name="">Delete</button>
-                                    </div>
+                            <div class="card project-container">
+                                <h5 class="card-header card-header-project">
+                                    <?php echo $row1[0] ;?>
+                                    yotninam
+                                </h5>
+                                <div class="card-body">
+                                    <span>
+                                        <h5>
+                                            <?php echo $row1[1] ;?>
+                                        </h5>
+                                    </span>
+                                    <span>
+                                        <h5>Start Date:
+                                            <?php echo $row1[2] ;?>
+                                        </h5>
+                                    </span>
+                                    <span>
+                                        <h5>End Date:
+                                            <?php echo $row1[3] ;?>
+                                        </h5>
+                                    </span>
+                                    <input type="hidden" name="project_id" value="<?php echo $row[4];?>">
+                                    <button type="submit" class="btn btn-danger" id="" name="delete_project">Delete</button>
                                 </div>
                             </div>
                             <?php
                             }   
-                        ?>
-                        </form>
+                        ?>-->
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
@@ -268,31 +270,33 @@
         }   
     ?>
                         <div class="input-group mb-3">
-                                <?php
+                            <?php
                                     $sqlmateng = "SELECT 
                                     CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts;";
                                     $resultmateng = mysqli_query($conn, $sqlmateng);
                                     while($rowmateng = mysqli_fetch_row($resultmateng)){
                                 ?>
-                                <div>
-                                <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>"/>    
-                                <span><?php echo $rowmateng[0]?> </span> 
-                                </div>
-                                <?php
+                            <div>
+                                <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>" />
+                                <span>
+                                    <?php echo $rowmateng[0]?> </span>
+                            </div>
+                            <?php
                                     }
                                 ?>
-                        <div>
-                            <label class="label-styles">Materials Engineer Involved</label>
-                            <select id="multiselect" multiple="multiple">
-                                <option>JAM SPICA ROCAFORT</option>
-                                <option>JAM SPICA ROCAFORT</option>
-                                <option>CARYL MARIE</option>
-                            </select>
+                            <div>
+                                <label class="label-styles">Materials Engineer Involved</label>
+                                <select id="multiselect" multiple="multiple">
+                                    <option>JAM SPICA ROCAFORT</option>
+                                    <option>JAM SPICA ROCAFORT</option>
+                                    <option>CARYL MARIE</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" name="edit_project" class="btn btn-success" value="Save">
-                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        <div class="modal-footer">
+                            <input type="submit" name="edit_project" class="btn btn-success" value="Save">
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel">
+                        </div>
                     </div>
                 </form>
             </div>
