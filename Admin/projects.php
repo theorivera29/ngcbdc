@@ -1,8 +1,5 @@
 <?php
-    include "../db_connection.php";
-    session_start();
-
-    $accounts_id = $_SESSION['account_id'];    
+    include "../session.php";
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +81,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <div class="card project-container">
-                                    <?php
+                                <?php
                                     $sql = "SELECT
                                         projects_name,
                                         projects_address,
@@ -200,7 +197,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                    <?php
+                                <?php
                                         }
                                     ?>
                             </div>
@@ -208,7 +205,7 @@
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="card project-container">
-                                    <?php
+                                <?php
                                     $sql = "SELECT
                                         projects_name,
                                         projects_address,
@@ -248,7 +245,7 @@
                                         </span>
                                     </div>
                                 </form>
-                                    <?php
+                                <?php
                                         }   
                                     ?>
                             </div>

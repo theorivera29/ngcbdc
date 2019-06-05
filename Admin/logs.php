@@ -1,8 +1,5 @@
 <?php
-    include "../db_connection.php";
-    session_start();
-
-    $accounts_id = $_SESSION['account_id'];    
+    include "../session.php";
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +44,6 @@
                         aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
@@ -95,21 +91,36 @@
         <table class="table list-of-accounts-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
-                    <th scope="col">Date</th>
+                    <th scope="col">Date / Time</th>
                     <th scope="col">Activity</th>
                     <th scope="col">Account</th>
                     <th scope="col">Account Type</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- dito po ilalagay php code  -->
+                <?php 
+                    $sql = "SELECT 
+                    logs.logs_datetime,
+                    logs.logs_activity,
+                    CONCAT(accounts.accounts_fname, ' ', accounts.accounts_lname),
+                    accounts.accounts_type,
+                    accounts.accounts_id
+                    FROM 
+                    logs
+                    INNER JOIN accounts ON logs.logs_logsOf  = accounts.accounts_id
+                    ORDER BY 1 DESC;";
+                    $result = mysqli_query($conn, $sql);
+                    while($row = mysqli_fetch_row($result)){
+                ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $row[0]; ?></td>
+                    <td><?php echo $row[1]; ?></td>
+                    <td><?php echo $row[2]; ?></td>
+                    <td><?php echo $row[3]; ?></td>
                 </tr>
-                <!-- dito po ilalagay closing na php code para di magulo yung datatables thanks!  -->
+                <?php 
+            }
+        ?>
             </tbody>
 
         </table>

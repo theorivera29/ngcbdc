@@ -1,8 +1,5 @@
 <?php
-    include "../db_connection.php";
-    session_start();
-
-    $accounts_id = $_SESSION['account_id'];
+    include "../session.php";
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +44,6 @@
                     <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="">Logout</a>
                     </div>
                 </div>
