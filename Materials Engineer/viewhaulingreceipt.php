@@ -1,6 +1,7 @@
 <?php
-    include "../db_connection.php";
+    include "../session.php";
 ?>
+
 <!DOCTYPE html>
 
 <html>
