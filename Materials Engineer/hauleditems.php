@@ -139,7 +139,7 @@
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
                     <td><?php echo $row[4]?></td>
-                    <td><button type="button" class="btn btn-success">View</button></td>
+                    <td><button type="button" class="btn btn-success"  onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
                 </tr>
             
             <?php

@@ -132,7 +132,7 @@
                         <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
                             <form class="needs-validation" novalidate>
-                                <table class="table new-category-table">
+                                <table class="table new-category-table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">Category</th>
