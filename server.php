@@ -96,6 +96,37 @@
         header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
     }
 
+    if (isset($_POST['close_project'])) {
+        
+        $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
+        $stmt = $conn->prepare("UPDATE projects set projects_status = 'closed' WHERE projects_id = ?;");
+        $stmt->bind_param("i", $projects_id);
+        $stmt->execute();
+        $stmt->fetch();
+
+        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+    }
+
+    if (isset($_POST['reopen_project'])) {
+
+        $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
+        $stmt = $conn->prepare("UPDATE projects set projects_status = 'open' WHERE projects_id = ?;");
+        $stmt->bind_param("i", $projects_id);
+        $stmt->execute();
+        $stmt->fetch();
+       header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+    }
+
+    if (isset($_POST['delete_project'])) {
+        
+        $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
+        $stmt = $conn->prepare("DELETE FROM projects WHERE projects_id = ?;");
+        $stmt->bind_param("i", $projects_id);
+        $stmt->execute();
+        $stmt->fetch();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+    }
+
     if (isset($_POST['create_project'])) {
         $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $address = mysqli_real_escape_string($conn, $_POST['address']);
