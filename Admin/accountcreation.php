@@ -164,7 +164,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <h4>You have successfully created an Account.</h4>
+                    <h4>You have successfully created an account.</h4>
                     </button>
                 </div>
                 <div class="modal-footer">
