@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -47,6 +47,7 @@
                         aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
@@ -77,7 +78,7 @@
     </div>
 
     <div class="list-of-accounts-container">
-    <h4 class="card-header">Hauled Materials</h4>
+        <h4 class="card-header">Hauled Materials</h4>
         <table class="table list-of-accounts-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
@@ -96,7 +97,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td> <button type="submit" class="btn btn-success" id="view-hauled-btn">View</button></td>
+                    <td> <button type="submit" class="btn btn-success" id="view-hauled-btn" onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
                 </tr>
             </tbody>
         </table>
