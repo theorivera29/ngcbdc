@@ -206,7 +206,7 @@
                                         ?>
                                     <tr>
                                         <td><?php echo $row[1];?></td>
-                                        <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal"
                                                 data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button></td>
                                     </tr>
                                     <!-- Start of edit category modal -->
@@ -361,8 +361,7 @@
     $(document).ready(function () {
         $(".addCat-row").click(function () {
             var category = $("#category").val();
-            var markup = "<tr><td>" + category +
-                "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            var markup = "<tr><td><input type='text' class='form-control' value='" + category + "'/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((category != '')) {
                 $("table #add-categ-table").append(markup);
                 $("#add-categ-row input[type=text]").val('');
@@ -376,8 +375,12 @@
         $(".addMat-row").click(function () {
             var category = $("#category1").val();
             var material = $("#material").val();
-            var markup = "<tr><td>" + category + "</td><td>" + material +
-                "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            var threshold=$("#threshold").val();
+            var unit=$("#unit").val();
+            var markup = "<tr><td><input type='text' class='form-control' value='" + category + "'/></td><td><input type='text' class='form-control' value='" + material +
+                "'/></td><td><input type='text' class='form-control' value='" + threshold +
+                "'/><td><input type='text' class='form-control' value='" + unit +
+                "'/></td></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((category != '') && (material != '')) {
                 $("table #add-material-table").append(markup);
                 $("#add-material-row input[type=text]").val('');
@@ -388,16 +391,6 @@
         $("#add-material-table").on('click', '.delete-row', function () {
             $(this).closest('tr').remove();
         });
-
-        // $(".add-categ")click(function(e){
-
-        //     if ($("table #add-categ-table:empty")){
-        //         e.preventDefault();
-        //         $("#add-categ-modal").modal('show');
-        //     }else{
-        //         alert("ang panget mo");
-        //     }
-        // });
 
     });
 </script>
