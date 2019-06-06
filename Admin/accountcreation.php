@@ -82,7 +82,7 @@
             </nav>
         </div>
     </div>
-    <form class="needs-validation" novalidate id="createAccountForm" action="../server.php" method="POST">
+    <form  id="createAccountForm" action="../server.php" method="POST">
     <div class="mx-auto mt-5 col-md-11 account-creation-container">
         <div class="card">
             <div class="card-header">
@@ -94,13 +94,11 @@
                         <label for="firstName" class="label-styles">First Name</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
                             placeholder="Enter first name" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="label-styles">Last Name</label>
                         <input name="lastName" id="lastName" type="text" class="form-control"
                             placeholder="Enter last name" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="username" class="label-styles">Username</label>
@@ -114,7 +112,6 @@
                         </h5>
                         <input name="username" id="username" type="text" class="form-control"
                             placeholder="Enter username" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="label-styles">Email</label>
@@ -128,7 +125,6 @@
                         </h5>    
                         <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
                             required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <h5 class="form-group" class="label-styles">Account Type:</h5>
@@ -142,7 +138,6 @@
                                 value="Materials Engineer" required>
                             <label class="custom-control-label" for="customRadioInline2">Materials Engineer</label>
                         </div>
-                        <div class="invalid-feedback">Please choose an account type.</div>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn">Create an Account</button>
@@ -199,34 +194,18 @@
             $('#sidebar').toggleClass('active');
         });
 
-        // $(".add-acct").click(function () {
-        //     var fname = $("#firstName").val();
-        //     var lname = $("#lastName").val();
-        //     var uname = $("#username").val();
-        //     var email = $("input[name=email]").val();
-        //     var selectFrom = $("input[name=accountType]:checked").val();
-        //     if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
-        //             $("#create-accnt-modal").appendTo("body").modal('show');
-        //     }
-        // });
+        $(".add-acct").click(function (e) {
+            var fname = $("#firstName").val();
+            var lname = $("#lastName").val();
+            var uname = $("#username").val();
+            var email = $("input[name=email]").val();
+            var selectFrom = $("input[name=accountType]:checked").val();
+            if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
+                    e.preventDefault();
+                    $("#create-accnt-modal").appendTo("body").modal('show');
+            }
+        });
     });
-
-    $(function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === true) {
-                        $("#create-accnt-modal").appendTo("body").modal('show');
-                    }
-                        event.preventDefault();
-                        event.stopPropagation();
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
 </script>
 
 </html>
