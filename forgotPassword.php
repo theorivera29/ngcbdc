@@ -8,9 +8,11 @@
 <html>
 
 <head>
-<title>NGCBDC</title>
+    <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="Images/login2.png">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -23,7 +25,7 @@
         <form class="login-form needs-validation" action="server.php" method="POST" novalidate>
             <div class="form-group">
                 <img src="Images/login.png" id="login-logo-image">
-                <p id="login-text">USER LOGIN</p>
+                <p id="login-text">FORGOT PASSWORD</p>
             </div>
             <div class="form-group">
                 <label for="inputUsername">Username</label>
@@ -31,14 +33,8 @@
                     placeholder="Enter your username" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" name="inputPassword"
-                    placeholder="Enter your password" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
             <div>
-                <p class="form-group forgot-password-link"><a href="forgotPassword.php">Forgot your password?</a></p>
+                <p class="form-group forgot-password-link"><a href="index.php"><i class="fas fa-arrow-left"></i>Back to Login Page</a></p>
             </div>
             <div class="form-group">
                 <p>
@@ -49,7 +45,7 @@
                         }
                     ?>
                 </p>
-                <button type="submit" name="login" class="btn btn-primary login-btn">Login</button>
+                <button type="submit" name="" class="btn btn-primary login-btn">Send</button>
             </div>
         </form>
     </div>
