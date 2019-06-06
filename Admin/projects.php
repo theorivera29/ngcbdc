@@ -143,12 +143,10 @@
                                             ?>
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $rowedit[0]?></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <h4>
-                                                            <?php echo $rowedit[0]?>
-                                                        </h4>
+                                                       &times;
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -157,29 +155,29 @@
                                                             Name</label>
                                                         <input type="text" class="form-control"
                                                             value="<?php echo $rowedit[0]?>" name="newProjectName"
-                                                            placeholder="Enter new project name" required>
+                                                            placeholder="Enter new project name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="address" class="label-styles">Address:</label>
                                                         <input type="text" class="form-control"
                                                             value="<?php echo $rowedit[1]?>" name="newAddress"
-                                                            placeholder="Enter new project address" required>
+                                                            placeholder="Enter new project address">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="startDate" class="label-styles">Start Date:</label>
                                                         <input type="date" value="<?php echo $rowedit[2]?>"
-                                                            name="newStartDate" class="form-control" required>
+                                                            name="newStartDate" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="endDate" class="label-styles">End Date:</label>
                                                         <input type="date" value="<?php echo $rowedit[3]?>"
-                                                            name="newEndDate" class="form-control" required>
+                                                            name="newEndDate" class="form-control">
                                                     </div>
                                                     <?php
                                                             }   
                                                         ?>
                                                     <label class="label-styles">Materials Engineer Involved</label>
-                                                    <div class="input-group mb-3">
+                                                    <div class="form-group">
                                                         <?php
                                                                 $sqlmateng = "SELECT 
                                                                 CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts;";
@@ -195,14 +193,6 @@
                                                         <?php
                                                                 }
                                                             ?>
-                                                        <!-- <div>
-                                                                <label class="label-styles">Materials Engineer Involved</label>
-                                                                <select id="multiselect" multiple="multiple">
-                                                                    <option>JAM SPICA ROCAFORT</option>
-                                                                    <option>JAM SPICA ROCAFORT</option>
-                                                                    <option>CARYL MARIE</option>
-                                                                </select>
-                                                            </div> -->
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="submit" name="edit_project" class="btn btn-success"
@@ -216,14 +206,14 @@
                                     </div>
                                     <!-- End of Edit Modal -->
                                     <!-- Start of Close Modal -->
-                                    <div class="modal fade" id="close-proj-modal-<?php echo $row[4]?>" tabindex="-1"
+                                    <div class="modal fade" id="close-proj-modal-<?php echo $row[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
-                                                        to close <?php echo $row[0]?> project?</h5>
+                                                        to close <?php echo $row[0];?> project?</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         &times;
@@ -283,20 +273,19 @@
                                         <span>
                                             <h5>End Date:
                                                 <?php echo $row1[3] ;?>
-                                                <?php echo $row1[4];?>
                                             </h5>
                                         </span>
                                         <button type="button" class="btn btn-success" name="reopen_project"
                                             data-toggle="modal"
-                                            data-target="#reopen-proj-modal-<?php echo $row[4]?>">Re-Open
+                                            data-target="#reopen-proj-modal-<?php echo $row1[4]?>">Re-Open
                                             Project</button>
                                         <button type="button" class="btn btn-danger" name="delete_project"
                                             data-toggle="modal"
-                                            data-target="#delete-proj-modal-<?php echo $row[4]?>">Delete
+                                            data-target="#delete-proj-modal-<?php echo $row1[4]?>">Delete
                                             Project</button>
                                     </div>
                                     <!-- Start of Reopen Modal -->
-                                    <div class="modal fade" id="reopen-proj-modal-<?php echo $row[4]?>" tabindex="-1"
+                                    <div class="modal fade" id="reopen-proj-modal-<?php echo $row1[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                                         <div class="modal-dialog" role="document">
@@ -321,14 +310,14 @@
                                     </div>
                                     <!-- End of Reopen Modal -->
                                     <!-- Start of Delete Modal -->
-                                    <div class="modal fade" id="delete-proj-modal-<?php echo $row[4]?>" tabindex="-1"
+                                    <div class="modal fade" id="delete-proj-modal-<?php echo $row1[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
-                                                        to delete <?php echo $row[0];?> project?</h5>
+                                                        to delete <?php echo $row1[0];?> project?</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         &times;
