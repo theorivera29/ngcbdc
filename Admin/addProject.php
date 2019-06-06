@@ -16,11 +16,6 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <!-- <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js">
-    </script> -->
 </head>
 
 <body>
@@ -88,7 +83,7 @@
         </div>
     </div>
     <div class="add-project-container">
-        <form action="../server.php" method="POST" class="needs-validation" novalidate>
+        <form action="../server.php" method="POST">
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
                 <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="[A-Za-z\s]*" title="Input letters and numbers only" required>
@@ -101,35 +96,13 @@
             </div>
             <div class="form-group">
                 <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="startDate" type="date" class="form-control" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
+                <input name="startDate" id="startDate" type="date" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="endDate" class="label-styles">END DATE:</label>
-                <input name="endDate" type="date" class="form-control" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
+                <input name="endDate" id="endDate" type="date" class="form-control" required>
             </div>
-            <div class="form-group ">
-                <label class="label-styles">Materials Engineer Involved</label>
-                <?php
-                    $sqlmateng = "SELECT 
-                    CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
-                    $resultmateng = mysqli_query($conn, $sqlmateng);
-                    while($rowmateng = mysqli_fetch_row($resultmateng)){
-                ?>
-                <div>
-
-                    <input type="checkbox" name="mateng[]" value="<?php echo $rowmateng[1]?>" required>
-                    <span>
-                        <?php echo $rowmateng[0]?> </span><br />
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-
-                <?php
-                    }
-                ?>
-            </div> 
-            <!-- <label class="label-styles">Materials Engineer Involved</label>
+            <label class="label-styles">Materials Engineer Involved</label>
             <?php
                     $sqlmateng = "SELECT 
                     CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
@@ -151,32 +124,10 @@
             </div>
             <?php
                     }
-                ?> -->
-
-            <!-- <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text">Materials Engineer
-                        Involved</label>
-                </div>
-                
-                <select id="multiselect" multiple="multiple" required>
-                <?php
-                    $sqlmateng = "SELECT 
-                    CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
-                    $resultmateng = mysqli_query($conn, $sqlmateng);
-                    while($rowmateng = mysqli_fetch_row($resultmateng)){
-                ?>
-                    <option value="<?php echo $rowmateng[1]?>"><?php echo $rowmateng[0]?></option>
-                    <?php
-                    }
                 ?> 
-                </select>
-                <div class="invalid-feedback">Please fill out this field.</div>
-               
-            </div> -->
 
             <div class="add-project-btn">
-                <button type="submit" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-success add-proj">Save</button>
                 <input type="reset" class="btn btn-danger" value="Cancel">
             </div>
 
@@ -186,9 +137,11 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <h4>Are you sure you want to create this project?</h4>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this project?</h5>
+                            <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="create_project" class="btn btn-success">Yes</button>
@@ -228,22 +181,19 @@
     //     });
     // });
 
-    $(function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === true) {
-                        $("#create-proj-modal").appendTo("body").modal('show');
-                    }
-                    event.preventDefault();
-                    event.stopPropagation();
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+    $(document).ready(function () {
+        $(".add-proj").click(function (e) {
+            var projname = $("#projectName").val();
+            var address = $("#address").val();
+            var sdate = $("#startDate").val();
+            var edate = $("#endDate").val();
+            var selectMat=$("#mateng option:selected").val();
+            if ((projname != '') && (address != '') && (sdate != '') && (edate != '') && (selectMat !='')) {
+                e.preventDefault();
+                $("#create-proj-modal").modal('show');
+            }
+        });
+    });
 </script>
 
 </html>
