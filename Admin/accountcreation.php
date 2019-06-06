@@ -93,12 +93,12 @@
                     <div class="form-group">
                         <label for="firstName" class="label-styles">First Name</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
-                            placeholder="Enter first name" required>
+                            placeholder="Enter first name" pattern="[A-Za-z\s]*" title="Input letters only" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="label-styles">Last Name</label>
                         <input name="lastName" id="lastName" type="text" class="form-control"
-                            placeholder="Enter last name" required>
+                            placeholder="Enter last name" pattern="[A-Za-z\s]*" title="Input letters only" required>
                     </div>
                     <div class="form-group">
                         <label for="username" class="label-styles">Username</label>
@@ -110,8 +110,8 @@
                                 }
                             ?>
                         </h5>
-                        <input name="username" id="username" type="text" class="form-control"
-                            placeholder="Enter username" required>
+                        <input name="username" id="username" type="text" class="form-control" placeholder="Enter username"
+                            pattern="[A-Za-z0-9._]*" title="Can input letters, numbers, period, and underscore" required>
                     </div>
                     <div class="form-group">
                         <label for="email" class="label-styles">Email</label>
@@ -123,8 +123,8 @@
                                 }
                             ?>
                         </h5>    
-                        <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
-                            required>
+                        <input name="email" id="email" type="email" class="form-control" placeholder="Enter email" pattern="[A-Za-z0-9._]*@[A-Za-z]*\.[A-Za-z]*"
+                        title="Follow the format. Example: email@email.com" required>
                     </div>
                     <div class="form-group">
                         <h5 class="form-group" class="label-styles">Account Type:</h5>
