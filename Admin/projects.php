@@ -269,7 +269,7 @@
                                     </h5>
                                     <div class="card-body">
                                         <input type="hidden" name="projects_id" value="<?php echo $row1[4];?>">
-                                        
+
                                         <span>
                                             <h5>
                                                 <?php echo $row1[1] ;?>
@@ -286,67 +286,71 @@
                                                 <?php echo $row1[4];?>
                                             </h5>
                                         </span>
-                                        <button type="button" class="btn btn-success" name="reopen_project" data-toggle="modal"
-                                                data-target="#reopen-proj-modal-<?php echo $row[4]?>">Re-Open Project</button>
-                                        <button type="button" class="btn btn-danger" name="delete_project" data-toggle="modal"
-                                                data-target="#delete-proj-modal-<?php echo $row[4]?>">Delete Project</button>
+                                        <button type="button" class="btn btn-success" name="reopen_project"
+                                            data-toggle="modal"
+                                            data-target="#reopen-proj-modal-<?php echo $row[4]?>">Re-Open
+                                            Project</button>
+                                        <button type="button" class="btn btn-danger" name="delete_project"
+                                            data-toggle="modal"
+                                            data-target="#delete-proj-modal-<?php echo $row[4]?>">Delete
+                                            Project</button>
                                     </div>
+                                    <!-- Start of Reopen Modal -->
+                                    <div class="modal fade" id="reopen-proj-modal-<?php echo $row[4]?>" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
+                                                        to reopen <?php echo $row1[0] ;?> project?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success"
+                                                        name="reopen_project">Yes</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">No</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Reopen Modal -->
+                                    <!-- Start of Delete Modal -->
+                                    <div class="modal fade" id="delete-proj-modal-<?php echo $row[4]?>" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
+                                                        to delete <?php echo $row[0];?> project?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success"
+                                                        name="delete_project">Yes</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">No</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Delete Modal -->
                                 </form>
                                 <?php
                                         }   
                                     ?>
                             </div>
                         </div>
-                        <!-- Start of Reopen Modal -->
-                        <div class="modal fade" id="reopen-proj-modal-<?php echo $row[4]?>" tabindex="-1"
-                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
-                                                        to reopen <?php echo $row[0]?> project?</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        &times;
-                                                    </button>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success"
-                                                    name="reopen_project">Yes</button>
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-dismiss="modal">No</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <!-- End of Reopen Modal -->
-                        <!-- Start of Delete Modal -->
-                        <div class="modal fade" id="delete-proj-modal-<?php echo $row[4]?>" tabindex="-1"
-                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
-                                                        to delete <?php echo $row[0]?> project?</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        &times;
-                                                    </button>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success"
-                                                    name="delete_project">Yes</button>
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-dismiss="modal">No</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <!-- End of Delete Modal -->
                     </div>
                 </div>
             </div>
