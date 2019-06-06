@@ -145,14 +145,14 @@
                         <div class="invalid-feedback">Please choose an account type.</div>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-success add-acct" id="create-accnt-btn">Create an Account</button>
+                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn">Create an Account</button>
                     </div>
 
                 
             </div>
         </div>
     </div>
-
+    <!-- Start of confirmation modal -->
     <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -170,13 +170,14 @@
             </div>
         </div>
     </div>
+    <!-- End of confirmation modal -->
 
     </form>
 
     <?php
         if(isset($_SESSION['create_success'])) {
             ?>
-                <!--HAHAHA-->MODAL TO
+                <!-- HAHAHAMODAL TO -->
             <?php
             unset($_SESSION['create_success']);
         }
@@ -198,16 +199,16 @@
             $('#sidebar').toggleClass('active');
         });
 
-        $(".add-acct").click(function () {
-            var fname = $("#firstName").val();
-            var lname = $("#lastName").val();
-            var uname = $("#username").val();
-            var email = $("input[name=email]").val();
-            var selectFrom = $("input[name=accountType]:checked").val();
-            if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
-                    $("#create-accnt-modal").appendTo("body").modal('show');
-            }
-        });
+        // $(".add-acct").click(function () {
+        //     var fname = $("#firstName").val();
+        //     var lname = $("#lastName").val();
+        //     var uname = $("#username").val();
+        //     var email = $("input[name=email]").val();
+        //     var selectFrom = $("input[name=accountType]:checked").val();
+        //     if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
+        //             $("#create-accnt-modal").appendTo("body").modal('show');
+        //     }
+        // });
     });
 
     $(function () {
@@ -216,10 +217,11 @@
             var forms = document.getElementsByClassName('needs-validation');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
+                    if (form.checkValidity() === true) {
+                        $("#create-accnt-modal").appendTo("body").modal('show');
+                    }
                         event.preventDefault();
                         event.stopPropagation();
-                    }
                     form.classList.add('was-validated');
                 }, false);
             });
