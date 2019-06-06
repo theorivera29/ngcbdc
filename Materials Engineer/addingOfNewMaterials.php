@@ -196,6 +196,7 @@
                                         <tr>
                                             <th scope="col">Category</th>
                                             <th scope="col">Material</th>
+                                            <th scope="col">Threshold</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -210,6 +211,9 @@
                                             </td>
                                             <td><input class="form-control" name="material" type="text" id="material"
                                                     placeholder="Material Name">
+                                            </td>
+                                            <td><input class="form-control" name="threshold" type="text" id="threshold"
+                                                    placeholder="Threshold">
                                             </td>
                                             <td colspan="5">
                                                 <input type="button" class="btn btn-md btn-outline-secondary addMat-row"
