@@ -158,13 +158,13 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
-    $(document).ready(function() {
-        $('#multiselect').multiselect({
-            buttonWidth: '75%',
-            includeSelectAllOption: true,
-            nonSelectedText: 'Select materials engineer'
-        });
-    });
+    // $(document).ready(function() {
+    //     $('#multiselect').multiselect({
+    //         buttonWidth: '75%',
+    //         includeSelectAllOption: true,
+    //         nonSelectedText: 'Select materials engineer'
+    //     });
+    // });
 </script>
 
 </html>
