@@ -102,26 +102,29 @@
                 <label for="endDate" class="label-styles">END DATE:</label>
                 <input name="endDate" id="endDate" type="date" class="form-control" required>
             </div>
-            <div class="form-group ">
-                <label class="label-styles">Materials Engineer Involved</label>
-                <?php
+            <label class="label-styles">Materials Engineer Involved</label>
+            <?php
                     $sqlmateng = "SELECT 
                     CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
                     $resultmateng = mysqli_query($conn, $sqlmateng);
                     while($rowmateng = mysqli_fetch_row($resultmateng)){
                 ?>
-                <div>
 
-                    <input type="checkbox" id="mateng" name="mateng[]" value="<?php echo $rowmateng[1]?>">
-                    <span>
-                        <?php echo $rowmateng[0]?> </span><br />
+            <div class="input-group mb-3">
+
+                <div class="input-group-prepend">
+
+                    <div class="input-group-text">
+                        <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input"
+                            value="<?php echo $rowmateng[1]?>">
+                    </div>
                 </div>
-
-                <?php
-                    }
-                ?>
+                <input type="text" class="form-control" aria-label="Text input with checkbox"
+                    value="<?php echo $rowmateng[0]?>" disabled>
             </div>
-
+            <?php
+                    }
+                ?> 
 
             <div class="add-project-btn">
                 <button type="submit" class="btn btn-success add-proj">Save</button>
