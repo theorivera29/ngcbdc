@@ -109,7 +109,7 @@
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
         $stmt->bind_param("ssi", $accept_date, $logs_message, $logs_of);
         $logs_message = 'Accepted request to reset password of '.$request_name;
-        $logs_of = 1;
+        $logs_of = 2;
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
@@ -139,7 +139,7 @@
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
         $stmt->bind_param("ssi", $reject_date, $logs_message, $logs_of);
         $logs_message = 'Rejected request to reset password of '.$request_name;
-        $logs_of = 1;
+        $logs_of = 2;
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
@@ -150,33 +150,56 @@
     }
 
     if (isset($_POST['close_project'])) {
-        
+
+        $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
         $stmt = $conn->prepare("UPDATE projects set projects_status = 'closed' WHERE projects_id = ?;");
         $stmt->bind_param("i", $projects_id);
         $stmt->execute();
         $stmt->fetch();
-
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $close_date = date("Y-m-d G:i:s");
+        $logs_message = 'Closed Project: '.$projectName;
+        $logs_of = 2;
+        $stmt->bind_param("ssi", $close_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
     }
 
     if (isset($_POST['reopen_project'])) {
 
+        $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
         $stmt = $conn->prepare("UPDATE projects set projects_status = 'open' WHERE projects_id = ?;");
         $stmt->bind_param("i", $projects_id);
         $stmt->execute();
         $stmt->fetch();
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $reopened_date = date("Y-m-d G:i:s");
+        $logs_message = 'Re-Opened Project: '.$projectName;
+        $logs_of = 2;
+        $stmt->bind_param("ssi", $reopened_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
     }
 
     if (isset($_POST['delete_project'])) {
         
+        $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
         $stmt = $conn->prepare("DELETE FROM projects WHERE projects_id = ?;");
         $stmt->bind_param("i", $projects_id);
         $stmt->execute();
         $stmt->fetch();
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $delete_date = date("Y-m-d G:i:s");
+        $logs_message = 'Deleted Project: '.$projectName;
+        $logs_of = 2;
+        $stmt->bind_param("ssi", $delete_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
     }
 
@@ -193,7 +216,6 @@
         $stmt->bind_param("sssss", $projectName, $address, $startDate, $endDate, $projectStatus);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
     
 /*            $stmt = $conn->prepare("SELECT projects_id FROM projects WHERE projects_name = ?;");
             $stmt->bind_param("s", $projects_name);
@@ -209,6 +231,14 @@
             $stmt->close();
                 
                 }
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+            $create_proj_date = date("Y-m-d G:i:s");
+            $logs_message = 'Created Project: '.$projectName;
+            $logs_of = 2;
+            $stmt->bind_param("ssi", $create_proj_date, $logs_message, $logs_of);
+            $stmt->execute();
+            $stmt->close();
+            header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
     }
 
 if (isset($_POST['edit_project'])) {/*
@@ -226,13 +256,13 @@ if (isset($_POST['edit_project'])) {/*
             $stmt->bind_param("si", $newProjectName, $projects_id);
             $stmt->execute();
             $stmt->close();
-    /*        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
-            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
-            $logs_message = 'Change account username to '.$newusername;
-            $logs_of = $account_id;
-            $stmt->execute();
-            $stmt->close();
-            $_SESSION['username'] = $newusername; */
+            // $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            // $stmt->bind_param("ssi", $edit_project_name, $logs_message, $logs_of);
+            // $edit_project_name = date("Y-m-d G:i:s");
+            // $logs_message = 'Changed Project Name to: '.$newusername;
+            // $logs_of = $account_id;
+            // $stmt->execute();
+            // $stmt->close();
         }
         if (isset($_POST['newAddress'])) {
             $newAddress = mysqli_real_escape_string($conn, $_POST['newAddress']);
@@ -310,6 +340,20 @@ if (isset($_POST['edit_project'])) {/*
         
         $stmt = $conn->prepare("INSERT INTO disposal (disposal_date, disposal_qty, disposal_unit, disposal_matname, disposal_remarks) VALUES (?, ?, ?, ?, ?);");
         $stmt->bind_param("siiis", $date, $quantity, $unit_id, $mat_id, $remarks);
+        $stmt->execute();
+        $stmt->close();
+
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_disp_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Disposal Slip';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_disp_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/disposalslip.php");     
@@ -570,6 +614,19 @@ if (isset($_POST['edit_project'])) {/*
             $stmt->execute();
             $stmt->close();
         }
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+        $materialName = mysqli_real_escape_string($conn, $_POST['materialName']);
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_mat_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Material: '.$materialName;
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_mat_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
 

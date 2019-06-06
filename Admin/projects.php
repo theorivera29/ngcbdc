@@ -124,6 +124,7 @@
                                                 </h5>
                                             </span>
                                             <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <input type="hidden" name="projectName" value="<?php echo $row[0];?>">
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#edit-project-modal-<?php echo $row[4]?>">Edit</button>
                                             <button type="button" class="btn btn-danger" name="close_project"
@@ -275,6 +276,7 @@
                                                 <?php echo $row1[3] ;?>
                                             </h5>
                                         </span>
+                                        <input type="hidden" name="projectName" value="<?php echo $row1[0];?>">
                                         <button type="button" class="btn btn-success" name="reopen_project"
                                             data-toggle="modal"
                                             data-target="#reopen-proj-modal-<?php echo $row1[4]?>">Re-Open
