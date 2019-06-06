@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="[A-Za-z.#_]*" title="Input letters and numbers only" required>
+                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
@@ -105,7 +105,7 @@
             <label class="label-styles">Materials Engineer Involved</label>
             <?php
                     $sqlmateng = "SELECT 
-                    CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
+                    CONCAT(accounts_fname,' ', accounts_lname), accounts_id FROM accounts WHERE accounts_type = 'Materials Engineer';";
                     $resultmateng = mysqli_query($conn, $sqlmateng);
                     while($rowmateng = mysqli_fetch_row($resultmateng)){
                 ?>
