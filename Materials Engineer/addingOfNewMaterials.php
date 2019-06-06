@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -130,7 +130,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
                             role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form class="needs-validation" novalidate action="../server.php" method="POST">
+                            <form action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
                                         <tr>
@@ -154,22 +154,23 @@
                                 </table>
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
-                                        <button type="submit" name="newCategory" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" name="newCategory" class="btn btn-primary">Save
+                                            Changes</button>
                                         <input type="reset" class="btn btn-secondary" value="Cancel">
                                     </div>
                                 </div>
                             </form>
 
-                                <table class="table view-inventory-tabs-table table-striped table-bordered display"
-                                    id="mydatatable">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
                                             $sql = "SELECT
                                                         categories_id,
                                                         categories_name
@@ -179,16 +180,16 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                        <tr>
-                                            <td><?php echo $row[1];?></td>
-                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
-                                                    value="Edit" /></td>
-                                        </tr>
-                                        <?php
+                                    <tr>
+                                        <td><?php echo $row[1];?></td>
+                                        <td><input type="button" class="btn btn-md btn-outline-secondary"
+                                                value="Edit" /></td>
+                                    </tr>
+                                    <?php
                                             }
                                         ?>
-                                    </tbody>
-                                </table>
+                                </tbody>
+                            </table>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -267,6 +268,30 @@
                                         ?>
                                     </tbody>
                                 </table>
+
+                                <!-- Start of confirmation modal -->
+                                <div class="modal fade" id="add-categ-modal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to add the following categories?</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" name="createAccount"
+                                                    class="btn btn-success">Yes</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">No</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End of confirmation modal -->
                             </form>
                         </div>
                     </div>
@@ -328,9 +353,6 @@
             $(this).closest('tr').remove();
         });
 
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
     });
 </script>
 

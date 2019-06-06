@@ -134,9 +134,11 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <h4>Are you sure you want to create this project?</h4>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this project?</h5>
+                            <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="create_project" class="btn btn-success">Yes</button>

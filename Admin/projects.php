@@ -143,7 +143,7 @@
                                             ?>
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $rowedit[0]?></h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit <?php echo $rowedit[0]?> Project</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                        &times;
