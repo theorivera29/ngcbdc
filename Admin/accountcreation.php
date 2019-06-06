@@ -142,8 +142,11 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <h4>Are you sure you want to create this account?</h4>
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this account?</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="createAccount" class="btn btn-success">Yes</button>
@@ -164,8 +167,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <h4>You have successfully created an account.</h4>
+                    <h5 class="modal-title" id="exampleModalLabel">You have successfully created an account.</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>

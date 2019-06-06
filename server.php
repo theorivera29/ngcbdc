@@ -218,11 +218,12 @@ if (isset($_POST['edit_project'])) {/*
         $newAddress = mysqli_real_escape_string($conn, $_POST['newAddress']);
         $newStartDate = mysqli_real_escape_string($conn, $_POST['newStartDate']);
         $newEndDate = mysqli_real_escape_string($conn, $_POST['newEndDate']);
+        $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
         $one = 1;
         if (isset($_POST['newProjectName'])) {
             $newProjectName = mysqli_real_escape_string($conn, $_POST['newProjectName']);
-            $stmt = $conn->prepare("UPDATE projects SET projects_name = ? WHERE projects_id = 1;");
-            $stmt->bind_param("s", $newProjectName);
+            $stmt = $conn->prepare("UPDATE projects SET projects_name = ? WHERE projects_id = ?;");
+            $stmt->bind_param("si", $newProjectName, $projects_id);
             $stmt->execute();
             $stmt->close();
     /*        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
@@ -235,8 +236,8 @@ if (isset($_POST['edit_project'])) {/*
         }
         if (isset($_POST['newAddress'])) {
             $newAddress = mysqli_real_escape_string($conn, $_POST['newAddress']);
-            $stmt = $conn->prepare("UPDATE projects SET projects_address = ? WHERE projects_id = 1;");
-            $stmt->bind_param("s",$newAddress);
+            $stmt = $conn->prepare("UPDATE projects SET projects_address = ? WHERE projects_id = ?;");
+            $stmt->bind_param("si", $newAddress, $projects_id);
             $stmt->execute();
             $stmt->close();
             /*$stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
@@ -249,8 +250,8 @@ if (isset($_POST['edit_project'])) {/*
 
         if (isset($_POST['newStartDate'])) {
             $newStartDate = mysqli_real_escape_string($conn, $_POST['newStartDate']);
-            $stmt = $conn->prepare("UPDATE projects SET projects_sdate = ? WHERE projects_id = 1;");
-            $stmt->bind_param("s", $newStartDate);
+            $stmt = $conn->prepare("UPDATE projects SET projects_sdate = ? WHERE projects_id = ?;");
+            $stmt->bind_param("si", $newStartDate, $projects_id);
             $stmt->execute();
             $stmt->close();
 /*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
@@ -263,13 +264,14 @@ if (isset($_POST['edit_project'])) {/*
 
         if (isset($_POST['newEndDate'])) {
             $newEndDate = mysqli_real_escape_string($conn, $_POST['newEndDate']);
-            $stmt = $conn->prepare("UPDATE projects SET projects_edate = ? WHERE projects_id = 1;");
-            $stmt->bind_param("s", $newEndDate);
+            $stmt = $conn->prepare("UPDATE projects SET projects_edate = ? WHERE projects_id = ?;");
+            $stmt->bind_param("si", $newEndDate, $projects_id);
             $stmt->execute();
             $stmt->close();
         }
     
-            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = 1;");
+            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = ?;");
+            $stmt->bind_param("i", $projects_id);
             $stmt->execute();
             $stmt->close();
     
@@ -552,6 +554,25 @@ if (isset($_POST['edit_project'])) {/*
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
+    if (isset($_POST['adding_materials'])) {
+
+        $matName = $_POST['matName'];
+        $prevStock = 0;
+        $notif = 50;
+        $currentQuantity = 0;
+        $project = 1;
+        
+        
+        for($x = 0; $x < sizeof($matName); $x++){
+            
+            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname)   VALUES (?, ?, ?, ?, ?);");
+            $stmt->bind_param("iiiii", $prevStock, $project, $notif, $currentQuantity, $matName[$x]);
+            $stmt->execute();
+            $stmt->close();
+        }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+    }
+
 
     if (isset($_POST['update_todo'])) {
         $todo_id = $_POST['todo_id'];
@@ -695,6 +716,17 @@ if (isset($_POST['edit_project'])) {/*
             header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
         }
     }
+
+    if (isset($_POST['prevViewInventory'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReportsPage.php?projects_id=$projects_id");    
+    }
+
+    if (isset($_POST['curViewInventory'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php?projects_id=$projects_id");    
+    }
+
 
     if (isset($_POST['viewReport'])) {
         $projects_id = $_POST['projects_id'];
