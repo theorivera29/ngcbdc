@@ -226,7 +226,7 @@ ul ul #sideNav-a  {
     font-weight: bold;
 }
 
-.create-accnt-btn{
+#create-accnt-btn{
     float: right;
 }
 
@@ -431,7 +431,8 @@ textarea{
 }
 
 .project-container{
-    width: 100%;
+    width: 150%;
+    margin-left: 40%;
 }
 
 .add-btn{
