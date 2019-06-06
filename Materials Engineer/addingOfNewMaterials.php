@@ -204,6 +204,7 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
+                                        <form action="../server.php" method="POST">
                                     <tr>
                                         <td><?php echo $row[1];?></td>
                                         <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal"
@@ -240,14 +241,14 @@
                                         </div>
                                     </div>
                                     <!-- End of edit category modal -->
-
+                                    </form>
                                     <?php
                                             }
                                         ?>
                                 </tbody>
                             </table>
 
-                            </form>
+                            
                         </div>
 
 
