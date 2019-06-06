@@ -173,18 +173,17 @@
     <?php
         if(isset($_SESSION['create_success'])) {
             ?>
-    <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <h4>Are you sure you want to create this account?</h4>
+                    <h4>You have successfully created an account.</h4>
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="createAccount" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
 
                 </div>
             </div>
