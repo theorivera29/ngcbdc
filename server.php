@@ -717,6 +717,17 @@ if (isset($_POST['edit_project'])) {/*
         }
     }
 
+    if (isset($_POST['prevViewInventory'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReportsPage.php?projects_id=$projects_id");    
+    }
+
+    if (isset($_POST['curViewInventory'])) {
+        $projects_id = $_POST['projects_id'];
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php?projects_id=$projects_id");    
+    }
+
+
     if (isset($_POST['viewReport'])) {
         $projects_id = $_POST['projects_id'];
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/reportpage.php?projects_id=$projects_id");    
