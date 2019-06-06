@@ -82,14 +82,14 @@
             </nav>
         </div>
     </div>
-    <form  id="createAccountForm" action="../server.php" method="POST">
-    <div class="mx-auto mt-5 col-md-11 account-creation-container">
-        <div class="card">
-            <div class="card-header">
-                <h4>Create Account</h4>
-            </div>
-            <div class="card-body">
-                
+    <form id="createAccountForm" action="../server.php" method="POST">
+        <div class="mx-auto mt-5 col-md-11 account-creation-container">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create Account</h4>
+                </div>
+                <div class="card-body">
+
                     <div class="form-group">
                         <label for="firstName" class="label-styles">First Name</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
@@ -122,7 +122,7 @@
                                     unset($_SESSION['email_error']);
                                 }
                             ?>
-                        </h5>    
+                        </h5>
                         <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
                             required>
                     </div>
@@ -140,14 +140,39 @@
                         </div>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn">Create an Account</button>
+                        <button type="submit" class="btn btn-success add-acct" id="create-accnt-btn">Create an
+                            Account</button>
                     </div>
 
-                
+
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Start of confirmation modal -->
+        <!-- Start of confirmation modal -->
+        <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <h4>Are you sure you want to create this account?</h4>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="createAccount" class="btn btn-success">Yes</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of confirmation modal -->
+
+    </form>
+
+    <?php
+        if(isset($_SESSION['create_success'])) {
+            ?>
     <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -165,15 +190,7 @@
             </div>
         </div>
     </div>
-    <!-- End of confirmation modal -->
-
-    </form>
-
     <?php
-        if(isset($_SESSION['create_success'])) {
-            ?>
-                <!-- HAHAHAMODAL TO -->
-            <?php
             unset($_SESSION['create_success']);
         }
     ?>
@@ -200,9 +217,10 @@
             var uname = $("#username").val();
             var email = $("input[name=email]").val();
             var selectFrom = $("input[name=accountType]:checked").val();
-            if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
-                    e.preventDefault();
-                    $("#create-accnt-modal").modal('show');
+            if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !=
+                '')) {
+                e.preventDefault();
+                $("#create-accnt-modal").modal('show');
             }
         });
     });
