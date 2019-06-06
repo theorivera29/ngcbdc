@@ -25,7 +25,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-<!--            <div class="account-container">
+           <div class="account-container">
                 <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
                         $result = mysqli_query($conn, $sql);
@@ -43,7 +43,7 @@
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </span>
 
         <div id="menu" class="navigation sidenav">
