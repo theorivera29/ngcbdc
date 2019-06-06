@@ -119,17 +119,19 @@
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                role="tab" aria-controls="nav-home" aria-selected="true">ADD NEW CATEGORY</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                role="tab" aria-controls="nav-profile" aria-selected="false">ADD NEW MATERIAL</a>
+                            <a class="nav-item nav-link active" id="nav-category-tab" data-toggle="tab" href="#nav-category"
+                                role="tab" aria-controls="nav-category" aria-selected="true">ADD NEW CATEGORY</a>
+                            <a class="nav-item nav-link" id="nav-unit-tab" data-toggle="tab" href="#nav-unit"
+                                role="tab" aria-controls="nav-unit" aria-selected="false">ADD NEW UNIT</a>
+                            <a class="nav-item nav-link" id="nav-material-tab" data-toggle="tab" href="#nav-material"
+                                role="tab" aria-controls="nav-material" aria-selected="false">ADD NEW MATERIAL</a>
                         </div>
                     </nav>
                 </div>
                 <div class="adding-of-materials-content">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
-                            role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="tab-pane fade show active adding-of-materials-container" id="nav-category"
+                            role="tabpanel" aria-labelledby="nav-category-tab">
                             <form class="needs-validation" novalidate action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
@@ -155,7 +157,7 @@
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
                                         <button type="submit" name="newCategory" class="btn btn-primary">Save Changes</button>
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                             </form>
@@ -191,7 +193,70 @@
                                 </table>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade show adding-of-materials-container" id="nav-unit"
+                            role="tabpanel" aria-labelledby="nav-unit-tab">
+                            <form class="needs-validation" novalidate action="../server.php" method="POST">
+                                <table class="table new-category-table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Unit</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-categ-table">
+                                    </tbody>
+                                    <tfoot>
+                                        <tr id="add-categ-row">
+                                            <td><input class="form-control" name="category[]" type="text" id="category"
+                                                    placeholder="Unit">
+                                            </td>
+                                            <td colspan="5">
+                                                <input type="button" class="btn btn-md btn-outline-secondary addCat-row"
+                                                    value="Add Row" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row form-group save-btn-container">
+                                    <div class="col-lg-12">
+                                        <button type="submit" name="newCategory" class="btn btn-primary">Save Changes</button>
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
+                                    </div>
+                                </div>
+                            </form>
+
+                                <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                    id="mydatatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Unit</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $sql = "SELECT
+                                                        categories_id,
+                                                        categories_name
+                                                    FROM
+                                                        categories
+                                                    ORDER BY 1;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row[1];?></td>
+                                            <td><input type="button" class="btn btn-md btn-info"
+                                                    value="Edit" /></td>
+                                        </tr>
+                                        <?php
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
                             <form class="needs-validation" novalidate>
                                 <table class="table new-category-table">
                                     <thead>
@@ -227,7 +292,7 @@
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
                                         <input type="submit" class="btn btn-primary" value="Save Changes">
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                                 <table class="table view-inventory-tabs-table table-striped table-bordered display"
@@ -259,7 +324,7 @@
                                             <td><?php echo $row[0];?></td>
                                             <td><?php echo $row[1];?></td>
                                             <td><?php echo $row[2];?></td>
-                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
+                                            <td><input type="button" class="btn btn-md btn-info"
                                                     value="Edit" /></td>
                                         </tr>
                                         <?php
