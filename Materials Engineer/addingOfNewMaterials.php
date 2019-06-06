@@ -210,7 +210,7 @@
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
                                         <input type="submit" class="btn btn-primary" value="Save Changes">
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                                 <table class="table view-inventory-tabs-table table-striped table-bordered display"
