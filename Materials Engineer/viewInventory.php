@@ -179,7 +179,7 @@
                                         INNER JOIN
                                             matinfo ON materials.mat_id = matinfo.matinfo_matname
                                         WHERE
-                                            matinfo.matinfo_matname = $projects_id;";
+                                            matinfo.matinfo_matproject = $projects_id;";
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
