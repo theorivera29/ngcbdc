@@ -202,7 +202,7 @@
             var selectFrom = $("input[name=accountType]:checked").val();
             if ((fname != '') && (lname != '') && (uname != '') && (email != '') && (selectFrom !='')) {
                     e.preventDefault();
-                    $("#create-accnt-modal").appendTo("body").modal('show');
+                    $("#create-accnt-modal").modal('show');
             }
         });
     });
