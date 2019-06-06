@@ -114,15 +114,31 @@
                 <th class="align-middle">Particulars</th>
                 <th class="align-middle">Previous Material Stock</th>
                 <th class="align-middle">Unit</th>
-                <th class="align-middle">Delivered Material as of</th>
-                <th class="align-middle">Material Pulled Out as of</th>
+                <th class="align-middle">Delivered Material as of <?php echo date("F Y"); ?></th>
+                <th class="align-middle">Material Pulled Out as of <?php echo date("F Y"); ?></th>
                 <th class="align-middle">Unit</th>
                 <th class="align-middle">Accumulated Materials Delivered</th>
-                <th class="align-middle">Material on Site as of</th>
+                <th class="align-middle">Material on Site as of <?php echo date("F Y"); ?></th>
                 <th class="align-middle">Unit</th>
             </tr>
         </thead>
         <tbody>
+        <?php 
+            $projects_name = $_GET['projects_name'];
+            $sql_categ = "SELECT DISTINCT categories.categories_name FROM materials 
+            INNER JOIN categories ON materials.mat_categ = categories.categories_id
+            INNER JOIN projects ON materials.mat_project = projects.projects_id
+            WHERE projects.projects_name = '$projects_name'
+            ORDER BY categories.categories_name;";
+            $result = mysqli_query($conn, $sql_categ);
+            $categories = array();
+            while($row_categ = mysqli_fetch_assoc($result)){
+                $categories[] = $row_categ;
+            }
+
+            foreach($categories as $data) {
+            $categ = $data['categories_name'];
+        ?>
             <tr>
                 <td></td>
                 <td></td>
@@ -134,6 +150,9 @@
                 <td></td>
                 <td></td>
             </tr>
+        <?php
+
+        ?>
         </tbody>
     </table>
 </body>
