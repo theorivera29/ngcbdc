@@ -552,6 +552,25 @@ if (isset($_POST['edit_project'])) {/*
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/dashboard.php");     
     }
 
+    if (isset($_POST['adding_materials'])) {
+
+        $matName = $_POST['matName'];
+        $prevStock = 0;
+        $notif = 50;
+        $currentQuantity = 0;
+        $project = 1;
+        
+        
+        for($x = 0; $x < sizeof($matName); $x++){
+            
+            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname)   VALUES (?, ?, ?, ?, ?);");
+            $stmt->bind_param("iiiii", $prevStock, $project, $notif, $currentQuantity, $matName[$x]);
+            $stmt->execute();
+            $stmt->close();
+        }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+    }
+
 
     if (isset($_POST['update_todo'])) {
         $todo_id = $_POST['todo_id'];
