@@ -86,12 +86,12 @@
         <form action="../server.php" method="POST">
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
-                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="[A-Za-z\s]*" title="Input letters and numbers only" required>
+                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="[A-Za-z\s]*" title="Input letters" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="[A-Za-z.#_]*" title="Input letters and nubers only" required>
+                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="[A-Za-z.#_]*" title="Input letters and numbers only" required>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
