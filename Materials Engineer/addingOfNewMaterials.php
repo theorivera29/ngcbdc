@@ -25,9 +25,9 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
-            <a href="#" class="open" onclick="openSlideMenu()">
+            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
@@ -53,7 +53,7 @@
         </span>
 
         <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" onclick="closeSlideMenu()">
+            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
             </a>
             <nav id="sidebar">
@@ -89,7 +89,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="returnsOrReplaced.php" id="sideNav-a">Returns/Replacements</a>
+                        <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
@@ -108,7 +108,9 @@
                     </li>
                 </ul>
             </nav>
+
         </div>
+
     </div>
 
     <section id="tabs">
