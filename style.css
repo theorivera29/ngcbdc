@@ -420,19 +420,23 @@ textarea{
 
 .project-tabs{
     width: 100% !important;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .project-tabs-content{
-    margin-top: 3%;
-    width: 40% !important;
+    width: 50%;
+    display: inline-block;
     text-align: center;
-    margin-left: 5%;
 }
 
 .project-container{
-    width: 150%;
-    margin-left: 40%;
+    width: 100%;
+    margin-left: 50%;
+    margin-top: 5%;
+}
+
+.card-form{
+    margin-bottom: 4% !important;
 }
 
 .add-btn{
@@ -530,6 +534,7 @@ textarea{
 .category-card{
     width: 100%;
     box-shadow: 0 0 4px black;
+    display: inline-block;
 }
 
 .category-card-body{

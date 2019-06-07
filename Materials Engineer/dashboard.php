@@ -260,9 +260,10 @@
                             INNER JOIN
                                 projmateng ON projmateng.projmateng_project = projects.projects_id
                             WHERE 
-                                projmateng.projmateng_mateng = $accounts_id";
+                                projmateng.projmateng_mateng = $accounts_id;";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_row($result)) {
+                        if($row[2] <= $row[4]) {
                 ?>
                 <tr>
                     <td><?php echo $row[0] ;?></td>
@@ -272,7 +273,8 @@
                     <td><?php echo $row[4] ;?></td>
                     <td><?php echo $row[5] ;?></td>
                 </tr>
-                <?php
+                <?php                            
+                        }
                     }
                 ?>
             </tbody>

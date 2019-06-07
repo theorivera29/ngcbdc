@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -36,8 +36,7 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="../logout.php">Logout</a>
@@ -56,13 +55,27 @@
                 </div>
                 <ul class="list-unstyled components">
                     <li>
+                        <a href="dashboard.php" id="sideNav-a">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
+                        <ul class="collapse list-unstyled" id="accountSubmenu">
+                            <li>
+                                <a href="accountcreation.php" id="sideNav-a">Create Account</a>
+                            </li>
+                            <li>
+                                <a href="listofaccounts.php" id="sideNav-a">List of Accounts</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="passwordrequest.php" id="sideNav-a">Password Request</a>
+                    </li>
+                    <li>
                         <a href="projects.php" id="sideNav-a">Projects</a>
                     </li>
                     <li>
-                        <a href="hauleditems.php" id="sideNav-a">Hauled Materials</a>
-                    </li>
-                    <li>
-                        <a href="sitematerials.php" id="sideNav-a">Site Materials</a>
+                        <a href="logs.php" id="sideNav-a">Logs</a>
                     </li>
                 </ul>
             </nav>
@@ -124,6 +137,7 @@
                                                 </h5>
                                             </span>
                                             <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <input type="hidden" name="projectName" value="<?php echo $row[0];?>">
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#edit-project-modal-<?php echo $row[4]?>">Edit</button>
                                             <button type="button" class="btn btn-danger" name="close_project"
@@ -275,6 +289,7 @@
                                                 <?php echo $row1[3] ;?>
                                             </h5>
                                         </span>
+                                        <input type="hidden" name="projectName" value="<?php echo $row1[0];?>">
                                         <button type="button" class="btn btn-success" name="reopen_project"
                                             data-toggle="modal"
                                             data-target="#reopen-proj-modal-<?php echo $row1[4]?>">Re-Open

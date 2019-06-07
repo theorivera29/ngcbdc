@@ -113,12 +113,13 @@
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ADD NEW CATEGORY</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">ADD NEW MATERIAL</a>
+                            <a class="nav-item nav-link active" id="nav-category-tab" data-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="true">ADD NEW CATEGORY</a>
+                            <a class="nav-item nav-link" id="nav-unit-tab" data-toggle="tab" href="#nav-unit" role="tab" aria-controls="nav-unit" aria-selected="false">ADD NEW UNIT</a>
+                            <a class="nav-item nav-link" id="nav-material-tab" data-toggle="tab" href="#nav-material" role="tab" aria-controls="nav-material" aria-selected="false">ADD NEW MATERIAL</a>
                         </div>
                     </nav>
                 </div>
-                
+
                 <div class="adding-of-materials-content">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active adding-of-materials-container" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -161,7 +162,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit"  class="btn btn-success">Yes</button>
+                                                <button type="submit" class="btn btn-success">Yes</button>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                                             </div>
@@ -195,7 +196,7 @@
                                             </td>
                                             <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button></td>
                                         </tr>
-                                        
+
                                         <!-- Start of edit category modal -->
                                         <div class="modal fade" id="edit-categ-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -231,27 +232,87 @@
                                 </table>
                             </form>
                         </div>
-
-
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form action="../server.php" method="POST">
-                                <table class="table new-category-table">
+                        <div class="tab-pane fade show adding-of-materials-container" id="nav-unit" role="tabpanel" aria-labelledby="nav-unit-tab">
+                            <form class="needs-validation" novalidate action="../server.php" method="POST">
+                                <table class="table new-category-table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Material</th>
-                                            <th scope="col">Threshold</th>
                                             <th scope="col">Unit</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="add-material-table">
+                                    <tbody id="add-categ-table">
                                     </tbody>
                                     <tfoot>
-                                        <tr id="add-material-row">
-                                            <td><select name="categ[]" class="custom-select" id="category1">
-                                                    <option selected disabled>Choose Category</option>
-                                                    <?php 
+                                        <tr id="add-categ-row">
+                                            <td><input class="form-control" name="category[]" type="text" id="category" placeholder="Unit">
+                                            </td>
+                                            <td colspan="5">
+                                                <input type="button" class="btn btn-md btn-outline-secondary addCat-row" value="Add Row" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row form-group save-btn-container">
+                                    <div class="col-lg-12">
+                                        <button type="submit" name="newCategory" class="btn btn-primary">Save Changes</button>
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <form action="../server.php" method="POST">
+                                    <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Unit</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $sql = "SELECT
+                                                        categories_id,
+                                                        categories_name
+                                                    FROM
+                                                        categories
+                                                    ORDER BY 1;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row[1];?>
+                                                </td>
+                                                <td><input type="button" class="btn btn-md btn-info" value="Edit" /></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
+                                <form class="needs-validation" novalidate>
+                                    <table class="table new-category-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Material</th>
+                                                <th scope="col">Threshold</th>
+                                                <th scope="col">Unit</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="add-material-table">
+                                        </tbody>
+                                        <tfoot>
+                                            <tr id="add-material-row">
+                                                <td><select name="categ[]" class="custom-select" id="category1">
+                                                        <option selected disabled>Choose Category</option>
+                                                        <?php 
                                                     $sql = "SELECT
                                                         categories_name
                                                     FROM
@@ -260,19 +321,21 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                                    <option value="<?php echo $row[0]?>"><?php echo $row[0]?></option>
-                                                    <?php
+                                                        <option value="<?php echo $row[0]?>">
+                                                            <?php echo $row[0]?>
+                                                        </option>
+                                                        <?php
                                             }
                                                 ?>
-                                                </select>
-                                            </td>
-                                            <td><input class="form-control" name="material[]" type="text" id="material" placeholder="Material Name">
-                                            </td>
-                                            <td><input class="form-control" name="threshold[]" type="text" id="threshold" placeholder="Threshold">
-                                            </td>
-                                            <td><select name="unit[]" class="custom-select" id="unit">
-                                                    <option value="" selected disabled>Choose unit</option>
-                                                    <?php 
+                                                    </select>
+                                                </td>
+                                                <td><input class="form-control" name="material[]" type="text" id="material" placeholder="Material Name">
+                                                </td>
+                                                <td><input class="form-control" name="threshold[]" type="text" id="threshold" placeholder="Threshold">
+                                                </td>
+                                                <td><select name="unit[]" class="custom-select" id="unit">
+                                                        <option value="" selected disabled>Choose unit</option>
+                                                        <?php 
                                                     $sql = "SELECT
                                                         unit_name
                                                     FROM
@@ -281,35 +344,37 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                                    <option value="<?php echo $row[0]?>"><?php echo $row[0]?></option>
-                                                    <?php
+                                                        <option value="<?php echo $row[0]?>">
+                                                            <?php echo $row[0]?>
+                                                        </option>
+                                                        <?php
                                             }
                                                 ?>
-                                                </select>
-                                            </td>
-                                            <td colspan="5">
-                                                <input type="button" class="btn btn-md btn-outline-secondary addMat-row" value="Add Row" />
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                <div class="row form-group save-btn-container">
-                                    <div class="col-lg-12">
-                                        <input type="submit" name="create_materials" class="btn btn-primary" value="Save Changes">
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                                    </select>
+                                                </td>
+                                                <td colspan="5">
+                                                    <input type="button" class="btn btn-md btn-outline-secondary addMat-row" value="Add Row" />
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div class="row form-group save-btn-container">
+                                        <div class="col-lg-12">
+                                            <input type="submit" name="create_materials" class="btn btn-primary" value="Save Changes">
+                                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        </div>
                                     </div>
-                                </div>
-                                <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th>Material Name</th>
-                                            <th>Unit</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
+                                    <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Material Name</th>
+                                                <th>Unit</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
                                             $sql = "SELECT
                                                         categories.categories_name,
                                                         materials.mat_name,
@@ -323,31 +388,31 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $row[0];?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row[1];?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row[2];?>
-                                            </td>
-                                            <td><input type="button" class="btn btn-md btn-outline-secondary" value="Edit" /></td>
-                                        </tr>
-                                        <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row[0];?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row[1];?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row[2];?>
+                                                </td>
+                                                <td><input type="button" class="btn btn-md btn-outline-secondary" value="Edit" /></td>
+                                            </tr>
+                                            <?php
                                             }
                                         ?>
-                                    </tbody>
-                                </table>
-                            </form>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 </body>
 
 <script type="text/javascript">
@@ -403,7 +468,7 @@
         $("#add-material-table").on('click', '.delete-row', function() {
             $(this).closest('tr').remove();
         });
-        
+
 
     });
 

@@ -25,7 +25,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-<!--            <div class="account-container">
+           <div class="account-container">
                 <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
                         $result = mysqli_query($conn, $sql);
@@ -43,7 +43,7 @@
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </span>
 
         <div id="menu" class="navigation sidenav">
@@ -126,14 +126,13 @@
                                     <h4>Hauling Receipt (To Be Return)</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                                    <form action="../server.php" method="POST" >
                                         <div class="form-group row formnum-container">
                                             <div class=" col-lg-12">
                                                 <label class="col-lg-12 col-form-label">Form No.:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="formNo"
                                                           required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +141,6 @@
                                                 <label class="col-lg-12 col-form-label">Date:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="date" name="date" required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +149,6 @@
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="deliverTo"
                                                      required>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
                                         <div class="form-group row col-lg-12">
@@ -159,7 +156,6 @@
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="hauledFrom"
                                                      required>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -180,16 +176,14 @@
                                                                  >
                                                         </td>
                                                         <td>
-                                                            <!--<div class="form-group">
+                                                            <div class="form-group">
                                                                 <select class="form-control" name="articles"
                                                                     id="articles">
                                                                     <option value="" selected disabled>Choose an Article
                                                                     </option>
                                                                 </select>
-                                                            </div>-->
-                                                            <input class="form-control" name="articles" type="text"
-                                                                id="quantity" placeholder="Articles"
-                                                                 >
+                                                            </div>
+                                                            
                                                         </td>
                                                         <td><input class="form-control" name="unit" type="text"
                                                                 id="unit" placeholder="Unit">
@@ -209,7 +203,6 @@
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="requestedBy"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-6">
@@ -217,7 +210,6 @@
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="hauledBy"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,13 +219,11 @@
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="warehouseman"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                                 <label class="col-lg-12 col-form-label">Approved by:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="approvedBy"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
 
@@ -247,29 +237,22 @@
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="type"
                                                                  required>
-                                                            <div class="invalid-feedback">Please fill out this field.
-                                                            </div>
+                                                           
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Plate #:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="plateNo"
                                                                   required>
-                                                            <div class="invalid-feedback">Please fill out this field.
-                                                            </div>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="PORS"
                                                                  required>
-                                                            <div class="invalid-feedback">Please fill out this field.
-                                                            </div>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="haulerID"
                                                                  required>
-                                                            <div class="invalid-feedback">Please fill out this field.
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -293,14 +276,13 @@
                                         <h4>Hauling Receipt (Permanently Hauled)</h4>
                                     </div>
                                     <div class="card-body">
-                                        <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                                        <form action="../server.php" method="POST">
                                             <div class="form-group row formnum-container">
                                                 <div class=" col-lg-12">
                                                     <label class="col-lg-12 col-form-label">Form No.:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="formNo"
                                                               required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,7 +291,6 @@
                                                     <label class="col-lg-12 col-form-label">Date:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="date" name="date" required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -318,7 +299,6 @@
                                                 <div class="col-lg-9">
                                                     <input class="form-control" type="text" name="deliverTo"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                             <div class="form-group row col-lg-12">
@@ -326,7 +306,6 @@
                                                 <div class="col-lg-9">
                                                     <input class="form-control" type="text" name="hauledFrom"
                                                          required>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -374,7 +353,6 @@
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="requestedBy"
                                                              required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6">
@@ -382,7 +360,6 @@
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="hauledBy"
                                                              required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -392,13 +369,11 @@
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="warehouseman"
                                                              required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                     <label class="col-lg-12 col-form-label">Approved by:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="approvedBy"
                                                              required>
-                                                        <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
 
@@ -412,33 +387,21 @@
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="type"
                                                                      required>
-                                                                <div class="invalid-feedback">Please fill out this
-                                                                    field.
-                                                                </div>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">Plate #:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="plateNo"
                                                                       required>
-                                                                <div class="invalid-feedback">Please fill out this
-                                                                    field.
-                                                                </div>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="PORS"
                                                                      required>
-                                                                <div class="invalid-feedback">Please fill out this
-                                                                    field.
-                                                                </div>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                             <div class="col-lg-8">
                                                                 <input class="form-control" type="text" name="haulerID"
                                                                      required>
-                                                                <div class="invalid-feedback">Please fill out this
-                                                                    field.
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
