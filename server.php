@@ -359,6 +359,65 @@ if (isset($_POST['edit_project'])) {/*
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/disposalslip.php");     
     }
 
+    if (isset($_POST['create_category'])) {
+        $category = $_POST['category'];
+
+            for($x = 0; $x < sizeof($category); $x++){
+                $stmt = $conn->prepare("INSERT INTO categories (categories_name)
+                    VALUES (?);");
+                $stmt->bind_param("s", $category[$x]);
+                $stmt->execute();
+                $stmt->close();
+                
+                }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
+    }
+
+    if (isset($_POST['create_materials'])) {
+        $categ = $_POST['categ'];
+        $materials = $_POST['material'];
+        $threshold = $_POST['threshold'];
+        $unit = $_POST['unit'];
+        $prevStock = 0;
+        $proj = 1;
+        $currentQuantity = 0;
+        
+        for($x = 0; $x < sizeof($materials); $x++){
+
+            $stmt = $conn->prepare("SELECT categories_id FROM categories WHERE categories_name = ?;");
+            $stmt->bind_param("s", $categ[$x]);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($categ_id[$x]);
+            $stmt->fetch();
+            
+            $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+            $stmt->bind_param("s", $unit[$x]);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($unit_id[$x]);
+            $stmt->fetch();
+                
+            $stmt = $conn->prepare("INSERT INTO materials (mat_name, mat_categ, mat_unit)VALUES (?, ?, ?);");
+            $stmt->bind_param("sii", $materials[$x], $categ_id[$x], $unit_id[$x]);
+            $stmt->execute();
+            $stmt->close();
+            
+            $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
+            $stmt->bind_param("s", $materials[$x]);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($mat_id[$x]);
+            $stmt->fetch();
+            
+           $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname)VALUES (?, ?, ?, ?, ?);");
+            $stmt->bind_param("iiiii", $prevStock, $proj, $threshold[$x], $currentQuantity, $mat_id[$x]);
+            $stmt->execute();
+            $stmt->close(); 
+        }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
+    }
+
     if (isset($_POST['create_requisitionSlip'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
@@ -543,6 +602,35 @@ if (isset($_POST['edit_project'])) {/*
             $stmt->close();*/
         }
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/account.php");     
+    }
+
+    if (isset($_POST['edit_category'])) {
+        $newCategName = mysqli_real_escape_string($conn, $_POST['newCategName']);
+        if (isset($_POST['newCategName'])) {
+            
+            $newCategName = mysqli_real_escape_string($conn, $_POST['newCategName']);
+            $stmt = $conn->prepare("SELECT categories_id FROM categories WHERE categories_name = ?;");
+            $stmt->bind_param("s", $newCategName);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($categ_id);
+            $stmt->fetch();
+            
+            echo var_dump($newCategName);
+            
+            
+            $stmt = $conn->prepare("UPDATE categories SET categories_name = ? WHERE categories_id = ?;");
+            $stmt->bind_param("si", $newCategName, $categ_id);
+            $stmt->execute();
+            $stmt->close();
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        }
+        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
     if (isset($_POST['create_deliveredin'])) {
