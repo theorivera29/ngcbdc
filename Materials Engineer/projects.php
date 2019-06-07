@@ -13,14 +13,19 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -127,9 +132,19 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <div class="card project-container">
-                                <?php
-                            $sql = "SELECT
+                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $sql = "SELECT
                                         projects.projects_name,
                                         projects.projects_address,
                                         projects.projects_sdate,
@@ -143,80 +158,78 @@
                                         projmateng.projmateng_mateng = $accounts_id
                                     AND 
                                         projects.projects_status = 'open';";
-                            $result = mysqli_query($conn, $sql);
-                            while ($row = mysqli_fetch_row($result)) {
-                        ?>
-                                <form action="../server.php" method="POST">
-                                    <h5 class="card-header card-header-project"><?php echo $row[0] ;?></h5>
-                                    <div class="card-body">
-                                        <span>
-                                            <h5><?php echo $row[1] ;?></h5>
-                                        </span>
-                                        <span>
-                                            <h5>Start Date: <?php echo $row[2] ;?></h5>
-                                        </span>
-                                        <span>
-                                            <h5>End Date: <?php echo $row[3] ;?></h5>
-                                        </span>
-                                        <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                        <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                            onclick="window.location.href='viewInventory.php'" name="viewInventory">View
-                                            inventory</button>
-                                        <button type="button" class="btn btn-info" id=""
-                                            onclick="window.location.href='addMaterials.php'" name="">Add
-                                            Materials</button>
-                                    </div>
-                                </form>
-                                <?php
-                            }
-                        ?>
-                            </div>
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_row($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
-
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="card project-container">
-                                <?php
-                            $sql = "SELECT
-                                        projects.projects_name,
-                                        projects.projects_address,
-                                        projects.projects_sdate,
-                                        projects.projects_edate,
-                                        projects.projects_id
-                                    FROM
-                                        projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
-                                    WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
-                                        projects.projects_status = 'closed';";
-                            $result1 = mysqli_query($conn, $sql);
-                            while ($row1 = mysqli_fetch_row($result1)) {
-                        ?>
-                                <form action="../server.php" method="POST">
-                                    <h5 class="card-header card-header-project"><?php echo $row1[0] ;?></h5>
-                                    <div class="card-body">
-                                        <span>
-                                            <h5><?php echo $row1[1] ;?></h5>
-                                        </span>
-                                        <span>
-                                            <h5>Start Date: <?php echo $row1[2] ;?></h5>
-                                        </span>
-                                        <span>
-                                            <h5>End Date: <?php echo $row1[3] ;?></h5>
-                                        </span>
-                                        <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                        <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                            name="viewInventory">View inventory</button>
-                                    </div>
-                                </form>
-                                <?php
-                            }   
-                        ?>
-                            </div>
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                            $sql = "SELECT
+                                            projects.projects_name,
+                                            projects.projects_address,
+                                            projects.projects_sdate,
+                                            projects.projects_edate,
+                                            projects.projects_id
+                                        FROM
+                                            projects
+                                        INNER JOIN
+                                            projmateng ON projects.projects_id = projmateng.projmateng_project
+                                        WHERE
+                                            projmateng.projmateng_mateng = $accounts_id
+                                        AND 
+                                            projects.projects_status = 'closed';";
+                                            $result = mysqli_query($conn, $sql);
+                                            while ($row = mysqli_fetch_row($result)) {
+                                        ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
+                                    </tr>
+                                    <?php
+                                            }
+                                        ?>
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -228,14 +241,20 @@
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
+
     function closeSlideMenu() {
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
     $(document).ready(function () {
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
+
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
     });
 </script>
 
