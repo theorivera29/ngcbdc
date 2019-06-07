@@ -21,7 +21,6 @@
 <body>
     <div id="content">
         <span class="slide">
-        <!--Change onlick back button, kasi may error-->
             <a href="#" class="open" name="" onclick="window.location.href='viewInventory.php'">
                 <i class="fas fa-arrow-circle-left"></i>
             </a>
