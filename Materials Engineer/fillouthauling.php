@@ -25,7 +25,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
-<!--            <div class="account-container">
+           <div class="account-container">
                 <?php 
                         $sql = "SELECT * FROM accounts WHERE accounts_id = '$accounts_id'";
                         $result = mysqli_query($conn, $sql);
@@ -43,7 +43,7 @@
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </span>
 
         <div id="menu" class="navigation sidenav">
@@ -132,7 +132,7 @@
                                                 <label class="col-lg-12 col-form-label">Form No.:</label>
                                                 <div class="col-lg-12">
                                                     <input class="form-control" type="text" name="formNo"
-                                                          required>
+                                                          pattern="[0-9]*" title="Input numbers" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,14 +148,14 @@
                                             <label class="col-lg-2 col-form-label">Deliver to:</label>
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="deliverTo"
-                                                     required>
+                                                    pattern="[A-Za-z\s]*" title="Input letters" required>
                                             </div>
                                         </div>
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
                                             <div class="col-lg-9">
                                                 <input class="form-control" type="text" name="hauledFrom"
-                                                     required>
+                                                     pattern="[A-Za-z\s]*" title="Input letters" required>
                                             </div>
                                         </div>
                                         <div class="card">
