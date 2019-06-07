@@ -291,6 +291,57 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                    id="mydatatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Unit</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td><button type="button" class="btn btn-outline-secondary"
+                                                        data-toggle="modal"
+                                                        data-target="#edit-unit-modal-<?php echo $row[0]?>">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <!-- Start of edit unit modal -->
+                                            <div class="modal fade" id="edit-unit-modal-<?php echo $row[0]?>"
+                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                                <?php echo $row[1];?></h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                &times;
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="editcategory"
+                                                                    class="label-styles">Unit</label>
+                                                                <input type="text" class="form-control"
+                                                                    value="<?php echo $row[1]?>" name="editcategory"
+                                                                    placeholder="Enter new project name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of edit unit modal -->
+                                    </tbody>
+                                </table>
                         </div>
                         <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
                             <form class="needs-validation" novalidate>
