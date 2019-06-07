@@ -116,13 +116,12 @@
                 <h4>Delivered Materials</h4>
             </div>
             <div class="card-body">
-                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
+                <form class="form" action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="date" name="deliveredDate" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -205,10 +204,10 @@
                 var unit = $("#unit").val();
                 var suppliedBy = $("#suppliedBy").val();
                 var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
-                    "</td><td>" + suppliedBy +
-                    "</td><td>" + selectFrom +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var markup = "<tr><td><input type='text' class='form-control' value='" + quantity + "' readonly/></td><td><input type='text' class='form-control' value='" + articles + "' readonly/></td><td><input type='text' class='form-control' value='" + unit +
+                    "' readonly/></td><td><input type='text' class='form-control' value='" + suppliedBy +
+                    "' readonly/></td><td><input type='text' class='form-control' value='" + selectFrom +
+                    "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
                 if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '') && (
                         selectFrom != '')) {
@@ -226,22 +225,6 @@
                 $('#sidebar').toggleClass('active');
             });
         });
-
-        $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
 
         function openSlideMenu() {
             document.getElementById('menu').style.width = '15%';
