@@ -261,7 +261,7 @@
                         </div>
                         <div class="tab-pane fade show adding-of-materials-container" id="nav-unit" role="tabpanel"
                             aria-labelledby="nav-unit-tab">
-                            <form class="needs-validation" novalidate action="../server.php" method="POST">
+                            <form action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
                                         <tr>
