@@ -373,6 +373,20 @@ if (isset($_POST['edit_project'])) {/*
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
+    if (isset($_POST['create_unit'])) {
+        $unit = $_POST['unit'];
+
+            for($x = 0; $x < sizeof($unit); $x++){
+                $stmt = $conn->prepare("INSERT INTO unit (unit_name)
+                    VALUES (?);");
+                $stmt->bind_param("s", $unit[$x]);
+                $stmt->execute();
+                $stmt->close();
+                
+                }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
+    }
+
     if (isset($_POST['create_materials'])) {
         $categ = $_POST['categ'];
         $materials = $_POST['material'];
@@ -605,19 +619,10 @@ if (isset($_POST['edit_project'])) {/*
     }
 
     if (isset($_POST['edit_category'])) {
-        $newCategName = mysqli_real_escape_string($conn, $_POST['newCategName']);
-        if (isset($_POST['newCategName'])) {
-            
             $newCategName = mysqli_real_escape_string($conn, $_POST['newCategName']);
-            $stmt = $conn->prepare("SELECT categories_id FROM categories WHERE categories_name = ?;");
-            $stmt->bind_param("s", $newCategName);
-            $stmt->execute();
-            $stmt->store_result();
-            $stmt->bind_result($categ_id);
-            $stmt->fetch();
+            $categ_id = mysqli_real_escape_string($conn, $_POST['categ_id']);
             
-            echo var_dump($newCategName);
-            
+            echo var_dump($categ_id);
             
             $stmt = $conn->prepare("UPDATE categories SET categories_name = ? WHERE categories_id = ?;");
             $stmt->bind_param("si", $newCategName, $categ_id);
@@ -629,7 +634,6 @@ if (isset($_POST['edit_project'])) {/*
             $logs_of = $account_id;
             $stmt->execute();
             $stmt->close();*/
-        }
         //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
