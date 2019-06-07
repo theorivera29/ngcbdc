@@ -429,9 +429,10 @@ textarea{
 }
 
 .project-tabs-content{
-    width: 50%;
-    display: inline-block;
+    margin-top: 5%;
+    width: 100%;
     text-align: center;
+    font-size: 2.2vmin;
 }
 
 .project-container{
@@ -452,6 +453,12 @@ textarea{
 .add-project-btn{
     margin-top: 1%;
     float: right !important;
+}
+
+.projects-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+
 }
 /*End of Materials Engineer - Project*/
 
