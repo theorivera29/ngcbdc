@@ -460,6 +460,8 @@ textarea{
     color: #FFF8F0;
 
 }
+
+
 /*End of Materials Engineer - Project*/
 
 /*Materials Engineer - Add Materials*/
@@ -485,6 +487,12 @@ textarea{
     width: 100% !important;
     text-align: center;
     width: 100%;
+}
+
+.stockcard-table> thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+
 }
 
 /*End of Materials Engineer - Stockard*/
