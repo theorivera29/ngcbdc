@@ -89,6 +89,9 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
+                    <li>
+                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
+                    </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Reports</a>
                         <ul class="collapse list-unstyled" id="reportSubmenu">
@@ -190,47 +193,49 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $row[1];?>
-                                            </td>
-                                            <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button></td>
-                                        </tr>
-
-                                        <!-- Start of edit category modal -->
-                                        <div class="modal fade" id="edit-categ-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                            <?php echo $row[1];?>
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            &times;
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="editcategory" class="label-styles">Category</label>
-                                                            <input type="text" class="form-control" value="<?php echo $row[1]?>" name="editcategory" placeholder="Enter new project name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-success">Save</button>
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-
+                                        <form action="../server.php" method="POST">
+                                    <tr>
+                                        <td><?php echo $row[1];?></td>
+                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                                data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button></td>
+                                    </tr>
+                                    <!-- Start of edit category modal -->
+                                    <div class="modal fade" id="edit-categ-modal-<?php echo $row[0]?>" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                        <?php echo $row[1];?></h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="editcategory" class="label-styles">Category</label>
+                                                    <input type="text" class="form-control"
+                                                        value="<?php echo $row[1]?>" name="editcategory"
+                                                        placeholder="Enter new project name">
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- End of edit category modal -->
-
-                                        <?php
+                                    </div>
+                                    <!-- End of edit category modal -->
+                                    </form>
+                                    <?php
                                             }
                                         ?>
-                                    </tbody>
-                                </table>
-                            </form>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade show adding-of-materials-container" id="nav-unit" role="tabpanel" aria-labelledby="nav-unit-tab">
                             <form class="needs-validation" novalidate action="../server.php" method="POST">
