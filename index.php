@@ -41,7 +41,7 @@
                 <p class="form-group forgot-password-link"><a href="forgotPassword.php">Forgot your password?</a></p>
             </div>
             <div class="form-group">
-                <p>
+                <p class="error">
                     <?php
                         if(isset($_SESSION['login_error'])) {
                             echo "Incorrect username or password.";

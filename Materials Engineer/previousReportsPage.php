@@ -93,6 +93,9 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
+                    <li>
+                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
+                    </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Reports</a>
@@ -151,15 +154,7 @@
 </body>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#mydatatable').DataTable();
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-
-    function openSlideMenu() {
+     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
 
@@ -167,6 +162,15 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
+    });
 </script>
 
 </html>

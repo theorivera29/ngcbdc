@@ -90,6 +90,9 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
+                    <li>
+                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
+                    </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Reports</a>
@@ -123,6 +126,7 @@
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
+<<<<<<< HEAD
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <?php
                             $sql = "SELECT
@@ -164,8 +168,60 @@
                         <?php
                             }
                         ?> 
+=======
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "SELECT
+                                                projects.projects_name,
+                                                projects.projects_address,
+                                                projects.projects_sdate,
+                                                projects.projects_edate,
+                                                projects.projects_id
+                                            FROM
+                                                projects
+                                            INNER JOIN
+                                                projmateng ON projects.projects_id = projmateng.projmateng_project
+                                            WHERE
+                                                projmateng.projmateng_mateng = $accounts_id
+                                            AND 
+                                                projects.projects_status = 'open';";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_row($result)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                name="curViewInventory"
+                                                onclick="window.location.href = 'previousReportPage.php'">View
+                                                Reports</button></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+>>>>>>> e44f723e263aae1d9ca3f214bba1c612976422fb
                         </div>
+
+
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+<<<<<<< HEAD
                         <?php
                             $sql = "SELECT
                                         projects.projects_name,
@@ -206,6 +262,53 @@
                         <?php
                             }   
                         ?>
+=======
+                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "SELECT
+                                                projects.projects_name,
+                                                projects.projects_address,
+                                                projects.projects_sdate,
+                                                projects.projects_edate,
+                                                projects.projects_id
+                                            FROM
+                                                projects
+                                            INNER JOIN
+                                                projmateng ON projects.projects_id = projmateng.projmateng_project
+                                            WHERE
+                                                projmateng.projmateng_mateng = $accounts_id
+                                            AND 
+                                                projects.projects_status = 'open';";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_row($result)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                name="curViewInventory"
+                                                onclick="window.location.href = 'currentReportPage.php'">View
+                                                Report</button></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+>>>>>>> e44f723e263aae1d9ca3f214bba1c612976422fb
                         </div>
                     </div>
                 </div>

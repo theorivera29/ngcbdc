@@ -88,6 +88,9 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
+                    <li>
+                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
+                    </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Reports</a>
@@ -429,9 +432,9 @@
                         var quantity = $("#quantity").val();
                         var unit = $("#unit").val();
                         var articles = $("#articles").val();
-                        var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" +
+                        var markup = "<tr><td><input type='text' class='form-control' value='" + quantity + "' readonly/></td><td><input type='text' class='form-control' value='" + articles + "' readonly/></td><td><input type='text' class='form-control' value='" +
                             unit +
-                            "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                            "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                         if ((quantity != '') && (articles != '') && (unit != '')) {
                             $("table tbody").append(markup);
                             $("#haulingRow input[type=text]").val('');
@@ -448,21 +451,6 @@
                     });
                 });
 
-                $(function () {
-                    'use strict';
-                    window.addEventListener('load', function () {
-                        var forms = document.getElementsByClassName('needs-validation');
-                        var validation = Array.prototype.filter.call(forms, function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
 
                 function openSlideMenu() {
                     document.getElementById('menu').style.width = '15%';

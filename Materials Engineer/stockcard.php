@@ -13,15 +13,20 @@
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
     <div id="content">
         <span class="slide">
-        <!--Change onlick back button, kasi may error-->
             <a href="#" class="open" name="" onclick="window.location.href='viewInventory.php'">
                 <i class="fas fa-arrow-circle-left"></i>
             </a>
@@ -66,7 +71,7 @@
                             aria-labelledby="nav-home-tab">
                             <div class="delivered-in-container">
                                 <table
-                                    class="table view-all-task-table table-striped table-bordered delivered-in-table">
+                                    class="table stockcard-table table-striped table-bordered delivered-in-table display" id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
@@ -89,7 +94,7 @@
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="usage-in-container">
-                                <table class="table view-all-task-table table-striped table-bordered">
+                                <table class="table stockcard-table table-striped table-bordered display" id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
@@ -129,6 +134,8 @@
     }
 
     $(document).ready(function () {
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');

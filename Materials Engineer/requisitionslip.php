@@ -88,6 +88,9 @@
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
+                    <li>
+                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
+                    </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                             id="sideNav-a">Reports</a>
@@ -113,13 +116,12 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="date" name="date" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -179,14 +181,12 @@
                             <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="requestedBy" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="approvedBy" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -210,9 +210,9 @@
                 var particulars = $("#particulars").val();
                 var location = $("#location").val();
                 var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + unit + "</td><td>" + particulars +
-                    "</td><td>" + location + "</td><td>" + remarks +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                var markup = "<tr><td><input type='text' class='form-control' value='" + quantity + "' readonly/></td><td><input type='text' class='form-control' value='" + unit + "' readonly/></td><td><input type='text' class='form-control' value='" + particulars +
+                    "' readonly/></td><td><input type='text' class='form-control' value='" + location + "' readonly/></td><td><input type='text' class='form-control' value='" + remarks +
+                    "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
                 if ((quantity != '') && (unit != '') && (particulars != '') && (location != '') && (
                         remarks != '')) {
                     $("table tbody").append(markup);
@@ -228,22 +228,6 @@
                 $('#sidebar').toggleClass('active');
             });
         });
-
-        $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
 
         function openSlideMenu() {
             document.getElementById('menu').style.width = '15%';
