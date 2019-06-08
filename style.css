@@ -526,10 +526,6 @@ textarea{
     margin: auto;
 }
 
-.view-inventory-tabs-container{
-   
-}
-
 .view-inventory-tabs-table{
     text-align: center;
 }
@@ -537,9 +533,6 @@ textarea{
 .view-inventory-tabs-table thead tr{
     background-color: #0D304F;
     color: #FFFFFF;
-}
-
-.view-inventory-row{
 }
 
 .view-inventory-content{
@@ -649,7 +642,7 @@ textarea{
     margin-top: 3%;
 }
 
-/*Start of Materials Engineer - returnsOrReplaced*/
+/*Start of Materials Engineer - returns*/
 .return-container{
     width: 100% !important;
 }
@@ -671,8 +664,22 @@ textarea{
 
 .returns-table{
     text-align: center;
+
 }
-/*End of Materials Engineer - returnsOrReplaced*/
+
+.returns-table thead tr{
+    background-color: #0D304F;
+    color: #FFFFFF;
+}
+
+.returns-content{
+    width: 90% !important;
+    margin-left: 5%;
+    margin-top: 5% !important;
+    text-align: center;
+    margin-bottom: 2% !important;
+}
+/*End of Materials Engineer - returns*/
 
 
 
