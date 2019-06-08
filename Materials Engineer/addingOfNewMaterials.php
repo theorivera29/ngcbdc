@@ -126,7 +126,9 @@
 
                 <div class="adding-of-materials-content">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active adding-of-materials-container" id="nav-home" role="tabpanel" aria-labelledby="nav-category-tab">
+                        <!-- Start of Category -->
+                        <div class="tab-pane fade show active adding-of-materials-container" id="nav-home"
+                            role="tabpanel" aria-labelledby="nav-category-tab">
                             <form action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
@@ -139,7 +141,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr id="add-categ-row">
-                                            <td><input class="form-control" name="category[]" type="text" id="category" placeholder="Category Name">
+                                            <td><input class="form-control" type="text" id="category"
+                                                    placeholder="Category Name">
                                             </td>
                                             <td colspan="5">
                                                 <input type="button" class="btn btn-md btn-outline-secondary addCat-row" value="Add Row" />
@@ -175,7 +178,8 @@
                                 </div>
                                 <!-- End of confirmation modal -->
                             </form>
-                            <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
@@ -193,42 +197,46 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $row[1];?>
-                                        </td>
-                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Start of edit category modal -->
-                                    <div class="modal fade" id="edit-categ-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <form action="../server.php" method="POST">
+                                    <form action="../server.php" method="POST">
+                                        <tr>
+                                            <td><?php echo $row[1];?></td>
+                                            <td><button type="button" class="btn btn-outline-secondary"
+                                                    data-toggle="modal"
+                                                    data-target="#edit-categ-modal-<?php echo $row[0]?>">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Start of edit category modal -->
+                                        <div class="modal fade" id="edit-categ-modal-<?php echo $row[0]?>" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                            <?php echo $row[1];?>
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Category:
+                                                            <?php echo $row[1];?> </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                             &times;
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="editcategory" class="label-styles">Category</label>
-                                                            <input type="text" class="form-control" value="<?php echo $row[1]?>" name="newCategName" placeholder="Enter new category name">
-                                                            <input type="hidden" name="categ_id" value="<?php echo $row[0]?>" />
+                                                            <label for="editcategory"
+                                                                class="label-styles">Category</label>
+                                                            <input type="text" class="form-control"
+                                                                value="<?php echo $row[1]?>" name="editcategory"
+                                                                placeholder="Enter new project name">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="submit" name="edit_category" class="btn btn-success" value="Save">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-success">Save</button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- End of edit category modal -->
+                                        <!-- End of edit category modal -->
+                                    </form>
                                     <?php
                                             }
                                         ?>
@@ -237,7 +245,11 @@
 
 
                         </div>
-                        <div class="tab-pane fade show adding-of-materials-container" id="nav-unit" role="tabpanel" aria-labelledby="nav-unit-tab">
+                        <!-- End of Category -->
+
+                        <!-- Start of Unit-->
+                        <div class="tab-pane fade show adding-of-materials-container" id="nav-unit" role="tabpanel"
+                            aria-labelledby="nav-unit-tab">
                             <form action="../server.php" method="POST">
                                 <table class="table new-category-table table-striped table-bordered">
                                     <thead>
@@ -246,28 +258,31 @@
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="add-categ-table">
+                                    <tbody id="add-unit-table">
                                     </tbody>
                                     <tfoot>
-                                        <tr id="add-categ-row">
-                                            <td><input class="form-control" name="category[]" type="text" id="category" placeholder="Unit">
+                                        <tr id="add-unit-row">
+                                            <td><input class="form-control" type="text" id="units" placeholder="Unit">
                                             </td>
                                             <td colspan="5">
-                                                <input type="button" class="btn btn-md btn-outline-secondary addCat-row" value="Add Row" />
+                                                <input type="button"
+                                                    class="btn btn-md btn-outline-secondary addUnit-row"
+                                                    value="Add Row" />
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
-                                        <button type="submit" name="newCategory" class="btn btn-primary">Save
+                                        <button type="submit" name="create_unit" class="btn btn-primary">Save
                                             Changes</button>
                                         <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                             </form>
 
-                            <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display"
+                                id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th>Unit</th>
@@ -275,32 +290,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <tr>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit-unit-modal-<?php echo $row[0]?>">Edit</button>
+                                        <td><?php echo $row[1]?></td>
+                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                                data-target="#edit-unit-modal-<?php echo $row[0]?>">Edit</button>
                                         </td>
                                     </tr>
+
                                     <!-- Start of edit unit modal -->
-                                    <div class="modal fade" id="edit-unit-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="edit-unit-modal-<?php echo $row[0]?>" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                        <?php echo $row[1];?>
-                                                    </h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        &times;
+                                                        Unit: <?php echo $row[1];?> </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for="editcategory" class="label-styles">Unit</label>
-                                                        <input type="text" class="form-control" value="<?php echo $row[1]?>" name="editcategory" placeholder="Enter new project name">
+                                                        <input type="text" class="form-control"
+                                                            value="<?php echo $row[1]?>" name="editunit"
+                                                            placeholder="Enter new project name">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-success">Save</button>
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -309,6 +330,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!-- End of Unit -->
+                        <!-- Start of Materials -->
                         <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
                             <form class="needs-validation" novalidate>
                                 <table class="table new-category-table">
@@ -413,15 +436,94 @@
                                             <td>
                                                 <?php echo $row[2];?>
                                             </td>
-                                            <td><input type="button" class="btn btn-md btn-outline-secondary" value="Edit" /></td>
+                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
+                                                    value="Edit" data-toggle="modal"
+                                                    data-target="#edit-material-modal-<?php echo $row[0]?>" /></td
                                         </tr>
-                                        <?php
+                                        <!-- Start of edit material modal -->
+                                        <div class="modal fade" id="edit-material-modal-<?php echo $row[0]?>"
+                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                            Material: <?php echo $row[1];?> </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            &times;
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="editcategory" class="label-styles">Unit</label>
+                                                            <select class="custom-select">
+                                                                <option selected disabled>Choose Category</option>
+                                                                <?php 
+                                                    $sql = "SELECT
+                                                        categories_name
+                                                    FROM
+                                                        categories
+                                                    ORDER BY 1;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
+                                                                <option value="<?php echo $row[0]?>">
+                                                                    <?php echo $row[0]?>
+                                                                </option>
+                                                                <?php
+                                            }
+                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label for="editmaterialname" class="label-styles">Material Name</label>
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Material Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label for="editthreshold" class="label-styles">Threshold</label>
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Threshold">
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label for="editunit" class="label-styles">Unit</label>
+                                                            <select class="custom-select">
+                                                                <option value="" selected disabled>Choose unit</option>
+                                                                <?php 
+                                                    $sql = "SELECT
+                                                        unit_name
+                                                    FROM
+                                                        unit
+                                                    ORDER BY 1;";
+                                            $result = mysqli_query($conn, $sql);
+                                            while($row = mysqli_fetch_row($result)){
+                                        ?>
+                                                                <option value="<?php echo $row[0]?>">
+                                                                    <?php echo $row[0]?>
+                                                                </option>
+                                                                <?php
+                                            }
+                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of edit unit modal -->
+                                            <?php
                                             }
                                         ?>
                                     </tbody>
                                 </table>
                             </form>
                         </div>
+                        <!-- end of Materials -->
                     </div>
                 </div>
             </div>
@@ -488,7 +590,20 @@
             $(this).closest('tr').remove();
         });
 
+        $(".addUnit-row").click(function () {
+            var units = $("#units").val();
+            var markup = "<tr><td><input type='text' name='units[]' class='form-control' value='" +
+                units +
+                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((units != '')) {
+                $("table #add-unit-table").append(markup);
+                $("#add-unit-row input[type=text]").val('');
+            }
+        });
 
+        $("#add-unit-table").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
+        });
     });
 
 </script>

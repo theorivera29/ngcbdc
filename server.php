@@ -374,12 +374,12 @@ if (isset($_POST['edit_project'])) {/*
     }
 
     if (isset($_POST['create_unit'])) {
-        $unit = $_POST['unit'];
+        $units = $_POST['units'];
 
-            for($x = 0; $x < sizeof($unit); $x++){
+            for($x = 0; $x < sizeof($units); $x++){
                 $stmt = $conn->prepare("INSERT INTO unit (unit_name)
                     VALUES (?);");
-                $stmt->bind_param("s", $unit[$x]);
+                $stmt->bind_param("s", $units[$x]);
                 $stmt->execute();
                 $stmt->close();
                 
