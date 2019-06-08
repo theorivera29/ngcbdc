@@ -133,6 +133,8 @@
                     <?php
                 }   
              ?>
+             </tbody>
+             <tfoot>
                     <tr>
                         <td colspan="4">
 
@@ -144,7 +146,7 @@
                             </div>
                         </td>
                     </tr>
-                </tbody>
+            </tfoot>
             </table>
 
         </form>
@@ -162,7 +164,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#mydatatable').DataTable();
-
         $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function() {

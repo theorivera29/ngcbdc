@@ -183,8 +183,9 @@
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
-                            <div class="card category-card">
-                                <form action="../server.php" method="POST">
+                            <form action="../server.php" method="POST">
+                                <div class="card category-card">
+
                                     <h5 class="card-header"><?php echo $row[1];?></h5>
                                     <div class="card-body category-card-body">
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
@@ -193,8 +194,9 @@
                                             id="open-category-btn"
                                             onclick="window.location.href='materialCategories.php'">View</button>
                                     </div>
-                                </form>
-                            </div>
+
+                                </div>
+                            </form>
                             <?php
                                 }
                             ?>
