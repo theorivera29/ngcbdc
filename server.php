@@ -622,8 +622,6 @@ if (isset($_POST['edit_project'])) {/*
             $newCategName = mysqli_real_escape_string($conn, $_POST['newCategName']);
             $categ_id = mysqli_real_escape_string($conn, $_POST['categ_id']);
             
-            echo var_dump($categ_id);
-            
             $stmt = $conn->prepare("UPDATE categories SET categories_name = ? WHERE categories_id = ?;");
             $stmt->bind_param("si", $newCategName, $categ_id);
             $stmt->execute();
@@ -635,6 +633,24 @@ if (isset($_POST['edit_project'])) {/*
             $stmt->execute();
             $stmt->close();*/
         //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
+    }
+
+    if (isset($_POST['edit_unit'])) {
+            $unit_name = mysqli_real_escape_string($conn, $_POST['unit_name']);
+            $unit_id = mysqli_real_escape_string($conn, $_POST['unit_id']);
+            
+            $stmt = $conn->prepare("UPDATE unit SET unit_name = ? WHERE unit_id = ?;");
+            $stmt->bind_param("si", $unit_name, $unit_id);
+            $stmt->execute();
+            $stmt->close();
+        
+/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
+            $logs_message = 'Change email to '.$newemail;
+            $logs_of = $account_id;
+            $stmt->execute();
+            $stmt->close();*/
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
     if (isset($_POST['create_deliveredin'])) {

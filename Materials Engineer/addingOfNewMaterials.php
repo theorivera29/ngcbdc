@@ -290,42 +290,56 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <?php 
+                                                    $sqlunit = "SELECT
+                                                        unit_name,
+                                                        unit_id
+                                                    FROM
+                                                        unit
+                                                    ORDER BY 1;";
+                                            $resultunit = mysqli_query($conn, $sqlunit);
+                                            while($rowunit = mysqli_fetch_row($resultunit)){
+                                        ?>
                                     <tr>
-                                        <td><?php echo $row[1]?></td>
-                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                                data-target="#edit-unit-modal-<?php echo $row[0]?>">Edit</button>
+                                        <td>
+                                            <?php echo $rowunit[0]?>
+                                        </td>
+                                        <td><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit-unit-modal-<?php echo $rowunit[1]?>">Edit</button>
+
                                         </td>
                                     </tr>
 
                                     <!-- Start of edit unit modal -->
-                                    <div class="modal fade" id="edit-unit-modal-<?php echo $row[0]?>" tabindex="-1"
-                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                        Unit: <?php echo $row[1];?> </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="editcategory" class="label-styles">Unit</label>
-                                                        <input type="text" class="form-control"
-                                                            value="<?php echo $row[1]?>" name="editunit"
-                                                            placeholder="Enter new project name">
+                                    <div class="modal fade" id="edit-unit-modal-<?php echo $rowunit[1]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <form action="../server.php" method="POST">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                            <?php echo $rowunit[0];?>
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            &times;
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="editcategory" class="label-styles">Unit</label>
+                                                            <input type="text" class="form-control" value="<?php echo $rowunit[0]; ?>" name="unit_name" placeholder="Enter new unit name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" value="<?php echo $rowunit[1];?>" name="unit_id" />
+                                                        <button type="submit" name="edit_unit" class="btn btn-success">Save</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success">Save</button>
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-dismiss="modal">Cancel</button>
-                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
+                                    <?php
+                                        }
+                                    ?>
                                     <!-- End of edit unit modal -->
                                 </tbody>
                             </table>
@@ -416,7 +430,8 @@
                                             $sql = "SELECT
                                                         categories.categories_name,
                                                         materials.mat_name,
-                                                        unit.unit_name
+                                                        unit.unit_name,
+                                                        materials.mat_id
                                                     FROM
                                                         materials
                                                     INNER JOIN
@@ -436,9 +451,8 @@
                                             <td>
                                                 <?php echo $row[2];?>
                                             </td>
-                                            <td><input type="button" class="btn btn-md btn-outline-secondary"
-                                                    value="Edit" data-toggle="modal"
-                                                    data-target="#edit-material-modal-<?php echo $row[0]?>" /></td
+                                            <td><input type="button" data-target="#edit-material-modal-<?php echo $row[3]?>" class="btn btn-md btn-outline-secondary" value="Edit" /></td>
+
                                         </tr>
                                         <!-- Start of edit material modal -->
                                         <div class="modal fade" id="edit-material-modal-<?php echo $row[0]?>"
@@ -527,6 +541,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </body>
 
