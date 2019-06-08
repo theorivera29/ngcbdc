@@ -283,14 +283,15 @@
             </tbody>
         </table>
     </div>
+    <!-- START DONE MODAL -->
     <div class="modal fade" id="done-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you are done with this task?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <h4>Are you sure you are done with this task?</h4>
+                        &times;
                     </button>
                 </div>
                 <div class="modal-body">
@@ -304,29 +305,30 @@
             </div>
         </div>
     </div>
-
+    <!-- END DONE MODAL -->
+    <!-- START CLEAR MODAL -->
     <div class="modal fade" id="clear-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to clear this task?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <h4>Are you sure you want to clear this task?</h4>
+                        &times;
                     </button>
                 </div>
                 <div class="modal-body">
                     NAME NG TASK
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Yes</button>
+                    <button type="button"  class="btn btn-success">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- END CLEAR MODAL -->
 </body>
 <script type="text/javascript">
     function openSlideMenu() {
