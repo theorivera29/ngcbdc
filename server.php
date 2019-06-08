@@ -373,6 +373,20 @@ if (isset($_POST['edit_project'])) {/*
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
+    if (isset($_POST['create_unit'])) {
+        $units = $_POST['units'];
+
+            for($x = 0; $x < sizeof($units); $x++){
+                $stmt = $conn->prepare("INSERT INTO unit (unit_name)
+                    VALUES (?);");
+                $stmt->bind_param("s", $units[$x]);
+                $stmt->execute();
+                $stmt->close();
+                
+                }
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
+    }
+
     if (isset($_POST['create_materials'])) {
         $categ = $_POST['categ'];
         $materials = $_POST['material'];
