@@ -142,6 +142,7 @@
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_row($result)) {
                         ?>
+                            <form action="../server.php" method="POST">
                             <div class="card project-container">
                                 <h5 class="card-header card-header-project"><?php echo $row[0] ;?></h5>
                                 <div class="card-body">
@@ -159,6 +160,7 @@
                                         onclick="window.location.href = 'previousReportsPage.php'">View Reports</button>
                                 </div>
                             </div>
+                            </form>
                         <?php
                             }
                         ?> 
@@ -182,6 +184,7 @@
                             $result1 = mysqli_query($conn, $sql);
                             while ($row1 = mysqli_fetch_row($result1)) {
                         ?>
+                            <form action="../server.php" method="POST">
                             <div class="card project-container">
                                 <h5 class="card-header card-header-project"><?php echo $row1[0] ;?></h5>
                                 <div class="card-body">
@@ -199,6 +202,7 @@
                                         name="prevViewInventory">View inventory</button>
                                 </div>
                             </div>
+                            </form>
                         <?php
                             }   
                         ?>
