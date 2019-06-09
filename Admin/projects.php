@@ -106,7 +106,6 @@
             <div class="project-tabs-content">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <form action="../server.php" method="POST">
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
@@ -158,6 +157,8 @@
                                                 while($rowedit = mysqli_fetch_row($resultedit)){
                                             ?>
                                             <div class="modal-content">
+                                                <form action="../server.php" method="POST">
+                                                <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit
                                                         <?php echo $rowedit[0]?> Project</h5>
@@ -198,7 +199,8 @@
                                                     <div class="form-group">
                                                         <?php
                                                                 $sqlmateng = "SELECT 
-                                                                CONCAT(accounts_fname, accounts_lname), accounts_id FROM accounts;";
+                                                                CONCAT(accounts_fname, ' ', accounts_lname), accounts_id FROM accounts
+                                                                WHERE NOT accounts_id BETWEEN 1 AND 3;";
                                                                 $resultmateng = mysqli_query($conn, $sqlmateng);
                                                                 while($rowmateng = mysqli_fetch_row($resultmateng)){
                                                             ?>
@@ -219,6 +221,7 @@
                                                             value="Cancel">
                                                     </div>
                                                 </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -226,9 +229,9 @@
                                     <!-- Start of Close Modal -->
                                     <div class="modal fade" id="close-proj-modal-<?php echo $row[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
+                                            <form action="../server.php" method="POST">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure you
                                                         want
@@ -239,12 +242,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                                     <button type="submit" class="btn btn-success"
                                                         name="close_project">Yes</button>
                                                     <button type="button" class="btn btn-danger"
                                                         data-dismiss="modal">No</button>
-
                                                 </div>
+                                            </form>
                                             </div>
                                         </div>
                                     </div>
@@ -255,11 +259,9 @@
                                     ?>
                                 </tbody>
                             </table>
-                        </form>
                     </div>
 
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <form action="../server.php" method="POST">
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
@@ -303,13 +305,13 @@
                                     </tr>
 
 
-
+                                    
                                     <!-- Start of Reopen Modal -->
                                     <div class="modal fade" id="reopen-proj-modal-<?php echo $row1[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
+                                            <form action="../server.php" method="POST">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
                                                         to reopen <?php echo $row1[0] ;?> project?</h5>
@@ -319,17 +321,20 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <input type="hidden" name="projects_id" value="<?php echo $row1[4];?>">
                                                     <button type="submit" class="btn btn-success"
                                                         name="reopen_project">Yes</button>
                                                     <button type="button" class="btn btn-danger"
                                                         data-dismiss="modal">No</button>
 
                                                 </div>
+                                            </form>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End of Reopen Modal -->
                                     <!-- Start of Delete Modal -->
+                                    <form action="../server.php" method="POST">
                                     <div class="modal fade" id="delete-proj-modal-<?php echo $row1[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -353,13 +358,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                     <!-- End of Delete Modal -->
                                     <?php
                                         }
                                     ?>
                                 </tbody>
                             </table>
-                        </form>
                     </div>
 
                 </div>
