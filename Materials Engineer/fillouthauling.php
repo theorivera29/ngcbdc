@@ -174,13 +174,11 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr id="haulingRow">
-                                                        <td><input class="form-control" name="quantity" type="text"
-                                                                id="quantity" placeholder="Quantity"
-                                                                 >
+                                                        <td><input class="form-control" name="quantity" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>
                                                         </td>
                                                         <td>
                                                             <div class="form-group">
-                                                                <select class="form-control" name="articles"
+                                                                <select class="form-control" name="articles" 
                                                                     id="articles">
                                                                     <option value="" selected disabled>Choose an Article
                                                                     </option>
@@ -188,8 +186,7 @@
                                                             </div>
                                                             
                                                         </td>
-                                                        <td><input class="form-control" name="unit" type="text"
-                                                                id="unit" placeholder="Unit">
+                                                        <td><input class="form-control" name="unit" pattern="[A-Za-z\s]*" title="Input letters" type="text"id="unit" placeholder="Unit">
                                                         </td>
                                                         <td colspan="5">
                                                             <input type="button"
@@ -204,15 +201,13 @@
                                             <div class="form-group col-lg-6">
                                                 <label class="col-lg-12 col-form-label">Requested by:</label>
                                                 <div class="col-lg-12">
-                                                    <input class="form-control" type="text" name="requestedBy"
-                                                         required>
+                                                    <input class="form-control" type="text" name="requestedBy" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label class="col-lg-12 col-form-label">Hauled by:</label>
                                                 <div class="col-lg-12">
-                                                    <input class="form-control" type="text" name="hauledBy"
-                                                         required>
+                                                    <input class="form-control" type="text" name="hauledBy" pattern="[A-Za-z\s]*" title="Input letters"required>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,13 +215,11 @@
                                             <div class="form-group col-lg-6">
                                                 <label class="col-lg-12 col-form-label">Warehouseman:</label>
                                                 <div class="col-lg-12">
-                                                    <input class="form-control" type="text" name="warehouseman"
-                                                         required>
+                                                    <input class="form-control" type="text" name="warehouseman" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                 </div>
                                                 <label class="col-lg-12 col-form-label">Approved by:</label>
                                                 <div class="col-lg-12">
-                                                    <input class="form-control" type="text" name="approvedBy"
-                                                         required>
+                                                    <input class="form-control" type="text" name="approvedBy" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                 </div>
                                             </div>
 
@@ -238,23 +231,22 @@
                                                     <div class="card-body form-group row col-lg-12">
                                                         <label class="col-lg-4 col-form-label">Type:</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="type"
-                                                                 required>
+                                                            <input class="form-control" type="text" name="type" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                            
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Plate #:</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="plateNo"
-                                                                  required>
+                                                            <input class="form-control" type="text" name="plateNo" 
+                                                            pattern="[A-Za-z0-9\s]*" title="Input letters and numbers"required>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                         <div class="col-lg-8">
                                                             <input class="form-control" type="text" name="PORS"
-                                                                 required>
+                                                            pattern="[A-Za-z0-9\s]*" title="Input letters and numbers" required>
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="haulerID"
+                                                            <input class="form-control" type="text" name="haulerID" pattern="[0-9]*" title="Input numbers"
                                                                  required>
                                                         </div>
                                                     </div>
@@ -284,8 +276,7 @@
                                                 <div class=" col-lg-12">
                                                     <label class="col-lg-12 col-form-label">Form No.:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="formNo"
-                                                              required>
+                                                        <input class="form-control" type="text" name="formNo" pattern="[0-9]*" title="Input numbers" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,15 +291,13 @@
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Deliver to:</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="deliverTo"
-                                                         required>
+                                                    <input class="form-control" type="text" name="deliverTo" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="hauledFrom"
-                                                         required>
+                                                    <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -324,8 +313,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr id="haulingRow">
-                                                            <td><input class="form-control" name="quantity" type="text"
-                                                                    id="quantity" placeholder="Quantity"
+                                                            <td><input class="form-control" name="quantity" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity"
                                                                      >
                                                             </td>
                                                             <td>
@@ -338,8 +326,7 @@
                                                                     </select>
                                                                 </div>
                                                             </td>
-                                                            <td><input class="form-control" name="unit" type="text"
-                                                                    id="unit" placeholder="Unit">
+                                                            <td><input class="form-control" name="unit" pattern="[A-Za-z\s]*" title="Input letters" type="text" id="unit" placeholder="Unit">
                                                             </td>
                                                             <td colspan="5">
                                                                 <input type="button"
@@ -354,15 +341,13 @@
                                                 <div class="form-group col-lg-6">
                                                     <label class="col-lg-12 col-form-label">Requested by:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="requestedBy"
-                                                             required>
+                                                        <input class="form-control" type="text" name="requestedBy" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6">
                                                     <label class="col-lg-12 col-form-label">Hauled by:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="hauledBy"
-                                                             required>
+                                                        <input class="form-control" type="text" name="hauledBy" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -370,13 +355,11 @@
                                                 <div class="form-group col-lg-6">
                                                     <label class="col-lg-12 col-form-label">Warehouseman:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="warehouseman"
-                                                             required>
+                                                        <input class="form-control" type="text" name="warehouseman" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                     </div>
                                                     <label class="col-lg-12 col-form-label">Approved by:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="approvedBy"
-                                                             required>
+                                                        <input class="form-control" type="text" name="approvedBy" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                     </div>
                                                 </div>
 
@@ -388,23 +371,22 @@
                                                         <div class="card-body form-group row col-lg-12">
                                                             <label class="col-lg-4 col-form-label">Type:</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="type"
-                                                                     required>
+                                                                <input class="form-control" type="text" name="type" pattern="[A-Za-z\s]*" title="Input letters" required>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">Plate #:</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="plateNo"
-                                                                      required>
+                                                                <input class="form-control" type="text" name="plateNo" 
+                                                                pattern="[A-Za-z0-9\s]*" title="Input letters and numbers" required>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="PORS"
-                                                                     required>
+                                                                <input class="form-control" type="text" name="PORS" 
+                                                                pattern="[A-Za-z0-9\s]*" title="Input letters and numbers" required>
                                                             </div>
                                                             <label class="col-lg-4 col-form-label">Hauler ID:</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" type="text" name="haulerID"
-                                                                     required>
+                                                                <input class="form-control" type="text" name="haulerID" 
+                                                                pattern="[0-9\s]*" title="Input letters and numbers"required>
                                                             </div>
                                                         </div>
                                                     </div>

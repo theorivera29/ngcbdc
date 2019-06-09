@@ -65,31 +65,21 @@
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT
-                            categories.categories_name, materials.mat_name, unit.unit_name 
-                        FROM 
-                            materials 
-                        INNER JOIN 
-                            categories 
-                        ON   
-                            materials.mat_categ = categories.categories_id 
-                        INNER JOIN 
-                            unit 
-                        ON 
-                            materials.mat_unit = unit.unit_id 
-                        INNER JOIN 
-                            matinfo 
-                        ON 
-                            materials.mat_id = matinfo.matinfo_id 
-                        WHERE                      
-                            matinfo.matinfo_project = 1;";
+                $sql = "SELECT categories.categories_name, materials.mat_name, unit.unit_name FROM materials INNER JOIN categories ON materials.mat_categ = categories.categories_id 
+                INNER JOIN unit ON materials.mat_unit = unit.unit_id INNER JOIN matinfo ON matinfo.matinfo_matname = materials.mat_id WHERE matinfo.matinfo_project = 1;";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_row($result)) {
                 ?>
                 <tr>
-                    <td><?php echo $row[0]; ?></td>
-                    <td><?php echo $row[1]; ?></td>
-                    <td><?php echo $row[2]; ?></td>
+                    <td>
+                        <?php echo $row[0]; ?>
+                    </td>
+                    <td>
+                        <?php echo $row[1]; ?>
+                    </td>
+                    <td>
+                        <?php echo $row[2]; ?>
+                    </td>
                 </tr>
                 <?php
                 }   
@@ -133,8 +123,8 @@
                     <?php
                 }   
              ?>
-             </tbody>
-             <tfoot>
+                </tbody>
+                <tfoot>
                     <tr>
                         <td colspan="4">
 
@@ -146,7 +136,7 @@
                             </div>
                         </td>
                     </tr>
-            </tfoot>
+                </tfoot>
             </table>
 
         </form>
