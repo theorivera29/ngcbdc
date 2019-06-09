@@ -17,10 +17,15 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -36,7 +41,8 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="../logout.php">Logout</a>
@@ -58,7 +64,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Account</a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                             <li>
                                 <a href="accountcreation.php" id="sideNav-a">Create Account</a>
@@ -94,14 +101,24 @@
                     </div>
                     <button type="button" class="btn btn-primary add-project-btn" data-dismiss="modal"
                         onclick="window.location.href = 'addProject.php'">Add Project</button>
-
                 </div>
-                <div class="project-tabs-content">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab">
-                            <div class="card project-container">
-                                <?php
+            </div>
+            <div class="project-tabs-content">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <form action="../server.php" method="POST">
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                     $sql = "SELECT
                                         projects_name,
                                         projects_address,
@@ -115,28 +132,13 @@
                                         $result = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_row($result)) {
                                     ?>
-                                <form action="../server.php" method="POST">
-                                    <div>
-                                        <h5 class="card-header card-header-project">
-                                            <?php echo $row[0] ;?>
-                                        </h5>
-                                        <div class="card-body">
-                                            <span>
-                                                <h5>
-                                                    <?php echo $row[1] ;?>
-                                                </h5>
-                                            </span>
-                                            <span>
-                                                <h5>Start Date:
-                                                    <?php echo $row[2] ;?>
-                                                </h5>
-                                            </span>
-                                            <span>
-                                                <h5>End Date:
-                                                    <?php echo $row[3] ;?>
-                                                </h5>
-                                            </span>
-                                            <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                             <input type="hidden" name="projectName" value="<?php echo $row[0];?>">
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#edit-project-modal-<?php echo $row[4]?>">Edit</button>
@@ -144,8 +146,8 @@
                                                 data-toggle="modal"
                                                 data-target="#close-proj-modal-<?php echo $row[4]?>">Close
                                                 Project</button>
-                                        </div>
-                                    </div>
+                                        </td>
+                                    </tr>
                                     <!-- Start of Edit Modal -->
                                     <div class="modal fade" id="edit-project-modal-<?php echo $row[4]?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -157,10 +159,11 @@
                                             ?>
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit <?php echo $rowedit[0]?> Project</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                        <?php echo $rowedit[0]?> Project</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                       &times;
+                                                        &times;
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -178,7 +181,8 @@
                                                             placeholder="Enter new project address">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="startDate" class="label-styles">Start Date:</label>
+                                                        <label for="startDate" class="label-styles">Start
+                                                            Date:</label>
                                                         <input type="date" value="<?php echo $rowedit[2]?>"
                                                             name="newStartDate" class="form-control">
                                                     </div>
@@ -226,7 +230,8 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you
+                                                        want
                                                         to close <?php echo $row[0];?> project?</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -244,16 +249,30 @@
                                         </div>
                                     </div>
                                     <!-- End of Close Modal -->
-                                </form>
-                                <?php
+
+                                    <?php
                                         }
                                     ?>
-                            </div>
-                        </div>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
 
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="card project-container">
-                                <?php
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <form action="../server.php" method="POST">
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
                                     $sql = "SELECT
                                         projects_name,
                                         projects_address,
@@ -267,38 +286,24 @@
                                         $result1 = mysqli_query($conn, $sql);
                                         while ($row1 = mysqli_fetch_row($result1)) {
                                     ?>
-                                <form action="../server.php" method="POST">
-                                    <h5 class="card-header card-header-project">
-                                        <?php echo $row1[0] ;?>
-                                    </h5>
-                                    <div class="card-body">
-                                        <input type="hidden" name="projects_id" value="<?php echo $row1[4];?>">
 
-                                        <span>
-                                            <h5>
-                                                <?php echo $row1[1] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>Start Date:
-                                                <?php echo $row1[2] ;?>
-                                            </h5>
-                                        </span>
-                                        <span>
-                                            <h5>End Date:
-                                                <?php echo $row1[3] ;?>
-                                            </h5>
-                                        </span>
-                                        <input type="hidden" name="projectName" value="<?php echo $row1[0];?>">
-                                        <button type="button" class="btn btn-success" name="reopen_project"
-                                            data-toggle="modal"
-                                            data-target="#reopen-proj-modal-<?php echo $row1[4]?>">Re-Open
-                                            Project</button>
-                                        <button type="button" class="btn btn-danger" name="delete_project"
-                                            data-toggle="modal"
-                                            data-target="#delete-proj-modal-<?php echo $row1[4]?>">Delete
-                                            Project</button>
-                                    </div>
+                                    <tr>
+                                        <td><?php echo $row1[0] ;?></td>
+                                        <td><?php echo $row1[1] ;?></td>
+                                        <td><?php echo $row1[2] ;?></td>
+                                        <td><?php echo $row1[3] ;?></td>
+                                        <td><input type="hidden" name="projectName" value="<?php echo $row1[0];?>">
+                                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                                data-target="#reopen-proj-modal-<?php echo $row1[4]?>">Re-Open
+                                                Project</button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#delete-proj-modal-<?php echo $row1[4]?>">Delete
+                                                Project</button>
+                                        </td>
+                                    </tr>
+
+
+
                                     <!-- Start of Reopen Modal -->
                                     <div class="modal fade" id="reopen-proj-modal-<?php echo $row1[4];?>" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -349,17 +354,18 @@
                                         </div>
                                     </div>
                                     <!-- End of Delete Modal -->
-                                </form>
-                                <?php
-                                        }   
+                                    <?php
+                                        }
                                     ?>
-                            </div>
-                        </div>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
+
                 </div>
             </div>
-        </div>
     </section>
+
 </body>
 <script>
     function openSlideMenu() {
@@ -372,7 +378,8 @@
     }
 
     $(document).ready(function () {
-
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
