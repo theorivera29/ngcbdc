@@ -718,6 +718,10 @@ textarea{
 .cancel-accnt-btn{
     display: inline-block;
 }
+
+.show-pass{
+    margin-left: 4% !important;
+}
 /*End of Materials Engineer - Account*/
 
 /*Start of Materials Engineer - Adding of Materials*/

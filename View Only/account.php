@@ -131,12 +131,6 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="col-lg-2 col-form-label">Password</label>
-                        <div class="col-lg-4">
-                            <input class="form-control" type="password" value="<?php echo $row[4]?>" name="password">
-                        </div>
-                    </div>
-                    <div class="row form-group">
                         <label class="col-lg-2 col-form-label">New Password</label>
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="pass" id="pass">
@@ -145,7 +139,11 @@
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="confpass" id="confpass">
                         </div>
-                        <div class="form-group">
+                        <div class="col">
+                            <input type="checkbox" id="checkbox-new-password" onclick="showNewPassword()" />
+                            <label for="checkbox-new-password" >Show new password</label>
+                        </div>
+                        <div class="col">
                             <span class="error" style="color:red"></span><br />
                         </div>
                     </div>
@@ -208,6 +206,21 @@
         });
 
     });
+
+    function showNewPassword() {
+        var show = document.getElementById("pass");
+        if (show.type === "password") {
+            show.type = "text";
+        } else {
+            show.type = "password";
+        }
+        var showconfirm = document.getElementById("confpass");
+        if (showconfirm.type === "password") {
+            showconfirm.type = "text";
+        } else {
+            showconfirm.type = "password";
+        }
+    }
 </script>
 
 </html>
