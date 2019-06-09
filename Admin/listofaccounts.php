@@ -115,7 +115,13 @@
                     <td><?php echo $row[3]?></td>
                     <td><?php echo $row[4]?></td>
                     <td><?php echo $row[5]?></td>
-                    <td><button type="button" class="btn btn-danger">Disable</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#disable-modal">Disable</button></td>
+                    
+                    <!-- DAPAT LALABAS LANG TO KAPAG DINISABLE NIYA NA 
+                    <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#enable-modal">Enable</button></td> 
+                    -->
                 </tr>
             
             <?php
@@ -124,6 +130,48 @@
             </tbody>
         </table>
     </div>
+    <!-- Start of ENABLE confirmation modal -->
+    <div class="modal fade" id="enable-modal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to enable
+                    (BACKEND ECHO MO NAME DITO NG IENABLE)'s account?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of ENABLE confirmation modal -->
+    <!-- Start of DISABLE confirmation modal -->
+    <div class="modal fade" id="disable-modal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to disable
+                        (BACKEND ECHO MO NAME DITO NG IDIDISABLE)'s account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of DISABLE confirmation modal -->
 </body>
 
 <script type="text/javascript">

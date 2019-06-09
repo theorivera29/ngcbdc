@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -110,23 +110,23 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
-
     </div>
-    
-    <table class="table returns-table table-striped table-bordered display" id="mydatatable">
-        <thead>
-            <tr>
-                <th scope="col">Form No.</th>
-                <th scope="col">Hauling Date</th>
-                <th scope="col">Hauled From</th>
-                <th scope="col">Hauled By</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
+
+    <div class="returns-content">
+    <h4 class="card-header">List of Materials To Be Return</h4>
+        <table class="table returns-table table-striped table-bordered display" id="mydatatable">
+            <thead>
+                <tr>
+                    <th scope="col">Form No.</th>
+                    <th scope="col">Hauling Date</th>
+                    <th scope="col">Hauled From</th>
+                    <th scope="col">Hauled By</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
                 $sql = "SELECT
                             hauling.hauling_no,
                             hauling.hauling_date,
@@ -136,20 +136,20 @@
                             hauling
                         WHERE";
             ?>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><button type="button" class="btn btn-success"
-                        onclick="window.location.href = 'returnHauledMaterial.php'">Open</button></td>
-            </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button type="button" class="btn btn-success"
+                            onclick="window.location.href = 'returnHauledMaterial.php'">Open</button></td>
+                </tr>
 
-            <?php
+                <?php
 
             ?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
 
 </body>

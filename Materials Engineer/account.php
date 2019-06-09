@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -153,7 +153,11 @@
                         <div class="col-lg-4">
                             <input class="form-control" type="password" name="confpass" id="confpass">
                         </div>
-                        <div class="form-group">
+                        <div class="col">
+                            <input type="checkbox" id="checkbox-new-password" onclick="showNewPassword()" />
+                            <label for="checkbox-new-password" >Show new password</label>
+                        </div>
+                        <div class="col">
                             <span class="error" style="color:red"></span><br />
                         </div>
                     </div>
@@ -194,7 +198,7 @@
                     $('.error').text('');
                     allowsubmit = true;
                 } else {
-                    $('.error').text('Password not matching');
+                    $('.error').text('Password do not matched');
                     allowsubmit = false;
                 }
             });
@@ -216,6 +220,21 @@
         });
 
     });
+
+    function showNewPassword() {
+        var show = document.getElementById("pass");
+        if (show.type === "password") {
+            show.type = "text";
+        } else {
+            show.type = "password";
+        }
+        var showconfirm = document.getElementById("confpass");
+        if (showconfirm.type === "password") {
+            showconfirm.type = "text";
+        } else {
+            showconfirm.type = "password";
+        }
+    }
 </script>
 
 </html>
