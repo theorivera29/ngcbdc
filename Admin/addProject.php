@@ -96,7 +96,7 @@
             </div>
             <div class="form-group">
                 <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="startDate" id="startDate" type="date" class="form-control" required>
+                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()" required>
             </div>
             <div class="form-group">
                 <label for="endDate" class="label-styles">END DATE:</label>
@@ -173,13 +173,21 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
-    // $(document).ready(function () {
-    //     $('#multiselect').multiselect({
-    //         buttonWidth: '75%',
-    //         includeSelectAllOption: true,
-    //         nonSelectedText: 'Select Materials Engineer'
-    //     });
-    // });
+    function startDateEnable(){
+        var date = $("#startDate").val();
+        var dtToday = new Date(date);
+        
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var start = year + '-' + month + '-' + day;
+        $('#endDate').attr('min', start);
+    }
 
     $(document).ready(function () {
         $(".add-proj").click(function (e) {
