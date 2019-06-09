@@ -155,19 +155,39 @@
                         </div>
                         <div class="col">
                             <input type="checkbox" id="checkbox-new-password" onclick="showNewPassword()" />
-                            <label for="checkbox-new-password" >Show new password</label>
+                            <label for="checkbox-new-password">Show new password</label>
                         </div>
                         <div class="col">
                             <span class="error" style="color:red"></span><br />
                         </div>
                     </div>
                     <div class="row form-group accnt-btn">
-
-                        <input type="submit" class="btn btn-success save-accnt-btn" name="update_account"
+                        <input type="button" class="btn btn-success save-accnt-btn" data-toggle="modal"
+                                data-target="#edit-acct-modal"
                             value="Save Changes">
                         <input type="reset" class="btn btn-danger cancel-accnt-btn" value="Cancel">
 
                     </div>
+                    <!-- Start of confirmation modal -->
+                    <div class="modal fade" id="edit-acct-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="update_account" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>

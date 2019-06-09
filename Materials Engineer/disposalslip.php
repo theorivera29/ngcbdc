@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -116,13 +116,12 @@
                 <h4>Disposal slip</h4>
             </div>
             <div class="card-body">
-                <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                <form action="../server.php" method="POST">
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="date" name="disposalDate" required>
-                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -187,58 +186,65 @@
             </div>
         </div>
     </div>
+    <!-- Start of confirmation modal -->
+    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
+                        changes?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="create_todo" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
-                var quantity = $("#quantity").val();
-                var articles = $("#articles").val();
-                var unit = $("#unit").val();
-                var remarks = $("#remarks").val();
-                var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
-                    "</td><td>" + remarks +
-                    "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                </div>
+            </div>
+        </div>
+    </div>
 
-                if ((quantity != '') && (articles != '') && (unit != '') && (remarks != '')) {
-                    $("table tbody").append(markup);
-                    $("#disposalRow input[type=text]").val('');
-                    $("#disposalRow select").val('');
-                }
-            });
-            $("#disposalTable").on('click', '.delete-row', function () {
-                $(this).closest('tr').remove();
-            });
+    <!-- End of confirmation modal -->
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".add-row").click(function () {
+            var quantity = $("#quantity").val();
+            var articles = $("#articles").val();
+            var unit = $("#unit").val();
+            var remarks = $("#remarks").val();
+            var markup = "<tr><td>" + quantity + "</td><td>" + articles + "</td><td>" + unit +
+                "</td><td>" + remarks +
+                "</td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+            if ((quantity != '') && (articles != '') && (unit != '') && (remarks != '')) {
+                $("table tbody").append(markup);
+                $("#disposalRow input[type=text]").val('');
+                $("#disposalRow select").val('');
+            }
+        });
+        $("#disposalTable").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
         });
 
-        $(function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
-        function openSlideMenu() {
-            document.getElementById('menu').style.width = '15%';
-        }
 
-        function closeSlideMenu() {
-            document.getElementById('menu').style.width = '0';
-            document.getElementById('content').style.marginLeft = '0';
-        }
-    </script>
-</body>
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+</script>
+
 
 </html>

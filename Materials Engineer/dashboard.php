@@ -130,10 +130,33 @@
                             <span id="characters">45</span><span id="char"> characters</span>
                         </div>
                         <div class="task-submitbtn-container">
-                            <button type="submit" class="btn btn-success" id="save-task-btn"
-                                name="create_todo">Save</button>
+                            <button type="button" class="btn btn-success" id="save-task-btn" data-toggle="modal"
+                                                data-target="#save-modal"
+                               >Save</button>
                         </div>
                     </div>
+                    <!-- Start of confirmation modal -->
+                    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
+                                        changes?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit"  name="create_todo" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>
@@ -209,8 +232,8 @@
                                 </tr>
                             </tbody>
                             <!-- START DONE MODAL -->
-                            <div class="modal fade" id="done-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="done-task-modal-<?php echo $row[0] ;?>" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -221,7 +244,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                        <?php echo $row[2] ;?>
+                                            <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-success">Yes</button>
@@ -234,8 +257,8 @@
                             </div>
                             <!-- END DONE MODAL -->
                             <!-- START CLEAR MODAL -->
-                            <div class="modal fade" id="clear-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="clear-task-modal-<?php echo $row[0] ;?>" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -246,7 +269,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                        <?php echo $row[2] ;?>
+                                            <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-success">Yes</button>
