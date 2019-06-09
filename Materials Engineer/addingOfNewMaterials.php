@@ -154,7 +154,7 @@
                                     <div class="col-lg-12">
                                         <button type="submit" name="create_category" class="btn btn-primary add-categ">Save
                                             Changes</button>
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                                 <!-- Start of confirmation modal -->
@@ -399,7 +399,7 @@
                                 <div class="row form-group save-btn-container">
                                     <div class="col-lg-12">
                                         <input type="submit" name="create_materials" class="btn btn-primary" value="Save Changes">
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
+                                        <input type="reset" class="btn btn-danger" value="Cancel">
                                     </div>
                                 </div>
                                 <table class="table view-inventory-tabs-table table-striped table-bordered display" id="mydatatable">
