@@ -127,7 +127,14 @@
             </thead>
             <tbody>
             <?php
-                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
+                        $sql = "SELECT 
+                                    lastmatinfo_month,
+                                    lastmatinfo_year,
+                                    lastmatinfo_id
+                                FROM  
+                                    lastmatinfo
+                                WHERE
+                                    lastmatinfo_project = '';";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
