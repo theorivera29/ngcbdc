@@ -86,17 +86,18 @@
         <form action="../server.php" method="POST">
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
-                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="[A-Za-z\s]*" title="Input letters" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
+                <input name="projectName" type="text" class="form-control" placeholder="Enter project name"
+                    pattern="[A-Za-z\s]*" title="Input letters" required>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z0-9\s][A-Za-z0-9!@#$%^&* ]*$" title="Input letters and numbers only" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
+                <input name="address" type="text" class="form-control" placeholder="Enter project address"
+                    pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
             <div class="form-group">
                 <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()" required>
+                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()"
+                    required>
             </div>
             <div class="form-group">
                 <label for="endDate" class="label-styles">END DATE:</label>
@@ -110,21 +111,22 @@
                     while($rowmateng = mysqli_fetch_row($resultmateng)){
                 ?>
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-2 col-md-12">
 
-                <div class="input-group-prepend">
+                <div class="input-group-prepend col-md-12 options">
 
                     <div class="input-group-text">
                         <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input"
-                            value="<?php echo $rowmateng[1]?>">
+                            value="<?php echo $rowmateng[1]?>" required>
                     </div>
+
+                    <input type="text" class="form-control" aria-label="Text input with checkbox"
+                        value="<?php echo $rowmateng[0]?>" disabled>
                 </div>
-                <input type="text" class="form-control" aria-label="Text input with checkbox"
-                    value="<?php echo $rowmateng[0]?>" disabled>
             </div>
             <?php
                     }
-                ?> 
+                ?>
 
             <div class="add-project-btn">
                 <button type="submit" class="btn btn-success add-proj">Save</button>
@@ -137,11 +139,11 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this project?</h5>
-                            <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        &times;
-                                                    </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this project?
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                &times;
+                            </button>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="create_project" class="btn btn-success">Yes</button>
@@ -173,10 +175,10 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
-    function startDateEnable(){
+    function startDateEnable() {
         var date = $("#startDate").val();
         var dtToday = new Date(date);
-        
+
         var month = dtToday.getMonth() + 1;
         var day = dtToday.getDate();
         var year = dtToday.getFullYear();
@@ -195,13 +197,25 @@
             var address = $("#address").val();
             var sdate = $("#startDate").val();
             var edate = $("#endDate").val();
-            var selectMat=$("#mateng option:selected").val();
-            if ((projname != '') && (address != '') && (sdate != '') && (edate != '') && (selectMat !='')) {
+            var selectMat = $("#mateng option:selected").val();
+            if ((projname != '') && (address != '') && (sdate != '') && (edate != '') && (selectMat !=
+                    '')) {
                 e.preventDefault();
                 $("#create-proj-modal").modal('show');
             }
         });
     });
+
+    $(function(){
+    var requiredCheckboxes = $('.options :checkbox[required]');
+    requiredCheckboxes.change(function(){
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        } else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+});
 </script>
 
 </html>
