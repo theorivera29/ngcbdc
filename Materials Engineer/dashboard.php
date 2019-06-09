@@ -119,12 +119,11 @@
         <div class="col-sm-5">
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
-                <form action="../server.php" method="POST" class="needs-validation" novalidate>
+                <form action="../server.php" method="POST">
                     <div class="card-body">
                         <p id="date-label">Date:</p>
                         <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID"
                             required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
                         <textarea class="form-control" id="task-textarea" name="todo_task" minlength="2" maxlength="45"
                             pattern="[A-Za-z0-9.,/!-+=()<>@#%^&*]{45}" required></textarea>
                         <div class="container-counter">
@@ -194,14 +193,14 @@
                                     if(strcmp($row[3], "in progress") == 0) {
                                 ?>
                                     <td><button type="button" class="btn btn-success" data-toggle="modal"
-                                            data-target="#done-task-modal">Done
+                                            data-target="#done-task-modal-<?php echo $row[0] ;?>">Done
                                         </button></td>
                                     <?php
                                     } else {
                                 ?>
                                     <td>
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#clear-task-modal">Clear
+                                            data-target="#clear-task-modal-<?php echo $row[0] ;?>">Clear
                                         </button></td>
                                     </td>
                                     <?php
@@ -209,6 +208,56 @@
                                 ?>
                                 </tr>
                             </tbody>
+                            <!-- START DONE MODAL -->
+                            <div class="modal fade" id="done-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you are done
+                                                with this task?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <?php echo $row[2] ;?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success">Yes</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">No</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END DONE MODAL -->
+                            <!-- START CLEAR MODAL -->
+                            <div class="modal fade" id="clear-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to
+                                                clear this task?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <?php echo $row[2] ;?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success">Yes</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">No</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END CLEAR MODAL -->
                         </form>
                         <?php
                             }
@@ -283,52 +332,7 @@
             </tbody>
         </table>
     </div>
-    <!-- START DONE MODAL -->
-    <div class="modal fade" id="done-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you are done with this task?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-body">
-                    NAME NG TASK
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END DONE MODAL -->
-    <!-- START CLEAR MODAL -->
-    <div class="modal fade" id="clear-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to clear this task?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-body">
-                    NAME NG TASK
-                </div>
-                <div class="modal-footer">
-                    <button type="button"  class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END CLEAR MODAL -->
 </body>
 <script type="text/javascript">
     function openSlideMenu() {
@@ -383,22 +387,6 @@
 
         });
     });
-
-    $(function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
 </script>
 
 </html>
