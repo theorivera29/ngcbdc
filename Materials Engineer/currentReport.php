@@ -133,7 +133,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Project Name</th>
@@ -182,7 +182,7 @@
 
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Project Name</th>
@@ -248,6 +248,7 @@
 
     $(document).ready(function () {
         $('#mydatatable').DataTable();
+        $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
