@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -109,8 +109,9 @@
         </div>
 
     </div>
-    
-    <button class="btn btn-warning" id="generate-report" type="button">Generate Report</button>
+
+    <button class="btn btn-warning" id="generate-report" data-toggle="modal" data-target="#generate_report"
+        type="button">Generate Report</button>
     <table class="table reportpage-table table-striped table-bordered">
         <thead>
             <tr>
@@ -195,7 +196,7 @@
                     $result2 = mysqli_query($conn, $sql2);
                     $row2 = mysqli_fetch_row($result2);
         ?>
-                
+
             <tr>
                 <td><?php echo $row[1] ;?></td>
                 <td><?php echo $row[3] ;?></td>
@@ -229,6 +230,38 @@
         ?>
         </tbody>
     </table>
+
+    <div class="modal fade" id="generate_report" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Generate Report</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="col-lg-5 col-form-label">Prepared By:</label>
+                        <input class="form-group" type="text" value="" name="" required>
+                        
+                        <label class="col-lg-5 col-form-label" >Checked By:</label>
+                        <input class="form-group" type="email" value="" name="" required>
+
+                        <label class="col-lg-5 col-form-label ">Noted By:</label>
+                        <input class="form-group" type="email" value="" name="" required>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" name="reopen_project">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     function openSlideMenu() {
