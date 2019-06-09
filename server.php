@@ -13,6 +13,9 @@
         $stmt->store_result();
         $stmt->bind_result($accounts_id, $accounts_password, $accounts_type);
         $stmt->fetch();
+        $_SESSION['account_id']= null;
+        $_SESSION['loggedin' ] = null;
+        $_SESSION['account_type'] = null;
         if (password_verify($password, $accounts_password)) {
             
             $_SESSION['account_id']= $accounts_id;
