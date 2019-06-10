@@ -87,7 +87,7 @@
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
                 <input name="projectName" type="text" class="form-control" placeholder="Enter project name"
-                    pattern="[A-Za-z\s]*" title="Input letters" required>
+                    pattern="^[A-Za-z][A-Za-z0-9\s-_#& ]*$" title="Input letters" required>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
@@ -116,6 +116,7 @@
                 <div class="input-group-prepend col-md-12 options">
 
                     <div class="input-group-text">
+                       
                         <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input"
                             value="<?php echo $rowmateng[1]?>" required>
                     </div>

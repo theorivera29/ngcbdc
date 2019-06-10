@@ -191,10 +191,13 @@
         
         $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
+        
         $stmt = $conn->prepare("DELETE FROM projects WHERE projects_id = ?;");
         $stmt->bind_param("i", $projects_id);
         $stmt->execute();
         $stmt->fetch();
+        $stmt->close();
+        
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
         $delete_date = date("Y-m-d G:i:s");
         $logs_message = 'Deleted Project: '.$projectName;
@@ -211,28 +214,29 @@
         $startDate = mysqli_real_escape_string($conn, $_POST['startDate']);
         $endDate = mysqli_real_escape_string($conn, $_POST['endDate']);
         $projectStatus = 'open';
-        $one = 1;
+        $one = 2;
         $mateng = $_POST['mateng'];
-
+        
         $stmt = $conn->prepare("INSERT INTO projects (projects_name, projects_address, projects_sdate, projects_edate, projects_status) VALUES (?, ?, ?, ?, ?);");
         $stmt->bind_param("sssss", $projectName, $address, $startDate, $endDate, $projectStatus);
         $stmt->execute();
-        $stmt->close();
-    
+        
             $stmt = $conn->prepare("SELECT projects_id FROM projects WHERE projects_name = ?;");
-            $stmt->bind_param("s", $projects_name);
+            $stmt->bind_param("s", $projectName);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($account_id);
+            $stmt->bind_result($projects_id);
             $stmt->fetch();
+        
             for($x = 0; $x < sizeof($mateng); $x++){
-           
+                
             $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng) VALUES (?, ?);");
-            $stmt->bind_param("ii", $one, $mateng[$x]);
+            $stmt->bind_param("ii", $projects_id, $mateng[$x]);
             $stmt->execute();
             $stmt->close();
                 
-                }
+            }
+        
             $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
             $create_proj_date = date("Y-m-d G:i:s");
             $logs_message = 'Created Project: '.$projectName;
@@ -240,7 +244,7 @@
             $stmt->bind_param("ssi", $create_proj_date, $logs_message, $logs_of);
             $stmt->execute();
             $stmt->close();
-            header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
+           header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
     }
 
 if (isset($_POST['edit_project'])) {
@@ -313,13 +317,16 @@ if (isset($_POST['edit_project'])) {
         }
 
         if (isset($_POST['mateng'])) {
-            $mateng = mysqli_real_escape_string($conn, $_POST['mateng']);
+            $mateng = $_POST['mateng'];
+            $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
             $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = ?;");
             $stmt->bind_param("i", $projects_id);
             $stmt->execute();
             $stmt->close();
+            
+            echo var_dump($mateng);
     
-            for($x = 0; $x < sizeof($mateng); $x++){
+         for($x = 0; $x < sizeof($mateng); $x++){
                 $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng)
                     VALUES (?, ?);");
                 $stmt->bind_param("ii", $projects_id, $mateng[$x]);
