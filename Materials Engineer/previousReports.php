@@ -131,49 +131,6 @@
                 </div>
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
-<<<<<<< HEAD
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <?php
-                            $sql = "SELECT
-                                        projects.projects_name,
-                                        projects.projects_address,
-                                        projects.projects_sdate,
-                                        projects.projects_edate,
-                                        projects.projects_id
-                                    FROM
-                                        projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
-                                    WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
-                                        projects.projects_status = 'open';";
-                            $result = mysqli_query($conn, $sql);
-                            while ($row = mysqli_fetch_row($result)) {
-                        ?>
-                            <form action="../server.php" method="POST">
-                            <div class="card project-container">
-                                <h5 class="card-header card-header-project"><?php echo $row[0] ;?></h5>
-                                <div class="card-body">
-                                    <span>
-                                        <h5><?php echo $row[1] ;?></h5>
-                                    </span>
-                                    <span>
-                                        <h5>Start Date: <?php echo $row[2] ;?></h5>
-                                    </span>
-                                    <span>
-                                        <h5>End Date: <?php echo $row[3] ;?></h5>
-                                    </span>
-                                    <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                    <button type="submit" class="btn btn-info" id="view-inventory-btn" name="prevViewInventory"
-                                        onclick="window.location.href = 'previousReportsPage.php'">View Reports</button>
-                                </div>
-                            </div>
-                            </form>
-                        <?php
-                            }
-                        ?> 
-=======
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
@@ -221,13 +178,10 @@
                                     ?>
                                 </tbody>
                             </table>
->>>>>>> e44f723e263aae1d9ca3f214bba1c612976422fb
                         </div>
 
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <?php
                             $sql = "SELECT
                                         projects.projects_name,
@@ -268,11 +222,8 @@
                         <?php
                             }   
                         ?>
-=======
                             <table class="table projects-table table-striped table-bordered" id="mydatatable">
-=======
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
->>>>>>> cd67c4c5f728051c6536d0201b4a593eaa3cdf01
                                 <thead>
                                     <tr>
                                         <th scope="col">Project Name</th>
@@ -317,7 +268,6 @@
                                     ?>
                                 </tbody>
                             </table>
->>>>>>> e44f723e263aae1d9ca3f214bba1c612976422fb
                         </div>
                     </div>
                 </div>
