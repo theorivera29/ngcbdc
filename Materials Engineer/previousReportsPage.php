@@ -116,7 +116,7 @@
     </div>
 
     <div class="hauled-items-container">
-        <h4 class="card-header">Previous Reports</h4>
+        <h4 class="card-header">PROJECT NAME Previous Reports</h4>
         <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>

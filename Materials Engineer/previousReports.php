@@ -7,7 +7,7 @@
 <html>
 
 <head>
-<title>NGCBDC</title>
+    <title>NGCBDC</title>
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
@@ -21,12 +21,11 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-</head>
 
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -127,13 +126,13 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
                     </div>
-
                 </div>
+
                 <div class="project-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
+                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Project Name</th>
@@ -145,24 +144,25 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT
-                                                projects.projects_name,
-                                                projects.projects_address,
-                                                projects.projects_sdate,
-                                                projects.projects_edate,
-                                                projects.projects_id
-                                            FROM
-                                                projects
-                                            INNER JOIN
-                                                projmateng ON projects.projects_id = projmateng.projmateng_project
-                                            WHERE
-                                                projmateng.projmateng_mateng = $accounts_id
-                                            AND 
-                                                projects.projects_status = 'open';";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_row($result)) {
-                                ?>
+                                        $sql = "SELECT
+                                        projects.projects_name,
+                                        projects.projects_address,
+                                        projects.projects_sdate,
+                                        projects.projects_edate,
+                                        projects.projects_id
+                                    FROM
+                                        projects
+                                    INNER JOIN
+                                        projmateng ON projects.projects_id = projmateng.projmateng_project
+                                    WHERE
+                                        projmateng.projmateng_mateng = $accounts_id
+                                    AND 
+                                        projects.projects_status = 'open';";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_row($result)) {
+                                    ?>
                                     <tr>
+<<<<<<< HEAD
                                         <form action="../server.php" method="POST">
                                             <td><?php echo $row[0] ;?></td>
                                             <td><?php echo $row[1] ;?></td>
@@ -172,6 +172,16 @@
                                                 <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                                     name="prevViewInventory">View Report</button></td>
                                         </form>
+=======
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='previousReportsPage.php'"
+                                                name="viewInventory">View Reports</button>
+>>>>>>> 38d23b6db2060713eabf7d37847c5af93ceac0f3
                                     </tr>
                                     <?php
                                         }
@@ -194,24 +204,25 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT
-                                                projects.projects_name,
-                                                projects.projects_address,
-                                                projects.projects_sdate,
-                                                projects.projects_edate,
-                                                projects.projects_id
-                                            FROM
-                                                projects
-                                            INNER JOIN
-                                                projmateng ON projects.projects_id = projmateng.projmateng_project
-                                            WHERE
-                                                projmateng.projmateng_mateng = $accounts_id
-                                            AND 
-                                                projects.projects_status = 'open';";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_row($result)) {
-                                ?>
+                                            $sql = "SELECT
+                                            projects.projects_name,
+                                            projects.projects_address,
+                                            projects.projects_sdate,
+                                            projects.projects_edate,
+                                            projects.projects_id
+                                        FROM
+                                            projects
+                                        INNER JOIN
+                                            projmateng ON projects.projects_id = projmateng.projmateng_project
+                                        WHERE
+                                            projmateng.projmateng_mateng = $accounts_id
+                                        AND 
+                                            projects.projects_status = 'closed';";
+                                            $result = mysqli_query($conn, $sql);
+                                            while ($row = mysqli_fetch_row($result)) {
+                                        ?>
                                     <tr>
+<<<<<<< HEAD
                                         <form action="../server.php" method="POST">
                                             <td><?php echo $row[0] ;?></td>
                                             <td><?php echo $row[1] ;?></td>
@@ -221,10 +232,20 @@
                                                 <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                                     name="prevViewInventory">View Report</button></td>
                                         </form>
+=======
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='previousReportsPage.php'"
+                                                name="viewInventory">View Reports</button>
+>>>>>>> 38d23b6db2060713eabf7d37847c5af93ceac0f3
                                     </tr>
                                     <?php
-                                        }
-                                    ?>
+                                            }
+                                        ?>
                                 </tbody>
                             </table>
                         </div>
