@@ -646,7 +646,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("si", $newCategName, $categ_id);
         $stmt->execute();
         $stmt->close();
-
+        
         $edit_categ_date = date("Y-m-d G:i:s");
         $account_id = "";
         session_start();
@@ -691,7 +691,7 @@ if (isset($_POST['edit_project'])) {
             $newMatName = mysqli_real_escape_string($conn, $_POST['newMatName']);
             $newThreshold = mysqli_real_escape_string($conn, $_POST['newThreshold']);
             $newUnit = mysqli_real_escape_string($conn, $_POST['newUnit']);
-            $mat_id = mysqli_real_escape_string($conn, $_POST['mat_id']);
+            $matinfo_id = mysqli_real_escape_string($conn, $_POST['matinfo_id']);
             
             $stmt = $conn->prepare("UPDATE materials SET mat_categ = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newCategory, $mat_id);
@@ -708,13 +708,13 @@ if (isset($_POST['edit_project'])) {
             $stmt->execute();
             $stmt->close();
 
-/*        
+
             $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
-            $stmt->bind_param("si", $newThreshold, $mat_id);
+            $stmt->bind_param("si", $newThreshold, $matinfo_id);
             $stmt->execute();
-            $stmt->close();*/
+            $stmt->close();
         
-/*            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+/*         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
             $logs_message = 'Change email to '.$newemail;
             $logs_of = $account_id;
@@ -782,7 +782,6 @@ if (isset($_POST['edit_project'])) {
         $notif = 50;
         $currentQuantity = 0;
         $project = 1;
-        
         
         for($x = 0; $x < sizeof($matName); $x++){
             
