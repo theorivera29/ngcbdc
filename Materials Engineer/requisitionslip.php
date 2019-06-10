@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -201,43 +201,67 @@
             </div>
         </div>
     </div>
+    <!-- Start of confirmation modal -->
+    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
-                var quantity = $("#quantity").val();
-                var unit = $("#unit").val();
-                var particulars = $("#particulars").val();
-                var location = $("#location").val();
-                var remarks = $("#remarks").val();
-                var markup = "<tr><td><input type='text' class='form-control' value='" + quantity + "' readonly/></td><td><input type='text' class='form-control' value='" + unit + "' readonly/></td><td><input type='text' class='form-control' value='" + particulars +
-                    "' readonly/></td><td><input type='text' class='form-control' value='" + location + "' readonly/></td><td><input type='text' class='form-control' value='" + remarks +
-                    "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                if ((quantity != '') && (unit != '') && (particulars != '') && (location != '') && (
-                        remarks != '')) {
-                    $("table tbody").append(markup);
-                    $("#requisitionRow input[type=text]").val('');
-                    $("#requisitionRow select").val('');
-                }
-            });
-            $("#requisitionTable").on('click', '.delete-row', function () {
-                $(this).closest('tr').remove();
-            });
+                </div>
+            </div>
+        </div>
+    </div>
 
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+    <!-- End of confirmation modal -->
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".add-row").click(function () {
+            var quantity = $("#quantity").val();
+            var unit = $("#unit").val();
+            var particulars = $("#particulars").val();
+            var location = $("#location").val();
+            var remarks = $("#remarks").val();
+            var markup = "<tr><td><input type='text' class='form-control' value='" + quantity +
+                "' readonly/></td><td><input type='text' class='form-control' value='" + unit +
+                "' readonly/></td><td><input type='text' class='form-control' value='" + particulars +
+                "' readonly/></td><td><input type='text' class='form-control' value='" + location +
+                "' readonly/></td><td><input type='text' class='form-control' value='" + remarks +
+                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity != '') && (unit != '') && (particulars != '') && (location != '') && (
+                    remarks != '')) {
+                $("table tbody").append(markup);
+                $("#requisitionRow input[type=text]").val('');
+                $("#requisitionRow select").val('');
+            }
+        });
+        $("#requisitionTable").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
         });
 
-        function openSlideMenu() {
-            document.getElementById('menu').style.width = '15%';
-        }
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
 
-        function closeSlideMenu() {
-            document.getElementById('menu').style.width = '0';
-            document.getElementById('content').style.marginLeft = '0';
-        }
-    </script>
-</body>
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+</script>
+
 
 </html>
