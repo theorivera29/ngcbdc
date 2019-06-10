@@ -79,7 +79,14 @@
             $accountsDeletable = "yes";
             $accountsStatus = "active";
             $stmt->execute();
-            $create_date = date("Y-m-d G:i:s");
+            try {
+                $mail->addAddress($email, $firstname.' '.$lastname);                
+                $mail->isHTML(true);                                  
+                $mail->Subject = 'Welcome to your NGCBDC Inventory System Account!';
+                $mail->Body    = 'Your account has been created. <br /> Please change your password after logging in. <br /> <br /> Username: <b>'.$username.'</b> <br /> Password: <b>'.$generated_password.'</b>';
+                $mail->send();
+            } catch (Exception $e) {}
+                $create_date = date("Y-m-d G:i:s");
             $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
             $logs_message = 'Created account of '.$firstName.' '.$lastName;
@@ -387,6 +394,7 @@ if (isset($_POST['edit_project'])) {
     }
 
     if (isset($_POST['create_category'])) {
+        $categoryName = mysqli_real_escape_string($conn, $_POST['categoryName']);
         $category = $_POST['category'];
 
             for($x = 0; $x < sizeof($category); $x++){
@@ -397,10 +405,23 @@ if (isset($_POST['edit_project'])) {
                 $stmt->close();
                 
                 }
+            $account_id = "";
+            session_start();
+            if(isset($_SESSION['account_id'])) {
+                $account_id = $_SESSION['account_id'];
+            }
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+            $create_categ_date = date("Y-m-d G:i:s");
+            $logs_message = 'Created Category: '.$categoryName;
+            $logs_of = $account_id;
+            $stmt->bind_param("ssi", $create_categ_date, $logs_message, $logs_of);
+            $stmt->execute();
+            $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
     if (isset($_POST['create_unit'])) {
+        $unitName = mysqli_real_escape_string($conn, $_POST['unitName']);
         $units = $_POST['units'];
 
             for($x = 0; $x < sizeof($units); $x++){
@@ -411,6 +432,18 @@ if (isset($_POST['edit_project'])) {
                 $stmt->close();
                 
                 }
+            $account_id = "";
+            session_start();
+            if(isset($_SESSION['account_id'])) {
+                $account_id = $_SESSION['account_id'];
+            }
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+            $create_unit_date = date("Y-m-d G:i:s");
+            $logs_message = 'Created Unit: '.$unitName;
+            $logs_of = $account_id;
+            $stmt->bind_param("ssi", $create_unit_date, $logs_message, $logs_of);
+            $stmt->execute();
+            $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
@@ -487,6 +520,20 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("siiissss", $date, $quantity, $unit_id, $mat_id, $location, $remarks, $requestedBy, $approvedBy);
         $stmt->execute();
         $stmt->close();
+
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_requisition_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Requisition Slip';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_requisition_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/requisitionslip.php");     
     }
 
@@ -526,7 +573,21 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
+
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_haulingtobereturn_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Hauling Form (To be Returned)';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");
     }
 
     if (isset($_POST['create_permanentHauling'])) {
@@ -563,6 +624,20 @@ if (isset($_POST['edit_project'])) {
             
         $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        $stmt->execute();
+        $stmt->close();
+
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_haulingpermanent_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Hauling Form (Permanently Hauled)';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_haulingpermanent_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
@@ -761,6 +836,20 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("siisis", $date, $quantity, $unit_id, $suppliedBy, $mat_id, $from);
         $stmt->execute();
         $stmt->close();
+
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_deliveredin_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Delivered-In';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_deliveredin_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/deliveredin.php");     
     }
 
@@ -778,8 +867,9 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("sssi", $todo_date, $todo_task, $todo_status, $account_id);
         $stmt->execute();
         $stmt->close();
+
         $create_todo_date = date("Y-m-d G:i:s");
-        $logs_message = 'Created todo task';
+        $logs_message = 'Created todo task'.$todo_task;
         $logs_of = $account_id;
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
         $stmt->bind_param("ssi", $create_todo_date, $logs_message, $logs_of);
