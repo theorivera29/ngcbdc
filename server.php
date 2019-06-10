@@ -79,13 +79,6 @@
             $accountsDeletable = "yes";
             $accountsStatus = "active";
             $stmt->execute();
-            $create_date = date("Y-m-d G:i:s");
-            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
-            $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
-            $logs_message = 'Created account of '.$firstName.' '.$lastName;
-            $logs_of = 1;
-            $stmt->execute();
-            $stmt->close();
             try {
                 $mail->addAddress($email, $firstname.' '.$lastname);                
                 $mail->isHTML(true);                                  
@@ -93,6 +86,13 @@
                 $mail->Body    = 'Your account has been created. <br /> Please change your password after logging in. <br /> <br /> Username: <b>'.$username.'</b> <br /> Password: <b>'.$generated_password.'</b>';
                 $mail->send();
             } catch (Exception $e) {}
+                $create_date = date("Y-m-d G:i:s");
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
+            $logs_message = 'Created account of '.$firstName.' '.$lastName;
+            $logs_of = 1;
+            $stmt->execute();
+            $stmt->close();
             $_SESSION['create_success'] = true;
         }
         header("location: http://127.0.0.1/NGCBDC/Admin/accountcreation.php");  
