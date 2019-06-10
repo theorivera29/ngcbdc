@@ -161,17 +161,17 @@
                                                 projects.projects_status = 'open';";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_row($result)) {
-                                ?>
+                                ?>  
                                     <tr>
-                                        <td><?php echo $row[0] ;?></td>
-                                        <td><?php echo $row[1] ;?></td>
-                                        <td><?php echo $row[2] ;?></td>
-                                        <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                name="curViewInventory"
-                                                onclick="window.location.href = 'currentReportPage.php'">View
-                                                Report</button></td>
+                                        <form action="../server.php" method="POST">
+                                            <td><?php echo $row[0] ;?></td>
+                                            <td><?php echo $row[1] ;?></td>
+                                            <td><?php echo $row[2] ;?></td>
+                                            <td><?php echo $row[3] ;?></td>
+                                            <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                                <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                    name="curViewInventory">View Report</button></td>
+                                        </form>
                                     </tr>
                                     <?php
                                         }
@@ -179,7 +179,6 @@
                                 </tbody>
                             </table>
                         </div>
-
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
@@ -212,15 +211,15 @@
                                     while ($row = mysqli_fetch_row($result)) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $row[0] ;?></td>
-                                        <td><?php echo $row[1] ;?></td>
-                                        <td><?php echo $row[2] ;?></td>
-                                        <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                name="curViewInventory"
-                                                onclick="window.location.href = 'currentReportPage.php'">View
-                                                Report</button></td>
+                                        <form action="../server.php" method="POST">
+                                            <td><?php echo $row[0] ;?></td>
+                                            <td><?php echo $row[1] ;?></td>
+                                            <td><?php echo $row[2] ;?></td>
+                                            <td><?php echo $row[3] ;?></td>
+                                            <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                                <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                    name="curViewInventory">View Report</button></td>
+                                        </form>
                                     </tr>
                                     <?php
                                         }

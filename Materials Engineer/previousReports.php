@@ -162,6 +162,17 @@
                                         while ($row = mysqli_fetch_row($result)) {
                                     ?>
                                     <tr>
+<<<<<<< HEAD
+                                        <form action="../server.php" method="POST">
+                                            <td><?php echo $row[0] ;?></td>
+                                            <td><?php echo $row[1] ;?></td>
+                                            <td><?php echo $row[2] ;?></td>
+                                            <td><?php echo $row[3] ;?></td>
+                                            <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                                <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                    name="prevViewInventory">View Report</button></td>
+                                        </form>
+=======
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
@@ -170,6 +181,7 @@
                                             <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                                 onclick="window.location.href='previousReportsPage.php'"
                                                 name="viewInventory">View Reports</button>
+>>>>>>> 38d23b6db2060713eabf7d37847c5af93ceac0f3
                                     </tr>
                                     <?php
                                         }
@@ -179,46 +191,6 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <?php
-                            $sql = "SELECT
-                                        projects.projects_name,
-                                        projects.projects_address,
-                                        projects.projects_sdate,
-                                        projects.projects_edate,
-                                        projects.projects_id
-                                    FROM
-                                        projects
-                                    INNER JOIN
-                                        projmateng ON projects.projects_id = projmateng.projmateng_project
-                                    WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
-                                        projects.projects_status = 'closed';";
-                            $result1 = mysqli_query($conn, $sql);
-                            while ($row1 = mysqli_fetch_row($result1)) {
-                        ?>
-                            <form action="../server.php" method="POST">
-                            <div class="card project-container">
-                                <h5 class="card-header card-header-project"><?php echo $row1[0] ;?></h5>
-                                <div class="card-body">
-                                    <span>
-                                        <h5><?php echo $row1[1] ;?></h5>
-                                    </span>
-                                    <span>
-                                        <h5>Start Date: <?php echo $row1[2] ;?></h5>
-                                    </span>
-                                    <span>
-                                        <h5>End Date: <?php echo $row1[3] ;?></h5>
-                                    </span>
-                                    <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                    <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                        name="prevViewInventory">View inventory</button>
-                                </div>
-                            </div>
-                            </form>
-                        <?php
-                            }   
-                        ?>
                             <table class="table projects-table table-striped table-bordered" id="mydatatable">
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
@@ -250,6 +222,17 @@
                                             while ($row = mysqli_fetch_row($result)) {
                                         ?>
                                     <tr>
+<<<<<<< HEAD
+                                        <form action="../server.php" method="POST">
+                                            <td><?php echo $row[0] ;?></td>
+                                            <td><?php echo $row[1] ;?></td>
+                                            <td><?php echo $row[2] ;?></td>
+                                            <td><?php echo $row[3] ;?></td>
+                                            <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                                <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                    name="prevViewInventory">View Report</button></td>
+                                        </form>
+=======
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
@@ -258,6 +241,7 @@
                                             <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                                 onclick="window.location.href='previousReportsPage.php'"
                                                 name="viewInventory">View Reports</button>
+>>>>>>> 38d23b6db2060713eabf7d37847c5af93ceac0f3
                                     </tr>
                                     <?php
                                             }
