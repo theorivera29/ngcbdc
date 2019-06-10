@@ -86,6 +86,11 @@
             $logs_of = 1;
             $stmt->execute();
             $stmt->close();
+            $mail->addAddress($email, $firstname.' '.$lastname);                
+            $mail->isHTML(true);                                  
+            $mail->Subject = 'Welcome to your NGCBDC Inventory System Account!';
+            $mail->Body    = 'Your account has been created. <br /> Please change your password after logging in. <br /> <br /> Username: <b>'.$username.'</b> <br /> Password: <b>'.$generated_password.'</b>';
+            $mail->send();
             $_SESSION['create_success'] = true;
         }
         header("location: http://127.0.0.1/NGCBDC/Admin/accountcreation.php");  
