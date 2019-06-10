@@ -221,6 +221,11 @@
         $stmt->bind_param("sssss", $projectName, $address, $startDate, $endDate, $projectStatus);
         $stmt->execute();
         
+        if ($stmt->error) {
+            header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php"); 
+            echo "<script type='text/javascript'>alert('$stmt->error');</script>";
+        } else {
+            
             $stmt = $conn->prepare("SELECT projects_id FROM projects WHERE projects_name = ?;");
             $stmt->bind_param("s", $projectName);
             $stmt->execute();
@@ -245,6 +250,7 @@
             $stmt->execute();
             $stmt->close();
            header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");  
+        }
     }
 
 if (isset($_POST['edit_project'])) {
