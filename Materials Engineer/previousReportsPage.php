@@ -127,7 +127,7 @@
             </thead>
             <tbody>
                 <?php
-                    $projects_id = $_GET['projects_id'];
+                    $projects_id = $_SESSION['prevProjects'];
                     $sql = "SELECT DISTINCT
                                 lastmatinfo_month,
                                 lastmatinfo_year
@@ -139,16 +139,16 @@
                     while ($row = mysqli_fetch_row($result)) {
                     ?>
                         <tr>
-                            <!-- <form action="../server.php" method="POST"> -->
+                            <form action="../server.php" method="POST">
                                 <td><?php echo $month_name = date("F", mktime(0, 0, 0, $row[0], 10)); ?></td>
                                 <td><?php echo $row[1]?></td>
                                 <td>
-                                    <!-- <input type="hidden" name="projects_id" value="<?php echo $projects_id ;?>">
+                                    <input type="hidden" name="projects_id" value="<?php echo $projects_id ;?>">
                                     <input type="hidden" name="lastmatinfo_month" value="<?php echo $row[0] ;?>">
-                                    <input type="hidden" name="lastmatinfo_year" value="<?php echo $row[1] ;?>"> -->
-                                    <button type="submit" class="btn btn-success">View</button>
+                                    <input type="hidden" name="lastmatinfo_year" value="<?php echo $row[1] ;?>">
+                                    <button type="submit" class="btn btn-success" name="viewPrevReport">View</button>
                                 </td>
-                            <!-- </form> -->
+                            </form>
                         </tr>
                     <?php
                     }

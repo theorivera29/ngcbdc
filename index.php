@@ -1,6 +1,6 @@
 <?php
     include "db_connection.php";
-    session_start();
+    include "checkReport.php";
 ?>
 
 <!DOCTYPE html>
