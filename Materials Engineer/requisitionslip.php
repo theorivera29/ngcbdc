@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </div>
-        </span>
-
+    </span>
+       
         <div id="menu" class="navigation sidenav">
             <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
@@ -82,14 +82,26 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Transactions</a>
+                        <ul class="collapse list-unstyled" id="transactionSubmenu">
+                            <li>
+                                <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
+                            </li>
+                            <li>
+                                <a href="deliveredin.php" id="sideNav-a">Delivered In Form</a>
+                            </li>
+                            <li>
+                                <a href="viewTransactions.php" id="sideNav-a">View Transactions</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
-                    </li>
-                    <li>
-                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
                     </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
@@ -124,6 +136,18 @@
                                 <input class="form-control" type="date" name="date" required>
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <label class="col-lg-12 col-form-label">Material Requisition No.:</label>
+                            <div class="col-lg-12">
+                                <input class="form-control" type="text" name="reqNo" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="col-lg-12 col-form-label">Remarks:</label>
+                            <div class="col-lg-12">
+                                <input class="form-control" type="text" name="remarks" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
@@ -145,29 +169,38 @@
                                     <th scope="col">Particulars</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Location</th>
-                                    <th scope="col">Remarks</th>
                                 </tr>
                             </thead>
                             <tbody id="requisitionTable">
                             </tbody>
                             <tfoot>
                                 <tr id="requisitionRow">
-                                    <td><input class="form-control" name="quantity" type="text" id="quantity"
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity"
                                             placeholder="Quantity">
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="particulars" id="particulars">
+                                            <select class="form-control" name="particulars[]" id="particulars">
                                                 <option value="" selected disabled>Choose a Particular</option>
+                                             <?php    
+                                                $sql = "SELECT  
+                                                        mat_id,
+                                                        mat_name
+                                                        FROM
+                                                        materials;";
+                                                $result = mysqli_query($conn, $sql);
+                                                while ($row = mysqli_fetch_row($result)) {
+                                            ?>                                              
+                                            <option value="<?php echo $row[0]?>"><?php echo $row[1]?></option>
+                                            <?php
+                                                }
+                                            ?>
                                             </select>
                                         </div>
-                                    <td><input class="form-control" name="unit" type="text" id="unit"
+                                    <td><input class="form-control" name="unit[]" type="text" id="unit"
                                             placeholder="Unit"></td>
-                                    <td><input class="form-control" name="location" type="text" id="location"
+                                    <td><input class="form-control" name="location[]" type="text" id="location"
                                             placeholder="Location"></td>
-                                    <td><input class="form-control" name="remarks" type="text" id="remarks"
-                                            placeholder="Remarks">
-                                    </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row"
                                             value="Add Row" />
@@ -230,15 +263,12 @@
             var unit = $("#unit").val();
             var particulars = $("#particulars").val();
             var location = $("#location").val();
-            var remarks = $("#remarks").val();
-            var markup = "<tr><td><input type='text' class='form-control' value='" + quantity +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + unit +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + particulars +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + location +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + remarks +
-                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-            if ((quantity != '') && (unit != '') && (particulars != '') && (location != '') && (
-                    remarks != '')) {
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity +
+                "'/></td><td><input type='text' name="unit[]" class='form-control' value='" + unit +
+                "'/></td><td><input type='text' name="particulars[]" class='form-control' value='" + particulars +
+                "'/></td><td><input type='text' name="location[]" class='form-control' value='" + location +
+                "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity != '') && (unit != '') && (particulars != '') && (location != '')) {
                 $("table tbody").append(markup);
                 $("#requisitionRow input[type=text]").val('');
                 $("#requisitionRow select").val('');
