@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -39,7 +39,8 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -62,7 +63,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -73,7 +75,8 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -83,17 +86,30 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Transactions</a>
+                        <ul class="collapse list-unstyled" id="transactionSubmenu">
+                            <li>
+                                <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
+                            </li>
+                            <li>
+                                <a href="deliveredin.php" id="sideNav-a">Delivered In Form</a>
+                            </li>
+                            <li>
+                                <a href="viewTransactions.php" id="sideNav-a">View Transactions</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
-                    </li>
                     <li class="active">
-                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Reports</a>
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
                         <ul class="collapse list-unstyled" id="reportSubmenu">
                             <li>
                                 <a href="currentReport.php" id="sideNav-a">Monthly Report</a>

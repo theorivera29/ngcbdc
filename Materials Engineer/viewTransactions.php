@@ -21,6 +21,7 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
@@ -127,135 +128,125 @@
 
     </div>
 
-    <div class="site-materials-container">
-        <h5 class="card-header">All Materials in Site</h5>
-        <table class="table site-materials-table table-striped table-bordered" id="mydatatable">
-            <thead>
-                <tr>
-                    <th class="align-middle">Particulars</th>
-                    <th class="align-middle">Category</th>
-                    <th class="align-middle">Previous Material Stock</th>
-                    <th class="align-middle">Unit</th>
-                    <th class="align-middle">Delivered Material as of</th>
-                    <th class="align-middle">Material Pulled Out as of</th>
-                    <th class="align-middle">Accumulated Materials Delivered</th>
-                    <th class="align-middle">Material on Site as of</th>
-                    <th class="align-middle">Unit</th>
-                    <th class="align-middle">Project</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $sql_categ = "SELECT
-                                    projmateng_project
-                                FROM
-                                    projmateng
-                                WHERE
-                                    projmateng_mateng = $accounts_id;";
-                    $result = mysqli_query($conn, $sql_categ);
-                    $id_array = array();
-                    while($row_categ = mysqli_fetch_assoc($result)){
-                        $id_array[] = $row_categ;
-                    }
+    <section id="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 project-tabs">
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            role="tab" aria-controls="nav-home" aria-selected="true">Delivered In Form</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">Material Requisition Slip</a>
+                    </div>
+                </div>
 
-                    foreach($id_array as $data) {
-                        $projects_id = $data['projmateng_project'];
-                        $sql_categ = "SELECT DISTINCT
-                                        categories_name
+                <div class="project-tabs-content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <table class="table projects-table table-striped table-bordered" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $sql = "SELECT
+                                        projects.projects_name,
+                                        projects.projects_address,
+                                        projects.projects_sdate,
+                                        projects.projects_edate,
+                                        projects.projects_id
                                     FROM
-                                        materials
+                                        projects
                                     INNER JOIN
-                                        categories ON categories.categories_id = materials.mat_categ
-                                    INNER JOIN
-                                        matinfo ON materials.mat_id = matinfo.matinfo_matname
+                                        projmateng ON projects.projects_id = projmateng.projmateng_project
                                     WHERE
-                                        matinfo.matinfo_project = $projects_id;";
-                        $result = mysqli_query($conn, $sql_categ);
-                        $categories = array();
-                        while($row_categ = mysqli_fetch_assoc($result)){
-                            $categories[] = $row_categ;
-                        }
-                        
-                        foreach($categories as $data) {
-                            $categ = $data['categories_name'];
-                            
-                            $sql = "SELECT 
-                                        materials.mat_id,
-                                        materials.mat_name,
-                                        categories.categories_name,
-                                        matinfo.matinfo_prevStock,
-                                        unit.unit_name
-                                    FROM
-                                        materials
-                                    INNER JOIN 
-                                        categories ON materials.mat_categ = categories.categories_id
-                                    INNER JOIN 
-                                        unit ON materials.mat_unit = unit.unit_id
-                                    INNER JOIN
-                                        matinfo ON materials.mat_id = matinfo.matinfo_matname
-                                    WHERE 
-                                        categories.categories_name = '$categ' 
+                                        projmateng.projmateng_mateng = $accounts_id
                                     AND 
-                                        matinfo.matinfo_project = $projects_id
-                                    ORDER BY 1;";
-                            $result = mysqli_query($conn, $sql);
-                            while($row = mysqli_fetch_row($result)){
-                                $sql1 = "SELECT 
-                                            SUM(deliveredin.deliveredin_quantity) 
-                                        FROM 
-                                            deliveredin
-                                        INNER JOIN 
-                                            matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
-                                        WHERE 
-                                            matinfo.matinfo_matname = '$row[0]';";
-                                $result1 = mysqli_query($conn, $sql1);
-                                $row1 = mysqli_fetch_row($result1);
-                                $sql2 = "SELECT 
-                                            SUM(usagein.usagein_quantity) 
-                                        FROM 
-                                            usagein
-                                        INNER JOIN 
-                                            matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
-                                        WHERE 
-                                            matinfo.matinfo_matname = '$row[0]';";
-                                $result2 = mysqli_query($conn, $sql2);
-                                $row2 = mysqli_fetch_row($result2);
-                                $sql3 = "SELECT
-                                            projects_name
+                                        projects.projects_status = 'open';";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_row($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
+                                    </tr>
+                                    <?php
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <table class="table projects-table table-striped table-bordered display" id="mydatatable">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Date</th>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                            $sql = "SELECT
+                                            projects.projects_name,
+                                            projects.projects_address,
+                                            projects.projects_sdate,
+                                            projects.projects_edate,
+                                            projects.projects_id
                                         FROM
                                             projects
+                                        INNER JOIN
+                                            projmateng ON projects.projects_id = projmateng.projmateng_project
                                         WHERE
-                                            projects_id = $projects_id;";
-                                $result3 = mysqli_query($conn, $sql3);
-                                $row3 = mysqli_fetch_row($result3);
-                ?>
-                <tr>
-                    <td><?php echo $row[1] ;?></td>
-                    <td><?php echo $row[2] ;?></td>
-                    <td><?php echo $row[3] ;?></td>
-                    <td><?php echo $row[4] ;?></td>
-                    <td><?php echo $row1[0] ;?></td>
-                    <td><?php echo $row2[0] ;?></td>
-                    <td><?php echo $row[3]+$row1[0] ;?></td>
-                    <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
-                    <td><?php echo $row[4] ;?></td>
-                    <td><?php echo $row3[0] ;?></td>
-                </tr>
-                <?php
-                            }
-                        }
-                    }
-                ?>
-            </tbody>
-        </table>
-    </div>
+                                            projmateng.projmateng_mateng = $accounts_id
+                                        AND 
+                                            projects.projects_status = 'closed';";
+                                            $result = mysqli_query($conn, $sql);
+                                            while ($row = mysqli_fetch_row($result)) {
+                                        ?>
+                                    <tr>
+                                        <td><?php echo $row[0] ;?></td>
+                                        <td><?php echo $row[1] ;?></td>
+                                        <td><?php echo $row[2] ;?></td>
+                                        <td><?php echo $row[3] ;?></td>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
+                                    </tr>
+                                    <?php
+                                            }
+                                        ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#mydatatable').DataTable();
-    });
-
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -266,6 +257,8 @@
     }
 
     $(document).ready(function () {
+        $('#mydatatable').DataTable();
+        $('table.display').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
