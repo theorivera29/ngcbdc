@@ -1,6 +1,7 @@
 <?php
     session_start();
     include "../db_connection.php";
+    include "../checkReport.php";
 
     $accounts_id = null;
 

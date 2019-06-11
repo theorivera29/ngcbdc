@@ -182,12 +182,13 @@
                                                         <th scope="col">Quantity</th>
                                                         <th scope="col">Articles</th>
                                                         <th scope="col">Unit</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="haulingTable">
+                                                <tbody id="returnHaulingTable">
                                                 </tbody>
                                                 <tfoot>
-                                                    <tr id="haulingRow">
+                                                    <tr id="returnHaulingRow">
                                                         <td><input class="form-control" name="quantity" pattern="[0-9]*"
                                                                 title="Input numbers" type="text" id="quantity"
                                                                 placeholder="Quantity" required>
@@ -280,7 +281,7 @@
                                         </div>
                                         <div class="row form-group save-btn-container">
                                             <div class="col-lg-12">
-                                                <input type="submit" name="create_toBeReturnedHauling"
+                                                <input type="button" data-toggle="modal" data-target="#save-modal"
                                                     class="btn btn-success" value="Save">
                                                 <input type="reset" class="btn btn-danger" value="Cancel">
                                             </div>
@@ -292,15 +293,15 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Are you sure you
-                                                            want to save
-                                                            changes?</h5>
+                                                            want to save this hauling form?</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             &times;
                                                         </button>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-success">Yes</button>
+                                                        <button type="submit" name="create_toBeReturnedHauling"
+                                                            class="btn btn-success">Yes</button>
                                                         <button type="button" class="btn btn-danger"
                                                             data-dismiss="modal">No</button>
 
@@ -314,6 +315,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Permanently Hauled -->
                         <div class="tab-pane fade" id="nav-permanent" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="card replace-container">
                                 <div class="card">
@@ -327,7 +329,7 @@
                                                     <label class="col-lg-12 col-form-label">Form No.:</label>
                                                     <div class="col-lg-12">
                                                         <input class="form-control" type="text" name="formNo"
-                                                            pattern="[0-9]*" title="Input numbers" required>
+                                                            pattern="[0-9]*" title="Input numbers only" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,20 +362,21 @@
                                                             <th scope="col">Quantity</th>
                                                             <th scope="col">Articles</th>
                                                             <th scope="col">Unit</th>
+                                                            <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="haulingTable">
+                                                    <tbody id="permanentHaulingTable">
                                                     </tbody>
                                                     <tfoot>
-                                                        <tr id="haulingRow">
+                                                        <tr id="permanentHaulingRow">
                                                             <td><input class="form-control" name="quantity"
                                                                     pattern="[0-9]*" title="Input numbers" type="text"
-                                                                    id="quantity" placeholder="Quantity">
+                                                                    id="quantity1" placeholder="Quantity">
                                                             </td>
                                                             <td>
                                                                 <div class="form-group">
                                                                     <select class="form-control" name="articles"
-                                                                        id="articles">
+                                                                        id="articles1">
                                                                         <option value="" selected disabled>Choose an
                                                                             Article
                                                                         </option>
@@ -382,11 +385,11 @@
                                                             </td>
                                                             <td><input class="form-control" name="unit"
                                                                     pattern="[A-Za-z\s]*" title="Input letters"
-                                                                    type="text" id="unit" placeholder="Unit">
+                                                                    type="text" id="unit1" placeholder="Unit">
                                                             </td>
                                                             <td colspan="5">
                                                                 <input type="button"
-                                                                    class="btn btn-md btn-outline-secondary add-row"
+                                                                    class="btn btn-md btn-outline-secondary add-row1"
                                                                     value="Add Row" />
                                                             </td>
                                                         </tr>
@@ -459,13 +462,13 @@
                                             </div>
                                             <div class="row form-group save-btn-container">
                                                 <div class="col-lg-12">
-                                                    <input type="submit" name="create_permanentHauling"
-                                                        class="btn btn-success" value="Save">
+                                                    <input type="button" 
+                                                        class="btn btn-success" value="Save" data-toggle="modal" data-target="#save-modal1">
                                                     <input type="reset" class="btn btn-danger" value="Cancel">
                                                 </div>
                                             </div>
                                             <!-- Start of confirmation modal -->
-                                            <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
+                                            <div class="modal fade" id="save-modal1" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -473,14 +476,14 @@
                                                             <h5 class="modal-title" id="exampleModalLabel">Are you sure
                                                                 you
                                                                 want to save
-                                                                changes?</h5>
+                                                                this hauling form?</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 &times;
                                                             </button>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-success">Yes</button>
+                                                            <button type="submit" name="create_permanentHauling" class="btn btn-success">Yes</button>
                                                             <button type="button" class="btn btn-danger"
                                                                 data-dismiss="modal">No</button>
 
@@ -501,25 +504,49 @@
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
+        // For to be returned Hauling
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
             var unit = $("#unit").val();
             var articles = $("#articles").val();
             var markup = "<tr><td><input type='text' class='form-control' value='" +
                 quantity +
-                "' readonly/></td><td><input type='text' class='form-control' value='" +
+                "' required/></td><td><input type='text' class='form-control' value='" +
                 articles +
-                "' readonly/></td><td><input type='text' class='form-control' value='" +
+                "' required/></td><td><input type='text' class='form-control' value='" +
                 unit +
-                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (articles != '') && (unit != '')) {
                 $("table tbody").append(markup);
-                $("#haulingRow input[type=text]").val('');
-                $("#haulingRow select").val('');
+                $("#returnHaulingRow input[type=text]").val('');
+                $("#returnHaulingRow select").val('');
             }
         });
 
-        $("#haulingTable").on('click', '.delete-row', function () {
+        $("#returnHaulingTable").on('click', '.delete-row', function () {
+            $(this).closest('tr').remove();
+        });
+
+        // For Permanently Hauled
+        $(".add-row1").click(function () {
+            var quantity1 = $("#quantity1").val();
+            var unit1 = $("#unit1").val();
+            var articles1 = $("#articles1").val();
+            var markup1 = "<tr><td><input type='text' class='form-control' value='" +
+                quantity1 +
+                "' required/></td><td><input type='text' class='form-control' value='" +
+                articles1 +
+                "' required/></td><td><input type='text' class='form-control' value='" +
+                unit1 +
+                "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity1 != '') && (articles1 != '') && (unit1 != '')) {
+                $("table tbody").append(markup1);
+                $("#permanentHaulingRow input[type=text]").val('');
+                $("#permanentHaulingRow select").val('');
+            }
+        });
+
+        $("#permanentHaulingTable").on('click', '.delete-row', function () {
             $(this).closest('tr').remove();
         });
 

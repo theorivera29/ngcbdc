@@ -62,17 +62,54 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+                $projects_id = $_GET['projects_id'];
+                $lastmatinfo_month = $_GET['lastmatinfo_month'];
+                $lastmatinfo_year = $_GET['lastmatinfo_year'];
+                
+                $sql = "SELECT
+                            materials.mat_name,
+                            categories.categories_name,
+                            lastmatinfo.lastmatinfo_prevStock,
+                            unit.unit_name,
+                            lastmatinfo.lastmatinfo_deliveredMat,
+                            lastmatinfo.lastmatinfo_matPulledOut,
+                            lastmatinfo.lastmatinfo_accumulatedMat,
+                            lastmatinfo.lastmatinfo_matOnSite
+                        FROM
+                            lastmatinfo
+                        INNER JOIN
+                            materials ON lastmatinfo.lastmatinfo_matname = materials.mat_id
+                        INNER JOIN
+                            categories ON lastmatinfo.lastmatinfo_categ = categories.categories_id
+                        INNER JOIN
+                            unit ON lastmatinfo.lastmatinfo_unit = unit.unit_id
+                        WHERE 
+                            lastmatinfo.lastmatinfo_project = $projects_id 
+                            AND
+                                lastmatinfo.lastmatinfo_year = $lastmatinfo_year
+                            AND
+                                lastmatinfo.lastmatinfo_month = $lastmatinfo_month
+                        ORDER BY 1;";
+
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_row($result)) {
+            ?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?php echo $row[0];?></td>
+                <td><?php echo $row[2];?></td>
+                <td><?php echo $row[3];?></td>
+                <td><?php echo $row[4];?></td>
+                <td><?php echo $row[5];?></td>
+                <td><?php echo $row[3];?></td>
+                <td><?php echo $row[6];?></td>
+                <td><?php echo $row[7];?></td>
+                <td><?php echo $row[3];?></td>
             </tr>
+
+            <?php
+                }
+            ?>
         </tbody>
     </table>
 </body>

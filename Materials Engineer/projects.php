@@ -184,7 +184,10 @@
                                                 name="viewInventory">View inventory</button>
                                             <button type="button" class="btn btn-info" id=""
                                                 onclick="window.location.href='addMaterials.php'" name="">Add
-                                                Materials</button></td>
+                                                Materials</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='reconcilliation.php'" name="">Reconcillation</button>
+                                        </td>
                                     </tr>
                                     <?php
                                         }

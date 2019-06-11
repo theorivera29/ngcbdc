@@ -152,7 +152,11 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="project">
+
+                            <select class="form-control" name="project" id="project" required>
+                                <option value="" selected disabled>Choose a Project</option>
+                            </select>
+
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -225,36 +229,38 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary"
-                                value="Save Changes">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                            <input type="button" class="btn btn-primary" value="Save Requisition Slip"
+                                data-toggle="modal" data-target="#save-modal">
+                            <input type=" reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
+                    <!-- Start of confirmation modal -->
+                    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save the
+                                        following?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="create_requisitionSlip"
+                                        class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>
     </div>
-    <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End of confirmation modal -->
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
