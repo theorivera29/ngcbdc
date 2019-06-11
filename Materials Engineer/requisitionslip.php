@@ -128,7 +128,11 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="project">
+
+                            <select class="form-control" name="project" id="project" required>
+                                <option value="" selected disabled>Choose a Project</option>
+                            </select>
+
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -153,20 +157,25 @@
                             <tfoot>
                                 <tr id="requisitionRow">
                                     <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                            placeholder="Quantity">
+                                            placeholder="Quantity" required>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="particulars" id="particulars">
+                                            <select class="form-control" name="particulars" id="particulars" required>
                                                 <option value="" selected disabled>Choose a Particular</option>
                                             </select>
                                         </div>
-                                    <td><input class="form-control" name="unit" type="text" id="unit"
-                                            placeholder="Unit"></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select class="form-control" name="unit" id="unit" required>
+                                                <option value="" selected disabled>Choose a Unit</option>
+                                            </select>
+                                        </div>
+                                    </td>
                                     <td><input class="form-control" name="location" type="text" id="location"
-                                            placeholder="Location"></td>
+                                            placeholder="Location" required></td>
                                     <td><input class="form-control" name="remarks" type="text" id="remarks"
-                                            placeholder="Remarks">
+                                            placeholder="Remarks" required>
                                     </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row"
@@ -192,36 +201,38 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary"
-                                value="Save Changes">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                            <input type="button" class="btn btn-primary" value="Save Requisition Slip"
+                                data-toggle="modal" data-target="#save-modal">
+                            <input type=" reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
+                    <!-- Start of confirmation modal -->
+                    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save the
+                                        following?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="create_requisitionSlip"
+                                        class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>
     </div>
-    <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End of confirmation modal -->
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -232,11 +243,11 @@
             var location = $("#location").val();
             var remarks = $("#remarks").val();
             var markup = "<tr><td><input type='text' class='form-control' value='" + quantity +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + unit +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + particulars +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + location +
-                "' readonly/></td><td><input type='text' class='form-control' value='" + remarks +
-                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                "' required/></td><td><input type='text' class='form-control' value='" + unit +
+                "' required/></td><td><input type='text' class='form-control' value='" + particulars +
+                "' required/></td><td><input type='text' class='form-control' value='" + location +
+                "' required/></td><td><input type='text' class='form-control' value='" + remarks +
+                "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (unit != '') && (particulars != '') && (location != '') && (
                     remarks != '')) {
                 $("table tbody").append(markup);
