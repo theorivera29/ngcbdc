@@ -167,7 +167,7 @@
                 </form>
                     </tr>
             <?php
-                                        }
+                }
             ?>
             </tbody>
         </table>
