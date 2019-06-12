@@ -56,30 +56,34 @@
                 </div>
             </div>
             <?php
-            $hauling_no= $_GET['hauling_no'];
-        $sql = "SELECT 
-                    hauling.hauling_date, 
-                    hauling.hauling_no, 
-                    hauling.hauling_hauledBy, 
-                    hauling.hauling_hauledFrom, 
-                    hauling.hauling_quantity, 
-                    hauling.hauling_unit, 
-                    hauling.hauling_matname, 
-                    returns.returns_returnedqty, 
-                    returns.returns_date, 
-                    returns.returns_returningqty, 
-                    hauling.hauling_status 
-                FROM 
-                    hauling 
-                INNER JOIN 
-                    returns ON hauling.hauling_id = returns.returns_id 
-                WHERE 
-                    hauling.hauling_no=$hauling_no;";
-        $result = mysqli_query($conn, $sql);
-        while($row = mysqli_fetch_row($result)){
-    ?>
+                $hauling_no= $_GET['hauling_no'];
+                $sql = "SELECT 
+                            hauling.hauling_date, 
+                            hauling.hauling_no, 
+                            hauling.hauling_hauledBy, 
+                            hauling.hauling_hauledFrom, 
+                            hauling.hauling_quantity, 
+                            unit.unit_name, 
+                            materials.mat_name,
+                            returns.returns_returnedqty, 
+                            returns.returns_date, 
+                            returns.returns_returningqty, 
+                            hauling.hauling_status,
+                            hauling.hauling_id
+                        FROM 
+                            hauling 
+                        INNER JOIN 
+                            returns ON hauling.hauling_id = returns.returns_id 
+                        INNER JOIN
+                            materials ON hauling.hauling_matname = materials.mat_id
+                        INNER JOIN
+                            unit ON hauling.hauling_unit = unit.unit_id
+                        WHERE 
+                            hauling.hauling_no=$hauling_no;";
+                $result = mysqli_query($conn, $sql);
+                while($row = mysqli_fetch_row($result)){
+            ?>
             <div class="card-body">
-                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
@@ -124,6 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                                 <tr data-toggle="collapse" data-target="#accordion" class="clickable">
                                     <td><?php echo $row[4]?></td>
                                     <td><?php echo $row[5]?></td>
@@ -132,26 +137,30 @@
                                     <td><?php echo $row[8]?></td>
                                     <td><?php echo $row[4] - $row[7]?></td>
                                     <td><?php echo $row[10]?></td>
-                                    <td> <input class="form-control" name="returningQuantity" type="text"
-                                            id="returningQuantity" placeholder="Returning Quantity"></td>
+                                    <td> 
+                                        <input class="form-control" name="returningQuantity" type="text" id="returningQuantity" placeholder="Returning Quantity"></td>
+                                        <input type="hidden" name="hauling_id" value="<?php echo $row[11];?>">
                                     <td> <input type="submit" name="return_hauling"
-                                            class="btn btn-md btn-outline-secondary save-row" value="Save" /></td>
+                                            class="btn btn-md btn-outline-secondary save-row"></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td id="accordion" class="collapse">
-                                        <!-- returning qty -->
+                                        20
                                     </td>
                                     <td id="accordion" class="collapse">
-                                        <!-- date returned -->
+                                        2019-04-15
+                                    </td>
+                                    <td id="accordion" class="collapse">
+                                        210
                                     </td>
                                 </tr>
+                                </form>
                             </tbody>
                         </table>
                     </div>
-                </form>
             </div>
             <?php
             }

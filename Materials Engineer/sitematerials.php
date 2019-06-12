@@ -228,7 +228,8 @@
                                 $row3 = mysqli_fetch_row($result3);
                 ?>
                 <tr>
-                    <td><?php echo $row[1] ;?></td>
+                    <td><button type="button" class="btn btn-info"
+                                                onclick="window.location.href = 'stockcard.php'"><?php echo $row[1] ;?></button></td>
                     <td><?php echo $row[2] ;?></td>
                     <td><?php echo $row[3] ;?></td>
                     <td><?php echo $row[4] ;?></td>

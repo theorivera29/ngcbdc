@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" onclick="window.location.href='hauleditems.php'">
                 <i class="fas fa-arrow-circle-left"></i>
