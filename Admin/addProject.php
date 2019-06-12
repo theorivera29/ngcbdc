@@ -11,8 +11,7 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
@@ -35,8 +34,7 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="../logout.php">Logout</a>
@@ -58,8 +56,7 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Account</a>
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                             <li>
                                 <a href="accountcreation.php" id="sideNav-a">Create Account</a>
@@ -86,18 +83,15 @@
         <form action="../server.php" method="POST">
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
-                <input name="projectName" type="text" class="form-control" placeholder="Enter project name"
-                    pattern="^[A-Za-z][A-Za-z0-9\s-_#& ]*$" title="Input letters" required>
+                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="^[A-Za-z][A-Za-z0-9\s-_#& ]*$" title="Input letters" required>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address"
-                    pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
+                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
             <div class="form-group">
                 <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()"
-                    required>
+                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()" required>
             </div>
             <div class="form-group">
                 <label for="endDate" class="label-styles">END DATE:</label>
@@ -116,13 +110,11 @@
                 <div class="input-group-prepend col-md-12 options">
 
                     <div class="input-group-text">
-                       
-                        <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input"
-                            value="<?php echo $rowmateng[1]?>" required>
+
+                        <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input" value="<?php echo $rowmateng[1]?>" required>
                     </div>
 
-                    <input type="text" class="form-control" aria-label="Text input with checkbox"
-                        value="<?php echo $rowmateng[0]?>" disabled>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="<?php echo $rowmateng[0]?>" disabled>
                 </div>
             </div>
             <?php
@@ -135,8 +127,7 @@
             </div>
 
             <!-- Start of confirmation modal -->
-            <div class="modal fade" id="create-proj-modal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="create-proj-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -160,9 +151,9 @@
 </body>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        $('#sidebarCollapse').on('click', function () {
+        $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
     });
@@ -192,8 +183,8 @@
         $('#endDate').attr('min', start);
     }
 
-    $(document).ready(function () {
-        $(".add-proj").click(function (e) {
+    $(document).ready(function() {
+        $(".add-proj").click(function(e) {
             var projname = $("#projectName").val();
             var address = $("#address").val();
             var sdate = $("#startDate").val();
@@ -207,16 +198,17 @@
         });
     });
 
-    $(function(){
-    var requiredCheckboxes = $('.options :checkbox[required]');
-    requiredCheckboxes.change(function(){
-        if(requiredCheckboxes.is(':checked')) {
-            requiredCheckboxes.removeAttr('required');
-        } else {
-            requiredCheckboxes.attr('required', 'required');
-        }
+    $(function() {
+        var requiredCheckboxes = $('.options :checkbox[required]');
+        requiredCheckboxes.change(function() {
+            if (requiredCheckboxes.is(':checked')) {
+                requiredCheckboxes.removeAttr('required');
+            } else {
+                requiredCheckboxes.attr('required', 'required');
+            }
+        });
     });
-});
+
 </script>
 
 </html>
