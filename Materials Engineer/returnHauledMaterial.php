@@ -207,6 +207,9 @@
                                     <td id="accordion" class="collapse">
                                         <?php echo $ctr;?>
                                     </td>
+                                    <td id="accordion" class="collapse"></td>
+                                    <td id="accordion" class="collapse"></td>
+                                    <td id="accordion" class="collapse"></td>
                                 </tr> 
                                 <?php                                   
                                         }
