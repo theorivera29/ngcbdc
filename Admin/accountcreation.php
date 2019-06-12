@@ -11,10 +11,12 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-validate-2.2.0/dist/bootstrap-validate.js"></script>
 </head>
 
 <body>
@@ -34,7 +36,8 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="../logout.php">Logout</a>
@@ -56,7 +59,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Account</a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                             <li>
                                 <a href="accountcreation.php" id="sideNav-a">Create Account</a>
@@ -79,7 +83,7 @@
             </nav>
         </div>
     </div>
-    <form id="createAccountForm" action="../server.php" method="POST">
+    <form id="createAccountForm" action="../server.php" method="POST" class="needs-validation" novalidate>
         <div class="mx-auto mt-5 col-md-11 account-creation-container">
             <div class="card">
                 <div class="card-header">
@@ -89,11 +93,13 @@
 
                     <div class="form-group">
                         <label for="firstName" class="label-styles">First Name</label>
-                        <input name="firstName" id="firstName" type="text" class="form-control" placeholder="Enter first name" pattern="[A-Za-z\s]*" title="Input letters only" required>
+                        <input name="firstName" id="firstName" type="text" class="form-control"
+                            placeholder="Enter first name" pattern="[A-Za-z\s]*" title="Input letters only" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="label-styles">Last Name</label>
-                        <input name="lastName" id="lastName" type="text" class="form-control" placeholder="Enter last name" pattern="[A-Za-z\s]*" title="Input letters only" required>
+                        <input name="lastName" id="lastName" type="text" class="form-control"
+                            placeholder="Enter last name" pattern="[A-Za-z\s]*" title="Input letters only" required>
                     </div>
                     <div class="form-group">
                         <label for="username" class="label-styles">Username</label>
@@ -105,7 +111,9 @@
                                 }
                             ?>
                         </h5>
-                        <input name="username" id="username" type="text" class="form-control" placeholder="Enter username" pattern="[A-Za-z0-9._]*" title="Can input letters, numbers, period, and underscore" required>
+                        <input name="username" id="username" type="text" class="form-control"
+                            placeholder="Enter username" pattern="[A-Za-z0-9._]*"
+                            title="Can input letters, numbers, period, and underscore" required>
                     </div>
                     <div class="form-group">
                         <label for="email" class="label-styles">Email</label>
@@ -117,16 +125,20 @@
                                 }
                             ?>
                         </h5>
-                        <input name="email" id="email" type="email" class="form-control" placeholder="Enter email" pattern="[A-Za-z0-9._]*@[A-Za-z]*\.[A-Za-z]*" title="Follow the format. Example: email@email.com" required>
+                        <input name="email" id="email" type="email" class="form-control" placeholder="Enter email"
+                            pattern="[A-Za-z0-9._]*@[A-Za-z]*\.[A-Za-z]*"
+                            title="Follow the format. Example: email@email.com" required>
                     </div>
                     <div class="form-group">
                         <h5 class="form-group" class="label-styles">Account Type:</h5>
                         <div class="form-group custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" name="accountType" class="custom-control-input" value="View Only" required>
+                            <input type="radio" id="customRadioInline1" name="accountType" class="custom-control-input"
+                                value="View Only" required>
                             <label class="custom-control-label" for="customRadioInline1">View Only</label>
                         </div>
                         <div class="form-group custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline2" name="accountType" class="custom-control-input" value="Materials Engineer" required>
+                            <input type="radio" id="customRadioInline2" name="accountType" class="custom-control-input"
+                                value="Materials Engineer" required>
                             <label class="custom-control-label" for="customRadioInline2">Materials Engineer</label>
                         </div>
                     </div>
@@ -138,15 +150,16 @@
             </div>
         </div>
         <!-- Start of confirmation modal -->
-        <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="create-accnt-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this account?</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        &times;
-                                                    </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to create this account?
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            &times;
+                        </button>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="createAccount" class="btn btn-success">Yes</button>
@@ -165,10 +178,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">You have successfully created an account.</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        &times;
-                                                    </button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
@@ -192,12 +204,12 @@ $(document).ready(function(){
         document.getElementById('content').style.marginLeft = '0';
     }
 
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
 
-        $(".add-acct").click(function(e) {
+        $(".add-acct").click(function (e) {
             var fname = $("#firstName").val();
             var lname = $("#lastName").val();
             var uname = $("#username").val();
@@ -211,6 +223,26 @@ $(document).ready(function(){
         });
     });
 
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+
+    bootstrapValidate('#firstName', 'alpha:You can only input alphabetic characters.')
+    bootstrapValidate('#lastName', 'alpha:You can only input alphabetic characters.')
+    bootstrapValidate('#email', 'email:Enter a valid email address.')
 </script>
 
 </html>

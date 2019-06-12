@@ -231,7 +231,7 @@
                         <div class="col-lg-12">
                             <input type="button" class="btn btn-primary" value="Save Requisition Slip"
                                 data-toggle="modal" data-target="#save-modal">
-                            <input type=" reset" class="btn btn-secondary" value="Cancel">
+                            <input type=" reset" class="btn btn-danger" value="Cancel">
                         </div>
                     </div>
                     <!-- Start of confirmation modal -->
