@@ -53,12 +53,14 @@
     </div>
 
     <div class="card low-in-quantity-container">
-    
         <h5 class="card-header">Reconcilliation of Project Name</h5>
-        <button class="btn btn-warning" id="" data-target="#" type="button">Generate Form</button>
-        <button class="btn btn-warning" id="" data-target="#" type="button">Edit</button>
-        <button class="btn btn-warning" id="" data-target="#" type="button">Save</button>
-        <table class="table low-quantity-table table-striped table-bordered" id="mydatatable">
+        <div class="recon-btn">
+            <button class="btn btn-danger" id="cancel-recon-btn" data-target="#" type="button">Cancel</button>
+            <button class="btn btn-success" id="save-recon-btn" data-target="#" type="button">Save</button>
+            <button class="btn btn-info" id="edit-recon-btn" data-target="#" type="button">Edit</button>
+            <button class="btn btn-warning" id="generate-recon-btn" data-target="#" type="button">Generate Form</button>
+        </div>
+        <table class="table reconcilliation-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
                     <th scope="col">Number</th>
@@ -70,7 +72,6 @@
                 </tr>
             </thead>
             <tbody>
-              
                 <tr>
                     <td><?php echo $row[0] ;?></td>
                     <td><?php echo $row[1] ;?></td>

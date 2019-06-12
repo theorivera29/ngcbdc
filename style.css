@@ -267,7 +267,7 @@ ul ul #sideNav-a  {
     background-color: #DCB149 !important;
     color: #0D304F;
 }
-]
+
 .card-header:hover{
     text-decoration: none !important;
 }
@@ -452,13 +452,13 @@ textarea{
 
 .add-project-btn{
     margin-top: 1%;
+    margin-bottom: 2%;
     float: right !important;
 }
 
 .projects-table > thead > tr > th{
     background-color: #124E78;
     color: #FFF8F0;
-
 }
 
 
@@ -704,6 +704,53 @@ textarea{
     margin-bottom: 2%;
 }
 /*End of Materials Engineer - Report Page*/
+
+/*Start of Materials Engineer - Reconcilliation*/
+.recon-btn{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+#generate-recon-btn{
+    width: 15%;
+    float: right;
+    margin-left: .5%;
+    margin-right: .5%;
+}
+
+#edit-recon-btn{
+    width: 5%;
+    float: right;
+}
+
+#save-recon-btn{
+    width: 5%;
+    float: right;
+    margin-left: .5%;
+    margin-right: .5%;
+}
+
+#cancel-recon-btn{
+    width: 6%;
+    float: right;
+    margin-right: 1%;
+}
+
+.reconcilliation-table{
+    width: 100% !important;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.reconcilliation-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+/*End of Materials Engineer - Reconcilliation*/
 
 
 /*Start of Materials Engineer - Account*/
