@@ -15,13 +15,14 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-validate-2.2.0/dist/bootstrap-validate.js"></script>
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
         <span class="slide">
-            <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
-                <i class="fas fa-bars"></i>
+            <a href="#" class="open" onclick="window.location.href='projects.php'">
+                <i class="fas fa-arrow-circle-left"></i>
             </a>
             <h4 class="title">NEW GOLDEN CITY BUILDERS AND DEVELOPMENT CORPORATION</h4>
             <div class="account-container">
@@ -34,60 +35,26 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="account.php">Account Settings</a>
                         <a class="dropdown-item" href="../logout.php">Logout</a>
                     </div>
                 </div>
             </div>
         </span>
-
-        <div id="menu" class="navigation sidenav">
-            <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i>
-            </a>
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <img src="../Images/login2.png" id="ngcbdc-logo">
-                </div>
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="dashboard.php" id="sideNav-a">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Account</a>
-                        <ul class="collapse list-unstyled" id="accountSubmenu">
-                            <li>
-                                <a href="accountcreation.php" id="sideNav-a">Create Account</a>
-                            </li>
-                            <li>
-                                <a href="listofaccounts.php" id="sideNav-a">List of Accounts</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="passwordrequest.php" id="sideNav-a">Password Request</a>
-                    </li>
-                    <li>
-                        <a href="projects.php" id="sideNav-a">Projects</a>
-                    </li>
-                    <li>
-                        <a href="logs.php" id="sideNav-a">Logs</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
     </div>
     <div class="add-project-container">
-        <form action="../server.php" method="POST">
+        <form action="../server.php" method="POST" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
-                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="^[A-Za-z][A-Za-z0-9\s-_#& ]*$" title="Input letters" required>
+                <input name="projectName" id="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$" title="Input letters" required>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
+                <input name="address" id="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
             <div class="form-group row">
                 <div class="col-lg-6">
@@ -198,6 +165,22 @@
         });
     });
 
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
     $(function () {
         var requiredCheckboxes = $('.options :checkbox[required]');
         requiredCheckboxes.change(function () {
@@ -208,6 +191,11 @@
             }
         });
     });
+
+    bootstrapValidate('#projectName', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
+    bootstrapValidate('#address', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
+    bootstrapValidate('#startDate', 'required:Please fill out this field!')
+    bootstrapValidate('#endDate', 'required:Please fill out this field!')
 </script>
 
 </html>

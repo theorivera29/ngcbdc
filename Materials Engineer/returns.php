@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    unset($_SESSION['hauling_no']);
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +135,7 @@
             </thead>
             <tbody>
             <?php
-                                        $sql = "    SELECT
+                $sql = "SELECT
                             hauling.hauling_no,
                             hauling.hauling_date,
                             hauling.hauling_hauledFrom,
@@ -143,9 +144,9 @@
                             hauling
                         WHERE
                             hauling.hauling_status='To be returned'";
-                                        $result = mysqli_query($conn, $sql);
-                                        while ($row = mysqli_fetch_row($result)) {
-                                    ?>
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_row($result)) {
+            ?>
                     <tr>
                         <td>
                             <?php echo $row[0]; ?>
@@ -167,7 +168,7 @@
                 </form>
                     </tr>
             <?php
-                                        }
+                }
             ?>
             </tbody>
         </table>

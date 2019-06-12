@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-success">Yes</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-success">Yes</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                                     </div>
                                 </div>
