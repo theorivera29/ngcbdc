@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+$hauling_no = $_GET['hauling_no'];
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +60,7 @@
                 </div>
             </div>
             <?php
-        $sql = "SELECT hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_requestedBy, hauling_hauledBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPLateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR FROM hauling WHERE hauling_id = 1;";
+        $sql = "SELECT hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_requestedBy, hauling_hauledBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPLateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR FROM hauling WHERE hauling_no = $hauling_no;";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_row($result)){
     ?>
