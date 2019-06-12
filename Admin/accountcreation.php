@@ -173,6 +173,7 @@
 
     </form>
 
+<<<<<<< HEAD
     <?php
         if(isset($_SESSION['create_success'])) {
 <<<<<<< HEAD
@@ -195,6 +196,9 @@
             ?>
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
+=======
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+>>>>>>> e2314b25662772a5e21a2102c0d82588cbc95cae
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -205,6 +209,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
+<<<<<<< HEAD
 
 >>>>>>> 9adbf1b3c632df2dec66f09bb51a0ff20ac073c4
                 </div>
@@ -213,9 +218,19 @@
             unset($_SESSION['create_success']);
         }
     ?>
+=======
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> e2314b25662772a5e21a2102c0d82588cbc95cae
 </body>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+		$("#success-modal").modal('show');
+	});
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
