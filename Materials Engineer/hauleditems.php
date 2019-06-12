@@ -135,6 +135,7 @@
                     <th scope="col">Form No.</th>
                     <th scope="col">Hauling Date</th>
                     <th scope="col">Hauled From</th>
+                    <th scope="col">Deliver To</th>
                     <th scope="col">Hauled By</th>
                     <th scope="col">Status/Remarks</th>
                     <th scope="col">Action</th>
@@ -142,7 +143,7 @@
             </thead>
             <tbody>
                 <?php
-                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
+                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo,hauling_hauledBy, hauling_status FROM  hauling;";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
@@ -153,6 +154,7 @@
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
                     <td><?php echo $row[4]?></td>
+                    <td><?php echo $row[5]?></td>
                     <td><button type="button" class="btn btn-success"
                             onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
                 </tr>
