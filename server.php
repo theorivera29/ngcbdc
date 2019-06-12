@@ -883,7 +883,9 @@ if (isset($_POST['edit_project'])) {
 
     if (isset($_POST['open_returns'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php?hauling_no=$hauling_no");     
+        session_start();
+        $_SESSION['hauling_no'] = $hauling_no;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
     if (isset($_POST['adding_materials'])) {
@@ -1105,20 +1107,13 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['return_hauling'])) {
         
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
-        $hauling_id = $_POST['hauling_id'];
-
-        $stmt = $conn->prepare("SELECT returns_returnedqty FROM returns WHERE return_id = ?;");
-        $stmt->bind_param("i", $hauling_id);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($currentReturnedQty);
-        $stmt->fetch();
-        $newQuantity = $returningQuantity+$currentReturnedQty;
-        $stmt = $conn->prepare("UPDATE returns SET return_returnedqty = ? WHERE return_id = 1;");
-        $stmt->bind_param("i", $newQuantity);
+        $returns_id = $_POST['returns_id']; 
+        $date_today = date("Y-m-d");
+        $stmt = $conn->prepare("INSERT INTO returnhistory (returns_id, returnhistory_date, returnhistory_returningqty) VALUES (?, ?, ?);");
+        $stmt->bind_param("isi", $returns_id, $date_today, $returningQuantity);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returns.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
     if (isset($_POST['materialCategories'])) {
