@@ -201,13 +201,11 @@
                             $result = mysqli_query($conn, $sql);
                             while($row = mysqli_fetch_row($result)){
                                 $sql1 = "SELECT 
-                                            SUM(deliveredin.deliveredin_quantity) 
+                                            SUM(deliveredmat.deliveredmat_qty) 
                                         FROM 
-                                            deliveredin
-                                        INNER JOIN 
-                                            matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                            deliveredmat
                                         WHERE 
-                                            matinfo.matinfo_matname = '$row[0]';";
+                                            deliveredmat.deliveredmat_materials = '$row[0]';";
                                 $result1 = mysqli_query($conn, $sql1);
                                 $row1 = mysqli_fetch_row($result1);
                                 $sql2 = "SELECT 
@@ -234,10 +232,42 @@
                     <td><?php echo $row[2] ;?></td>
                     <td><?php echo $row[3] ;?></td>
                     <td><?php echo $row[4] ;?></td>
-                    <td><?php echo $row1[0] ;?></td>
-                    <td><?php echo $row2[0] ;?></td>
-                    <td><?php echo $row[3]+$row1[0] ;?></td>
-                    <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
+                    <td>
+                        <?php 
+                            if ($row1[0] == 0) {
+                                echo 0;
+                            } else {
+                                echo $row1[0];
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                            if ($row2[0] == 0) {
+                                echo 0;
+                            } else {
+                                echo $row2[0];
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                            if (($row[3]+$row1[0]) == 0) {
+                                echo 0;
+                            } else {
+                                echo $row[3]+$row1[0];
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                            if (($row[3]+$row1[0]-$row2[0]) == 0) {
+                                echo 0;
+                            } else {
+                                echo $row[3]+$row1[0]-$row2[0];
+                            }
+                        ?>
+                    </td>
                     <td><?php echo $row[4] ;?></td>
                     <td><?php echo $row3[0] ;?></td>
                 </tr>
