@@ -85,7 +85,7 @@
 
     <div class="row dashboard-card-container">
         <div class="card account-card-container">
-            <h5 class="card-header"><a href="account.php">Accounts</a></h5>
+            <h5 class="card-header"><a href="listofaccounts.php">Accounts</a></h5>
             <div class="card-body">
                 <?php
                     $sql_accounts = "SELECT

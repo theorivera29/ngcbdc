@@ -452,7 +452,6 @@ textarea{
 
 .add-project-btn{
     margin-top: 1%;
-    margin-bottom: 2%;
     float: right !important;
 }
 
@@ -460,7 +459,6 @@ textarea{
     background-color: #124E78;
     color: #FFF8F0;
 }
-
 
 /*End of Materials Engineer - Project*/
 
@@ -541,7 +539,7 @@ textarea{
 
 .view-inventory-tabs-content{
     margin-top: 3%;
-
+    width: 100%;
 }
 
 .category-card{
@@ -551,7 +549,6 @@ textarea{
 }
 
 .category-card-body{
-
     padding: 20% !important;
 }
 
@@ -569,6 +566,10 @@ textarea{
     margin-top: 3% !important;
 }
 
+.category-table > thead > tr > th{
+    background-color: #0D304F;
+    color: #FFFFFF;
+}
 /*Materials Engineer - Material Categories*/
 .category-title{
     text-align: center;
@@ -633,6 +634,10 @@ textarea{
 /*Start of Admin - Projects*/
 #edit-project-modal{
     width: 100% !important;
+}
+
+.mat-eng-involved{
+    text-align: left;
 }
 
 /*Start of Admin - Create Project*/
