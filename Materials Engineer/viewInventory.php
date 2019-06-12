@@ -70,18 +70,18 @@
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                role="tab" aria-controls="nav-home" aria-selected="true">SITE MATERIALS</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                role="tab" aria-controls="nav-profile" aria-selected="false">CATEGORY</a>
+                            <a class="nav-item nav-link active" id="nav-mat-tab" data-toggle="tab" href="#nav-mat"
+                                role="tab" aria-controls="nav-mat" aria-selected="true">SITE MATERIALS</a>
+                            <a class="nav-item nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category"
+                                role="tab" aria-controls="nav-category" aria-selected="false">CATEGORY</a>
                         </div>
                     </nav>
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content view-inventory-content" id="nav-tabContent">
                         <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
-                            role="tabpanel" aria-labelledby="nav-home-tab">
-                            <table class="table view-inventory-tabs-table table-striped table-bordered"
+                            role="tabpanel" aria-labelledby="nav-mat-tab">
+                            <table class="table view-inventory-tabs-table table-striped table-bordered display"
                                 id="mydatatable">
                                 <thead>
                                     <tr>
@@ -209,8 +209,17 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <?php
+                        <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
+                        <table class="table category-table table-striped table-bordered display"
+                                id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
                                 $sql = "SELECT DISTINCT
                                             categories.categories_id,
                                             categories_name
@@ -225,23 +234,24 @@
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
-                            <form action="../server.php" method="POST">
-                                <div class="card category-card">
-
-                                    <h5 class="card-header"><?php echo $row[1];?></h5>
-                                    <div class="card-body category-card-body">
+                                    <tr>
+                                        <td><?php echo $row[1] ;?></button>
+                                        </td>
+                                        <td>
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
                                         <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
                                         <button type="submit" name="materialCategories" class="btn btn-info"
                                             id="open-category-btn"
                                             onclick="window.location.href='materialCategories.php'">View</button>
-                                    </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                        }
 
-                                </div>
-                            </form>
-                            <?php
-                                }
-                            ?>
+                                ?>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>
@@ -254,6 +264,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
+        $('table.display').DataTable();
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
     });
 </script>
 
