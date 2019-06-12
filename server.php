@@ -75,7 +75,7 @@
             $generated_password = substr(str_shuffle($characters), 0, 8);
             $password = password_hash($generated_password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("INSERT INTO accounts (accounts_fname, accounts_lname, accounts_username, accounts_password, accounts_type, accounts_email, accounts_deletable, accounts_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
-            $stmt->bind_param("ssssssss", $firstName, $lastName, $username, $generated_password, $accountType, $email, $accountsDeletable, $accountsStatus);
+            $stmt->bind_param("ssssssss", $firstName, $lastName, $username, $password, $accountType, $email, $accountsDeletable, $accountsStatus);
             $accountsDeletable = "yes";
             $accountsStatus = "active";
             $stmt->execute();
