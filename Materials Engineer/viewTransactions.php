@@ -134,9 +134,9 @@
                 <div class="col-xs-12 project-tabs">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                            role="tab" aria-controls="nav-home" aria-selected="true">ONGOING</a>
+                            role="tab" aria-controls="nav-home" aria-selected="true">Delivered In Form</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                            role="tab" aria-controls="nav-profile" aria-selected="false">CLOSED</a>
+                            role="tab" aria-controls="nav-profile" aria-selected="false">Material Requisition Slip</a>
                     </div>
                 </div>
 
@@ -147,10 +147,9 @@
                             <table class="table projects-table table-striped table-bordered" id="mydatatable">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Date</th>
                                         <th scope="col">Project Name</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
+                                        <th scope="col">Location</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -174,18 +173,16 @@
                                         while ($row = mysqli_fetch_row($result)) {
                                     ?>
                                     <tr>
-                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
-                                        <td><?php echo $row[3] ;?></td>
-                                        <td>
-                                            <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
-                                            <button type="submit" class="btn btn-info" id="" name="addMaterials">Add Materials</button>
-                                            <button type="button" class="btn btn-info" id="" name="reconcillation">Reconcillation</button>
-                                        </td>
-                                        </form>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
                                     </tr>
                                     <?php
                                         }
@@ -198,10 +195,9 @@
                             <table class="table projects-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
+                                    <th scope="col">Date</th>
                                         <th scope="col">Project Name</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
+                                        <th scope="col">Location</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -225,17 +221,17 @@
                                             while ($row = mysqli_fetch_row($result)) {
                                         ?>
                                     <tr>
-                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
-                                        <td>
-                                            <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
-                                            <button type="submit" class="btn btn-info" id="" name="addMaterials">Add Materials</button>
-                                        </td>
-                                        </form>
+                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
+                                                onclick="window.location.href='viewInventory.php'"
+                                                name="viewInventory">View inventory</button>
+                                            <button type="button" class="btn btn-info" id=""
+                                                onclick="window.location.href='addMaterials.php'" name="">Add
+                                                Materials</button></td>
                                     </tr>
                                     <?php
                                             }
