@@ -244,6 +244,7 @@
         }, false);
     })();
 
+
     bootstrapValidate('#firstName', 'alpha:You can only input alphabetic characters.')
     bootstrapValidate('#lastName', 'alpha:You can only input alphabetic characters.')
     bootstrapValidate('#email', 'email:Enter a valid email address.')
