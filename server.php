@@ -774,33 +774,45 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
+    if (isset($_POST['edit_threshold'])) {
+        $matinfo_id = mysqli_real_escape_string($conn, $_POST['matinfo_id']);
+        $threshold = mysqli_real_escape_string($conn, $_POST['threshold']);
+        $proj_id = mysqli_real_escape_string($conn, $_POST['proj_id']);
+        
+        $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
+        $stmt->bind_param("ii", $threshold, $matinfo_id);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php?projects_id=$proj_id");     
+    }
+
     if (isset($_POST['edit_material'])) {
             $newCategory = mysqli_real_escape_string($conn, $_POST['newCategory']);
             $newMatName = mysqli_real_escape_string($conn, $_POST['newMatName']);
-            $newThreshold = mysqli_real_escape_string($conn, $_POST['newThreshold']);
             $newUnit = mysqli_real_escape_string($conn, $_POST['newUnit']);
-            $matinfo_id = mysqli_real_escape_string($conn, $_POST['matinfo_id']);
-            
+            $mat_id = mysqli_real_escape_string($conn, $_POST['mat_id']);  
+        
+            if(isset($_POST['newCategory'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_categ = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newCategory, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
         
+            if(isset($_POST['newUnit'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_unit = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newUnit, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
         
+            if(isset($_POST['newMatName'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_name = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newMatName, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
 
-
-            $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
-            $stmt->bind_param("si", $newThreshold, $matinfo_id);
-            $stmt->execute();
-            $stmt->close();
         
 /*         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
@@ -890,18 +902,21 @@ if (isset($_POST['edit_project'])) {
 
         $matName = $_POST['matName'];
         $prevStock = 0;
-        $notif = 50;
+        $notif = 0;
         $currentQuantity = 0;
-        $project = 1;
+        $project = mysqli_real_escape_string($conn, $_POST['proj_id']);;
         
+   
         for($x = 0; $x < sizeof($matName); $x++){
             
-            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname)   VALUES (?, ?, ?, ?, ?);");
+            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname) VALUES (?, ?, ?, ?, ?);");
             $stmt->bind_param("iiiii", $prevStock, $project, $notif, $currentQuantity, $matName[$x]);
             $stmt->execute();
             $stmt->close();
         }
-        $account_id = "";
+        
+        
+/*        $account_id = "";
         session_start();
         if(isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
@@ -913,8 +928,8 @@ if (isset($_POST['edit_project'])) {
         $logs_of = $account_id;
         $stmt->bind_param("ssi", $create_mat_date, $logs_message, $logs_of);
         $stmt->execute();
-        $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+        $stmt->close();*/
+        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
 
 
