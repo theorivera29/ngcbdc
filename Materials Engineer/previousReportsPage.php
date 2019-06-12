@@ -251,16 +251,6 @@
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
-                <tr>
-                    <td><?php echo $row[0]?></td>
-                    <td><?php echo $row[1]?></td>
-                    <td><button type="button" class="btn btn-success"
-                            onclick="window.location.href = 'viewPreviousReport.php'">View</button></td>
-                </tr>
-
-                <?php
-                        }
-                    ?>
                         <tr>
                             <form action="../server.php" method="POST">
                                 <td><?php echo $month_name = date("F", mktime(0, 0, 0, $row[0], 10)); ?></td>

@@ -1061,6 +1061,27 @@ if (isset($_POST['edit_project'])) {
         }
     }
 
+    if (isset($_POST['addMaterials'])) {
+        $projects_id = $_POST['projects_id'];
+        session_start();
+
+        $accounts_id = $_SESSION['account_id'];   
+        $sql = "SELECT
+                    accounts_type
+                FROM
+                    accounts
+                WHERE 
+                    accounts_id = $accounts_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        
+        if (strcmp($row[0], "Materials Engineer") == 0) {
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php?projects_id=$projects_id");    
+        } else {
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/addMaterials.php?projects_id=$projects_id");    
+        }
+    }
+
     if (isset($_POST['prevViewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();

@@ -174,20 +174,18 @@
                                         while ($row = mysqli_fetch_row($result)) {
                                     ?>
                                     <tr>
+                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                onclick="window.location.href='viewInventory.php'"
-                                                name="viewInventory">View inventory</button>
-                                            <button type="button" class="btn btn-info" id=""
-                                                onclick="window.location.href='addMaterials.php'" name="">Add
-                                                Materials</button>
-                                            <button type="button" class="btn btn-info" id=""
-                                                onclick="window.location.href='reconcilliation.php'" name="">Reconcillation</button>
+                                        <td>
+                                            <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
+                                            <button type="submit" class="btn btn-info" id="" name="addMaterials">Add Materials</button>
+                                            <button type="button" class="btn btn-info" id="" name="reconcillation">Reconcillation</button>
                                         </td>
+                                        </form>
                                     </tr>
                                     <?php
                                         }
@@ -227,17 +225,17 @@
                                             while ($row = mysqli_fetch_row($result)) {
                                         ?>
                                     <tr>
+                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[0] ;?></td>
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                onclick="window.location.href='viewInventory.php'"
-                                                name="viewInventory">View inventory</button>
-                                            <button type="button" class="btn btn-info" id=""
-                                                onclick="window.location.href='addMaterials.php'" name="">Add
-                                                Materials</button></td>
+                                        <td>
+                                            <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                            <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
+                                            <button type="submit" class="btn btn-info" id="" name="addMaterials">Add Materials</button>
+                                        </td>
+                                        </form>
                                     </tr>
                                     <?php
                                             }
