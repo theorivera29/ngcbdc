@@ -413,6 +413,10 @@ textarea{
     margin-top: 2%;
     margin-bottom: 1%;
 }
+
+.modal-body{
+    text-align: center;
+}
 /*End of Materials Engineer-View All Task*/
 
 
