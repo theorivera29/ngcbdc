@@ -57,7 +57,7 @@
             </div>
             <div class="card-body">
                 <?php
-                    $hauling_no = $_GET['hauling_no'];
+                    $hauling_no = $_SESSION['hauling_no'];
                     $sql_hauling = "SELECT
                                 hauling_date,
                                 hauling_hauledBy,
@@ -114,21 +114,24 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql = "SELECT
-                                                hauling.hauling_quantity,
+                                    $sql = "SELECT 
+                                                haulingmat.haulingmat_qty, 
                                                 unit.unit_name,
                                                 materials.mat_name,
-                                                materials.mat_id
-                                            FROM
+                                                materials.mat_id 
+                                            FROM 
                                                 materials
-                                            INNER JOIN
-                                                hauling ON materials.mat_id = hauling.hauling_matname
-                                            INNER JOIN
+                                            INNER JOIN 
+                                                haulingmat ON haulingmat.haulingmat_matname = materials.mat_id
+                                            INNER JOIN 
                                                 unit ON materials.mat_unit = unit.unit_id
-                                            WHERE
+                                            INNER JOIN 
+                                                hauling ON haulingmat.haulingmat_haulingid = hauling.hauling_id
+                                            WHERE 
                                                 hauling.hauling_no = $hauling_no;";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_row($result)) {
+                                        $ctr = $row[0];
                                         $sql_sum = "SELECT
                                                         SUM(returnhistory.returnhistory_returningqty)
                                                     FROM
@@ -140,36 +143,42 @@
                                         $result_sum = mysqli_query($conn, $sql_sum);
                                         $row_sum = mysqli_fetch_row($result_sum);
                                         $sum = $row_sum[0];
-                                        $sql_status = "SELECT
-                                                        returns_status
-                                                    FROM
-                                                        returns
-                                                    WHERE
-                                                        returns_matname = $row[3];";
-                                        $result_status = mysqli_query($conn, $sql_status);
-                                        $row_status = mysqli_fetch_row($result_status);
-                                        $status = $row_status[0];
+                                        $stmt = $conn->prepare("SELECT returns_status, returns_id FROM returns WHERE returns_matname = ?;");
+                                        $stmt->bind_param("i", $row[3]);
+                                        $stmt->execute();
+                                        $stmt->store_result();
+                                        $stmt->bind_result($status, $returns_id);
+                                        $stmt->fetch();
                                 ?>
-                                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                                 <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                                <form class="form needs-validation" action="../server.php" method="POST" novalidate>
                                     <td><?php echo $row[0] ;?></td>
                                     <td><?php echo $row[1] ;?></td>
                                     <td><?php echo $row[2] ;?></td>
-                                    <td><?php echo $sum ;?></td>
+                                    <td>
+                                        <?php 
+                                            if ($sum == null ) {
+                                                echo 0;
+                                            } else {
+                                                echo $sum;
+                                            }
+                                        ?>
+                                    </td>
                                     <td>-</td>
                                     <td>
                                         <?php   
-                                            $ctr = $row[0]-$sum;
-                                            echo $ctr;
+                                            echo $row[0]-$sum;
                                         ?>
                                     </td>
                                     <td><?php echo $status ;?></td>
                                     <td> 
-                                        <input class="form-control" name="returningQuantity" type="text" id="returningQuantity" placeholder="Returning Quantity"></td>
-                                        <input type="hidden" name="hauling_no" value="<?php echo $hauling_no ;?>">
+                                        <input class="form-control" name="returningQuantity" type="text" id="returningQuantity" placeholder="Returning Quantity">
+                                    </td>
                                     <td> 
+                                        <input type="hidden" name="returns_id" value="<?php echo $returns_id ;?>">
                                         <input type="submit" name="return_hauling" class="btn btn-md btn-outline-secondary save-row">
                                     </td>
+                                </form>
                                 </tr>
                                 <?php
                                         $sql_ret = "SELECT
@@ -182,12 +191,13 @@
                                                     WHERE
                                                         returns.returns_matname = $row[3];";
                                         $result_ret = mysqli_query($conn, $sql_ret);
-                                        while ($row_ret = mysqli_fetch_row($result_ret)) {
+                                        while ($row_ret = mysqli_fetch_row($result_ret)) {                                                 
+                                        $ctr = $ctr - $row_ret[0];  
                                 ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td id="accordion" class="collapse"></td>
+                                    <td id="accordion" class="collapse"></td>
+                                    <td id="accordion" class="collapse"></td>
                                     <td id="accordion" class="collapse">
                                         <?php echo $row_ret[0];?>
                                     </td>
@@ -198,12 +208,10 @@
                                         <?php echo $ctr;?>
                                     </td>
                                 </tr> 
-                                <?php                                        
-                                        $ctr = $ctr - $row_ret[0];  
+                                <?php                                   
                                         }
                                     }
                                 ?>
-                                </form>
                             </tbody>
                         </table>
                     </div>

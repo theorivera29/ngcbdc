@@ -172,33 +172,13 @@
         <!-- End of confirmation modal -->
 
     </form>
-
-<<<<<<< HEAD
-    <?php
-        if(isset($_SESSION['create_success'])) {
-<<<<<<< HEAD
+    
+    <?php 
+        if (isset($_SESSION['create_success'])) {
     ?>
-            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">You have successfully created an account.</h5>
-                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                &times;
-                                                            </button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
-                        </div>
-                    </div>
-=======
-            ?>
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-=======
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
->>>>>>> e2314b25662772a5e21a2102c0d82588cbc95cae
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -209,21 +189,16 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
-<<<<<<< HEAD
-
->>>>>>> 9adbf1b3c632df2dec66f09bb51a0ff20ac073c4
                 </div>
             </div>
     <?php
             unset($_SESSION['create_success']);
         }
     ?>
-=======
                 </div>
             </div>
         </div>
     </div>
->>>>>>> e2314b25662772a5e21a2102c0d82588cbc95cae
 </body>
 
 <script type="text/javascript">
