@@ -900,6 +900,11 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
+    if (isset($_POST['view_hauling'])) {
+        $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php?hauling_no=$hauling_no");     
+    }
+
     if (isset($_POST['adding_materials'])) {
 
         $matName = $_POST['matName'];
