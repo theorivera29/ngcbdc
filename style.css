@@ -267,7 +267,7 @@ ul ul #sideNav-a  {
     background-color: #DCB149 !important;
     color: #0D304F;
 }
-]
+
 .card-header:hover{
     text-decoration: none !important;
 }
@@ -452,13 +452,13 @@ textarea{
 
 .add-project-btn{
     margin-top: 1%;
+    margin-bottom: 2%;
     float: right !important;
 }
 
 .projects-table > thead > tr > th{
     background-color: #124E78;
     color: #FFF8F0;
-
 }
 
 
