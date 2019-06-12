@@ -53,7 +53,6 @@
     </div>
 
     <div class="card low-in-quantity-container">
-
         <h5 class="card-header">Reconcilliation of Project Name</h5>
         <div class="recon-btn">
             <button class="btn btn-danger" id="cancel-recon-btn" data-target="#" type="button">Cancel</button>
@@ -73,7 +72,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 <tr>
                     <td><?php echo $row[0] ;?></td>
                     <td><?php echo $row[1] ;?></td>

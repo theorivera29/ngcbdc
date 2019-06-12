@@ -11,15 +11,14 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -35,8 +34,7 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -59,8 +57,7 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -71,8 +68,7 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Hauling</a>
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -82,18 +78,28 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Transactions</a>
+                        <ul class="collapse list-unstyled" id="transactionSubmenu">
+                            <li>
+                                <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
+                            </li>
+                            <li>
+                                <a href="deliveredin.php" id="sideNav-a">Delivered In Form</a>
+                            </li>
+                            <li>
+                                <a href="viewTransactions.php" id="sideNav-a">View Transactions</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
-                    <li>
-                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
-                    </li>
                     <li class="active">
-                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Reports</a>
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Reports</a>
                         <ul class="collapse list-unstyled" id="reportSubmenu">
                             <li>
                                 <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
@@ -124,11 +130,47 @@
                                 <input class="form-control" type="date" name="deliveredDate" required>
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <label class="col-lg-12 col-form-label">Receipt No.:</label>
+                            <div class="col-lg-12">
+                                <input class="form-control" type="text" name="resibo" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="col-lg-12 col-form-label">Remarks:</label>
+                            <div class="col-lg-12">
+                                <select class="form-control" name="remarks" id="remarks">
+                                    <option value="" selected disabled>Select remarks:</option>
+                                    <option value="Delivered from Main Office">Delivered from Main Office</option>
+                                    <option value="Delivered using Petty Cash">Delivered using Petty Cash</option>
+                                    <option value="Replacement from Main Office">Replacement from Main Office</option>
+                                    <option value="Replacement using Petty Cash">Replacement using Petty Cash</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" name="project">
+                        <div class="form-group col-lg-9">
+                            <select class="form-control" name="projectName">
+                                <option value="" selected disabled>Choose a project</option>
+                                <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                <option value="<?php echo $row[1]; ?>">
+                                    <?php echo $row[0]; ?>
+                                </option>
+                                <?php
+                                        }
+                                        ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -145,41 +187,45 @@
                                     <th scope="col">Articles</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Supplied By</th>
-                                    <th scope="col">From</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="deliveredTable">
                             </tbody>
                             <tfoot>
                                 <tr id="deliveredRow">
-                                    <td><input class="form-control" name="quantity" type="text" id="quantity"
-                                            placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity">
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="articles" id="articles">
+                                            <select class="form-control" name="articles[]" id="articles">
                                                 <option value="" selected disabled>Choose an Article</option>
+                                                <?php
+                                                $sql = "SELECT
+                                                    mat_name,
+                                                    mat_id
+                                                FROM
+                                                    materials;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                                <option value="<?php echo $row[1]; ?>">
+                                                    <?php echo $row[0]; ?>
+                                                </option>
+                                                <?php
+                                        }
+                                        ?>
                                             </select>
                                         </div>
-                                    </td>
-                                    <td><input class="form-control" name="unit" type="text" id="unit"
-                                            placeholder="Unit">
-                                    </td>
-                                    <td><input class="form-control" name="suppliedBy" type="text" id="suppliedBy"
-                                            placeholder="Supplied By">
                                     </td>
                                     <td>
-                                        <div class="form-group">
-                                            <select class="form-control" name="from" id="selectFrom">
-                                                <option value="" selected disabled>Choose</option>
-                                                <option value="Main Office">Main Office</option>
-                                                <option value="Petty Cash">Petty Cash</option>
-                                            </select>
-                                        </div>
+                                        <input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit">
+                                    </td>
+                                    <td><input class="form-control" name="suppliedBy[]" type="text" id="suppliedBy" placeholder="Supplied By">
                                     </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                            value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -196,66 +242,64 @@
         </div>
     </div>
     <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
-                                        changes?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        &times;
-                                    </button>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit"  name="create_todo" class="btn btn-success">Yes</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+    <!--    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
+                        changes?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="create_todo" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- End of confirmation modal -->
+    <!-- End of confirmation modal -->
 </body>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".add-row").click(function () {
-                var quantity = $("#quantity").val();
-                var articles = $("#articles").val();
-                var unit = $("#unit").val();
-                var suppliedBy = $("#suppliedBy").val();
-                var selectFrom = $("#selectFrom option:selected").val();
-                var markup = "<tr><td><input type='text' class='form-control' value='" + quantity + "' readonly/></td><td><input type='text' class='form-control' value='" + articles + "' readonly/></td><td><input type='text' class='form-control' value='" + unit +
-                    "' readonly/></td><td><input type='text' class='form-control' value='" + suppliedBy +
-                    "' readonly/></td><td><input type='text' class='form-control' value='" + selectFrom +
-                    "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".add-row").click(function() {
+            var quantity = $("#quantity").val();
+            var articles = $("#articles option:selected").val();
+            var unit = $("#unit").val();
+            var suppliedBy = $("#suppliedBy").val();
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity +
+                "' readonly/></td><td><input type='text' name='articles[]' class='form-control' value='" + articles +
+                "' readonly/></td><td><input type='text' name='unit[]' class='form-control' value='" + unit +
+                "' readonly/></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" + suppliedBy +
+                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
-                if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '') && (
-                        selectFrom != '')) {
-                    $("table tbody").append(markup);
-                    $("#deliveredRow input[type=text]").val('');
-                    $("#deliveredRow select").val('');
-                }
-            });
-
-            $("#deliveredTable").on('click', '.delete-row', function () {
-                $(this).closest('tr').remove();
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+            if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '')) {
+                $("table tbody").append(markup);
+                $("#deliveredRow input[type=text]").val('');
+                $("#deliveredRow select").val('');
+            }
         });
 
-        function openSlideMenu() {
-            document.getElementById('menu').style.width = '15%';
-        }
+        $("#deliveredTable").on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
+        });
 
-        function closeSlideMenu() {
-            document.getElementById('menu').style.width = '0';
-            document.getElementById('content').style.marginLeft = '0';
-        }
-    </script>
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+
+</script>
 
 </html>

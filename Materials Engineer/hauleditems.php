@@ -87,14 +87,26 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Transactions</a>
+                        <ul class="collapse list-unstyled" id="transactionSubmenu">
+                            <li>
+                                <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
+                            </li>
+                            <li>
+                                <a href="deliveredin.php" id="sideNav-a">Delivered In Form</a>
+                            </li>
+                            <li>
+                                <a href="viewTransactions.php" id="sideNav-a">View Transactions</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="returns.php" id="sideNav-a">Returns</a>
                     </li>
                     <li>
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
-                    </li>
-                    <li>
-                        <a href="requisitionslip.php" id="sideNav-a">Material Requisition</a>
                     </li>
                     <li class="active">
                         <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
@@ -116,35 +128,38 @@
     </div>
 
     <div class="hauled-items-container">
-    <h4 class="card-header">Hauled Materials</h4>
+        <h4 class="card-header">Hauled Materials</h4>
         <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>
                     <th scope="col">Form No.</th>
                     <th scope="col">Hauling Date</th>
                     <th scope="col">Hauled From</th>
+                    <th scope="col">Deliver To</th>
                     <th scope="col">Hauled By</th>
                     <th scope="col">Status/Remarks</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-            <?php
-                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo, hauling_status FROM  hauling;";
+                <?php
+                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo,hauling_hauledBy, hauling_status FROM  hauling;";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
-            
+
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
                     <td><?php echo $row[2]?></td>
                     <td><?php echo $row[3]?></td>
                     <td><?php echo $row[4]?></td>
-                    <td><button type="button" class="btn btn-success"  onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
+                    <td><?php echo $row[5]?></td>
+                    <td><button type="button" class="btn btn-success"
+                            onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
                 </tr>
-            
-            <?php
+
+                <?php
                         }
                     ?>
             </tbody>
