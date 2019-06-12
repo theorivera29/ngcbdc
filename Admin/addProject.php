@@ -89,13 +89,16 @@
                 <label for="address" class="label-styles">ADDRESS:</label>
                 <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
-            <div class="form-group">
-                <label for="startDate" class="label-styles">START DATE:</label>
-                <input name="startDate" id="startDate" type="date" class="form-control" onchange="startDateEnable()" required>
-            </div>
-            <div class="form-group">
-                <label for="endDate" class="label-styles">END DATE:</label>
-                <input name="endDate" id="endDate" type="date" class="form-control" required>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <label for="startDate" class="label-styles">START DATE:</label>
+                    <input name="startDate" id="startDate" type="date" class="form-control start-date"
+                        onchange="startDateEnable()" required>
+                </div>
+                <div class="col-lg-6">
+                    <label for="endDate" class="label-styles">END DATE:</label>
+                    <input name="endDate" id="endDate" type="date" class="form-control end-date" required>
+                </div>
             </div>
             <label class="label-styles">Materials Engineer Involved</label>
             <?php
@@ -106,9 +109,7 @@
                 ?>
 
             <div class="input-group mb-2 col-md-12">
-
                 <div class="input-group-prepend col-md-12 options">
-
                     <div class="input-group-text">
 
                         <input type="checkbox" name="mateng[]" aria-label="Checkbox for following text input" value="<?php echo $rowmateng[1]?>" required>
@@ -118,9 +119,8 @@
                 </div>
             </div>
             <?php
-                    }
-                ?>
-
+                }
+            ?>
             <div class="add-project-btn">
                 <button type="submit" class="btn btn-success add-proj">Save</button>
                 <input type="reset" class="btn btn-danger" value="Cancel">
@@ -198,9 +198,9 @@
         });
     });
 
-    $(function() {
+    $(function () {
         var requiredCheckboxes = $('.options :checkbox[required]');
-        requiredCheckboxes.change(function() {
+        requiredCheckboxes.change(function () {
             if (requiredCheckboxes.is(':checked')) {
                 requiredCheckboxes.removeAttr('required');
             } else {
@@ -208,7 +208,6 @@
             }
         });
     });
-
 </script>
 
 </html>
