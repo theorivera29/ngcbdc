@@ -233,7 +233,6 @@
                                         <td>
                                             <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
                                             <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">View inventory</button>
-                                            <button type="submit" class="btn btn-info" id="" name="addMaterials">Add Materials</button>
                                         </td>
                                         </form>
                                     </tr>

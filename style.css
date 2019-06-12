@@ -389,8 +389,6 @@ textarea{
     float: right !important;
 }
 
-
-
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
     width: 96%;
@@ -401,6 +399,19 @@ textarea{
 
 .view-all-task-table{
     text-align: center;
+}
+
+.view-hauling-receipt-container{
+    width: 96%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+.generate-hauling-btn{
+    float: right;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 1%;
 }
 /*End of Materials Engineer-View All Task*/
 
