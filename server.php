@@ -1105,8 +1105,10 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['return_hauling'])) {
         
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
+        $hauling_id = $_POST['hauling_id'];
 
-        $stmt = $conn->prepare("SELECT return_returnedqty FROM returns WHERE return_id = 1;");
+        $stmt = $conn->prepare("SELECT returns_returnedqty FROM returns WHERE return_id = ?;");
+        $stmt->bind_param("i", $hauling_id);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($currentReturnedQty);
