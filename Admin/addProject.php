@@ -15,6 +15,7 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-validate-2.2.0/dist/bootstrap-validate.js"></script>
 </head>
 
 <body>
@@ -46,14 +47,14 @@
         </span>
     </div>
     <div class="add-project-container">
-        <form action="../server.php" method="POST">
+        <form action="../server.php" method="POST" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="projectName" class="label-styles">PROJECT NAME:</label>
-                <input name="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="^[A-Za-z][A-Za-z0-9\s-_#& ]*$" title="Input letters" required>
+                <input name="projectName" id="projectName" type="text" class="form-control" placeholder="Enter project name" pattern="^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$" title="Input letters" required>
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
+                <input name="address" id="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
             <div class="form-group row">
                 <div class="col-lg-6">
@@ -164,6 +165,22 @@
         });
     });
 
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
     $(function () {
         var requiredCheckboxes = $('.options :checkbox[required]');
         requiredCheckboxes.change(function () {
@@ -174,6 +191,11 @@
             }
         });
     });
+
+    bootstrapValidate('#projectName', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
+    bootstrapValidate('#address', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
+    bootstrapValidate('#startDate', 'required:Please fill out this field!')
+    bootstrapValidate('#endDate', 'required:Please fill out this field!')
 </script>
 
 </html>
