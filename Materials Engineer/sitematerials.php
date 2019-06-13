@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    unset($_SESSION['matinfo_id']);
 ?>
 
 <!DOCTYPE html>
@@ -184,7 +185,8 @@
                                         materials.mat_name,
                                         categories.categories_name,
                                         matinfo.matinfo_prevStock,
-                                        unit.unit_name
+                                        unit.unit_name,
+                                        matinfo.matinfo_id
                                     FROM
                                         materials
                                     INNER JOIN 
@@ -228,8 +230,15 @@
                                 $row3 = mysqli_fetch_row($result3);
                 ?>
                 <tr>
-                    <td><button type="button" class="btn btn-info"
-                                                onclick="window.location.href = 'stockcard.php'"><?php echo $row[1] ;?></button></td>
+                    <td>
+                        <form action="../server.php" method="POST">
+                            <input type="hidden" name="matinfo_id" value="<?php echo $row[5] ;?>">
+                            <button type="submit" class="btn btn-info" name="viewStockCard">
+                                <?php echo $row[1] ;?>
+                            </button>
+                        </form>
+                    </td>
+                    
                     <td><?php echo $row[2] ;?></td>
                     <td><?php echo $row[3] ;?></td>
                     <td><?php echo $row[4] ;?></td>

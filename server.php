@@ -349,6 +349,13 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+    if (isset($_POST['viewStockCard'])) {
+        session_start();
+        $matinfo_id = $_POST['matinfo_id'];
+        $_SESSION['matinfo_id'] = $matinfo_id;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
+
+    }
     if (isset($_POST['reconcilliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;
@@ -1077,7 +1084,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-
+        $_SESSION['projects_id'] = $projects_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1089,9 +1096,9 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php");    
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php");    
         }
     }
 
