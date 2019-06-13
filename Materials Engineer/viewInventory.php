@@ -1,6 +1,11 @@
 <?php
     include "../session.php";
-    $projects_id = $_GET['projects_id'];
+
+    if (isset($_SESSION['projects_id'])) {
+        $projects_id = $_SESSION['projects_id'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
+    }
 
     $sql_project_name = "SELECT 
                             projects_name
