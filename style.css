@@ -691,11 +691,6 @@ textarea{
     width: 100% !important;
 }
 
-.returns-table{
-    text-align: center;
-
-}
-
 .returns-table thead tr{
     background-color: #0D304F;
     color: #FFFFFF;
@@ -705,8 +700,21 @@ textarea{
     width: 90% !important;
     margin-left: 5%;
     margin-top: 5% !important;
-    text-align: center;
     margin-bottom: 2% !important;
+}
+
+table .clickable{
+    cursor: pointer;
+}
+
+.hiddenrow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}
+
+.fa-plus:before{
+    color: #0267C1 !important;
 }
 /*End of Materials Engineer - returns*/
 
