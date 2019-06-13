@@ -349,6 +349,13 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+    if (isset($_POST['viewStockCard'])) {
+        session_start();
+        $matinfo_id = $_POST['matinfo_id'];
+        $_SESSION['matinfo_id'] = $matinfo_id;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
+
+    }
     if (isset($_POST['reconcilliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;

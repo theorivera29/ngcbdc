@@ -1,5 +1,11 @@
 <?php
     include "../session.php";
+
+    if (isset($_SESSION['matinfo_id'])) {
+        $matinfo_id = $_SESSION['matinfo_id'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/sitematerials.php");  
+    }
 ?>
 
 <!DOCTYPE html>
