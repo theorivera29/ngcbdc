@@ -328,7 +328,6 @@ textarea{
 }
 
 .today-task-table{
-    margin-top: -2% !important;
     text-align: center;
     width: 100% !important;
 }
@@ -399,6 +398,11 @@ textarea{
 
 .view-all-task-table{
     text-align: center;
+}
+
+.view-all-task-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
 }
 
 .view-hauling-receipt-container{

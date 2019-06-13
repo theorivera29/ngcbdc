@@ -349,6 +349,19 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+    if (isset($_POST['reconcilliation_edit'])) {
+        session_start();
+        $_SESSION['edit_clicked'] = true;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+    }
+
+    if (isset($_POST['reconcillation'])) {
+        session_start();
+        $projects_id = $_POST['projects_id'];
+        $_SESSION['projects_id'] = $projects_id;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+    }
+
     if (isset($_POST['create_disposalSlip'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
@@ -918,7 +931,6 @@ if (isset($_POST['edit_project'])) {
         $stmt->close();
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
-
 
     if (isset($_POST['update_todo'])) {
         $todo_id = $_POST['todo_id'];
