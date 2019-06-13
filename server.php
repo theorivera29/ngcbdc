@@ -1084,7 +1084,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-
+        $_SESSION['projects_id'] = $projects_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1096,9 +1096,9 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php");    
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php");    
         }
     }
 
