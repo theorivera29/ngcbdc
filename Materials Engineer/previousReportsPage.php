@@ -1,5 +1,13 @@
 <?php
     include "../session.php";
+
+    if (isset($_SESSION['projects_id'])) {
+        $projects_id = $_SESSION['projects_id'];
+        unset($_SESSION['lastmatinfo_month']);
+        unset($_SESSION['lastmatinfo_year']);
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReport.php");  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +154,7 @@
                                 FROM  
                                     lastmatinfo
                                 WHERE
-                                    lastmatinfo_project = '';";
+                                    lastmatinfo_project = $projects_id;";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>

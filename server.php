@@ -349,6 +349,17 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+    if (isset($_POST['curGenerateReport'])) {
+        $preparedBy = mysqli_real_escape_string($conn, $_POST['preparedBy']);
+        $checkedBy = mysqli_real_escape_string($conn, $_POST['checkedBy']);
+        $notedBy = mysqli_real_escape_string($conn, $_POST['notedBy']);
+        session_start();
+        $_SESSION['preparedBy'] = $preparedBy;
+        $_SESSION['checkedBy'] = $checkedBy;
+        $_SESSION['notedBy'] = $notedBy;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/curGenerateReport.php");  
+    }
+
     if (isset($_POST['viewStockCard'])) {
         session_start();
         $matinfo_id = $_POST['matinfo_id'];
@@ -1126,7 +1137,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['prevViewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-        $_SESSION['prevProjects'] = $projects_id;
+        $_SESSION['projects_id'] = $projects_id;
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReportsPage.php");    
     }
 
@@ -1134,13 +1145,18 @@ if (isset($_POST['edit_project'])) {
         $projects_id = $_POST['projects_id'];
         $lastmatinfo_month = $_POST['lastmatinfo_month'];
         $lastmatinfo_year = $_POST['lastmatinfo_year'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewPreviousReport.php?projects_id=$projects_id&lastmatinfo_month=$lastmatinfo_month&lastmatinfo_year=$lastmatinfo_year");    
+        session_start();
+        $_SESSION['lastmatinfo_month'] = $lastmatinfo_month;
+        $_SESSION['lastmatinfo_year'] = $lastmatinfo_year;
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewPreviousReport.php");    
     }
     
 
     if (isset($_POST['curViewInventory'])) {
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php?projects_id=$projects_id");    
+        session_start();
+        $_SESSION['projects_id'] = $projects_id;
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php");    
     }
     
     if (isset($_POST['return_hauling'])) {
