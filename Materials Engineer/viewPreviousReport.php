@@ -1,5 +1,12 @@
 <?php
     include "../session.php";
+    if (isset($_SESSION['lastmatinfo_month'])) {
+        $projects_id = $_SESSION['projects_id'];
+        $lastmatinfo_month = $_SESSION['lastmatinfo_month'];
+        $lastmatinfo_year = $_SESSION['lastmatinfo_year'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReport.php");  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +69,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php
-                $projects_id = $_GET['projects_id'];
-                $lastmatinfo_month = $_GET['lastmatinfo_month'];
-                $lastmatinfo_year = $_GET['lastmatinfo_year'];
-                
+            <?php                
                 $sql = "SELECT
                             materials.mat_name,
                             categories.categories_name,

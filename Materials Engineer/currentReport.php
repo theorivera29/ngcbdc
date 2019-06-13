@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    unset($_SESSION['projects_id']);
 ?>
 
 <!DOCTYPE html>

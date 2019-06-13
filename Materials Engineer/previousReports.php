@@ -1,6 +1,6 @@
 <?php
     include "../session.php";
-    unset($_SESSION['prevProjects']);
+    unset($_SESSION['projects_id']);
 ?>
 
 <!DOCTYPE html>
@@ -224,7 +224,6 @@
                                             while ($row = mysqli_fetch_row($result)) {
                                         ?>
                                     <tr>
-<<<<<<< HEAD
                                         <form action="../server.php" method="POST">
                                             <td><?php echo $row[0] ;?></td>
                                             <td><?php echo $row[1] ;?></td>
@@ -234,16 +233,6 @@
                                                 <button type="submit" class="btn btn-info" id="view-inventory-btn"
                                                     name="prevViewInventory">View Report</button></td>
                                         </form>
-=======
-                                        <td><?php echo $row[0] ;?></td>
-                                        <td><?php echo $row[1] ;?></td>
-                                        <td><?php echo $row[2] ;?></td>
-                                        <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                onclick="window.location.href='previousReportsPage.php'"
-                                                name="viewInventory">View Reports</button>
->>>>>>> 38d23b6db2060713eabf7d37847c5af93ceac0f3
                                     </tr>
                                     <?php
                                             }
