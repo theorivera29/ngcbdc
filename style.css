@@ -479,6 +479,11 @@ textarea{
     color: #FFF8F0;
 }
 
+.delete-btn-container{
+    float: right !important;
+    padding: 1% !important;
+}
+
 /*End of Materials Engineer - Project*/
 
 /*Materials Engineer - Add Materials*/
