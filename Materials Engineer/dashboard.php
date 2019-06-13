@@ -259,7 +259,7 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success">Yes</button>
+                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
                                             <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
@@ -284,8 +284,8 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success">Yes</button>
-                                            <button type="button" class="btn btn-secondary"
+                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
+                                            <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
                                         </div>

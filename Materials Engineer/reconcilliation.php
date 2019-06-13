@@ -55,10 +55,12 @@
     <div class="card low-in-quantity-container">
         <h5 class="card-header">Reconcilliation of Project Name</h5>
         <div class="recon-btn">
-            <button class="btn btn-danger" id="cancel-recon-btn" data-target="#" type="button">Cancel</button>
-            <button class="btn btn-success" id="save-recon-btn" data-target="#" type="button">Save</button>
-            <button class="btn btn-info" id="edit-recon-btn" data-target="#" type="button">Edit</button>
-            <button class="btn btn-warning" id="generate-recon-btn" data-target="#" type="button">Generate Form</button>
+            <form action="../server.php" method="POST">
+                <button class="btn btn-danger" id="cancel-recon-btn" data-target="#" type="button">Cancel</button>
+                <button class="btn btn-success" id="save-recon-btn" data-target="#" type="submit" name="reconcilliation_save">Save</button>
+                <button class="btn btn-info" id="edit-recon-btn" data-target="#" type="submit" name="reconcilliation_edit">Edit</button>
+                <button class="btn btn-warning" id="generate-recon-btn" data-target="#" type="submit" name="reconcilliation_generate">Generate Form</button>
+            </form>
         </div>
         <table class="table reconcilliation-table table-striped table-bordered" id="mydatatable">
             <thead>
@@ -72,20 +74,77 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><?php echo $row[0] ;?></td>
-                    <td><?php echo $row[1] ;?></td>
-                    <td><?php echo $row[2] ;?></td>
-                    <td><input type="text" class="form-control" pattern="[0-9]*" value="" required></td>
-                    <td><?php echo $row[3] ;?></td>
-                    <td><?php echo $row[4] ;?></td>
-                </tr>
+                <?php
+                    $projects_id = $_SESSION['projects_id'];
+                    $sql_ctr = "SELECT
+                                    COUNT(matinfo_matname)
+                                FROM
+                                    matinfo
+                                WHERE
+                                    matinfo_project = $projects_id;";
+                    $result_ctr = mysqli_query($conn, $sql_ctr);
+                    $row_ctr = mysqli_fetch_row($result_ctr);
+                    $mat_ctr = $row_ctr[0];
+
+                    $sql = "SELECT
+                                materials.mat_name,
+                                matinfo.currentQuantity
+                            FROM
+                                materials
+                            INNER JOIN
+                                matinfo ON materials.mat_id = matinfo.matinfo_matname
+                            WHERE
+                                matinfo_project = $projects_id;";
+                    $result = mysqli_query($conn, $sql);
+                    $ctr = 1;
+                    while ($row = mysqli_fetch_row($result)) {
+                        ?>
+                            <tr>
+                                <td><?php echo $ctr ;?></td>
+                                <td><?php echo $row[0] ;?></td>
+                                <td>
+                                    <form name="systemCount" method="POST">
+                                        <input type="text" id="systemCount" class="form-control" disable value="<?php echo $row[1] ;?>">
+                                    </form>
+                                </td>
+                                <td>
+                                    <?php
+                                        if (isset($_SESSION['edit_clicked'])) {
+                                    ?>
+                                    <form name="difference_column" method="POST">
+                                        <input type="text" class="form-control" pattern="[0-9]*" id="nameValidation"  onchange="difference()"required>
+                                    </form>
+                                    <?php
+                                        }
+                                    ?>
+                                </td>
+                                <td id="difference_cell">
+                                    
+                                </td>
+                                <td><?php ?></td>
+                            </tr>
+                        <?php
+                        $ctr++;
+                    }
+                    unset($_SESSION['edit_clicked']);
+                ?>
+                
+                <?php
+
+                ?>
             </tbody>
         </table>
     </div>
 
 </body>
 <script type="text/javascript">
+    function difference() {
+        var NameValue = document.forms["difference_column"]["nameValidation"].value;
+        var SystemCount = $("#systemCount").val();
+        var diff = parseInt(SystemCount) - parseInt(NameValue);
+        // $("#difference_cell").html(diff);
+        alert("changed");
+    }
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
