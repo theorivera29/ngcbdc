@@ -103,8 +103,9 @@
                                 <td><?php echo $ctr ;?></td>
                                 <td><?php echo $row[0] ;?></td>
                                 <td>
+                                    <?php echo $row[1] ;?>
                                     <form name="systemCount" method="POST">
-                                        <input type="text" id="systemCount" class="form-control" disable value="<?php echo $row[1] ;?>">
+                                        <input type="hidden" id="systemCount" class="form-control" disable value="<?php echo $row[1] ;?>">
                                     </form>
                                 </td>
                                 <td>
@@ -143,7 +144,7 @@
         var SystemCount = $("#systemCount").val();
         var diff = parseInt(SystemCount) - parseInt(NameValue);
         // $("#difference_cell").html(diff);
-        alert("changed");
+        alert(SystemCount);
     }
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
