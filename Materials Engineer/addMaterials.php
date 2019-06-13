@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    $proj_id = $_GET['projects_id'];
 ?>
 
 <!DOCTYPE html>
@@ -53,33 +54,71 @@
     </div>
 
     <div class="adding-materials-container">
-        <h4 class="project-title">NAME OF PROJECT</h4>
+        <?php 
+        $sql = "SELECT projects_name FROM projects WHERE projects_id = '$proj_id'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        ?>
+        <h4 class="project-title">
+            <?php echo $row[0]?>
+        </h4>
         <h5 class=" card-header">List of All Materials Added</h5>
         <table class="table adding-materials-table table-striped table-bordered display" id="mydatatable">
             <thead>
                 <tr>
                     <th>Category</th>
                     <th>Material Name</th>
+                    <th>Threshold</th>
                     <th>Unit</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+               
+               
                 <?php
-                $sql = "SELECT categories.categories_name, materials.mat_name, unit.unit_name FROM materials INNER JOIN categories ON materials.mat_categ = categories.categories_id 
-                INNER JOIN unit ON materials.mat_unit = unit.unit_id INNER JOIN matinfo ON matinfo.matinfo_matname = materials.mat_id WHERE matinfo.matinfo_project = 1;";
+                $sql = "SELECT 
+                categories.categories_name, 
+                materials.mat_name, 
+                unit.unit_name, 
+                matinfo.matinfo_matname 
+                FROM materials
+                INNER JOIN categories 
+                ON materials.mat_categ = categories.categories_id 
+                INNER JOIN unit 
+                ON materials.mat_unit = unit.unit_id
+                INNER JOIN matinfo 
+                ON matinfo.matinfo_matname = materials.mat_id
+                WHERE matinfo.matinfo_project = $proj_id;";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_row($result)) {
                 ?>
                 <tr>
-                    <td>
-                        <?php echo $row[0]; ?>
-                    </td>
-                    <td>
-                        <?php echo $row[1]; ?>
-                    </td>
-                    <td>
-                        <?php echo $row[2]; ?>
-                    </td>
+                    <form action="../server.php" method="POST">
+                        <td>
+                            <?php echo $row[0]; ?>
+                        </td>
+                        <td>
+                            <?php echo $row[1]; ?>
+                        </td>
+                <?php
+                    $matname = $row[3];
+                    $sql1 = "SELECT matinfo_notif FROM matinfo WHERE matinfo_matname = $matname;";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $row1 = mysqli_fetch_row($result1)
+                ?>
+                        <td>
+                            <input type="text" value="<?php echo $row1[0]?>" name="threshold" placeholder="Enter Threshold">
+                        </td>
+                        <td>
+                            <?php echo $row[2]; ?>
+                        </td>
+                        <td>
+                            <input type="hidden" name="matinfo_id" value="<?php echo $row[3]?>" />
+                            <input type="hidden" name="proj_id" value="<?php echo $proj_id?>" />
+                            <input type="submit" name="edit_threshold" class="btn btn-info" value="Save">
+                        </td>
+                    </form>
                 </tr>
                 <?php
                 }   
@@ -99,10 +138,16 @@
                 </thead>
                 <tbody>
                     <?php
-            $sql = "SELECT
-                        mat_categ, mat_name, mat_unit, mat_id
-                    FROM
-                        materials;";
+            $sql = "SELECT 
+                categories.categories_name, 
+                materials.mat_name, 
+                unit.unit_name, 
+                materials.mat_id 
+                FROM materials 
+                INNER JOIN categories 
+                ON materials.mat_categ = categories.categories_id 
+                INNER JOIN unit ON materials.mat_unit = unit.unit_id
+                WHERE mat_id NOT IN (SELECT matinfo_matname FROM matinfo WHERE matinfo_project = $proj_id);";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_row($result)) {
             ?>
@@ -130,7 +175,8 @@
 
                             <div class="row form-group save-btn-container">
                                 <div class="col-lg-12">
-                                    <input type="submit" name="adding_materials" class="btn btn-success" value="Save Changes">
+                                    <input type="hidden" name="proj_id" value="<?php echo $proj_id?>" >
+                                    <input type="submit" name="adding_materials" class="btn btn-primary" value="Save Changes">
                                     <input type="reset" class="btn btn-danger" value="Cancel">
                                 </div>
                             </div>
@@ -152,8 +198,7 @@
     </div>
 
     <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

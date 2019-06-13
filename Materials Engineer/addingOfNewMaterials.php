@@ -378,7 +378,6 @@
                                         <tr>
                                             <th scope="col">Category</th>
                                             <th scope="col">Material</th>
-                                            <th scope="col">Threshold</th>
                                             <th scope="col">Unit</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -407,8 +406,6 @@
                                                 </select>
                                             </td>
                                             <td><input class="form-control" name="material[]" type="text" id="material" placeholder="Material Name" required>
-                                            </td>
-                                            <td><input class="form-control" name="threshold[]" type="text" id="threshold" placeholder="Threshold" required>
                                             </td>
                                             <td><select name="unit[]" class="custom-select" id="unit" required>
                                                     <option value="disabled" selected disabled>Choose unit</option>
@@ -469,7 +466,6 @@
                                         <tr>
                                             <th>Category</th>
                                             <th>Material Name</th>
-                                            <th>Threshold</th>
                                             <th>Unit</th>
                                             <th>Action</th>
                                         </tr>
@@ -482,17 +478,13 @@
                                                         materials.mat_name,
                                                         unit.unit_name,
                                                         materials.mat_id,
-                                                        unit.unit_id,
-                                                        matinfo.matinfo_notif,
-                                                        matinfo.matinfo_id
+                                                        unit.unit_id
                                                     FROM
                                                         materials
                                                     INNER JOIN
                                                         categories ON materials.mat_categ = categories.categories_id
                                                     INNER JOIN
-                                                        unit ON materials.mat_unit = unit.unit_id
-													INNER JOIN
-														matinfo ON materials.mat_id = matinfo.matinfo_matname;";
+                                                        unit ON materials.mat_unit = unit.unit_id";
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
@@ -502,9 +494,6 @@
                                             </td>
                                             <td>
                                                 <?php echo $row[1];?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row[5];?>
                                             </td>
                                             <td>
                                                 <?php echo $row[2];?>
@@ -531,7 +520,7 @@
                                                             <div class="form-group">
                                                                 <label for="editcategory" class="label-styles">Category</label>
                                                                 <select name="newCategory" class="custom-select">
-                                                                    <option value="<?php echo $row[5]?>" selected disabled>
+                                                                    <option value="<?php echo $row[4]?>" selected disabled>
                                                                         <?php echo $row[0]?>
                                                                     </option>
                                                                     <?php 
@@ -555,10 +544,6 @@
                                                             <div class="form-group">
                                                                 <label for="editmaterialname" class="label-styles">Material Name</label>
                                                                 <input class="form-control" name="newMatName" value="<?php echo $row[1];?>" type="text" placeholder="Material Name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="editthreshold" class="label-styles">Threshold</label>
-                                                                <input class="form-control" name="newThreshold" value="<?php echo $row[5];?>" type="text" placeholder="Threshold">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="editunit" class="label-styles">Unit</label>
@@ -585,7 +570,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <input type="hidden" name="matinfo_id" value="<?php echo $row[6]; ?>" />
+                                                               <input type="hidden" name="mat_id" value="<?php echo $row[3]; ?>" />
                                                                 <button type="submit" name="edit_material" class="btn btn-success">Save</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
@@ -649,15 +634,12 @@
         $(".addMat-row").click(function() {
             var category = $("#category1").val();
             var material = $("#material").val();
-            var threshold = $("#threshold").val();
             var unit = $("#unit").val();
             var markup = "<tr><td><input type='text' name='categ[]' class='form-control' value='" +
                 category +
                 "' readonly/></td><td><input type='text' name='material[]' class='form-control' value='" +
                 material +
-                "' required/></td><td><input type='text' name='threshold[]' class='form-control' value='" +
-                threshold +
-                "' required/><td><input type='text' name='unit[]' class='form-control' value='" + unit +
+                "' required/></td><td><input type='text' name='unit[]' class='form-control' value='" + unit +
                 "' readonly/></td></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((category != '') && (material != '')) {
                 $("table #add-material-table").append(markup);
