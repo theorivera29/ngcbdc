@@ -62,6 +62,7 @@
     <section id="tabs">
         <div class="container">
             <div class="row">
+            <h4 class="project-title">NAME OF material</h4>
                 <div class="col-xs-12 project-tabs">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
