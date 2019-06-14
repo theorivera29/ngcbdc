@@ -650,6 +650,20 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("iiis", $requisition_id, $particulars[$x], $quantity[$x], $location[$x]);
         $stmt->execute();
         $stmt->close();
+
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $projName, $particulars[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $projName, $particulars[$x]);
+        $stmt->execute();
+        $stmt->close();
         }
         
         $account_id = "";
@@ -1344,6 +1358,28 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("isi", $returns_id, $date_today, $returningQuantity);
         $stmt->execute();
         $stmt->close();
+
+        $stmt = $conn->prepare("SELECT hauling.hauling_hauledFrom, returns.returns_matname FROM returns INNER JOIN hauling ON returns.returns_hauling_no = hauling.hauling_no WHERE returns.returns_id = ?");
+        $stmt->bind_param("i", $returns_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($hauling_hauledFrom, $returns_matname);
+        $stmt->fetch();
+
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauling_hauledFrom, $returns_matname);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity +$returningQuantity;
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $returningQuantity, $hauling_hauledFrom, $returns_matname);
+        $stmt->execute();
+        $stmt->close();
+
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
