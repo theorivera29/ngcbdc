@@ -329,15 +329,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-    
-            $('#particulars').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
 
     (function () {
         'use strict';
@@ -354,6 +345,16 @@
             });
         }, false);
     })();
+    
+        
+            $('#particulars').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
 </script>
 
 

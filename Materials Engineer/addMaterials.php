@@ -132,19 +132,6 @@
                 }   
              ?>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6">
-                        <div class="row form-group delete-btn-container">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-outline-danger remove-row">Remove</button>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-
-            </tfoot>
         </table>
         <h5 class=" card-header list-of-material">List of All Materials</h5>
         <form action="../server.php" method="POST">

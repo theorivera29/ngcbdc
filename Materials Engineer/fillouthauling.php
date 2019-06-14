@@ -550,15 +550,6 @@
             $('#sidebar').toggleClass('active');
         });
     });
-    
-            $('#articles').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
 
     (function() {
         'use strict';
@@ -588,6 +579,16 @@
 
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
+    
+                $('#articles').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
+
 
 </script>
 
