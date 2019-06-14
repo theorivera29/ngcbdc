@@ -86,7 +86,7 @@
                 $mail->Body    = 'Your account has been created. <br /> Please change your password after logging in. <br /> <br /> Username: <b>'.$username.'</b> <br /> Password: <b>'.$generated_password.'</b>';
                 $mail->send();
             } catch (Exception $e) {}
-                $create_date = date("Y-m-d G:i:s");
+            $create_date = date("Y-m-d G:i:s");
             $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
             $logs_message = 'Created account of '.$firstName.' '.$lastName;
@@ -99,6 +99,44 @@
     }
 
 // <--Admin-->
+    if (isset($_POST['disableAccount'])) {
+        $accounts_id = $_POST['accounts_id'];
+        $accounts_username = $_POST['accounts_username'];
+        $accounts_status = "inactive";
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_status = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $accounts_status, $accounts_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $date_today = date("Y-m-d G:i:s");
+        $logs_message = 'Disabled account '.$accounts_username;
+        $logs_of = $account_id;
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $date_today, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/listofaccounts.php");     
+    }   
+
+    if (isset($_POST['enableAccount'])) {
+        $accounts_id = $_POST['accounts_id'];
+        $accounts_username = $_POST['accounts_username'];
+        $accounts_status = "active";
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_status = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $accounts_status, $accounts_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $date_today = date("Y-m-d G:i:s");
+        $logs_message = 'Enabled account '.$accounts_username;
+        $logs_of = $account_id;
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $date_today, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/listofaccounts.php");     
+    }  
+
     if (isset($_POST['requestAccept'])) {
         $request_accountID = $_POST['accounts_id'];
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -111,15 +149,15 @@
         $stmt->bind_result($request_email, $request_name); 
         $stmt->fetch();
         $stmt->close();
-        $accept_date = date("Y-m-d G:i:s");
         $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
         $stmt->bind_param("si", $password, $request_accountID);
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
         $stmt->bind_param("ssi", $accept_date, $logs_message, $logs_of);
+        $accept_date = date("Y-m-d G:i:s");
         $logs_message = 'Accepted request to reset password of '.$request_name;
-        $logs_of = 2;
+        $logs_of = 1;
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
@@ -138,7 +176,6 @@
     }
 
     if (isset($_POST['delete_projmateng'])) {
-
         $mateng = $_POST['mateng'];
         $projects_id = mysqli_real_escape_string($conn, $_POST['project']);
         
@@ -1247,6 +1284,8 @@ if (isset($_POST['edit_project'])) {
             header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php");  
         }    
     }
+
+     
 
 // <--View Only-->
 ?>
