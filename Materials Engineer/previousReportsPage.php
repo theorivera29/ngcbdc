@@ -6,7 +6,7 @@
         unset($_SESSION['lastmatinfo_month']);
         unset($_SESSION['lastmatinfo_year']);
     } else {
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReport.php");  
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReports.php");  
     }
 ?>
 
