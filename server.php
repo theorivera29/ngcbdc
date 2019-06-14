@@ -387,17 +387,17 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
 
     }
-    if (isset($_POST['reconcilliation_edit'])) {
+    if (isset($_POST['reconciliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
-    if (isset($_POST['reconcillation'])) {
+    if (isset($_POST['reconciliation'])) {
         session_start();
         $projects_id = $_POST['projects_id'];
         $_SESSION['projects_id'] = $projects_id;
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
     if (isset($_POST['create_disposalSlip'])) {
