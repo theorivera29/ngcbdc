@@ -960,7 +960,22 @@ if (isset($_POST['edit_project'])) {
         $stmt = $conn->prepare("INSERT INTO deliveredmat (deliveredmat_deliveredin, deliveredmat_materials, deliveredmat_qty, suppliedBy) VALUES (?, ?, ?, ?);");
         $stmt->bind_param("iiis", $deliveredin_id, $articles[$x], $quantity[$x], $suppliedBy[$x]);
         $stmt->execute();
-        $stmt->close();        
+        $stmt->close();
+            
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND  matinfo_matname = ?;");
+        $stmt->bind_param("ii", $projectName, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+            
+        $newQuantity = $currentQuantity + $articles[$x];
+            
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity = ? WHERE matinfo_project = ? AND  matinfo_matname = ?;");
+        $stmt->bind_param("iii", $newQuantity, $projectName, $articles[$x]);
+        $stmt->execute();
+        $stmt->close();
+            
         }
 
         $account_id = "";
@@ -976,7 +991,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_deliveredin_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/deliveredin.php");   
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewTransactions.php");   
     }
 
     if (isset($_POST['create_todo'])) {

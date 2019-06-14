@@ -147,12 +147,14 @@
                                 <tbody>
                                     <?php
                                         $sql = "SELECT 
-                                        deliveredin_date,
-                                        deliveredin_project,
-                                        deliveredin_receiptno,
-                                        deliveredin_remarks,
-                                        deliveredin_id
-                                        FROM deliveredin";
+                                            deliveredin_date,
+                                            projects.projects_name,
+                                            deliveredin_receiptno,
+                                            deliveredin_remarks,
+                                            deliveredin_id
+                                        FROM deliveredin
+                                        INNER JOIN projects 
+                                        ON deliveredin_project = projects.projects_id;";
                                         $result = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_row($result)) {
                                     ?>
