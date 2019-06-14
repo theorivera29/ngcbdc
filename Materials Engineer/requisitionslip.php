@@ -11,15 +11,14 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -35,8 +34,7 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -44,8 +42,8 @@
                     </div>
                 </div>
             </div>
-    </span>
-       
+        </span>
+
         <div id="menu" class="navigation sidenav">
             <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
@@ -59,8 +57,7 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -71,8 +68,7 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Hauling</a>
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -83,8 +79,7 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Transactions</a>
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Transactions</a>
                         <ul class="collapse list-unstyled" id="transactionSubmenu">
                             <li>
                                 <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
@@ -104,8 +99,7 @@
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li class="active">
-                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Reports</a>
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Reports</a>
                         <ul class="collapse list-unstyled" id="reportSubmenu">
                             <li>
                                 <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
@@ -136,27 +130,20 @@
                                 <input class="form-control" type="date" name="date" required>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row formnum-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Material Requisition No.:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="reqNo" required>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Remarks:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="remarks" required>
-                            </div>
-                        </div>
                     </div>
+                    
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-
-                            <select class="form-control" name="project" id="project" required>
-                                <option value="" selected disabled>Choose a Project</option>
-                            </select>
-
+                            <input class="form-control" type="text" name="project">
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -164,6 +151,13 @@
                         <div class="col-lg-9">
                             <input class="form-control" type="text" name="location">
                         </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        
+                            <label class="col-lg-2 col-form-label">Remarks:</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="remarks" required>
+                            </div>
                     </div>
                     <div class="card">
                         <table class="table requisition-form-table">
@@ -173,20 +167,20 @@
                                     <th scope="col">Particulars</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Location</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="requisitionTable">
                             </tbody>
                             <tfoot>
                                 <tr id="requisitionRow">
-                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity"
-                                            placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity">
                                     </td>
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" name="particulars[]" id="particulars">
                                                 <option value="" selected disabled>Choose a Particular</option>
-                                             <?php    
+                                                <?php    
                                                 $sql = "SELECT  
                                                         mat_id,
                                                         mat_name
@@ -194,20 +188,19 @@
                                                         materials;";
                                                 $result = mysqli_query($conn, $sql);
                                                 while ($row = mysqli_fetch_row($result)) {
-                                            ?>                                              
-                                            <option value="<?php echo $row[0]?>"><?php echo $row[1]?></option>
-                                            <?php
+                                            ?>
+                                                <option value="<?php echo $row[0]?>">
+                                                    <?php echo $row[1]?>
+                                                </option>
+                                                <?php
                                                 }
                                             ?>
                                             </select>
                                         </div>
-                                    <td><input class="form-control" name="unit[]" type="text" id="unit"
-                                            placeholder="Unit"></td>
-                                    <td><input class="form-control" name="location[]" type="text" id="location"
-                                            placeholder="Location"></td>
+                                    <td><input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit"></td>
+                                    <td><input class="form-control" name="location[]" type="text" id="location" placeholder="Location"></td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
-                                            value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -229,62 +222,58 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Requisition Slip"
-                                data-toggle="modal" data-target="#save-modal">
-                            <input type=" reset" class="btn btn-danger" value="Cancel">
+                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary" value="Save Changes">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
-                    <!-- Start of confirmation modal -->
-                    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save the
-                                        following?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        &times;
-                                    </button>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" name="create_requisitionSlip"
-                                        class="btn btn-success">Yes</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>
     </div>
+    <!-- Start of confirmation modal -->
+    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of confirmation modal -->
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".add-row").click(function () {
+    $(document).ready(function() {
+        $(".add-row").click(function() {
             var quantity = $("#quantity").val();
-            var unit = $("#unit").val();
             var particulars = $("#particulars").val();
+            var unit = $("#unit").val();
             var location = $("#location").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity +
-                "'/></td><td><input type='text' name="unit[]" class='form-control' value='" + unit +
-                "'/></td><td><input type='text' name="particulars[]" class='form-control' value='" + particulars +
-                "'/></td><td><input type='text' name="location[]" class='form-control' value='" + location +
+                "'/></td><td><input type='text' name='particulars[]' class='form-control' value='" + particulars +
+                "'/></td><td><input type='text' name='unit[]' class='form-control' value='" + unit +
+                "'/></td><td><input type='text' name='location[]' class='form-control' value='" + location +
                 "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-            if ((quantity != '') && (unit != '') && (particulars != '') && (location != '')) {
+            if ((quantity != '') && (particulars != '') && (unit != '') && (location != '')) {
                 $("table tbody").append(markup);
                 $("#requisitionRow input[type=text]").val('');
                 $("#requisitionRow select").val('');
             }
         });
-        $("#requisitionTable").on('click', '.delete-row', function () {
+        $("#requisitionTable").on('click', '.delete-row', function() {
             $(this).closest('tr').remove();
         });
 
-        $('#sidebarCollapse').on('click', function () {
+        $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
     });

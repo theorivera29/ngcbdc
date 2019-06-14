@@ -955,6 +955,19 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php?hauling_no=$hauling_no");     
     }
 
+    if (isset($_POST['open_deliveredin'])) {
+        $delivered_id = mysqli_real_escape_string($conn, $_POST['delivered_id']);
+        $receipt_no = mysqli_real_escape_string($conn, $_POST['receipt_no']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewdeliveredin.php?deliveredin_id=$delivered_id&receipt_no=$receipt_no");     
+    }
+
+    if (isset($_POST['open_requisition'])) {
+        $req_no = mysqli_real_escape_string($conn, $_POST['req_no']);
+        $req_id = mysqli_real_escape_string($conn, $_POST['req_id']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewrequisitionslip.php?requisition_no=$req_no&requisition_id=$req_id");     
+    }
+
+
     if (isset($_POST['adding_materials'])) {
 
         $matName = $_POST['matName'];
