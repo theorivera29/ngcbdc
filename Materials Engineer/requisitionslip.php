@@ -151,8 +151,25 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="project" required>
-                            <div class="invalid-feedback">Please fill out this field.</div>
+                            <select class="form-control" name="projectName" required>
+                                <option value="" selected disabled>Choose a project</option>
+                                <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                <option value="<?php echo $row[1]; ?>">
+                                    <?php echo $row[0]; ?>
+                                </option>
+                                <?php
+                                        }
+                                        ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
@@ -176,7 +193,6 @@
                                 <tr>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Particulars</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -201,7 +217,7 @@
                                                         materials;";
                                                 $result = mysqli_query($conn, $sql);
                                                 while ($row = mysqli_fetch_row($result)) {
-                                            ?>
+                                                ?>
                                                 <option value="<?php echo $row[0]?>">
                                                     <?php echo $row[1]?>
                                                 </option>
@@ -211,10 +227,7 @@
                                             </select>
                                             <div class="invalid-feedback">Please select one particular.</div>
                                         </div>
-                                    <td><input class="form-control" name="unit[]" type="text" id="unit"
-                                            placeholder="Unit" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
+                                            <input type="hidden" class="form-control" name="unit[]" type="text" id="unit">
                                     <td><input class="form-control" name="location[]" type="text" id="location"
                                             placeholder="Location" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -289,7 +302,7 @@
                 quantity +
                 "'/></td><td><input type='text' name='particulars[]' class='form-control' value='" +
                 particulars +
-                "'/></td><td><input type='text' name='unit[]' class='form-control' value='" + unit +
+                "'/><input type='hidden' name='unit[]' class='form-control' value='" + unit +
                 "'/></td><td><input type='text' name='location[]' class='form-control' value='" +
                 location +
                 "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
@@ -316,6 +329,15 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+    
+            $('#particulars').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
 
     (function () {
         'use strict';
