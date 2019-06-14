@@ -592,9 +592,6 @@ if (isset($_POST['edit_project'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
         $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
-        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
-        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
         $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
         $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
         $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
@@ -603,27 +600,39 @@ if (isset($_POST['edit_project'])) {
         $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
         $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
         $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
+        $quantity = $_POST['quantity'];
+        $unit = $_POST['unit'];
+        $articles = $_POST['articles'];
+        
         $status = "To be returned";
                             
         $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
-        $stmt->bind_param("s", $unit);
+        $stmt->bind_param("i", $unit);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($unit_id);
         $stmt->fetch();
         
-        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
-        $stmt->bind_param("s", $articles);
+        $stmt = $conn->prepare("SELECT hauling_id FROM hauling WHERE hauling_no = ?;");
+        $stmt->bind_param("i", $formNo);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($mat_id);
+        $stmt->bind_result($hauling_id);
         $stmt->fetch();
             
-        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("isssssssssiis", $formNo, $date, $deliverTo, $hauledFrom, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
         $stmt->execute();
         $stmt->close();
-
+        
+        for($x = 0; $x < sizeof($matName); $x++){
+        
+        $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
+        $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
+        $stmt->execute();
+        $stmt->close();
+        }
+        
         $account_id = "";
         session_start();
         if(isset($_SESSION['account_id'])) {
