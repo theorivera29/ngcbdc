@@ -7,15 +7,7 @@
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
     }
 
-    $sql_project_name = "SELECT 
-                            projects_name
-                        FROM
-                            projects
-                        WHERE
-                            projects_id = $projects_id;";
-    $result = mysqli_query($conn, $sql_project_name);
-    $row = mysqli_fetch_row($result);
-    $projects_name = $row[0];
+    $accounts_id = $_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -71,20 +63,20 @@
     <section id="tabs">
         <div class="view-inventory-container">
             <div class="row view-inventory-row">
-                <h4 class="project-title"><?php echo $projects_name ;?></h4>
+                <h4 class="project-title">NAME OF PROJECT</h4>
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-mat-tab" data-toggle="tab" href="#nav-mat"
-                                role="tab" aria-controls="nav-mat" aria-selected="true">SITE MATERIALS</a>
-                            <a class="nav-item nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category"
-                                role="tab" aria-controls="nav-category" aria-selected="false">CATEGORY</a>
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                role="tab" aria-controls="nav-home" aria-selected="true">SITE MATERIALS</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                                role="tab" aria-controls="nav-profile" aria-selected="false">CATEGORY</a>
                         </div>
                     </nav>
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content view-inventory-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
+                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-mat"
                             role="tabpanel" aria-labelledby="nav-mat-tab">
                             <table class="table view-inventory-tabs-table table-striped table-bordered display"
                                 id="mydatatable">
@@ -104,6 +96,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $projects_id = $_GET['projects_id'];
                                     $sql_categ = "SELECT DISTINCT
                                                     categories_name
                                                 FROM
@@ -145,11 +138,11 @@
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_row($result)){
                                             $sql1 = "SELECT 
-                                                        SUM(deliveredmat.deliveredmat_qty) 
-                                                    FROM 
-                                                        deliveredmat
+                                                        SUM(deliveredin.deliveredin_quantity) FROM deliveredin
+                                                    INNER JOIN 
+                                                        matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
                                                     WHERE 
-                                                        deliveredmat.deliveredmat_materials = '$row[0]';";
+                                                        matinfo.matinfo_matname = '$row[0]';";
                                             $result1 = mysqli_query($conn, $sql1);
                                             $row1 = mysqli_fetch_row($result1);
                                             $sql2 = "SELECT 
@@ -168,43 +161,11 @@
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
-                                        <td>
-                                            <?php 
-                                                if ($row1[0] == 0) {
-                                                    echo 0;
-                                                } else {
-                                                    echo $row1[0];
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php 
-                                                if ($row2[0] == 0) {
-                                                    echo 0;
-                                                } else {
-                                                    echo $row2[0];
-                                                }
-                                            ?>
-                                        </td>
+                                        <td><?php echo $row1[0] ;?></td>
+                                        <td><?php echo $row2[0] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
-                                        <td>
-                                            <?php 
-                                                if (($row[3]+$row1[0]) == 0) {
-                                                    echo 0;
-                                                } else {
-                                                    echo $row[3]+$row1[0];
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php 
-                                                if (($row[3]+$row1[0]-$row2[0]) == 0) {
-                                                    echo 0;
-                                                } else {
-                                                    echo $row[3]+$row1[0]-$row2[0];
-                                                }
-                                            ?>
-                                        </td>
+                                        <td><?php echo $row[3]+$row1[0] ;?></td>
+                                        <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
                                     </tr>
                                     <?php
@@ -215,8 +176,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
-                        <table class="table category-table table-striped table-bordered display"
-                                id="mydatatable">
+                            <table class="table category-table table-striped table-bordered display" id="mydatatable">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
@@ -224,7 +184,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                 $sql = "SELECT DISTINCT
                                             categories.categories_id,
                                             categories_name
@@ -235,7 +195,7 @@
                                         INNER JOIN
                                             matinfo ON materials.mat_id = matinfo.matinfo_matname
                                         WHERE
-                                            matinfo.matinfo_project = $projects_id;";
+                                            matinfo.matinfo_matname = $projects_id;";
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
@@ -243,11 +203,11 @@
                                         <td><?php echo $row[1] ;?></button>
                                         </td>
                                         <td>
-                                        <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
-                                        <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info"
-                                            id="open-category-btn"
-                                            onclick="window.location.href='materialCategories.php'">View</button>
+                                            <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
+                                            <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
+                                            <button type="submit" name="materialCategories" class="btn btn-info"
+                                                id="open-category-btn"
+                                                onclick="window.location.href='materialCategories.php'">View</button>
                                         </td>
                                     </tr>
                                     <?php
@@ -256,7 +216,6 @@
                                 ?>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -269,12 +228,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#mydatatable').DataTable();
-        $('table.display').DataTable();
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-
     });
 </script>
 
