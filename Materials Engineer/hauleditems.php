@@ -137,7 +137,9 @@
             </thead>
             <tbody>
                 <?php
-                        $sql = "SELECT hauling_no, hauling_date, hauling_hauledFrom, hauling_deliverTo,hauling_hauledBy, hauling_status FROM  hauling;";
+                        $sql = "SELECT hauling_no, hauling_date, projects.projects_name, hauling_deliverTo,hauling_hauledBy, hauling_status FROM  hauling  
+                        INNER JOIN 
+                            projects ON projects.projects_id = hauling.hauling_hauledFrom;";
                         $result = mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_array($result)) {
                     ?>
