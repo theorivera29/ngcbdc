@@ -325,8 +325,8 @@
                 function (data) {
                     var d = JSON.parse(data);
                     $('#unit').val(d[0][0])
-                })
-        })
+                });
+        });
     });
 
     function openSlideMenu() {
@@ -337,7 +337,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
 
     (function () {
         'use strict';
