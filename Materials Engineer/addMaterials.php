@@ -251,15 +251,6 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
-
-        // Find and remove selected table rows
-        $(".remove-row").click(function(){
-            $("table tbody").find('input[name="mat-row"]').each(function(){
-            	if($(this).is(":checked")){
-                    $(this).parents("tr").remove();
-                }
-            });
-        });
     });
 
     function openSlideMenu() {
