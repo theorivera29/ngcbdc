@@ -1303,6 +1303,7 @@ if (isset($_POST['edit_project'])) {
         }    
     }
 
+    // API
     header("Access-Control-Allow-Origin: *");
     if (isset($_GET['category_id'])) {
         $id = $_GET['category_id'];
@@ -1313,7 +1314,7 @@ if (isset($_POST['edit_project'])) {
     }
     if (isset($_GET['mat_name'])) {
         $name = $_GET['mat_name'];
-        $sql = "SELECT unit.unit_id FROM materials INNER JOIN unit ON materials.mat_unit = unit.unit_id WHERE mat_id = '$name'";
+        $sql = "SELECT unit.unit_name FROM materials INNER JOIN unit ON materials.mat_unit = unit.unit_id WHERE mat_id = '$name'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_all($result);
         echo json_encode($row);
