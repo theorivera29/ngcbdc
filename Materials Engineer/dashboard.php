@@ -88,8 +88,8 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Transactions</a>
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Transactions</a>
                         <ul class="collapse list-unstyled" id="transactionSubmenu">
                             <li>
                                 <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
@@ -131,20 +131,21 @@
         <div class="col-sm-5">
             <div class="card add-task-container">
                 <h5 class="card-header">Add To-do Task</h5>
-                <form action="../server.php" method="POST">
+                <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="card-body">
                         <p id="date-label">Date:</p>
                         <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID"
                             required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                         <textarea class="form-control" id="task-textarea" name="todo_task" minlength="2" maxlength="45"
                             pattern="[A-Za-z0-9.,/!-+=()<>@#%^&*]{45}" autocomplete="off" required></textarea>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                         <div class="container-counter">
                             <span id="characters">45</span><span id="char"> characters</span>
                         </div>
                         <div class="task-submitbtn-container">
                             <button type="button" class="btn btn-success" id="save-task-btn" data-toggle="modal"
-                                                data-target="#save-modal"
-                               >Save</button>
+                                data-target="#save-modal">Save</button>
                         </div>
                     </div>
                     <!-- Start of confirmation modal -->
@@ -160,7 +161,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit"  name="create_todo" class="btn btn-success">Yes</button>
+                                    <button type="submit" name="create_todo" class="btn btn-success">Yes</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                                 </div>
@@ -259,7 +260,8 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
+                                            <button type="submit" class="btn btn-success"
+                                                name="update_todo">Yes</button>
                                             <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
@@ -284,7 +286,8 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
+                                            <button type="submit" class="btn btn-success"
+                                                name="update_todo">Yes</button>
                                             <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
@@ -370,6 +373,22 @@
 
 </body>
 <script type="text/javascript">
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })(); 
+
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
