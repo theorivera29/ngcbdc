@@ -70,7 +70,7 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">USAGE IN</a>
                     </div>
-
+                    <button class="btn btn-warning" id="generate-stockcard" type="button">Generate Stockcard</button>
                 </div>
                 <div class="stockcard-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
