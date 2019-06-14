@@ -127,18 +127,22 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="deliveredDate" autocomplete="off" required>
+                                <input class="form-control" type="date" name="deliveredDate" required>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row formnum-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Receipt No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="resibo" autocomplete="off" required>
+                                <input class="form-control" type="text" name="resibo" required>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row formnum-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Remarks:</label>
-                            <div class="col-lg-12">
+                            <div class="form-group col-lg-12">
                                 <select class="form-control" name="remarks" id="remarks">
                                     <option value="" selected disabled>Select remarks:</option>
                                     <option value="Delivered from Main Office">Delivered from Main Office</option>
@@ -194,7 +198,7 @@
                             </tbody>
                             <tfoot>
                                 <tr id="deliveredRow">
-                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity" autocomplete="off">
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity">
                                     </td>
                                     <td>
                                         <div class="form-group">
@@ -220,7 +224,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit" autocomplete="off">
+                                        <input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit">
                                     </td>
                                     <td><input class="form-control" name="suppliedBy[]" type="text" id="suppliedBy" placeholder="Supplied By">
                                     </td>
@@ -299,7 +303,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
 </script>
 
 </html>
