@@ -101,13 +101,13 @@
                 </tr>
             </thead>
             <tbody>
-            <?php 
+                <?php 
                 $sql = "SELECT accounts_id, accounts_username, concat(accounts_fname,' ', accounts_lname) as name,  
                 accounts_email, accounts_type, accounts_status FROM accounts WHERE accounts_deletable = 'yes';";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
             ?>
-            
+
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
@@ -116,62 +116,63 @@
                     <td><?php echo $row[4]?></td>
                     <td><?php echo $row[5]?></td>
                     <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#disable-modal">Disable</button></td>
-                    
+                            data-target="#disable-modal-<?php echo $row[0]?>">Disable</button></td>
+
                     <!-- DAPAT LALABAS LANG TO KAPAG DINISABLE NIYA NA 
                     <td><button type="button" class="btn btn-success" data-toggle="modal"
-                                data-target="#enable-modal">Enable</button></td> 
+                                data-target="#enable-modal-<?php echo $row[0]?>">Enable</button></td> 
                     -->
                 </tr>
-            
-            <?php
+                <!-- Start of ENABLE confirmation modal -->
+                <div class="modal fade" id="enable-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to enable
+                                <?php echo $row[2]?>'s account?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of ENABLE confirmation modal -->
+                <!-- Start of DISABLE confirmation modal -->
+                <div class="modal fade" id="disable-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to disable
+                                <?php echo $row[2]?>'s account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of DISABLE confirmation modal -->
+
+                <?php
                 }
             ?>
             </tbody>
         </table>
     </div>
-    <!-- Start of ENABLE confirmation modal -->
-    <div class="modal fade" id="enable-modal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to enable
-                    (BACKEND ECHO MO NAME DITO NG IENABLE)'s account?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit"  class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of ENABLE confirmation modal -->
-    <!-- Start of DISABLE confirmation modal -->
-    <div class="modal fade" id="disable-modal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to disable
-                        (BACKEND ECHO MO NAME DITO NG IDIDISABLE)'s account</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of DISABLE confirmation modal -->
 </body>
 
 <script type="text/javascript">

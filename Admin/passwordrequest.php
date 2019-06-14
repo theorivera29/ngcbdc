@@ -124,11 +124,55 @@
                         <td>
                             <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
                             <button type="submit" name="requestAccept" class="btn btn-success" data-toggle="modal"
-                                data-target="#accept-modal" >Accept</button>
-                            <button type="submit" name="requestReject" class="btn btn-danger"  data-toggle="modal"
-                                data-target="#reject-modal">Reject</button>
+                                data-target="#accept-modal-<?php echo $row[0] ;?>">Accept</button>
+                            <button type="submit" name="requestReject" class="btn btn-danger" data-toggle="modal"
+                                data-target="#reject-modal-<?php echo $row[0] ;?>">Reject</button>
                         </td>
                     </tr>
+                    <!-- Start of ACCEPT confirmation modal -->
+                    <div class="modal fade" id="accept-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to accept
+                                    <?php echo $row[2] ;?>'s password reset
+                                        request?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="requestAccept" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of ACCEPT confirmation modal -->
+                    <!-- Start of REJECT confirmation modal -->
+                    <div class="modal fade" id="reject-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to reject
+                                    <?php echo $row[2] ;?>'s password reset
+                                        request?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="requestReject" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of REJECT confirmation modal -->
                 </form>
                 <?php
                     }
@@ -136,50 +180,7 @@
             </tbody>
         </table>
     </div>
-    <!-- Start of ACCEPT confirmation modal -->
-    <div class="modal fade" id="accept-modal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to accept
-                    (BACKEND ECHO MO NAME DITO NG NAGREREQUEST)'s password reset
-                        request?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" name="requestAccept" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of ACCEPT confirmation modal -->
-    <!-- Start of REJECT confirmation modal -->
-    <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to reject
-                        (BACKEND ECHO MO NAME DITO NG NAGREREQUEST)'s password reset
-                        request?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" name="requestReject" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of REJECT confirmation modal -->
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
