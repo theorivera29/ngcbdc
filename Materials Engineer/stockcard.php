@@ -77,13 +77,15 @@
                             aria-labelledby="nav-home-tab">
                             <div class="delivered-in-container">
                                 <table
-                                    class="table stockcard-table table-striped table-bordered delivered-in-table display" id="mydatatable">
+                                    class="table stockcard-table table-striped table-bordered delivered-in-table display"
+                                    id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
                                             <th scope="col">Quantity</th>
                                             <th scope="col">Unit</th>
                                             <th scope="col">Supplied By</th>
+                                            <th scope="col">Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,18 +97,27 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                         </tr>
                                         <?php
 
                                         ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3">Running Total (in):</td>
+                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
+                                                    placeholder="Running Total (in)" required></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                                 </table>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="usage-in-container">
-                                <table class="table stockcard-table table-striped table-bordered display" id="mydatatable">
+                                <table class="table stockcard-table table-striped table-bordered display"
+                                    id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
@@ -121,16 +132,23 @@
 
                                         ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>hh</td>
+                                            <td>jhj</td>
+                                            <td>jj</td>
+                                            <td>bhvgvg</td>
+                                            <td>ddd</td>
                                         </tr>
                                         <?php
 
                                         ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3">Running Total (out):</td>
+                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
+                                                    placeholder="Running Total (out)" required></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
