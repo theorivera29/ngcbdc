@@ -174,11 +174,25 @@
                                         </div>
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="hauledFrom"
-                                                    pattern="[A-Za-z\s]*" title="Input letters" required>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
-                                            </div>
+                                            <select class="form-control col-lg-9 " name="projectName" required>
+                                                <option value="" selected disabled>Choose a project</option>
+                                                <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                                <option value="<?php echo $row[1]; ?>">
+                                                    <?php echo $row[0]; ?>
+                                                </option>
+                                                <?php
+                                        }
+                                        ?>
+                                            </select>
                                         </div>
                                         <div class="card">
                                             <table class="table hauling-form-table">
@@ -186,7 +200,6 @@
                                                     <tr>
                                                         <th scope="col">Quantity</th>
                                                         <th scope="col">Articles</th>
-                                                        <th scope="col">Unit</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -194,30 +207,38 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr id="returnHaulingRow">
-                                                        <td><input class="form-control" name="quantity" pattern="[0-9]*"
-                                                                title="Input numbers" type="text" id="quantity"
-                                                                placeholder="Quantity" required>
+                                                        <td><input class="form-control" name="quantity[]"
+                                                                pattern="[0-9]*" title="Input numbers" type="text"
+                                                                id="quantity" placeholder="Quantity" required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-group">
-                                                                <select class="form-control" name="articles"
-                                                                    id="articles" required>
+                                                                <select class="form-control" name="articles[]"
+                                                                    id="articles">
                                                                     <option value="" selected disabled>Choose an Article
                                                                     </option>
+                                                                    <?php
+                                                                            $sql = "SELECT
+                                                                                mat_name,
+                                                                                mat_id
+                                                                            FROM
+                                                                                materials;";
+                                                                                $result = mysqli_query($conn, $sql);
+                                                                                while ($row = mysqli_fetch_row($result)) {
+                                                                        ?>
+                                                                    <option value="<?php echo $row[1]; ?>">
+                                                                        <?php echo $row[0]; ?>
+                                                                    </option>
+                                                                    <?php
+                                                                            }
+                                                                        ?>
                                                                 </select>
-                                                                <div class="invalid-feedback">Please select one.
                                                             </div>
-                                                            </div>
-
-                                                        </td>
-                                                        <td><input class="form-control" name="unit"
-                                                                pattern="[A-Za-z\s]*" title="Input letters" type="text"
-                                                                id="unit" placeholder="Unit" required>
-                                                                <div class="invalid-feedback">Please fill out this field.
-                                                            </div>
-                                                        </td>
+                                                        </td><input type="hidden" class="form-control" name="unit[]"
+                                                            pattern="[A-Za-z\s]*" title="Input letters" type="text"
+                                                            id="unit" placeholder="Unit" required>
                                                         <td colspan="5">
                                                             <input type="button"
                                                                 class="btn btn-md btn-outline-secondary add-row"
@@ -346,13 +367,14 @@
                                         <h4>Hauling Receipt (Permanently Hauled)</h4>
                                     </div>
                                     <div class="card-body">
-                                        <form action="../server.php" method="POST">
+                                        <form action="../server.php" method="POST" class="needs-validation" novalidate>
                                             <div class="form-group row formnum-container">
                                                 <div class=" col-lg-12">
                                                     <label class="col-lg-12 col-form-label">Form No.:</label>
                                                     <div class="col-lg-12">
-                                                        <input class="form-control" type="text" name="formNo" id="formNo1"
-                                                            pattern="[0-9]*" title="Input numbers only" required>
+                                                        <input class="form-control" type="text" name="formNo"
+                                                            id="formNo1" pattern="[0-9]*" title="Input numbers only"
+                                                            required>
                                                         <div class="invalid-feedback">Please fill out this field.</div>
                                                     </div>
                                                 </div>
@@ -374,10 +396,25 @@
                                             </div>
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="hauledFrom"
-                                                        pattern="[A-Za-z\s]*" title="Input letters" required>
-                                                </div>
+                                                <select class="form-control col-lg-9" name="projectName" required>
+                                                    <option value="" selected disabled>Choose a project</option>
+                                                    <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                                    <option value="<?php echo $row[1]; ?>">
+                                                        <?php echo $row[0]; ?>
+                                                    </option>
+                                                    <?php
+                                        }
+                                        ?>
+                                                </select>
                                             </div>
                                             <div class="card">
                                                 <table class="table hauling-form-table">
@@ -385,7 +422,6 @@
                                                         <tr>
                                                             <th scope="col">Quantity</th>
                                                             <th scope="col">Articles</th>
-                                                            <th scope="col">Unit</th>
                                                             <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
@@ -393,29 +429,38 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr id="permanentHaulingRow">
-                                                            <td><input class="form-control" name="quantity"
+                                                            <td><input class="form-control" name="quantity[]"
                                                                     pattern="[0-9]*" title="Input numbers" type="text"
-                                                                    id="quantity1" placeholder="Quantity">
+                                                                    id="quantity1" placeholder="Quantity" required>
                                                                 <div class="invalid-feedback">Please fill out this
                                                                     field.</div>
                                                             </td>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <select class="form-control" name="articles"
-                                                                        id="articles1" required>
+                                                                    <select class="form-control" name="articles[]"
+                                                                        id="articles">
                                                                         <option value="" selected disabled>Choose an
-                                                                            Article
+                                                                            Article</option>
+                                                                        <?php
+                                                                            $sql = "SELECT
+                                                                                mat_name,
+                                                                                mat_id
+                                                                            FROM
+                                                                                materials;";
+                                                                                $result = mysqli_query($conn, $sql);
+                                                                                while ($row = mysqli_fetch_row($result)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $row[1]; ?>">
+                                                                            <?php echo $row[0]; ?>
                                                                         </option>
+                                                                        <?php
+                                                                            }
+                                                                        ?>
                                                                     </select>
-                                                                    <div class="invalid-feedback">Please select one.</div>
                                                                 </div>
-                                                            </td>
-                                                            <td><input class="form-control" name="unit"
-                                                                    pattern="[A-Za-z\s]*" title="Input letters"
-                                                                    type="text" id="unit1" placeholder="Unit" required>
-                                                                <div class="invalid-feedback">Please fill out this
-                                                                    field.</div>
-                                                            </td>
+                                                            </td><input type="hidden" class="form-control" name="unit[]"
+                                                                pattern="[A-Za-z\s]*" title="Input letters" type="text"
+                                                                id="unit1" placeholder="Unit" required>
                                                             <td colspan="5">
                                                                 <input type="button"
                                                                     class="btn btn-md btn-outline-secondary add-row1"
@@ -543,6 +588,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -550,12 +597,12 @@
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
             var unit = $("#unit").val();
-            var articles = $("#articles").val();
-            var markup = "<tr><td><input type='text' class='form-control' value='" +
+            var articles = $("#articles option:selected").text();
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity +
-                "' required/></td><td><input type='text' class='form-control' value='" +
+                "' required/></td><td><input type='text' name='articles[]' class='form-control' value='" +
                 articles +
-                "' required/></td><td><input type='text' class='form-control' value='" +
+                "' required/><input type='hidden' name='unit[]' class='form-control' value='" +
                 unit +
                 "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (articles != '') && (unit != '')) {
@@ -573,12 +620,12 @@
         $(".add-row1").click(function () {
             var quantity1 = $("#quantity1").val();
             var unit1 = $("#unit1").val();
-            var articles1 = $("#articles1").val();
-            var markup1 = "<tr><td><input type='text' class='form-control' value='" +
+            var articles1 = $("#articles1 option:selected").text();
+            var markup1 = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity1 +
-                "' required/></td><td><input type='text' class='form-control' value='" +
+                "' required/></td><td><input type='text' name='articles[]' class='form-control' value='" +
                 articles1 +
-                "' required/></td><td><input type='text' class='form-control' value='" +
+                "' required/><input type='hidden' name='unit[]' class='form-control' value='" +
                 unit1 +
                 "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity1 != '') && (articles1 != '') && (unit1 != '')) {
@@ -595,7 +642,20 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
+        $('#articles').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this)
+                .children(
+                    'option:selected').val(),
+                function (data) {
+                    var d = JSON.parse(data);
+                    $('#unit').val(d[0][0])
+                });
+        });
     });
+
+
 
     (function () {
         'use strict';
@@ -625,6 +685,7 @@
 
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
+
 </script>
 
 
