@@ -424,9 +424,53 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
 
     }
+
     if (isset($_POST['reconciliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
+    }
+
+    if (isset($_POST['reconciliation_reconcile'])) {
+        $sql = "SELECT 
+                    reconciliation.reconciliation_physCount,
+                    ";
+    }
+
+    if (isset($_POST['reconciliation_save'])) {
+        session_start();
+        $difference = $_POST['difference'];
+        $matinfo_id = $_POST['matinfo_id'];
+        $systemCount = $_POST['system_Count'];
+        $remarks = array();
+        $x = 0;
+        if (isset($_POST['remarks'])) {
+            $remarks = $_POST['remarks'];
+        }
+        for ($ctr = 0; $ctr <= sizeof($difference)-1; $ctr++) {
+            $dif = $difference[$ctr];
+            $mat = $matinfo_id[$ctr];
+            $sys = $systemCount[$ctr];
+            $phys = $sys-$dif;
+            $stmt = $conn->prepare("DELETE FROM reconciliation WHERE reconciliation_matinfo = ?");
+            $stmt->bind_param("i", $mat);
+            $stmt->execute();
+            $stmt->close();
+
+            if ($dif != 0) {
+                $rem = $remarks[$x];
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo, reconciliation_remarks) VALUES (?, ?, ?);");
+                $stmt->bind_param("iis", $phys, $mat, $rem);
+                $stmt->execute();
+                $stmt->close();
+                $x++;
+            } else {
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo) VALUES (?, ?);");
+                $stmt->bind_param("ii", $phys, $mat);
+                $stmt->execute();
+                $stmt->close();
+            }
+        }
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
@@ -669,6 +713,10 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
         $stmt->execute();
         $stmt->close();
+        // $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity = ? WHERE accounts_id = 1;");
+        // $stmt->bind_param("s", $lastName);
+        // $stmt->execute();
+        // $stmt->close();
         }
         
         $account_id = "";

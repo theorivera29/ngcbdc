@@ -164,7 +164,25 @@
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z\s]*" title="Input letters" required>
+                                            <select class="form-control" name="projectName" required>
+                                                <option value="" selected disabled>Choose a project</option>
+                                                <?php
+                                                                $sql = "SELECT
+                                                                    projects_name,
+                                                                    projects_id
+                                                                FROM
+                                                                    projects;";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    while ($row = mysqli_fetch_row($result)) {
+                                                            ?>
+
+                                                <option value="<?php echo $row[1]; ?>">
+                                                    <?php echo $row[0]; ?>
+                                                </option>
+                                                <?php
+                                                        }
+                                                        ?>
+                                            </select>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
@@ -350,7 +368,25 @@
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z\s]*" title="Input letters" required>
+                                                    <select class="form-control" name="projectName" required>
+                                                        <option value="" selected disabled>Choose a project</option>
+                                                        <?php
+                                                                        $sql = "SELECT
+                                                                            projects_name,
+                                                                            projects_id
+                                                                        FROM
+                                                                            projects;";
+                                                                            $result = mysqli_query($conn, $sql);
+                                                                            while ($row = mysqli_fetch_row($result)) {
+                                                                    ?>
+
+                                                        <option value="<?php echo $row[1]; ?>">
+                                                            <?php echo $row[0]; ?>
+                                                        </option>
+                                                        <?php
+                                                                }
+                                                                ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="card">
