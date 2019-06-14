@@ -4,7 +4,7 @@
     if (isset($_SESSION['matinfo_id'])) {
         $matinfo_id = $_SESSION['matinfo_id'];
     } else {
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/sitematerials.php");  
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php");  
     }
 ?>
 
@@ -62,6 +62,7 @@
     <section id="tabs">
         <div class="container">
             <div class="row">
+            <h4 class="project-title">NAME OF material</h4>
                 <div class="col-xs-12 project-tabs">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
@@ -77,30 +78,47 @@
                             aria-labelledby="nav-home-tab">
                             <div class="delivered-in-container">
                                 <table
-                                    class="table stockcard-table table-striped table-bordered delivered-in-table display" id="mydatatable">
+                                    class="table stockcard-table table-striped table-bordered delivered-in-table display"
+                                    id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
                                             <th scope="col">Quantity</th>
                                             <th scope="col">Unit</th>
                                             <th scope="col">Supplied By</th>
+                                            <th scope="col">Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+
+                                        ?>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                         </tr>
+                                        <?php
+
+                                        ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3">Running Total (in):</td>
+                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
+                                                    placeholder="Running Total (in)" required></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                                 </table>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="usage-in-container">
-                                <table class="table stockcard-table table-striped table-bordered display" id="mydatatable">
+                                <table class="table stockcard-table table-striped table-bordered display"
+                                    id="mydatatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
@@ -108,17 +126,32 @@
                                             <th scope="col">Unit</th>
                                             <th scope="col">Pulled By</th>
                                             <th scope="col">Area of Usage</th>
+                                            <th scope="col">Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+
+                                        ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>hh</td>
+                                            <td>jhj</td>
+                                            <td>jj</td>
+                                            <td>bhvgvg</td>
+                                            <td>ddd</td>
                                             <td></td>
                                         </tr>
+                                        <?php
+
+                                        ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4">Running Total (out):</td>
+                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
+                                                    placeholder="Running Total (out)" required></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>

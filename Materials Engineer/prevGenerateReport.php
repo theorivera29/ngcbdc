@@ -2,6 +2,9 @@
     include '../fpdf/fpdf.php';
     include "../db_connection.php";
     session_start();
+    $projects_id = $_SESSION['projects_id'];
+    $lastmatinfo_month = $_SESSION['lastmatinfo_month'];
+    $lastmatinfo_year = $_SESSION['lastmatinfo_year'];
 
     //INITIALIZATION OF FPDF OBJECT
     $pdf = new FPDF();
@@ -23,7 +26,7 @@
     $pdf->SetFont('Times','',12);
     $pdf->Cell(0,25,'PROJECT : '.strtoupper($row[0]),0,2);
     $pdf->Cell(0,-16,'LOCATION : '.strtoupper($row[1]),0,2);
-    $pdf->Cell(0,26,'SUBJECT : INVENTORY REPORT AS OF '.date("F Y"),0,2);
+    $pdf->Cell(0,26,'SUBJECT : INVENTORY REPORT AS OF '.date("F", mktime(0, 0, 0, $lastmatinfo_month, 10))." ".$lastmatinfo_year,0,2);
 
     //SET TABLE BORDER COLOR
     $pdf->SetFont('Times','B',9);
@@ -47,13 +50,15 @@
     $sql_categ = "SELECT DISTINCT
                     categories_name
                 FROM
-                    materials
+                    lastmatinfo
                 INNER JOIN
-                    categories ON categories.categories_id = materials.mat_categ
-                INNER JOIN
-                    matinfo ON materials.mat_id = matinfo.matinfo_matname
+                    categories ON categories.categories_id = lastmatinfo.lastmatinfo_categ
                 WHERE
-                    matinfo.matinfo_project = $projects_id;";
+                    lastmatinfo.lastmatinfo_project = $projects_id
+                    AND
+                        lastmatinfo.lastmatinfo_year = $lastmatinfo_year
+                    AND
+                        lastmatinfo.lastmatinfo_month = $lastmatinfo_month;";
     $result = mysqli_query($conn, $sql_categ);
     $categories = array();
     while($row_categ = mysqli_fetch_assoc($result)){
@@ -61,24 +66,30 @@
     }
     foreach($categories as $data) {
         $categ = $data['categories_name'];
-        $sql = "SELECT 
-            materials.mat_id,
+        $sql = "SELECT
             materials.mat_name,
-            categories.categories_name,
-            matinfo.matinfo_prevStock,
-            unit.unit_name
+            lastmatinfo.lastmatinfo_prevStock,
+            unit.unit_name,
+            lastmatinfo.lastmatinfo_deliveredMat,
+            lastmatinfo.lastmatinfo_matPulledOut,
+            lastmatinfo.lastmatinfo_accumulatedMat,
+            lastmatinfo.lastmatinfo_matOnSite
         FROM
-            materials
-        INNER JOIN 
-            categories ON materials.mat_categ = categories.categories_id
-        INNER JOIN 
-            unit ON materials.mat_unit = unit.unit_id
+            lastmatinfo
         INNER JOIN
-            matinfo ON materials.mat_id = matinfo.matinfo_matname
+            materials ON lastmatinfo.lastmatinfo_matname = materials.mat_id
+        INNER JOIN
+            categories ON lastmatinfo.lastmatinfo_categ = categories.categories_id
+        INNER JOIN
+            unit ON lastmatinfo.lastmatinfo_unit = unit.unit_id
         WHERE 
-            categories.categories_name = '$categ' 
-        AND 
-        matinfo.matinfo_project = '$projects_id'
+            lastmatinfo.lastmatinfo_project = $projects_id 
+            AND
+                lastmatinfo.lastmatinfo_year = $lastmatinfo_year
+            AND
+                lastmatinfo.lastmatinfo_month = $lastmatinfo_month
+            AND
+                categories.categories_name = '$categ' 
         ORDER BY 1;";
         $pdf->SetFont('Times','B',9);
         $pdf->Cell(189,0.75," ",1,0,'L',true);
@@ -90,51 +101,19 @@
         $result = mysqli_query($conn, $sql);
         $pdf->SetFont('Times','',9);
         while($row = mysqli_fetch_row($result)){
-            $sql1 = "SELECT 
-                        SUM(deliveredmat.deliveredmat_qty) 
-                    FROM 
-                        deliveredmat
-                    WHERE 
-                        deliveredmat.deliveredmat_materials = '$row[0]';";
-            $result1 = mysqli_query($conn, $sql1);
-            $row1 = mysqli_fetch_row($result1);
-            $sql2 = "SELECT 
-                        SUM(usagein.usagein_quantity) FROM usagein
-                    INNER JOIN 
-                        matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
-                    WHERE 
-                        matinfo.matinfo_matname = '$row[0]';";
-            $result2 = mysqli_query($conn, $sql2);
-            $row2 = mysqli_fetch_row($result2);
-            $pdf->Cell(50,10,$row[1],1,0,'C',true);
-            $pdf->Cell(12,10,$row[3],1,0,'C',true);
-            $pdf->Cell(10,10,$row[4],1,0,'C',true);
-            if($row1[0] == null) {
-                $pdf->Cell(22,10,0,1,0,'C',true);
-            } else {                
-                $pdf->Cell(22,10,$row1[0],1,0,'C',true);
-            } 
-            if($row2[0] == null) {
-                $pdf->Cell(21,10,0,1,0,'C',true);
-            } else {                
-                $pdf->Cell(21,10,$row2[0],1,0,'C',true);
-            }
-            $pdf->Cell(10,10,$row[4],1,0,'C',true);
-            $pdf->Cell(29,10,$row[3]+$row1[0],1,0,'C',true);
-            $pdf->Cell(25,10,($row[3]+$row1[0])-$row2[0],1,0,'C',true);
-            $pdf->Cell(10,10,$row[4],1,0,'C',true);
+            $pdf->Cell(50,10,$row[0],1,0,'C',true);
+            $pdf->Cell(12,10,$row[1],1,0,'C',true);
+            $pdf->Cell(10,10,$row[2],1,0,'C',true);
+            $pdf->Cell(22,10,$row[3],1,0,'C',true);
+            $pdf->Cell(21,10,$row[4],1,0,'C',true);
+            $pdf->Cell(10,10,$row[2],1,0,'C',true);
+            $pdf->Cell(29,10,$row[5],1,0,'C',true);
+            $pdf->Cell(25,10,$row[6],1,0,'C',true);
+            $pdf->Cell(10,10,$row[2],1,0,'C',true);
             $pdf->Ln();
         }
     }
-    $preparedBy = $_SESSION['preparedBy'];
-    $checkedBy = $_SESSION['checkedBy'];
-    $notedBy = $_SESSION['notedBy'];
-    $pdf->SetFontSize(12);
-    $pdf->SetX($pdf->GetX());
-    $pdf->Cell(63,10,'Prepared by: '.$preparedBy,1,0,'L',true);
-    $pdf->Cell(63,10,'Checked by: '.$checkedBy,1,0,'L',true);
-    $pdf->Cell(63,10,'Noted by: '.$notedBy,1,0,'L',true);
 
     //OUTPUT TO PDF
-    $pdf->Output('D', "INVENTORY REPORT ".date("F Y").".pdf");
+    $pdf->Output('D', "INVENTORY REPORT ".date("F", mktime(0, 0, 0, $lastmatinfo_month, 10))." ".$lastmatinfo_year.".pdf");
 ?>

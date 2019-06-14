@@ -1,12 +1,12 @@
+
 <?php
     include "../session.php";
-
     if (isset($_SESSION['projects_id'])) {
         $projects_id = $_SESSION['projects_id'];
+        unset($_SESSION['categories_id']);
     } else {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
     }
-
     $sql_project_name = "SELECT 
                             projects_name
                         FROM
@@ -84,7 +84,7 @@
                 </div>
                 <div class="view-inventory-tabs-content">
                     <div class="tab-content view-inventory-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-home"
+                        <div class="tab-pane fade show active view-inventory-tabs-container" id="nav-mat"
                             role="tabpanel" aria-labelledby="nav-mat-tab">
                             <table class="table view-inventory-tabs-table table-striped table-bordered display"
                                 id="mydatatable">
@@ -119,7 +119,6 @@
                                     while($row_categ = mysqli_fetch_assoc($result)){
                                         $categories[] = $row_categ;
                                     }
-
                                     foreach($categories as $data) {
                                         $categ = $data['categories_name'];
                                         
@@ -128,7 +127,8 @@
                                                     materials.mat_name,
                                                     categories.categories_name,
                                                     matinfo.matinfo_prevStock,
-                                                    unit.unit_name
+                                                    unit.unit_name,
+                                                    matinfo.matinfo_id
                                                 FROM
                                                     materials
                                                 INNER JOIN 
@@ -154,7 +154,7 @@
                                             $row1 = mysqli_fetch_row($result1);
                                             $sql2 = "SELECT 
                                                         SUM(usagein.usagein_quantity) FROM usagein
-                                                        INNER JOIN 
+                                                    INNER JOIN 
                                                         matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
                                                     WHERE 
                                                         matinfo.matinfo_matname = '$row[0]';";
@@ -162,8 +162,11 @@
                                             $row2 = mysqli_fetch_row($result2);
                                 ?>
                                     <tr>
-                                        <td><button type="button" class="btn btn-info"
-                                                onclick="window.location.href = 'stockcard.php'"><?php echo $row[1] ;?></button>
+                                        <td>
+                                            <form action="../server.php" method="POST">
+                                                <input type="hidden" name="matinfo_id" value="<?php echo $row[5] ;?>">
+                                                <button type="submit" class="btn btn-info" name="viewStockCard"><?php echo $row[1] ;?></button>
+                                            </form>
                                         </td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
@@ -240,19 +243,18 @@
                                 while($row = mysqli_fetch_row($result)){
                             ?>
                                     <tr>
+                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[1] ;?></button>
                                         </td>
                                         <td>
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
-                                        <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info"
-                                            id="open-category-btn"
-                                            onclick="window.location.href='materialCategories.php'">View</button>
+                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn">View</button>
+
                                         </td>
+                                        </form>
                                     </tr>
                                     <?php
                                         }
-
                                 ?>
                                 </tbody>
                             </table>
@@ -270,11 +272,9 @@
     $(document).ready(function () {
         $('#mydatatable').DataTable();
         $('table.display').DataTable();
-
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
-
     });
 </script>
 
