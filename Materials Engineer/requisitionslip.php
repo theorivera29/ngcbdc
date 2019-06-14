@@ -11,7 +11,8 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
@@ -34,7 +35,8 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -57,7 +59,8 @@
                         <a href="dashboard.php" id="sideNav-a">Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Site</a>
+                        <a href="#siteSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Site</a>
                         <ul class="collapse list-unstyled" id="siteSubmenu">
                             <li>
                                 <a href="projects.php" id="sideNav-a">Projects</a>
@@ -68,7 +71,8 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Hauling</a>
+                        <a href="#haulingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Hauling</a>
                         <ul class="collapse list-unstyled" id="haulingSubmenu">
                             <li>
                                 <a href="fillouthauling.php" id="sideNav-a">Fill out Hauling Receipt</a>
@@ -79,7 +83,8 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Transactions</a>
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Transactions</a>
                         <ul class="collapse list-unstyled" id="transactionSubmenu">
                             <li>
                                 <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
@@ -99,7 +104,8 @@
                         <a href="addingOfNewMaterials.php" id="sideNav-a">Adding of Materials</a>
                     </li>
                     <li class="active">
-                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="sideNav-a">Reports</a>
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                            id="sideNav-a">Reports</a>
                         <ul class="collapse list-unstyled" id="reportSubmenu">
                             <li>
                                 <a href="currentReport.php" id="sideNav-a">Monthly Report</a>
@@ -122,12 +128,13 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form action="../server.php" method="POST">
+                <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="date" name="date" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
@@ -136,28 +143,32 @@
                             <label class="col-lg-12 col-form-label">Material Requisition No.:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="reqNo" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="project">
+                            <input class="form-control" type="text" name="project" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Location:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="location">
+                            <input class="form-control" type="text" name="location" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
-                        
-                            <label class="col-lg-2 col-form-label">Remarks:</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" name="remarks" required>
-                            </div>
+
+                        <label class="col-lg-2 col-form-label">Remarks:</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="remarks" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
                     </div>
                     <div class="card">
                         <table class="table requisition-form-table">
@@ -174,11 +185,13 @@
                             </tbody>
                             <tfoot>
                                 <tr id="requisitionRow">
-                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity"
+                                            placeholder="Quantity" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="particulars[]" id="particulars">
+                                            <select class="form-control" name="particulars[]" id="particulars" required>
                                                 <option value="" selected disabled>Choose a Particular</option>
                                                 <?php    
                                                 $sql = "SELECT  
@@ -196,11 +209,19 @@
                                                 }
                                             ?>
                                             </select>
+                                            <div class="invalid-feedback">Please select one particular.</div>
                                         </div>
-                                    <td><input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit"></td>
-                                    <td><input class="form-control" name="location[]" type="text" id="location" placeholder="Location"></td>
+                                    <td><input class="form-control" name="unit[]" type="text" id="unit"
+                                            placeholder="Unit" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
+                                    <td><input class="form-control" name="location[]" type="text" id="location"
+                                            placeholder="Location" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
                                     <td colspan="5">
-                                        <input type="button" class="btn btn-md btn-outline-secondary add-row" value="Add Row" />
+                                        <input type="button" class="btn btn-md btn-outline-secondary add-row"
+                                            value="Add Row" />
                                     </td>
                                 </tr>
                             </tfoot>
@@ -211,57 +232,66 @@
                             <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="requestedBy" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="approvedBy" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="submit" name="create_requisitionSlip" class="btn btn-primary" value="Save Changes">
+                            <input type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#save-modal" value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
+                    <!-- Start of confirmation modal -->
+                    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
+                                        changes?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="create_requisitionSlip" class="btn btn-success">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of confirmation modal -->
                 </form>
             </div>
         </div>
     </div>
-    <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save changes?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End of confirmation modal -->
 </body>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".add-row").click(function() {
+    $(document).ready(function () {
+        $(".add-row").click(function () {
             var quantity = $("#quantity").val();
             var particulars = $("#particulars").val();
             var unit = $("#unit").val();
             var location = $("#location").val();
-            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity +
-                "'/></td><td><input type='text' name='particulars[]' class='form-control' value='" + particulars +
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
+                quantity +
+                "'/></td><td><input type='text' name='particulars[]' class='form-control' value='" +
+                particulars +
                 "'/></td><td><input type='text' name='unit[]' class='form-control' value='" + unit +
-                "'/></td><td><input type='text' name='location[]' class='form-control' value='" + location +
+                "'/></td><td><input type='text' name='location[]' class='form-control' value='" +
+                location +
                 "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (particulars != '') && (unit != '') && (location != '')) {
                 $("table tbody").append(markup);
@@ -269,11 +299,11 @@
                 $("#requisitionRow select").val('');
             }
         });
-        $("#requisitionTable").on('click', '.delete-row', function() {
+        $("#requisitionTable").on('click', '.delete-row', function () {
             $(this).closest('tr').remove();
         });
 
-        $('#sidebarCollapse').on('click', function() {
+        $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
     });
@@ -286,6 +316,22 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 
