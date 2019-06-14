@@ -175,8 +175,6 @@
     <?php 
         if (isset($_SESSION['create_success'])) {
     ?>
-    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -194,8 +192,6 @@
             unset($_SESSION['create_success']);
         }
     ?>
-                </div>
-            </div>
         </div>
     </div>
 </body>
