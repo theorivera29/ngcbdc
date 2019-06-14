@@ -1,6 +1,11 @@
 <?php
-    include "../db_connection.php";
-    session_start();
+    include "../session.php";
+
+    if (isset($_SESSION['projects_id'])) {
+        $projects_id = $_SESSION['projects_id'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
+    }
 
     $accounts_id = $_SESSION['account_id'];
 ?>

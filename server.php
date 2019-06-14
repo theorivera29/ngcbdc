@@ -349,6 +349,37 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+    if (isset($_POST['curGenerateReport'])) {
+        $preparedBy = mysqli_real_escape_string($conn, $_POST['preparedBy']);
+        $checkedBy = mysqli_real_escape_string($conn, $_POST['checkedBy']);
+        $notedBy = mysqli_real_escape_string($conn, $_POST['notedBy']);
+        session_start();
+        $_SESSION['preparedBy'] = $preparedBy;
+        $_SESSION['checkedBy'] = $checkedBy;
+        $_SESSION['notedBy'] = $notedBy;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/curGenerateReport.php");  
+    }
+
+    if (isset($_POST['viewStockCard'])) {
+        session_start();
+        $matinfo_id = $_POST['matinfo_id'];
+        $_SESSION['matinfo_id'] = $matinfo_id;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
+
+    }
+    if (isset($_POST['reconcilliation_edit'])) {
+        session_start();
+        $_SESSION['edit_clicked'] = true;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+    }
+
+    if (isset($_POST['reconcillation'])) {
+        session_start();
+        $projects_id = $_POST['projects_id'];
+        $_SESSION['projects_id'] = $projects_id;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconcilliation.php");  
+    }
+
     if (isset($_POST['create_disposalSlip'])) {
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
@@ -774,33 +805,45 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addingOfNewMaterials.php");     
     }
 
+    if (isset($_POST['edit_threshold'])) {
+        $matinfo_id = mysqli_real_escape_string($conn, $_POST['matinfo_id']);
+        $threshold = mysqli_real_escape_string($conn, $_POST['threshold']);
+        $proj_id = mysqli_real_escape_string($conn, $_POST['proj_id']);
+        
+        $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
+        $stmt->bind_param("ii", $threshold, $matinfo_id);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php?projects_id=$proj_id");     
+    }
+
     if (isset($_POST['edit_material'])) {
             $newCategory = mysqli_real_escape_string($conn, $_POST['newCategory']);
             $newMatName = mysqli_real_escape_string($conn, $_POST['newMatName']);
-            $newThreshold = mysqli_real_escape_string($conn, $_POST['newThreshold']);
             $newUnit = mysqli_real_escape_string($conn, $_POST['newUnit']);
-            $matinfo_id = mysqli_real_escape_string($conn, $_POST['matinfo_id']);
-            
+            $mat_id = mysqli_real_escape_string($conn, $_POST['mat_id']);  
+        
+            if(isset($_POST['newCategory'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_categ = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newCategory, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
         
+            if(isset($_POST['newUnit'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_unit = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newUnit, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
         
+            if(isset($_POST['newMatName'])) {
             $stmt = $conn->prepare("UPDATE materials SET mat_name = ? WHERE mat_id = ?;");
             $stmt->bind_param("si", $newMatName, $mat_id);
             $stmt->execute();
             $stmt->close();
+            }
 
-
-            $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
-            $stmt->bind_param("si", $newThreshold, $matinfo_id);
-            $stmt->execute();
-            $stmt->close();
         
 /*         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $edit_account_date, $logs_message, $logs_of);
@@ -883,25 +926,35 @@ if (isset($_POST['edit_project'])) {
 
     if (isset($_POST['open_returns'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php?hauling_no=$hauling_no");     
+        session_start();
+        $_SESSION['hauling_no'] = $hauling_no;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
+    }
+
+    if (isset($_POST['view_hauling'])) {
+        $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php?hauling_no=$hauling_no");     
     }
 
     if (isset($_POST['adding_materials'])) {
 
         $matName = $_POST['matName'];
         $prevStock = 0;
-        $notif = 50;
+        $notif = 0;
         $currentQuantity = 0;
-        $project = 1;
+        $project = mysqli_real_escape_string($conn, $_POST['proj_id']);;
         
+   
         for($x = 0; $x < sizeof($matName); $x++){
             
-            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname)   VALUES (?, ?, ?, ?, ?);");
+            $stmt = $conn->prepare("INSERT INTO matinfo (matinfo_prevStock, matinfo_project, matinfo_notif, currentQuantity, matinfo_matname) VALUES (?, ?, ?, ?, ?);");
             $stmt->bind_param("iiiii", $prevStock, $project, $notif, $currentQuantity, $matName[$x]);
             $stmt->execute();
             $stmt->close();
         }
-        $account_id = "";
+        
+        
+/*        $account_id = "";
         session_start();
         if(isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
@@ -913,10 +966,9 @@ if (isset($_POST['edit_project'])) {
         $logs_of = $account_id;
         $stmt->bind_param("ssi", $create_mat_date, $logs_message, $logs_of);
         $stmt->execute();
-        $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+        $stmt->close();*/
+        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
-
 
     if (isset($_POST['update_todo'])) {
         $todo_id = $_POST['todo_id'];
@@ -1043,7 +1095,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['viewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-
+        $_SESSION['projects_id'] = $projects_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1055,9 +1107,9 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php");    
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewinventory.php");    
         }
     }
 
@@ -1085,7 +1137,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['prevViewInventory'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-        $_SESSION['prevProjects'] = $projects_id;
+        $_SESSION['projects_id'] = $projects_id;
         header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReportsPage.php");    
     }
 
@@ -1093,30 +1145,30 @@ if (isset($_POST['edit_project'])) {
         $projects_id = $_POST['projects_id'];
         $lastmatinfo_month = $_POST['lastmatinfo_month'];
         $lastmatinfo_year = $_POST['lastmatinfo_year'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewPreviousReport.php?projects_id=$projects_id&lastmatinfo_month=$lastmatinfo_month&lastmatinfo_year=$lastmatinfo_year");    
+        session_start();
+        $_SESSION['lastmatinfo_month'] = $lastmatinfo_month;
+        $_SESSION['lastmatinfo_year'] = $lastmatinfo_year;
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/viewPreviousReport.php");    
     }
     
 
     if (isset($_POST['curViewInventory'])) {
         $projects_id = $_POST['projects_id'];
-        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php?projects_id=$projects_id");    
+        session_start();
+        $_SESSION['projects_id'] = $projects_id;
+        header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReportPage.php");    
     }
     
     if (isset($_POST['return_hauling'])) {
         
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
-
-        $stmt = $conn->prepare("SELECT return_returnedqty FROM returns WHERE return_id = 1;");
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($currentReturnedQty);
-        $stmt->fetch();
-        $newQuantity = $returningQuantity+$currentReturnedQty;
-        $stmt = $conn->prepare("UPDATE returns SET return_returnedqty = ? WHERE return_id = 1;");
-        $stmt->bind_param("i", $newQuantity);
+        $returns_id = $_POST['returns_id']; 
+        $date_today = date("Y-m-d");
+        $stmt = $conn->prepare("INSERT INTO returnhistory (returns_id, returnhistory_date, returnhistory_returningqty) VALUES (?, ?, ?);");
+        $stmt->bind_param("isi", $returns_id, $date_today, $returningQuantity);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returns.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
     if (isset($_POST['materialCategories'])) {

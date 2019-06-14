@@ -539,9 +539,9 @@
                 "' required/></td><td><input type='text' class='form-control' value='" +
                 unit1 +
                 "' required/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-            if ((quantity1 != '') && (articles1 != '') && (unit1 != '')) {
+            if ((quantity1 != '') && (articles1 != '')&& (unit1 != '')) {
                 $("table tbody").append(markup1);
-                $("#permanentHaulingRow input[type=text]").val('');
+                $("#permanentHaulingRow input[typ e=text]").val('');
                 $("#permanentHaulingRow select").val('');
             }
         });

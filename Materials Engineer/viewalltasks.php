@@ -20,7 +20,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -52,129 +51,128 @@
         </span>
     </div>
 
-    <div class="card view-all-task-container">
-        <h5 class="card-header">All Task</h5>
-        <div class="card-body">
-            <?php
-                $sql = "SELECT 
-                            todo_id,
-                            todo_date,
-                            todo_task,
-                            todo_status,
-                            todoOf 
-                        FROM 
-                            todo 
-                        WHERE 
-                            todoOf = $accounts_id ORDER BY todo_task;";
-                $result = mysqli_query($conn, $sql);
-                if (mysqli_num_rows($result) > 0) {
-            ?>
-            <table class="table today-task-table table-striped table-bordered" id="mydatatable">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Task</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
+    <div class="card-body todo-task-header">
 
-                <form action="../server.php" method="POST">
-                    <tbody>
+                    <?php
+                        $date_today = date("Y-m-d");
+                        $sql = "SELECT 
+                                    todo_id,
+                                    todo_date,
+                                    todo_task,
+                                    todo_status,
+                                    todoOf 
+                                FROM 
+                                    todo 
+                                WHERE 
+                                    todoOf = $accounts_id ORDER BY todo_task;";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                    ?>
+                    <table class="table view-all-task-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Task</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
                         <?php 
-                    while($row = mysqli_fetch_row($result)) {
-                ?>
-                        <tr>
-                            <td><?php echo $row[1] ;?></td>
-                            <td><?php echo $row[2] ;?></td>
-                            <td><?php echo $row[3] ;?></td>
-                            <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
-                            <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
-                            <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
-                            <?php
-                            if(strcmp($row[3], "in progress") == 0) {
+                            while($row = mysqli_fetch_row($result)) {
                         ?>
-                            <td><button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#done-task-modal-<?php echo $row[0] ;?>">Done
-                                </button></td>
-                            <?php
-                            } else {
-                        ?>
-                            <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#clear-task-modal-<?php echo $row[0] ;?>">Clear
-                                </button></td>
-                            <?php
+                        <form action="../server.php" method="POST">
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $row[1] ;?></td>
+                                    <td><?php echo $row[2] ;?></td>
+                                    <td><?php echo $row[3] ;?></td>
+                                    <input type="hidden" name="todo_id" value="<?php echo $row[0];?>">
+                                    <input type="hidden" name="todo_task" value="<?php echo $row[2];?>">
+                                    <input type="hidden" name="todo_status" value="<?php echo $row[3];?>">
+                                    <?php
+                                    if(strcmp($row[3], "in progress") == 0) {
+                                ?>
+                                    <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#done-task-modal-<?php echo $row[0] ;?>">Done
+                                        </button></td>
+                                    <?php
+                                    } else {
+                                ?>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#clear-task-modal-<?php echo $row[0] ;?>">Clear
+                                        </button></td>
+                                    </td>
+                                    <?php
+                                    }
+                                ?>
+                                </tr>
+                            </tbody>
+                            <!-- START DONE MODAL -->
+                            <div class="modal fade" id="done-task-modal-<?php echo $row[0] ;?>" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you are done
+                                                with this task?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php echo $row[2] ;?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success" name="update_todo_all">Yes</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">No</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END DONE MODAL -->
+                            <!-- START CLEAR MODAL -->
+                            <div class="modal fade" id="clear-task-modal-<?php echo $row[0] ;?>" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to
+                                                clear this task?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php echo $row[2] ;?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success" name="update_todo_all">Yes</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">No</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END CLEAR MODAL -->
+                        </form>
+                        <?php
                             }
                         ?>
-                        </tr>
-                        <!-- START DONE MODAL -->
-                        <div class="modal fade" id="done-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you are done with
-                                            this task?
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            &times;
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <?php echo $row[2] ;?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success">Yes</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END DONE MODAL -->
-                        <!-- START CLEAR MODAL -->
-                        <div class="modal fade" id="clear-task-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to clear
-                                            this task?
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            &times;
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <?php echo $row[2] ;?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success">Yes</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END CLEAR MODAL -->
-                        <?php
-                    }
-                ?>
-                    </tbody>
-                </form>
-
-            </table>
-            <?php
-                } else {
-            ?>
-            <div>
-                <p id="no-task-text">NO TASK</p>
-            </div>
-            <?php
-                }
-            ?>
-        </div>
-    </div>
+                    </table>
+                    <?php
+                        } else {
+                    ?>
+                    <div>
+                        <p id="no-task-text">NO TASK FOR TODAY</p>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                </div>
 
 </body>
 <script type="text/javascript">
@@ -188,7 +186,6 @@
     }
 
     $(document).ready(function () {
-        $('#mydatatable').DataTable();
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');

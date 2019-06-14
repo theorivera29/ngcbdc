@@ -137,7 +137,7 @@
                         <input type="date" class="form-group form-control add-task-date" name="todo_date" id="dateID"
                             required>
                         <textarea class="form-control" id="task-textarea" name="todo_task" minlength="2" maxlength="45"
-                            pattern="[A-Za-z0-9.,/!-+=()<>@#%^&*]{45}" required></textarea>
+                            pattern="[A-Za-z0-9.,/!-+=()<>@#%^&*]{45}" autocomplete="off" required></textarea>
                         <div class="container-counter">
                             <span id="characters">45</span><span id="char"> characters</span>
                         </div>
@@ -259,7 +259,7 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success">Yes</button>
+                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
                                             <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
@@ -284,8 +284,8 @@
                                             <?php echo $row[2] ;?>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success">Yes</button>
-                                            <button type="button" class="btn btn-secondary"
+                                            <button type="submit" class="btn btn-success" name="update_todo">Yes</button>
+                                            <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">No</button>
 
                                         </div>

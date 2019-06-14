@@ -323,7 +323,6 @@ textarea{
 }
 
 .today-task-table{
-    margin-top: -2% !important;
     text-align: center;
     width: 100% !important;
 }
@@ -398,6 +397,11 @@ textarea{
     text-align: center;
 }
 
+.view-all-task-table > thead > tr > th{
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
 .view-hauling-receipt-container{
     width: 96%;
     margin-left: 2%;
@@ -462,15 +466,17 @@ textarea{
     margin-top: 1%;
     float: right !important;
 }
-<<<<<<< Updated upstream
 
 .projects-table > thead > tr > th{
     background-color: #124E78;
     color: #FFF8F0;
 }
 
-=======
->>>>>>> Stashed changes
+.delete-btn-container{
+    float: right !important;
+    padding: 1% !important;
+}
+
 /*End of Materials Engineer - Project*/
 
 /*Materials Engineer - Add Materials*/
@@ -671,11 +677,6 @@ textarea{
     width: 100% !important;
 }
 
-.returns-table{
-    text-align: center;
-
-}
-
 .returns-table thead tr{
     background-color: #0D304F;
     color: #FFFFFF;
@@ -685,8 +686,21 @@ textarea{
     width: 90% !important;
     margin-left: 5%;
     margin-top: 5% !important;
-    text-align: center;
     margin-bottom: 2% !important;
+}
+
+table .clickable{
+    cursor: pointer;
+}
+
+.hiddenrow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}
+
+.fa-plus:before{
+    color: #0267C1 !important;
 }
 /*End of Materials Engineer - returns*/
 

@@ -1,6 +1,7 @@
 <?php
     include "db_connection.php";
     include "checkReport.php";
+    session_start();
 ?>
 
 <!DOCTYPE html>

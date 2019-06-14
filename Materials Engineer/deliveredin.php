@@ -127,13 +127,13 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" name="deliveredDate" required>
+                                <input class="form-control" type="date" name="deliveredDate" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Receipt No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="resibo" required>
+                                <input class="form-control" type="text" name="resibo" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -194,7 +194,7 @@
                             </tbody>
                             <tfoot>
                                 <tr id="deliveredRow">
-                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity">
+                                    <td><input class="form-control" name="quantity[]" type="text" id="quantity" placeholder="Quantity" autocomplete="off">
                                     </td>
                                     <td>
                                         <div class="form-group">
@@ -220,7 +220,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit">
+                                        <input class="form-control" name="unit[]" type="text" id="unit" placeholder="Unit" autocomplete="off">
                                     </td>
                                     <td><input class="form-control" name="suppliedBy[]" type="text" id="suppliedBy" placeholder="Supplied By">
                                     </td>

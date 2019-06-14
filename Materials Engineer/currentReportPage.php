@@ -1,5 +1,11 @@
 <?php
     include "../session.php";
+
+    if (isset($_SESSION['projects_id'])) {
+        $projects_id = $_SESSION['projects_id'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/currentReport.php");  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +134,6 @@
         </thead>
         <tbody>
             <?php
-            $projects_id = $_GET['projects_id'];
             $sql_categ = "SELECT DISTINCT
                             categories_name
                         FROM
@@ -149,6 +154,7 @@
             ?>
             <tr>
                 <td><b> <?php echo $categ ;?> </b> </td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -180,16 +186,16 @@
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
                     $sql1 = "SELECT 
-                                SUM(deliveredin.deliveredin_quantity) FROM deliveredin
-                            INNER JOIN 
-                                matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                SUM(deliveredmat.deliveredmat_qty) 
+                            FROM 
+                                deliveredmat
                             WHERE 
-                                matinfo.matinfo_matname = '$row[0]';";
+                                deliveredmat.deliveredmat_materials = '$row[0]';";
                     $result1 = mysqli_query($conn, $sql1);
                     $row1 = mysqli_fetch_row($result1);
                     $sql2 = "SELECT 
                                 SUM(usagein.usagein_quantity) FROM usagein
-                                INNER JOIN 
+                            INNER JOIN 
                                 matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
                             WHERE 
                                 matinfo.matinfo_matname = '$row[0]';";
@@ -236,6 +242,7 @@
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <form action="../server.php" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Generate Report</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -245,20 +252,21 @@
                 <div class="modal-body">
                     <div class="row">
                         <label class="col-lg-5 col-form-label">Prepared By:</label>
-                        <input class="form-group" type="text" value="" name="" required>
+                        <input class="form-group" type="text" name="preparedBy" required>
                         
                         <label class="col-lg-5 col-form-label" >Checked By:</label>
-                        <input class="form-group" type="email" value="" name="" required>
+                        <input class="form-group" type="text" name="checkedBy" required>
 
                         <label class="col-lg-5 col-form-label ">Noted By:</label>
-                        <input class="form-group" type="email" value="" name="" required>
+                        <input class="form-group" type="text" name="notedBy" required>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="reopen_project">Yes</button>
+                    <button type="submit" class="btn btn-success" name="curGenerateReport">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
