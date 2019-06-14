@@ -3,6 +3,7 @@
 
     if (isset($_SESSION['projects_id'])) {
         $projects_id = $_SESSION['projects_id'];
+        unset($_SESSION['categories_id']);
     } else {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
     }
@@ -128,7 +129,8 @@
                                                     materials.mat_name,
                                                     categories.categories_name,
                                                     matinfo.matinfo_prevStock,
-                                                    unit.unit_name
+                                                    unit.unit_name,
+                                                    matinfo.matinfo_id
                                                 FROM
                                                     materials
                                                 INNER JOIN 
@@ -162,8 +164,11 @@
                                             $row2 = mysqli_fetch_row($result2);
                                 ?>
                                     <tr>
-                                        <td><button type="button" class="btn btn-info"
-                                                onclick="window.location.href = 'stockcard.php'"><?php echo $row[1] ;?></button>
+                                        <td>
+                                            <form action="../server.php" method="POST">
+                                                <input type="hidden" name="matinfo_id" value="<?php echo $row[5] ;?>">
+                                                <button type="submit" class="btn btn-info" name="viewStockCard"><?php echo $row[1] ;?></button>
+                                            </form>
                                         </td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
@@ -240,15 +245,14 @@
                                 while($row = mysqli_fetch_row($result)){
                             ?>
                                     <tr>
+                                        <form action="../server.php" method="POST">
                                         <td><?php echo $row[1] ;?></button>
                                         </td>
                                         <td>
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
-                                        <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info"
-                                            id="open-category-btn"
-                                            onclick="window.location.href='materialCategories.php'">View</button>
+                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn">View</button>
                                         </td>
+                                        </form>
                                     </tr>
                                     <?php
                                         }
