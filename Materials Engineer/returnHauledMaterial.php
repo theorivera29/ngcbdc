@@ -16,6 +16,7 @@
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
@@ -46,7 +47,7 @@
             </div>
         </span>
     </div>
-    <div class="mx-auto col-md-10">
+    <div class="mx-auto col-md-11">
         <div class="card">
             <div class="card-header">
                 <div class="row col-lg-12">
@@ -69,51 +70,52 @@
                     $result_hauling = mysqli_query($conn, $sql_hauling);
                     $row_hauling = mysqli_fetch_row($result_hauling);
                 ?>
-                    <div class="form-group row formnum-container">
-                        <div class=" col-lg-12">
-                            <label class="col-lg-12 col-form-label">Form No.:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" value="<?php echo $hauling_no ;?>" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row date-container">
+                <div class="form-group row formnum-container">
+                    <div class=" col-lg-12">
+                        <label class="col-lg-12 col-form-label">Form No.:</label>
                         <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Hauling Date:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="date" value="<?php echo $row_hauling[0] ;?>" disabled>
-                            </div>
+                            <input class="form-control" type="text" value="<?php echo $hauling_no ;?>" disabled>
                         </div>
                     </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled by:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="<?php echo $row_hauling[1] ;?>" disabled>
+                </div>
+                <div class="form-group row date-container">
+                    <div class="col-lg-12">
+                        <label class="col-lg-12 col-form-label">Hauling Date:</label>
+                        <div class="col-lg-12">
+                            <input class="form-control" type="date" value="<?php echo $row_hauling[0] ;?>" disabled>
                         </div>
                     </div>
-                    <div class="form-group row col-lg-12">
-                        <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="text" value="<?php echo $row_hauling[2] ;?>" disabled>
-                        </div>
+                </div>
+                <div class="form-group row col-lg-12">
+                    <label class="col-lg-2 col-form-label">Hauled by:</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" value="<?php echo $row_hauling[1] ;?>" disabled>
                     </div>
-                    <div class="card">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Total Quantity</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Articles</th>
-                                    <th scope="col">Returned Quantity</th>
-                                    <th scope="col">Returned Date</th>
-                                    <th scope="col">Remaining Quantity</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Returning Quantity</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                </div>
+                <div class="form-group row col-lg-12">
+                    <label class="col-lg-2 col-form-label">Hauled from:</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" value="<?php echo $row_hauling[2] ;?>" disabled>
+                    </div>
+                </div>
+                <div class="card">
+                    <table class="table returns-table table-hover table-bordered display">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th scope="col">Total Quantity</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Articles</th>
+                                <th scope="col">Returned Quantity</th>
+                                <th scope="col">Returned Date</th>
+                                <th scope="col">Remaining Quantity</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Returning Quantity</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                                     $sql = "SELECT 
                                                 haulingmat.haulingmat_qty, 
                                                 unit.unit_name,
@@ -150,9 +152,10 @@
                                         $stmt->bind_result($status, $returns_id);
                                         $stmt->fetch();
                                 ?>
-                                <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+                            <tr data-toggle="collapse" data-target="#accordion-<?php echo $row[3] ;?>"
+                                class="clickable">
                                 <form class="form needs-validation" action="../server.php" method="POST" novalidate>
-                                    <td><?php echo $row[0] ;?></td>
+                                    <td><i class="fa fa-plus green" aria-hidden="true"></</td> <td><?php echo $row[0] ;?></td>
                                     <td><?php echo $row[1] ;?></td>
                                     <td><?php echo $row[2] ;?></td>
                                     <td>
@@ -171,16 +174,18 @@
                                         ?>
                                     </td>
                                     <td><?php echo $status ;?></td>
-                                    <td> 
-                                        <input class="form-control" name="returningQuantity" type="text" id="returningQuantity" placeholder="Returning Quantity">
+                                    <td>
+                                        <input class="form-control" name="returningQuantity" type="text"
+                                            id="returningQuantity" placeholder="Returning Quantity" autocomplete="off">
                                     </td>
-                                    <td> 
+                                    <td>
                                         <input type="hidden" name="returns_id" value="<?php echo $returns_id ;?>">
-                                        <input type="submit" name="return_hauling" class="btn btn-md btn-outline-secondary save-row">
+                                        <input type="submit" name="return_hauling"
+                                            class="btn btn-md btn-outline-secondary save-row">
                                     </td>
                                 </form>
-                                </tr>
-                                <?php
+                            </tr>
+                            <?php
                                         $sql_ret = "SELECT
                                                         returnhistory.returnhistory_returningqty,
                                                         returnhistory.returnhistory_date
@@ -194,32 +199,28 @@
                                         while ($row_ret = mysqli_fetch_row($result_ret)) {                                                 
                                         $ctr = $ctr - $row_ret[0];  
                                 ?>
-                                <tr>
-                                    <td id="accordion" class="collapse"></td>
-                                    <td id="accordion" class="collapse"></td>
-                                    <td id="accordion" class="collapse"></td>
-                                    <td id="accordion" class="collapse">
-                                        <?php echo $row_ret[0];?>
-                                    </td>
-                                    <td id="accordion" class="collapse">
-                                        <?php echo $row_ret[1];?>
-                                    </td>
-                                    <td id="accordion" class="collapse">
-                                        <?php echo $ctr;?>
-                                    </td>
-                                    <td id="accordion" class="collapse"></td>
-                                    <td id="accordion" class="collapse"></td>
-                                    <td id="accordion" class="collapse"></td>
-                                </tr> 
-                                <?php                                   
+                            <tr class="hiddenrow">
+                                <td colspan="4" id="accordion-<?php echo $row[3] ;?>" class="collapse"></td>
+                                <td id="accordion-<?php echo $row[3] ;?>" class="collapse">
+                                    <?php echo $row_ret[0];?>
+                                </td>
+                                <td id="accordion-<?php echo $row[3] ;?>" class="collapse">
+                                    <?php echo $row_ret[1];?>
+                                </td>
+                                <td id="accordion-<?php echo $row[3] ;?>" class="collapse">
+                                    <?php echo $ctr;?>
+                                </td>
+                                <td colspan="3" id="accordion-<?php echo $row[3] ;?>" class="collapse"></td>
+                            </tr>
+                            <?php                                   
                                         }
                                     }
                                 ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        <?php
+            <?php
             
         ?>
         </div>

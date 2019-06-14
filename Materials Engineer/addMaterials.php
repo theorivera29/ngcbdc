@@ -12,12 +12,14 @@
     <link rel="icon" type="image/png" href="../Images/login2.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="../js/jquery/jquery-3.4.1.min.js"></script>
     <script src="../js/popper/popper.min.js"></script>
     <script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
@@ -42,7 +44,8 @@
                     <?php echo $row[1]." ".$row[2]; ?>
                 </h5>
                 <div class="btn-group dropdown-account">
-                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropdown-settings" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="account.php">Account Settings</a>
@@ -66,6 +69,7 @@
         <table class="table adding-materials-table table-striped table-bordered display" id="mydatatable">
             <thead>
                 <tr>
+                    <th>Select</th>
                     <th>Category</th>
                     <th>Material Name</th>
                     <th>Threshold</th>
@@ -74,8 +78,8 @@
                 </tr>
             </thead>
             <tbody>
-               
-               
+
+
                 <?php
                 $sql = "SELECT 
                 categories.categories_name, 
@@ -96,19 +100,23 @@
                 <tr>
                     <form action="../server.php" method="POST">
                         <td>
+                            <input type="checkbox" name="mat-row">
+                        </td>
+                        <td>
                             <?php echo $row[0]; ?>
                         </td>
                         <td>
                             <?php echo $row[1]; ?>
                         </td>
-                <?php
+                        <?php
                     $matname = $row[3];
                     $sql1 = "SELECT matinfo_notif FROM matinfo WHERE matinfo_matname = $matname;";
                     $result1 = mysqli_query($conn, $sql1);
                     $row1 = mysqli_fetch_row($result1)
                 ?>
                         <td>
-                            <input type="text" value="<?php echo $row1[0]?>" name="threshold" placeholder="Enter Threshold">
+                            <input type="text" class="form-control" value="<?php echo $row1[0]?>" name="threshold"
+                                placeholder="Enter Threshold">
                         </td>
                         <td>
                             <?php echo $row[2]; ?>
@@ -124,6 +132,19 @@
                 }   
              ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <div class="row form-group delete-btn-container">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-outline-danger remove-row">Remove</button>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </tfoot>
         </table>
         <h5 class=" card-header list-of-material">List of All Materials</h5>
         <form action="../server.php" method="POST">
@@ -157,7 +178,8 @@
                                 <label><input type="checkbox" name="matName[]" value="<?php echo $row[3]?>"></label>
                             </div>
                         </td>
-                        <td><input name="category" type="text" class="form-control" value="<?php echo $row[0]?>" readonly></td>
+                        <td><input name="category" type="text" class="form-control" value="<?php echo $row[0]?>"
+                                readonly></td>
                         <td><input type="hidden" class="form-control" value="<?php echo $row[3]?>" readonly>
                             <?php echo $row[1]; ?>
                         </td>
@@ -175,8 +197,9 @@
 
                             <div class="row form-group save-btn-container">
                                 <div class="col-lg-12">
-                                    <input type="hidden" name="proj_id" value="<?php echo $proj_id?>" >
-                                    <input type="submit" name="adding_materials" class="btn btn-primary" value="Save Changes">
+                                    <input type="hidden" name="proj_id" value="<?php echo $proj_id?>">
+                                    <input type="submit" name="adding_materials" class="btn btn-primary"
+                                        value="Save Changes">
                                     <input type="reset" class="btn btn-danger" value="Cancel">
                                 </div>
                             </div>
@@ -192,13 +215,15 @@
         <div class="card ">
             <h5 class="card-header">Category Name</h5>
             <div class="card-body">
-                <button type="button" class="btn btn-info" id="open-category-btn" type="button" onclick="window.location.href='materialCategories.php'">View</button>
+                <button type="button" class="btn btn-info" id="open-category-btn" type="button"
+                    onclick="window.location.href='materialCategories.php'">View</button>
             </div>
         </div>
     </div>
 
     <!-- Start of confirmation modal -->
-    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,12 +244,21 @@
     <!-- End of confirmation modal -->
 </body>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#mydatatable').DataTable();
         $('table.display').DataTable();
 
-        $('#sidebarCollapse').on('click', function() {
+        $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
+        });
+
+        // Find and remove selected table rows
+        $(".remove-row").click(function(){
+            $("table tbody").find('input[name="mat-row"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
         });
     });
 
@@ -236,7 +270,6 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
 </script>
 
 </html>
