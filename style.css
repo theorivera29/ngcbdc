@@ -42,11 +42,6 @@
 .login-btn{
     width: 100%;
 }
-
-.error{
-    color: red;
-    font-size: 2vmin;
-}
 /*End of Index.php*/
 
 /*Navigation*/
@@ -267,7 +262,7 @@ ul ul #sideNav-a  {
     background-color: #DCB149 !important;
     color: #0D304F;
 }
-
+]
 .card-header:hover{
     text-decoration: none !important;
 }
@@ -389,6 +384,8 @@ textarea{
     float: right !important;
 }
 
+
+
 /*Start of Materials Engineer-View All Task*/
 .view-all-task-container{
     width: 96%;
@@ -440,24 +437,20 @@ textarea{
 
 .project-tabs{
     width: 100% !important;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 .project-tabs-content{
-    margin-top: 5%;
-    width: 100%;
+    margin-top: 3%;
+    width: 40% !important;
     text-align: center;
-    font-size: 2.2vmin;
+    margin-left: 5%;
 }
 
 .project-container{
-    width: 100%;
-    margin-left: 50%;
-    margin-top: 5%;
-}
-
-.card-form{
-    margin-bottom: 4% !important;
+    width: 150% !important;
+    margin-bottom: 10% !important;
+    margin-left: 40% !important;
 }
 
 .add-btn{
@@ -469,12 +462,15 @@ textarea{
     margin-top: 1%;
     float: right !important;
 }
+<<<<<<< Updated upstream
 
 .projects-table > thead > tr > th{
     background-color: #124E78;
     color: #FFF8F0;
 }
 
+=======
+>>>>>>> Stashed changes
 /*End of Materials Engineer - Project*/
 
 /*Materials Engineer - Add Materials*/
@@ -500,12 +496,6 @@ textarea{
     width: 100% !important;
     text-align: center;
     width: 100%;
-}
-
-.stockcard-table> thead > tr > th{
-    background-color: #124E78;
-    color: #FFF8F0;
-
 }
 
 /*End of Materials Engineer - Stockard*/
@@ -539,6 +529,10 @@ textarea{
     margin: auto;
 }
 
+.view-inventory-tabs-container{
+   
+}
+
 .view-inventory-tabs-table{
     text-align: center;
 }
@@ -548,22 +542,25 @@ textarea{
     color: #FFFFFF;
 }
 
+.view-inventory-row{
+}
+
 .view-inventory-content{
     width: 100% !important;
 }
 
 .view-inventory-tabs-content{
     margin-top: 3%;
-    width: 100%;
+
 }
 
 .category-card{
     width: 100%;
     box-shadow: 0 0 4px black;
-    display: inline-block;
 }
 
 .category-card-body{
+
     padding: 20% !important;
 }
 
@@ -581,10 +578,6 @@ textarea{
     margin-top: 3% !important;
 }
 
-.category-table > thead > tr > th{
-    background-color: #0D304F;
-    color: #FFFFFF;
-}
 /*Materials Engineer - Material Categories*/
 .category-title{
     text-align: center;
@@ -651,10 +644,6 @@ textarea{
     width: 100% !important;
 }
 
-.mat-eng-involved{
-    text-align: left;
-}
-
 /*Start of Admin - Create Project*/
 .add-project-container{
     width: 86%;
@@ -662,7 +651,7 @@ textarea{
     margin-top: 3%;
 }
 
-/*Start of Materials Engineer - returns*/
+/*Start of Materials Engineer - returnsOrReplaced*/
 .return-container{
     width: 100% !important;
 }
@@ -701,8 +690,6 @@ textarea{
 }
 /*End of Materials Engineer - returns*/
 
-
-
 /*Start of Materials Engineer - Report Page*/
 .reportpage-table{
     width: 96% !important;
@@ -733,26 +720,22 @@ textarea{
 }
 
 #generate-recon-btn{
-    width: 15%;
     float: right;
     margin-left: .5%;
     margin-right: .5%;
 }
 
-#edit-recon-btn{
-    width: 5%;
+#edit-recon-btn{ 
     float: right;
 }
 
 #save-recon-btn{
-    width: 5%;
     float: right;
     margin-left: .5%;
     margin-right: .5%;
 }
 
 #cancel-recon-btn{
-    width: 6%;
     float: right;
     margin-right: 1%;
 }
@@ -784,10 +767,6 @@ textarea{
 
 .cancel-accnt-btn{
     display: inline-block;
-}
-
-.show-pass{
-    margin-left: 4% !important;
 }
 /*End of Materials Engineer - Account*/
 
