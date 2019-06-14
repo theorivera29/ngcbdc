@@ -137,6 +137,32 @@
         header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
     }
 
+    if (isset($_POST['delete_projmateng'])) {
+
+        $mateng = $_POST['mateng'];
+        $projects_id = mysqli_real_escape_string($conn, $_POST['project']);
+        
+        for($x = 0; $x < sizeof($mateng); $x++){
+        
+        $stmt = $conn->prepare("SELECT projmateng_id FROM projmateng WHERE  projmateng_project = ? AND projmateng_mateng = ?;");
+        $stmt->bind_param("ii", $projects_id, $mateng[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($projmateng_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_id = ?;");
+        $stmt->bind_param("i", $projmateng_id);
+        $stmt->execute();
+        $stmt->close();
+        }
+        
+        echo var_dump($mateng[0]);
+        
+        //header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+    }
+
+
     if (isset($_POST['requestReject'])) {
         $request_accountID = $_POST['accounts_id'];
         $stmt = $conn->prepare("SELECT CONCAT(accounts_fname, ' ', accounts_lname) FROM accounts WHERE accounts_id = ?;");
@@ -329,13 +355,6 @@ if (isset($_POST['edit_project'])) {
 
         if (isset($_POST['mateng'])) {
             $mateng = $_POST['mateng'];
-            $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
-            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = ?;");
-            $stmt->bind_param("i", $projects_id);
-            $stmt->execute();
-            $stmt->close();
-            
-            echo var_dump($mateng);
     
          for($x = 0; $x < sizeof($mateng); $x++){
                 $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng)
