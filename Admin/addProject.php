@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="address" class="label-styles">ADDRESS:</label>
-                <input name="address" id="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s!@#$%^&* ]*$" title="Input letters and numbers only" required>
+                <input name="address" id="address" type="text" class="form-control" placeholder="Enter project address" pattern="^[A-Za-z][A-Za-z0-9\s.,-!@#$%^&* ]*$" title="Input letters and numbers only" required>
             </div>
             <div class="form-group row">
                 <div class="col-lg-6">
@@ -193,7 +193,7 @@
     });
 
     bootstrapValidate('#projectName', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
-    bootstrapValidate('#address', 'regex:^[A-Za-z][A-Za-z0-9\s-_#&.+()@/<>`~|]*$:You can only input alphabetic characters.')
+    bootstrapValidate('#address', 'required:Please fill out this field!')
     bootstrapValidate('#startDate', 'required:Please fill out this field!')
     bootstrapValidate('#endDate', 'required:Please fill out this field!')
 </script>

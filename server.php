@@ -368,6 +368,7 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+
     if (isset($_POST['curGenerateReport'])) {
         $preparedBy = mysqli_real_escape_string($conn, $_POST['preparedBy']);
         $checkedBy = mysqli_real_escape_string($conn, $_POST['checkedBy']);
@@ -961,7 +962,10 @@ if (isset($_POST['edit_project'])) {
 
     if (isset($_POST['view_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php?hauling_no=$hauling_no");     
+        session_start();
+        $_SESSION['hauling_no'] = $hauling_no;
+        echo $_SESSION['hauling_no'];
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php");     
     }
 
     if (isset($_POST['open_deliveredin'])) {
@@ -1214,10 +1218,10 @@ if (isset($_POST['edit_project'])) {
 
     if (isset($_POST['materialCategories'])) {
         $categories_id = $_POST['categories_id'];
-        $projects_id = $_POST['projects_id'];
 
         session_start();
 
+        $_SESSION['categories_id'] = $categories_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1229,9 +1233,9 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id"); 
+            header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php");  
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");  
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php");  
         }    
     }
 

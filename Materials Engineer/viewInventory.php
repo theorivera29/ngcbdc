@@ -7,15 +7,15 @@
     } else {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
     }
-    $sql_project_name = "SELECT 
-                            projects_name
-                        FROM
-                            projects
-                        WHERE
-                            projects_id = $projects_id;";
-    $result = mysqli_query($conn, $sql_project_name);
-    $row = mysqli_fetch_row($result);
-    $projects_name = $row[0];
+    $sql_name = "SELECT 
+                    projects_name
+                FROM
+                    projects
+                WHERE
+                    projects_id = $projects_id;";
+    $result_name = mysqli_query($conn, $sql_name);
+    $row_name = mysqli_fetch_row($result_name);
+    $projects_name = $row_name[0];
 ?>
 
 <!DOCTYPE html>
@@ -155,7 +155,7 @@
                                             $sql2 = "SELECT 
                                                         SUM(usagein.usagein_quantity) FROM usagein
                                                     INNER JOIN 
-                                                        matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                                                        matinfo ON usagein.usagein_material = matinfo.matinfo_id
                                                     WHERE 
                                                         matinfo.matinfo_matname = '$row[0]';";
                                             $result2 = mysqli_query($conn, $sql2);
