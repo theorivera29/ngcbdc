@@ -125,6 +125,7 @@
                                             <th scope="col">Unit</th>
                                             <th scope="col">Pulled By</th>
                                             <th scope="col">Area of Usage</th>
+                                            <th scope="col">Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,6 +138,7 @@
                                             <td>jj</td>
                                             <td>bhvgvg</td>
                                             <td>ddd</td>
+                                            <td></td>
                                         </tr>
                                         <?php
 
@@ -144,7 +146,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="3">Running Total (out):</td>
+                                            <td colspan="4">Running Total (out):</td>
                                             <td colspan="2"><input type="text" class="form-control" autocomplete="off"
                                                     placeholder="Running Total (out)" required></td>
                                         </tr>
