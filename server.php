@@ -422,9 +422,53 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
 
     }
+
     if (isset($_POST['reconciliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
+    }
+
+    if (isset($_POST['reconciliation_reconcile'])) {
+        $sql = "SELECT 
+                    reconciliation.reconciliation_physCount,
+                    ";
+    }
+
+    if (isset($_POST['reconciliation_save'])) {
+        session_start();
+        $difference = $_POST['difference'];
+        $matinfo_id = $_POST['matinfo_id'];
+        $systemCount = $_POST['system_Count'];
+        $remarks = array();
+        $x = 0;
+        if (isset($_POST['remarks'])) {
+            $remarks = $_POST['remarks'];
+        }
+        for ($ctr = 0; $ctr <= sizeof($difference)-1; $ctr++) {
+            $dif = $difference[$ctr];
+            $mat = $matinfo_id[$ctr];
+            $sys = $systemCount[$ctr];
+            $phys = $sys-$dif;
+            $stmt = $conn->prepare("DELETE FROM reconciliation WHERE reconciliation_matinfo = ?");
+            $stmt->bind_param("i", $mat);
+            $stmt->execute();
+            $stmt->close();
+
+            if ($dif != 0) {
+                $rem = $remarks[$x];
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo, reconciliation_remarks) VALUES (?, ?, ?);");
+                $stmt->bind_param("iis", $phys, $mat, $rem);
+                $stmt->execute();
+                $stmt->close();
+                $x++;
+            } else {
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo) VALUES (?, ?);");
+                $stmt->bind_param("ii", $phys, $mat);
+                $stmt->execute();
+                $stmt->close();
+            }
+        }
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
@@ -628,7 +672,7 @@ if (isset($_POST['edit_project'])) {
         $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
-        $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
+        $hauledFrom = mysqli_real_escape_string($conn, $_POST['projectName']);
         $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
         $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
         $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
@@ -662,13 +706,22 @@ if (isset($_POST['edit_project'])) {
         $stmt->fetch();
         
         for($x = 0; $x < sizeof($articles); $x++){
-        
-        echo var_dump($articles[$x]);
-        echo var_dump($quantity[$x]);
-        echo var_dump($unit[$x]);
-            
         $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
         $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
+        $stmt->execute();
+        $stmt->close();
+        
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $hauledFrom, $articles[$x]);
         $stmt->execute();
         $stmt->close();
         }
@@ -733,8 +786,22 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
         $stmt->execute();
         $stmt->close();
-        }
         
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->close();
+        }
+
         $account_id = "";
         session_start();
         if(isset($_SESSION['account_id'])) {
