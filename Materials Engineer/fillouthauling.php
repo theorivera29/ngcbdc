@@ -163,10 +163,25 @@
                                         </div>
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z\s]*" title="Input letters" required>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
-                                            </div>
+                                            <select class="form-control" name="projectName" required>
+                                                <option value="" selected disabled>Choose a project</option>
+                                                <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                                <option value="<?php echo $row[1]; ?>">
+                                                    <?php echo $row[0]; ?>
+                                                </option>
+                                                <?php
+                                        }
+                                        ?>
+                                            </select>
                                         </div>
                                         <div class="card">
                                             <table class="table hauling-form-table">
@@ -344,9 +359,25 @@
                                             </div>
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="hauledFrom" pattern="[A-Za-z\s]*" title="Input letters" required>
-                                                </div>
+                                                <select class="form-control" name="projectName" required>
+                                                    <option value="" selected disabled>Choose a project</option>
+                                                    <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
+
+                                                    <option value="<?php echo $row[1]; ?>">
+                                                        <?php echo $row[0]; ?>
+                                                    </option>
+                                                    <?php
+                                        }
+                                        ?>
+                                                </select>
                                             </div>
                                             <div class="card">
                                                 <table class="table hauling-form-table">
@@ -579,16 +610,15 @@
 
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
-    
-                $('#articles').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
 
+    $('#articles').on('change', function() {
+        console.log($(this).children('option:selected').val())
+        $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+            'option:selected').val(), function(data) {
+            var d = JSON.parse(data);
+            $('#unit').val(d[0][0])
+        })
+    })
 
 </script>
 
