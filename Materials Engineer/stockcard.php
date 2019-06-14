@@ -4,7 +4,7 @@
     if (isset($_SESSION['matinfo_id'])) {
         $matinfo_id = $_SESSION['matinfo_id'];
     } else {
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/sitematerials.php");  
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewinventory.php");  
     }
 ?>
 
@@ -90,6 +90,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+
+                                        ?>
                                         <tr>
                                             <td></td>
                                             <td></td>
@@ -97,6 +100,9 @@
                                             <td></td>
                                             <td></td>
                                         </tr>
+                                        <?php
+
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -124,6 +130,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+
+                                        ?>
                                         <tr>
                                             <td>hh</td>
                                             <td>jhj</td>
@@ -132,6 +141,9 @@
                                             <td>ddd</td>
                                             <td></td>
                                         </tr>
+                                        <?php
+
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
