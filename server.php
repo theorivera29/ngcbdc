@@ -194,9 +194,7 @@
         $stmt->close();
         }
         
-        echo var_dump($mateng[0]);
-        
-        //header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
     }
 
 
@@ -1078,7 +1076,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_mat_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();*/
-        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
 
     if (isset($_POST['update_todo'])) {
