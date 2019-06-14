@@ -739,7 +739,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        // header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
     }
 
     if (isset($_POST['create_permanentHauling'])) {
@@ -801,8 +801,6 @@ if (isset($_POST['edit_project'])) {
         $stmt->execute();
         $stmt->close();
         }
-        
-        
 
         $account_id = "";
         session_start();
@@ -817,7 +815,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        // header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
     }
 
     if (isset($_POST['update_account'])) {
