@@ -179,30 +179,25 @@
     <?php 
         if (isset($_SESSION['create_success'])) {
     ?>
-    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">You have successfully created an account.</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            &times;
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
-                    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">You have successfully created an account.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </button>
                 </div>
-                <?php
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
+                </div>
+          </div>
+      </div>
+    </div>
+    <?php
             unset($_SESSION['create_success']);
         }
     ?>
-            </div>
-        </div>
-    </div>
-    </div>
 </body>
 
 <script type="text/javascript">
