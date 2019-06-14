@@ -504,7 +504,7 @@
         $(".add-row").click(function() {
             var quantity = $("#quantity").val();
             var unit = $("#unit").val();
-            var articles = $("#articles").val();
+            var articles = $("#articles option:selected").text();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity +
                 "' required/></td><td><input type='text' name='articles[]' class='form-control' value='" +
@@ -527,7 +527,7 @@
         $(".add-row1").click(function() {
             var quantity1 = $("#quantity1").val();
             var unit1 = $("#unit1").val();
-            var articles1 = $("#articles1").val();
+            var articles1 = $("#articles1 option:selected").text();
             var markup1 = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity1 +
                 "' required/></td><td><input type='text' name='articles[]' class='form-control' value='" +
@@ -549,9 +549,8 @@
         $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
-    });
-    
-            $('#articles').on('change', function () {
+
+        $('#articles').on('change', function () {
             console.log($(this).children('option:selected').val())
             $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
                 'option:selected').val(), function (data) {
@@ -559,6 +558,9 @@
                 $('#unit').val(d[0][0])
             })
         })
+    });
+    
+           
 
     (function() {
         'use strict';

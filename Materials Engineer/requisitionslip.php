@@ -226,8 +226,8 @@
                                             ?>
                                             </select>
                                             <div class="invalid-feedback">Please select one particular.</div>
-                                        </div>
-                                            <input type="hidden" class="form-control" name="unit[]" type="text" id="unit">
+                                        </div></td>
+                                        <input type="hidden" class="form-control" name="unit[]" type="text" id="unit">
                                     <td><input class="form-control" name="location[]" type="text" id="location"
                                             placeholder="Location" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -258,8 +258,8 @@
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#save-modal" value="Save Changes">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-modal"
+                                value="Save Changes">
                             <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
@@ -276,7 +276,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="create_requisitionSlip" class="btn btn-success">Yes</button>
+                                    <button type="submit" name="create_requisitionSlip"
+                                        class="btn btn-success">Yes</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 
                                 </div>
@@ -295,17 +296,13 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
-            var particulars = $("#particulars").val();
+            var particulars = $("#particulars option:selected").text();
             var unit = $("#unit").val();
             var location = $("#location").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
-                quantity +
-                "'/></td><td><input type='text' name='particulars[]' class='form-control' value='" +
-                particulars +
-                "'/><input type='hidden' name='unit[]' class='form-control' value='" + unit +
+                quantity + "'/></td><td><input type='text' name='particulars[]' class='form-control' value='"+ particulars + "'/><input type='hidden' name='unit[]' class='form-control' value='" + unit +
                 "'/></td><td><input type='text' name='location[]' class='form-control' value='" +
-                location +
-                "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                location + "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (particulars != '') && (unit != '') && (location != '')) {
                 $("table tbody").append(markup);
                 $("#requisitionRow input[type=text]").val('');
@@ -319,6 +316,17 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
+        $('#particulars').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this)
+                .children(
+                    'option:selected').val(),
+                function (data) {
+                    var d = JSON.parse(data);
+                    $('#unit').val(d[0][0])
+                })
+        })
     });
 
     function openSlideMenu() {
@@ -329,15 +337,7 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-    
-            $('#particulars').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
+
 
     (function () {
         'use strict';

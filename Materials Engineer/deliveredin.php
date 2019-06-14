@@ -288,7 +288,7 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
-            var articles = $("#articles option:selected").val();
+            var articles = $("#articles option:selected").text();
             var unit = $("#unit").val();
             var suppliedBy = $("#suppliedBy").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
@@ -315,6 +315,16 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
+        $('#articles').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
+
     });
 
     function openSlideMenu() {
@@ -326,15 +336,7 @@
         document.getElementById('content').style.marginLeft = '0';
     }
     
-                $('#articles').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
-
+               
     (function () {
         'use strict';
         window.addEventListener('load', function () {
