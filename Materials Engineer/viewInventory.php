@@ -8,7 +8,15 @@
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/projects.php");  
     }
 
-    $accounts_id = $_SESSION['account_id'];
+    $sql_project_name = "SELECT 
+                            projects_name
+                        FROM
+                            projects
+                        WHERE
+                            projects_id = $projects_id;";
+    $result = mysqli_query($conn, $sql_project_name);
+    $row = mysqli_fetch_row($result);
+    $projects_name = $row[0];
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +72,7 @@
     <section id="tabs">
         <div class="view-inventory-container">
             <div class="row view-inventory-row">
-                <h4 class="project-title">NAME OF PROJECT</h4>
+                <h4 class="project-title"><?php echo $projects_name ;?></h4>
                 <div class="col-xs-12 project-tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -97,7 +105,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $projects_id = $_GET['projects_id'];
                                     $sql_categ = "SELECT DISTINCT
                                                     categories_name
                                                 FROM
@@ -140,16 +147,16 @@
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_row($result)){
                                             $sql1 = "SELECT 
-                                                        SUM(deliveredin.deliveredin_quantity) FROM deliveredin
-                                                    INNER JOIN 
-                                                        matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                                        SUM(deliveredmat.deliveredmat_qty) 
+                                                    FROM 
+                                                        deliveredmat
                                                     WHERE 
-                                                        matinfo.matinfo_matname = '$row[0]';";
+                                                        deliveredmat.deliveredmat_materials = '$row[0]';";
                                             $result1 = mysqli_query($conn, $sql1);
                                             $row1 = mysqli_fetch_row($result1);
                                             $sql2 = "SELECT 
                                                         SUM(usagein.usagein_quantity) FROM usagein
-                                                        INNER JOIN 
+                                                    INNER JOIN 
                                                         matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
                                                     WHERE 
                                                         matinfo.matinfo_matname = '$row[0]';";
