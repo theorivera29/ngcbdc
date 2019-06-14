@@ -201,7 +201,6 @@
                                 <tr>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Articles</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Supplied By</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -238,11 +237,7 @@
                                             <div class="invalid-feedback">Please select one.</div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <input class="form-control" name="unit[]" type="text" id="unit"
-                                            placeholder="Unit" required>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </td>
+                                        <input type="hidden" class="form-control" name="unit[]" type="text" id="unit">
                                     <td><input class="form-control" name="suppliedBy[]" type="text" id="suppliedBy"
                                             placeholder="Supplied By" required>
                                         <div class="invalid-feedback">Please fill out this field.</div>
@@ -300,7 +295,7 @@
                 quantity +
                 "' readonly/></td><td><input type='text' name='articles[]' class='form-control' value='" +
                 articles +
-                "' readonly/></td><td><input type='text' name='unit[]' class='form-control' value='" +
+                "' readonly/><input type='hidden' name='unit[]' class='form-control' value='" +
                 unit +
                 "' readonly/></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" +
                 suppliedBy +
@@ -331,6 +326,7 @@
         document.getElementById('content').style.marginLeft = '0';
     }
 
+
     (function () {
         'use strict';
         window.addEventListener('load', function () {
@@ -346,6 +342,15 @@
             });
         }, false);
     })();
+        
+                $('#articles').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
 </script>
 
 </html>
