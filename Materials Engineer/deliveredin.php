@@ -293,13 +293,13 @@
             var suppliedBy = $("#suppliedBy").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity +
-                "' readonly/></td><td><input type='text' name='articles[]' class='form-control' value='" +
+                "' /></td><td><input type='text' name='articles[]' class='form-control' value='" +
                 articles +
-                "' readonly/><input type='hidden' name='unit[]' class='form-control' value='" +
+                "' /><input type='hidden' name='unit[]' class='form-control' value='" +
                 unit +
-                "' readonly/></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" +
+                "' /></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" +
                 suppliedBy +
-                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
             if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '')) {
                 $("table tbody").append(markup);
