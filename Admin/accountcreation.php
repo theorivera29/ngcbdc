@@ -191,8 +191,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
                 </div>
-          </div>
-      </div>
+            </div>
+        </div>
     </div>
     <?php
             unset($_SESSION['create_success']);
