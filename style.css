@@ -504,6 +504,12 @@ textarea{
     width: 100%;
 }
 
+.stockcard-table > thead > tr > th {
+    background-color: #124E78;
+    color: #FFF8F0;
+}
+
+
 /*End of Materials Engineer - Stockard*/
 
 /*Start of Materials Engineer- Site Materials*/
