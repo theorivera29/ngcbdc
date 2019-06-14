@@ -53,7 +53,7 @@
             </div>
         </span>
     </div>
-    <button class="btn btn-warning" id="generate-report" type="button">Generate Report</button>
+    <button class="btn btn-warning" id="generate-report" type="button" onclick="window.location.href = 'prevGenerateReport.php'">Generate Report</button>
     <table class="table reportpage-table table-striped table-bordered">
         <thead>
             <tr>
@@ -69,10 +69,41 @@
             </tr>
         </thead>
         <tbody>
-            <?php                
+            <?php
+            $sql_categ = "SELECT DISTINCT
+                            categories_name
+                        FROM
+                            lastmatinfo
+                        INNER JOIN
+                            categories ON categories.categories_id = lastmatinfo.lastmatinfo_categ
+                        WHERE
+                            lastmatinfo.lastmatinfo_project = $projects_id
+                            AND
+                                lastmatinfo.lastmatinfo_year = $lastmatinfo_year
+                            AND
+                                lastmatinfo.lastmatinfo_month = $lastmatinfo_month;";
+            $result = mysqli_query($conn, $sql_categ);
+            $categories = array();
+            while($row_categ = mysqli_fetch_assoc($result)){
+                $categories[] = $row_categ;
+            }
+            foreach($categories as $data) {
+                $categ = $data['categories_name'];
+            ?>
+            <tr>
+                <td><b> <?php echo $categ ;?> </b> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php
                 $sql = "SELECT
                             materials.mat_name,
-                            categories.categories_name,
                             lastmatinfo.lastmatinfo_prevStock,
                             unit.unit_name,
                             lastmatinfo.lastmatinfo_deliveredMat,
@@ -93,6 +124,8 @@
                                 lastmatinfo.lastmatinfo_year = $lastmatinfo_year
                             AND
                                 lastmatinfo.lastmatinfo_month = $lastmatinfo_month
+                            AND
+                                categories.categories_name = '$categ' 
                         ORDER BY 1;";
 
                 $result = mysqli_query($conn, $sql);
@@ -100,18 +133,19 @@
             ?>
             <tr>
                 <td><?php echo $row[0];?></td>
+                <td><?php echo $row[1];?></td>
                 <td><?php echo $row[2];?></td>
                 <td><?php echo $row[3];?></td>
                 <td><?php echo $row[4];?></td>
+                <td><?php echo $row[2];?></td>
                 <td><?php echo $row[5];?></td>
-                <td><?php echo $row[3];?></td>
                 <td><?php echo $row[6];?></td>
-                <td><?php echo $row[7];?></td>
-                <td><?php echo $row[3];?></td>
+                <td><?php echo $row[2];?></td>
             </tr>
 
             <?php
                 }
+            }
             ?>
         </tbody>
     </table>
