@@ -436,20 +436,25 @@ if (isset($_POST['edit_project'])) {
         session_start();
         $projects_id = $_SESSION['projects_id'];
 
-        echo var_dump($matinfo_id);
+        // echo $matinfo_id[2]."<br />";
+        $matt = array();
+        $diff = array();
+        $sysC = array();
 
-        for ($ctr = 0; $ctr <= sizeof($difference)-1; $ctr++) {
-            echo $ctr;
-            if (!empty($difference)) {
-                $dif = $difference[$ctr];
-            }
-
-            if (!empty($matinfo_id)) {
-                $mat = $matinfo_id[$ctr];
-            }
-                $sys = $systemCount[$ctr];
-                $phys = $sys-$dif;
-
+        foreach ($matinfo_id as $m) {
+            array_push($matt, $m);
+        }
+        foreach ($difference as $d) {
+            array_push($diff, $d);
+        }
+        foreach ($systemCount as $s) {
+            array_push($sysC, $s);
+        }
+        for ($ctr = 0; $ctr < sizeof($difference) ; $ctr++) {
+            $mat = $matt[$ctr];
+            $dif = $diff[$ctr];
+            $sys = $sysC[$ctr];
+            $phys = $sys-$dif;
             $sql_categ = "SELECT DISTINCT
                             categories_name
                         FROM
@@ -459,7 +464,7 @@ if (isset($_POST['edit_project'])) {
                         INNER JOIN
                             matinfo ON materials.mat_id = matinfo.matinfo_matname
                         WHERE
-                            matinfo.matinfo_project = $projects_id;";
+                            matinfo.matinfo_id = $mat;";
             $result = mysqli_query($conn, $sql_categ);
             $categories = array();
             while($row_categ = mysqli_fetch_assoc($result)){
@@ -489,11 +494,14 @@ if (isset($_POST['edit_project'])) {
                         WHERE 
                             categories.categories_name = '$categ' 
                         AND 
-                        matinfo.matinfo_project = '$projects_id'
+                            matinfo.matinfo_project = '$projects_id'
+                        AND 
+                            matinfo.matinfo_id = $mat
                         ORDER BY 1;";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
                     $matinfo_id = $row[8];
+                    echo "Matinfo_id: ".$matinfo_id."<br />";
                     $sql1 = "SELECT 
                                 SUM(deliveredmat.deliveredmat_qty) 
                             FROM 
@@ -516,6 +524,7 @@ if (isset($_POST['edit_project'])) {
                     $result_mat = mysqli_query($conn, $sql_mat);
                     $mat_count_use = 0;
                     while ($row_mat = mysqli_fetch_row($result_mat)) {
+                        
                         $sql_use = "SELECT
                                         requisition.requisition_date,
                                         reqmaterial.reqmaterial_qty,
@@ -548,19 +557,37 @@ if (isset($_POST['edit_project'])) {
                         while ($row_use = mysqli_fetch_row($result_use)) {
                         $mat_count_use = $mat_count_use + $row_use[1];
                             }
-                        }
-                    $mat_id = $row[0];
+                    $mat_id = $row_mat[1];
                     $categ_id = $row[6];
                     $prev = $row[3];
                     $unit_id = $row[7];
-                    $delivered = $row1[0];
+                    $delivered = 0;
+                    if ($row1[0] == NULL) {
+                        $delivered = 0;
+                    } else {
+                        $delivered = $row1[0];
+                    }
                     $use = $mat_count_use;
+                    $accu = $delivered + $use;
+                    $qty = $phys;
+                    $year = date("Y");
+                    $month = date("n");
+
+                    $stmt = $conn->prepare("INSERT INTO lastmatinfo (
+                        lastmatinfo_matname, lastmatinfo_categ, lastmatinfo_prevStock, lastmatinfo_unit, 
+                        lastmatinfo_deliveredMat, lastmatinfo_matPulledOut, lastmatinfo_accumulatedMat, 
+                        lastmatinfo_matOnSite, lastmatinfo_project, lastmatinfo_year, lastmatinfo_month) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    $stmt->bind_param("iiiiiiiiiii", 
+                    $mat_id, $categ_id, $prev, $unit_id, 
+                    $delivered, $use, $accu, 
+                    $qty, $projects_id, $year, $month);
+                    $stmt->execute();
+                    $stmt->close();
+                    }
                 }
             }
         }
-        $sql = "SELECT 
-                    reconciliation.reconciliation_physCount,
-                    ";
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
     if (isset($_POST['reconciliation_save'])) {
