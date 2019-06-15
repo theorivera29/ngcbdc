@@ -143,7 +143,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Receipt No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" name="resibo" minlength="7" maxlength="11" required>
+                                <input class="form-control" type="text" name="resibo" minlength="4" maxlength="11" required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
@@ -288,18 +288,18 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
-            var articles = $("#articles option:selected").val();
+            var articles = $("#articles option:selected").text();
             var unit = $("#unit").val();
             var suppliedBy = $("#suppliedBy").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
                 quantity +
-                "' readonly/></td><td><input type='text' name='articles[]' class='form-control' value='" +
+                "' /></td><td><input type='text' name='articles[]' class='form-control' value='" +
                 articles +
-                "' readonly/><input type='hidden' name='unit[]' class='form-control' value='" +
+                "' /><input type='hidden' name='unit[]' class='form-control' value='" +
                 unit +
-                "' readonly/></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" +
+                "' /></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" +
                 suppliedBy +
-                "' readonly/></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+                "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
             if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '')) {
                 $("table tbody").append(markup);
@@ -315,6 +315,16 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
+        $('#articles').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data);
+                $('#unit').val(d[0][0])
+            })
+        })
+
     });
 
     function openSlideMenu() {
@@ -325,8 +335,8 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
-
-
+    
+               
     (function () {
         'use strict';
         window.addEventListener('load', function () {
@@ -343,14 +353,7 @@
         }, false);
     })();
         
-                $('#articles').on('change', function () {
-            console.log($(this).children('option:selected').val())
-            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this).children(
-                'option:selected').val(), function (data) {
-                var d = JSON.parse(data);
-                $('#unit').val(d[0][0])
-            })
-        })
+               
 </script>
 
 </html>
