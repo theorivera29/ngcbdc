@@ -1,6 +1,7 @@
 <?php
     include "../session.php";
     unset($_SESSION['matinfo_id']);
+    unset($_SESSION['projects_id']);
 ?>
 
 <!DOCTYPE html>
@@ -272,6 +273,7 @@
                     <td>
                         <form action="../server.php" method="POST">
                             <input type="hidden" name="matinfo_id" value="<?php echo $row[5] ;?>">
+                            <input type="hidden" name="projects_id" value="<?php echo $projects_id ;?>">
                             <button type="submit" class="btn btn-info" name="viewStockCard">
                                 <?php echo $row[1] ;?>
                             </button>
@@ -292,15 +294,15 @@
                     </td>
                     <td>
                         <?php 
-                                echo $mat_count_use;
+                            echo $mat_count_use;
                         ?>
                     </td>
                     <td>
                         <?php 
-                            if (($mat_count_use+$row1[0]) == 0) {
+                            if ($row1[0] == 0) {
                                 echo 0;
                             } else {
-                                echo $mat_count_use+$row1[0];
+                                echo $row1[0];
                             }
                         ?>
                     </td>

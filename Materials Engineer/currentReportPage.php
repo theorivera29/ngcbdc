@@ -264,7 +264,15 @@
                     ?>
                 </td>
                 <td><?php echo $row[4] ;?></td>
-                <td><?php echo $mat_count_use+$row1[0] ;?></td>
+                <td>
+                    <?php 
+                        if ($row1[0] == 0) {
+                                echo 0;
+                            } else {
+                                echo $row1[0];
+                        }
+                    ?>
+                </td>
                 <td><?php echo $row[5];?></td>
                 <td><?php echo $row[4] ;?></td>
             </tr>
