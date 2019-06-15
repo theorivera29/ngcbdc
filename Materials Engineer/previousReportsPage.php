@@ -8,6 +8,16 @@
     } else {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/previousReports.php");  
     }
+
+    $sql_name = "SELECT 
+                    projects_name
+                FROM
+                    projects
+                WHERE
+                    projects_id = $projects_id;";
+    $result_name = mysqli_query($conn, $sql_name);
+    $row_name = mysqli_fetch_row($result_name);
+    $projects_name = $row_name[0];
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +146,7 @@
     </div>
     
     <div class="hauled-items-container">
-        <h4 class="card-header">PROJECT NAME Previous Reports</h4>
+        <h4 class="card-header"><?php echo $projects_name ;?> Previous Reports</h4>
         <table class="table hauled-items-table table-striped table-bordered" id="mydatatable">
             <thead>
                 <tr>

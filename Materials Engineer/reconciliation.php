@@ -70,7 +70,49 @@
     <div class="card low-in-quantity-container">
         <h5 class="card-header">Reconcilliation of <?php echo $projects_name ;?></h5>
         <div class="recon-btn">
+        <?php
+            $projects_id = $_SESSION['projects_id'];
+            $sql_ctr = "SELECT
+                            COUNT(matinfo_matname)
+                        FROM
+                            matinfo
+                        WHERE
+                            matinfo_project = $projects_id;";
+            $result_ctr = mysqli_query($conn, $sql_ctr);
+            $row_ctr = mysqli_fetch_row($result_ctr);
+            $mat_ctr = $row_ctr[0];
+
+            $sql = "SELECT
+                        matinfo.matinfo_id
+                    FROM
+                        materials
+                    INNER JOIN
+                        matinfo ON materials.mat_id = matinfo.matinfo_matname
+                    WHERE
+                        matinfo_project = $projects_id;";
+            $result = mysqli_query($conn, $sql);
+            $ctr_phys = 0;
+            while ($row = mysqli_fetch_row($result)) {
+                $sql_phys = "SELECT 
+                                COUNT(reconciliation_matinfo)
+                            FROM
+                                reconciliation
+                            WHERE
+                                reconciliation_matinfo = $row[0];";
+                $result_phys = mysqli_query($conn, $sql_phys);
+                while ($row_phys = mysqli_fetch_row($result_phys)) {
+                    if ($row_phys[0] == 1) {
+                        $ctr_phys++;
+                    } 
+                }
+            }
+            
+            if ($ctr_phys == $mat_ctr) {
+            ?>
             <button class="btn btn-warning" id="generate-recon-btn" data-target="#" type="submit" name="reconciliation_reconcile">Reconcile</button>
+            <?php
+                }
+            ?>
             <button class="btn btn-danger" id="cancel-recon-btn" data-target="#" type="button">Cancel</button>
             <button class="btn btn-success" id="save-recon-btn" data-target="#" type="submit" name="reconciliation_save">Save</button>
             <button class="btn btn-info" id="edit-recon-btn" data-target="#" type="submit" name="reconciliation_edit">Edit</button>
@@ -88,16 +130,6 @@
             </thead>
             <tbody>
                 <?php
-                    $projects_id = $_SESSION['projects_id'];
-                    $sql_ctr = "SELECT
-                                    COUNT(matinfo_matname)
-                                FROM
-                                    matinfo
-                                WHERE
-                                    matinfo_project = $projects_id;";
-                    $result_ctr = mysqli_query($conn, $sql_ctr);
-                    $row_ctr = mysqli_fetch_row($result_ctr);
-                    $mat_ctr = $row_ctr[0];
 
                     $sql = "SELECT
                                 materials.mat_name,
