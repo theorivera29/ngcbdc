@@ -82,7 +82,7 @@
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="false">USAGE IN</a>
                     </div>
-                    <button class="btn btn-warning" id="generate-stockcard" type="button">Generate Stockcard</button>
+                    <!-- <button class="btn btn-warning" id="generate-stockcard" type="button">Generate Stockcard</button> -->
                 </div>
                 <div class="stockcard-tabs-content">
                     <div class="tab-content" id="nav-tabContent">
@@ -114,6 +114,7 @@
                                                         WHERE
                                                             matinfo.matinfo_id = $matinfo_id;";
                                             $result_mat = mysqli_query($conn, $sql_mat);
+                                            $mat_count_del = 0;
                                             while ($row_mat = mysqli_fetch_row($result_mat)) {
                                                 $sql_del = "SELECT
                                                                 deliveredin.deliveredin_date,
@@ -142,6 +143,7 @@
                                             <td><?php echo $row_del[3] ;?></td>
                                         </tr>
                                         <?php
+                                            $mat_count_del = $mat_count_del + $row_del[1];
                                                 }
                                             }
                                         ?>
@@ -149,8 +151,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="3">Running Total (in):</td>
-                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
-                                                    placeholder="Running Total (in)" required></td>
+                                            <td colspan="2"><?php echo $mat_count_del ;?></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -185,19 +186,22 @@
                                                     WHERE
                                                         matinfo.matinfo_id = $matinfo_id;";
                                         $result_mat = mysqli_query($conn, $sql_mat);
+                                        $mat_count_use = 0;
                                         while ($row_mat = mysqli_fetch_row($result_mat)) {
                                             $sql_use = "SELECT
-                                                            usagein_date,
-                                                            usagein_quantity,
-                                                            pulledOutBy,
-                                                            usagein_areaOfUsage,
-                                                            usagein_project
+                                                            requisition.requisition_date,
+                                                            reqmaterial.reqmaterial_qty,
+                                                            requisition.requisition_reqBy,
+                                                            reqmaterial.reqmaterial_areaOfUsage,
+                                                            requisition.requisition_remarks
                                                         FROM
-                                                            usagein
+                                                            requisition
+                                                        INNER JOIN
+                                                            reqmaterial ON reqmaterial.reqmaterial_requisition = requisition.requisition_id
                                                         WHERE
-                                                            usagein_matname = $row_mat[1];";
+                                                            reqmaterial.reqmaterial_material = $row_mat[1];";
                                             $result_use = mysqli_query($conn, $sql_use);
-                                            while ($row_use = mysqli_fetch_row($result_del)) {
+                                            while ($row_use = mysqli_fetch_row($result_use)) {
                                         ?>
                                         <tr>
                                             <td><?php echo $row_use[0] ;?></td>
@@ -208,6 +212,33 @@
                                             <td><?php echo $row_use[4] ;?></td>
                                         </tr>
                                         <?php
+                                            $mat_count_use = $mat_count_use + $row_use[1];
+                                                }
+                                            $sql_use = "SELECT
+                                                            hauling.hauling_date,
+                                                            haulingmat.haulingmat_qty,
+                                                            hauling.hauling_requestedBy,
+                                                            hauling.hauling_deliverTo,
+                                                            hauling.hauling_status
+                                                        FROM
+                                                            hauling
+                                                        INNER JOIN
+                                                            haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid
+                                                        WHERE
+                                                            haulingmat.haulingmat_matname = $row_mat[1];";
+                                            $result_use = mysqli_query($conn, $sql_use);
+                                            while ($row_use = mysqli_fetch_row($result_use)) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row_use[0] ;?></td>
+                                            <td><?php echo $row_use[1] ;?></td>
+                                            <td><?php echo $row_mat[0] ;?></td>
+                                            <td><?php echo $row_use[2] ;?></td>
+                                            <td><?php echo $row_use[3] ;?></td>
+                                            <td><?php echo $row_use[4] ;?></td>
+                                        </tr>
+                                        <?php
+                                            $mat_count_use = $mat_count_use + $row_use[1];
                                                 }
                                             }
                                         ?>
@@ -215,8 +246,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="4">Running Total (out):</td>
-                                            <td colspan="2"><input type="text" class="form-control" autocomplete="off"
-                                                    placeholder="Running Total (out)" required></td>
+                                            <td colspan="2"><?php echo $mat_count_use ;?></td>
                                         </tr>
                                     </tfoot>
                                 </table>
