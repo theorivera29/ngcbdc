@@ -968,11 +968,12 @@ if (isset($_POST['edit_project'])) {
         $threshold = mysqli_real_escape_string($conn, $_POST['threshold']);
         $proj_id = mysqli_real_escape_string($conn, $_POST['proj_id']);
         
+        
         $stmt = $conn->prepare("UPDATE matinfo SET matinfo_notif = ? WHERE matinfo_id = ?;");
         $stmt->bind_param("ii", $threshold, $matinfo_id);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php?projects_id=$proj_id");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php");     
     }
 
     if (isset($_POST['edit_material'])) {
@@ -1306,7 +1307,7 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['addMaterials'])) {
         $projects_id = $_POST['projects_id'];
         session_start();
-
+        $_SESSION['projects_id'] = $projects_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1318,9 +1319,9 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/addMaterials.php");    
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/addMaterials.php?projects_id=$projects_id");    
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/addMaterials.php");    
         }
     }
 
