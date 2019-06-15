@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+     $accounts_id =$_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -145,14 +146,18 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <select class="form-control" name="projectName" required>
+                            <select class="form-control" id="projects" name="projectName" required>
                                 <option value="" selected disabled>Choose a project</option>
                                 <?php
-                                                $sql = "SELECT
-                                                    projects_name,
-                                                    projects_id
-                                                FROM
-                                                    projects;";
+                                                $sql = "SELECT 
+                                                    projects_name, projects_id 
+                                                FROM projmateng 
+                                                INNER JOIN projects 
+                                                ON projmateng_project = projects.projects_id 
+                                                INNER JOIN accounts 
+                                                ON  projmateng_mateng = accounts.accounts_id 
+                                                WHERE accounts.accounts_id 
+                                                IN (SELECT projmateng_mateng FROM projmateng WHERE projmateng_mateng = $accounts_id);";
                                                     $result = mysqli_query($conn, $sql);
                                                     while ($row = mysqli_fetch_row($result)) {
                                             ?>
@@ -202,22 +207,6 @@
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" name="particulars[]" id="particulars" required>
-                                                <option value="" selected disabled>Choose a Particular</option>
-                                                <?php    
-                                                $sql = "SELECT  
-                                                        mat_id,
-                                                        mat_name
-                                                        FROM
-                                                        materials;";
-                                                $result = mysqli_query($conn, $sql);
-                                                while ($row = mysqli_fetch_row($result)) {
-                                                ?>
-                                                <option value="<?php echo $row[0]?>">
-                                                    <?php echo $row[1]?>
-                                                </option>
-                                                <?php
-                                                }
-                                            ?>
                                             </select>
                                             <div class="invalid-feedback">Please select one particular.</div>
                                         </div>
@@ -290,7 +279,7 @@
             var unit = $("#unit").val();
             var units = $("#units").val();
             var location = $("#location").val();
-            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='particulars[]' id='particulars" + i +"' value='"+ particulars.val() + "' readonly><option value='"+ particulars.val() + "' selected readonly>"+ particulars.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' /><input type='hidden' class='form-control' name='unit[]' value='" + unit + "' readonly></td><td><input type='text' name='location[]' class='form-control' value='" + location + "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='particulars[]' id='particulars" + i + "' value='" + particulars.val() + "' readonly><option value='" + particulars.val() + "' selected readonly>" + particulars.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' /><input type='hidden' class='form-control' name='unit[]' value='" + unit + "' readonly></td><td><input type='text' name='location[]' class='form-control' value='" + location + "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
             if ((quantity != '') && (particulars != '') && (unit != '') && (location != '')) {
                 $("table tbody").append(markup);
                 $("#requisitionRow input[type=text]").val('');
@@ -314,6 +303,19 @@
                 console.log(d);
                 $('#units').val(d[0][1])
                 $('#unit').val(d[0][0])
+            })
+        })
+
+        $('#projects').on('change', function() {
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?project_id=' + $(this).children(
+                'option:selected').val(), function(data) {
+                var d = JSON.parse(data)
+                var print_options = '';
+                print_options = print_options + `<option disabled selected>Choose your option</option>`
+                d.forEach(function(da) {
+                    print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
+                })
+                $('#particulars').html(print_options)
             })
         })
     });
