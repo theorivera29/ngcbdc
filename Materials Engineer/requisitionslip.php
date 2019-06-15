@@ -296,7 +296,7 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
-            var particulars = $("#particulars option:selected").text();
+            var particulars = $("#particulars option:selected").val();
             var unit = $("#unit").val();
             var location = $("#location").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
