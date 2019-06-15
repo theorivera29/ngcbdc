@@ -430,6 +430,134 @@ if (isset($_POST['edit_project'])) {
     }
 
     if (isset($_POST['reconciliation_reconcile'])) {
+        $difference = $_POST['difference'];
+        $matinfo_id = $_POST['matinfo_id'];
+        $systemCount = $_POST['system_Count'];
+        session_start();
+        $projects_id = $_SESSION['projects_id'];
+
+        echo var_dump($matinfo_id);
+
+        for ($ctr = 0; $ctr <= sizeof($difference)-1; $ctr++) {
+            echo $ctr;
+            if (!empty($difference)) {
+                $dif = $difference[$ctr];
+            }
+
+            if (!empty($matinfo_id)) {
+                $mat = $matinfo_id[$ctr];
+            }
+                $sys = $systemCount[$ctr];
+                $phys = $sys-$dif;
+
+            $sql_categ = "SELECT DISTINCT
+                            categories_name
+                        FROM
+                            materials
+                        INNER JOIN
+                            categories ON categories.categories_id = materials.mat_categ
+                        INNER JOIN
+                            matinfo ON materials.mat_id = matinfo.matinfo_matname
+                        WHERE
+                            matinfo.matinfo_project = $projects_id;";
+            $result = mysqli_query($conn, $sql_categ);
+            $categories = array();
+            while($row_categ = mysqli_fetch_assoc($result)){
+                $categories[] = $row_categ;
+            }
+            foreach($categories as $data) {
+                $categ = $data['categories_name'];
+
+                $sql = "SELECT 
+                            materials.mat_id,
+                            materials.mat_name,
+                            categories.categories_name,
+                            matinfo.matinfo_prevStock,
+                            unit.unit_name,
+                            matinfo.currentQuantity,
+                            categories.categories_id,
+                            unit.unit_id,
+                            matinfo.matinfo_id
+                        FROM
+                            materials
+                        INNER JOIN 
+                            categories ON materials.mat_categ = categories.categories_id
+                        INNER JOIN 
+                            unit ON materials.mat_unit = unit.unit_id
+                        INNER JOIN
+                            matinfo ON materials.mat_id = matinfo.matinfo_matname
+                        WHERE 
+                            categories.categories_name = '$categ' 
+                        AND 
+                        matinfo.matinfo_project = '$projects_id'
+                        ORDER BY 1;";
+                $result = mysqli_query($conn, $sql);
+                while($row = mysqli_fetch_row($result)){
+                    $matinfo_id = $row[8];
+                    $sql1 = "SELECT 
+                                SUM(deliveredmat.deliveredmat_qty) 
+                            FROM 
+                                deliveredmat
+                            WHERE 
+                                deliveredmat.deliveredmat_materials = '$row[0]';";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $row1 = mysqli_fetch_row($result1);
+                    $sql_mat = "SELECT
+                                    unit.unit_name,
+                                    materials.mat_id
+                                FROM
+                                    materials
+                                INNER JOIN
+                                    unit ON unit.unit_id = materials.mat_unit
+                                INNER JOIN
+                                    matinfo ON matinfo.matinfo_matname = materials.mat_id
+                                WHERE
+                                    matinfo.matinfo_id = $matinfo_id;";
+                    $result_mat = mysqli_query($conn, $sql_mat);
+                    $mat_count_use = 0;
+                    while ($row_mat = mysqli_fetch_row($result_mat)) {
+                        $sql_use = "SELECT
+                                        requisition.requisition_date,
+                                        reqmaterial.reqmaterial_qty,
+                                        requisition.requisition_reqBy,
+                                        reqmaterial.reqmaterial_areaOfUsage,
+                                        requisition.requisition_remarks
+                                    FROM
+                                        requisition
+                                    INNER JOIN
+                                        reqmaterial ON reqmaterial.reqmaterial_requisition = requisition.requisition_id
+                                    WHERE
+                                        reqmaterial.reqmaterial_material = $row_mat[1];";
+                        $result_use = mysqli_query($conn, $sql_use);
+                        while ($row_use = mysqli_fetch_row($result_use)) {
+                        $mat_count_use = $mat_count_use + $row_use[1];
+                            }
+                        $sql_use = "SELECT
+                                        hauling.hauling_date,
+                                        haulingmat.haulingmat_qty,
+                                        hauling.hauling_requestedBy,
+                                        hauling.hauling_deliverTo,
+                                        hauling.hauling_status
+                                    FROM
+                                        hauling
+                                    INNER JOIN
+                                        haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid
+                                    WHERE
+                                        haulingmat.haulingmat_matname = $row_mat[1];";
+                        $result_use = mysqli_query($conn, $sql_use);
+                        while ($row_use = mysqli_fetch_row($result_use)) {
+                        $mat_count_use = $mat_count_use + $row_use[1];
+                            }
+                        }
+                    $mat_id = $row[0];
+                    $categ_id = $row[6];
+                    $prev = $row[3];
+                    $unit_id = $row[7];
+                    $delivered = $row1[0];
+                    $use = $mat_count_use;
+                }
+            }
+        }
         $sql = "SELECT 
                     reconciliation.reconciliation_physCount,
                     ";

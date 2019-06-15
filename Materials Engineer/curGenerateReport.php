@@ -67,7 +67,8 @@
             categories.categories_name,
             matinfo.matinfo_prevStock,
             unit.unit_name,
-            matinfo.currentQuantity
+            matinfo.currentQuantity,
+            matinfo.matinfo_id
         FROM
             materials
         INNER JOIN 
@@ -91,6 +92,7 @@
         $result = mysqli_query($conn, $sql);
         $pdf->SetFont('Times','',9);
         while($row = mysqli_fetch_row($result)){
+            $matinfo_id = $row[6];  
             $sql1 = "SELECT 
                         SUM(deliveredmat.deliveredmat_qty) 
                     FROM 
@@ -99,14 +101,53 @@
                         deliveredmat.deliveredmat_materials = '$row[0]';";
             $result1 = mysqli_query($conn, $sql1);
             $row1 = mysqli_fetch_row($result1);
-            $sql2 = "SELECT 
-                        SUM(usagein.usagein_quantity) FROM usagein
-                    INNER JOIN 
-                        matinfo ON usagein.usagein_material = matinfo.matinfo_id
-                    WHERE 
-                        matinfo.matinfo_matname = '$row[0]';";
-            $result2 = mysqli_query($conn, $sql2);
-            $row2 = mysqli_fetch_row($result2);
+            $sql_mat = "SELECT
+                            unit.unit_name,
+                            materials.mat_id
+                        FROM
+                            materials
+                        INNER JOIN
+                            unit ON unit.unit_id = materials.mat_unit
+                        INNER JOIN
+                            matinfo ON matinfo.matinfo_matname = materials.mat_id
+                        WHERE
+                            matinfo.matinfo_id = $matinfo_id;";
+            $result_mat = mysqli_query($conn, $sql_mat);
+            $mat_count_use = 0;
+            while ($row_mat = mysqli_fetch_row($result_mat)) {
+                $sql_use = "SELECT
+                                requisition.requisition_date,
+                                reqmaterial.reqmaterial_qty,
+                                requisition.requisition_reqBy,
+                                reqmaterial.reqmaterial_areaOfUsage,
+                                requisition.requisition_remarks
+                            FROM
+                                requisition
+                            INNER JOIN
+                                reqmaterial ON reqmaterial.reqmaterial_requisition = requisition.requisition_id
+                            WHERE
+                                reqmaterial.reqmaterial_material = $row_mat[1];";
+                $result_use = mysqli_query($conn, $sql_use);
+                while ($row_use = mysqli_fetch_row($result_use)) {
+                $mat_count_use = $mat_count_use + $row_use[1];
+                    }
+                $sql_use = "SELECT
+                                hauling.hauling_date,
+                                haulingmat.haulingmat_qty,
+                                hauling.hauling_requestedBy,
+                                hauling.hauling_deliverTo,
+                                hauling.hauling_status
+                            FROM
+                                hauling
+                            INNER JOIN
+                                haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid
+                            WHERE
+                                haulingmat.haulingmat_matname = $row_mat[1];";
+                $result_use = mysqli_query($conn, $sql_use);
+                while ($row_use = mysqli_fetch_row($result_use)) {
+                    $mat_count_use = $mat_count_use + $row_use[1];
+                }
+            }
             $pdf->Cell(50,10,$row[1],1,0,'C',true);
             $pdf->Cell(12,10,$row[3],1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
@@ -114,14 +155,10 @@
                 $pdf->Cell(22,10,0,1,0,'C',true);
             } else {                
                 $pdf->Cell(22,10,$row1[0],1,0,'C',true);
-            } 
-            if($row2[0] == null) {
-                $pdf->Cell(21,10,0,1,0,'C',true);
-            } else {                
-                $pdf->Cell(21,10,$row2[0],1,0,'C',true);
-            }
+            }             
+            $pdf->Cell(21,10,$mat_count_use,1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
-            $pdf->Cell(29,10,$row[3]+$row1[0],1,0,'C',true);
+            $pdf->Cell(29,10,$mat_count_use+$row1[0],1,0,'C',true);
             $pdf->Cell(25,10,$row[5],1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
             $pdf->Ln();
