@@ -110,8 +110,6 @@
                                     INNER JOIN
                                         projmateng ON projects.projects_id = projmateng.projmateng_project
                                     WHERE
-                                        projmateng.projmateng_mateng = $accounts_id
-                                    AND 
                                         projects.projects_status = 'open';";
                                         $result = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_row($result)) {
@@ -160,8 +158,6 @@
                                         INNER JOIN
                                             projmateng ON projects.projects_id = projmateng.projmateng_project
                                         WHERE
-                                            projmateng.projmateng_mateng = $accounts_id
-                                        AND 
                                             projects.projects_status = 'closed';";
                                             $result = mysqli_query($conn, $sql);
                                             while ($row = mysqli_fetch_row($result)) {
