@@ -186,7 +186,6 @@
                                                         matinfo.matinfo_id = $matinfo_id;";
                                         $result_mat = mysqli_query($conn, $sql_mat);
                                         while ($row_mat = mysqli_fetch_row($result_mat)) {
-                                            echo $row_mat[1];
                                             $sql_use = "SELECT
                                                             requisition.requisition_date,
                                                             reqmaterial.reqmaterial_qty,
