@@ -85,7 +85,8 @@
                 categories.categories_name, 
                 materials.mat_name, 
                 unit.unit_name, 
-                matinfo.matinfo_matname 
+                matinfo.matinfo_matname,
+                matinfo.matinfo_id
                 FROM materials
                 INNER JOIN categories 
                 ON materials.mat_categ = categories.categories_id 
@@ -122,7 +123,7 @@
                             <?php echo $row[2]; ?>
                         </td>
                         <td>
-                            <input type="hidden" name="matinfo_id" value="<?php echo $row[3]?>" />
+                            <input type="hidden" name="matinfo_id" value="<?php echo $row[4]?>" />
                             <input type="hidden" name="proj_id" value="<?php echo $proj_id?>" />
                             <input type="submit" name="edit_threshold" class="btn btn-info" value="Save">
                         </td>
@@ -132,19 +133,6 @@
                 }   
              ?>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6">
-                        <div class="row form-group delete-btn-container">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-outline-danger remove-row">Remove</button>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-
-            </tfoot>
         </table>
         <h5 class=" card-header list-of-material">List of All Materials</h5>
         <form action="../server.php" method="POST">
@@ -250,15 +238,6 @@
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
-        });
-
-        // Find and remove selected table rows
-        $(".remove-row").click(function(){
-            $("table tbody").find('input[name="mat-row"]').each(function(){
-            	if($(this).is(":checked")){
-                    $(this).parents("tr").remove();
-                }
-            });
         });
     });
 

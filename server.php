@@ -86,7 +86,7 @@
                 $mail->Body    = 'Your account has been created. <br /> Please change your password after logging in. <br /> <br /> Username: <b>'.$username.'</b> <br /> Password: <b>'.$generated_password.'</b>';
                 $mail->send();
             } catch (Exception $e) {}
-                $create_date = date("Y-m-d G:i:s");
+            $create_date = date("Y-m-d G:i:s");
             $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
             $stmt->bind_param("ssi", $create_date, $logs_message, $logs_of);
             $logs_message = 'Created account of '.$firstName.' '.$lastName;
@@ -99,6 +99,44 @@
     }
 
 // <--Admin-->
+    if (isset($_POST['disableAccount'])) {
+        $accounts_id = $_POST['accounts_id'];
+        $accounts_username = $_POST['accounts_username'];
+        $accounts_status = "inactive";
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_status = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $accounts_status, $accounts_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $date_today = date("Y-m-d G:i:s");
+        $logs_message = 'Disabled account '.$accounts_username;
+        $logs_of = $account_id;
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $date_today, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/listofaccounts.php");     
+    }   
+
+    if (isset($_POST['enableAccount'])) {
+        $accounts_id = $_POST['accounts_id'];
+        $accounts_username = $_POST['accounts_username'];
+        $accounts_status = "active";
+        $stmt = $conn->prepare("UPDATE accounts SET accounts_status = ? WHERE accounts_id = ?;");
+        $stmt->bind_param("si", $accounts_status, $accounts_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $date_today = date("Y-m-d G:i:s");
+        $logs_message = 'Enabled account '.$accounts_username;
+        $logs_of = $account_id;
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+        $stmt->bind_param("ssi", $date_today, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Admin/listofaccounts.php");     
+    }  
+
     if (isset($_POST['requestAccept'])) {
         $request_accountID = $_POST['accounts_id'];
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -111,15 +149,15 @@
         $stmt->bind_result($request_email, $request_name); 
         $stmt->fetch();
         $stmt->close();
-        $accept_date = date("Y-m-d G:i:s");
         $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
         $stmt->bind_param("si", $password, $request_accountID);
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
         $stmt->bind_param("ssi", $accept_date, $logs_message, $logs_of);
+        $accept_date = date("Y-m-d G:i:s");
         $logs_message = 'Accepted request to reset password of '.$request_name;
-        $logs_of = 2;
+        $logs_of = 1;
         $stmt->execute();
         $stmt->close();
         $stmt = $conn->prepare("DELETE FROM request WHERE req_username = ?;");
@@ -136,6 +174,29 @@
         } catch (Exception $e) {}
         header("location: http://127.0.0.1/NGCBDC/Admin/passwordrequest.php");  
     }
+
+    if (isset($_POST['delete_projmateng'])) {
+        $mateng = $_POST['mateng'];
+        $projects_id = mysqli_real_escape_string($conn, $_POST['project']);
+        
+        for($x = 0; $x < sizeof($mateng); $x++){
+        
+        $stmt = $conn->prepare("SELECT projmateng_id FROM projmateng WHERE  projmateng_project = ? AND projmateng_mateng = ?;");
+        $stmt->bind_param("ii", $projects_id, $mateng[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($projmateng_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_id = ?;");
+        $stmt->bind_param("i", $projmateng_id);
+        $stmt->execute();
+        $stmt->close();
+        }
+        
+        header("Location:http://127.0.0.1/NGCBDC/Admin/projects.php");     
+    }
+
 
     if (isset($_POST['requestReject'])) {
         $request_accountID = $_POST['accounts_id'];
@@ -329,13 +390,6 @@ if (isset($_POST['edit_project'])) {
 
         if (isset($_POST['mateng'])) {
             $mateng = $_POST['mateng'];
-            $projects_id = mysqli_real_escape_string($conn, $_POST['projects_id']);
-            $stmt = $conn->prepare("DELETE FROM projmateng WHERE projmateng_project = ?;");
-            $stmt->bind_param("i", $projects_id);
-            $stmt->execute();
-            $stmt->close();
-            
-            echo var_dump($mateng);
     
          for($x = 0; $x < sizeof($mateng); $x++){
                 $stmt = $conn->prepare("INSERT INTO projmateng (projmateng_project, projmateng_mateng)
@@ -349,6 +403,7 @@ if (isset($_POST['edit_project'])) {
     }
 
 // <--Materials Engineer-->
+
     if (isset($_POST['curGenerateReport'])) {
         $preparedBy = mysqli_real_escape_string($conn, $_POST['preparedBy']);
         $checkedBy = mysqli_real_escape_string($conn, $_POST['checkedBy']);
@@ -367,9 +422,53 @@ if (isset($_POST['edit_project'])) {
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
 
     }
+
     if (isset($_POST['reconciliation_edit'])) {
         session_start();
         $_SESSION['edit_clicked'] = true;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
+    }
+
+    if (isset($_POST['reconciliation_reconcile'])) {
+        $sql = "SELECT 
+                    reconciliation.reconciliation_physCount,
+                    ";
+    }
+
+    if (isset($_POST['reconciliation_save'])) {
+        session_start();
+        $difference = $_POST['difference'];
+        $matinfo_id = $_POST['matinfo_id'];
+        $systemCount = $_POST['system_Count'];
+        $remarks = array();
+        $x = 0;
+        if (isset($_POST['remarks'])) {
+            $remarks = $_POST['remarks'];
+        }
+        for ($ctr = 0; $ctr <= sizeof($difference)-1; $ctr++) {
+            $dif = $difference[$ctr];
+            $mat = $matinfo_id[$ctr];
+            $sys = $systemCount[$ctr];
+            $phys = $sys-$dif;
+            $stmt = $conn->prepare("DELETE FROM reconciliation WHERE reconciliation_matinfo = ?");
+            $stmt->bind_param("i", $mat);
+            $stmt->execute();
+            $stmt->close();
+
+            if ($dif != 0) {
+                $rem = $remarks[$x];
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo, reconciliation_remarks) VALUES (?, ?, ?);");
+                $stmt->bind_param("iis", $phys, $mat, $rem);
+                $stmt->execute();
+                $stmt->close();
+                $x++;
+            } else {
+                $stmt = $conn->prepare("INSERT INTO reconciliation (reconciliation_physCount, reconciliation_matinfo) VALUES (?, ?);");
+                $stmt->bind_param("ii", $phys, $mat);
+                $stmt->execute();
+                $stmt->close();
+            }
+        }
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/reconciliation.php");  
     }
 
@@ -522,6 +621,7 @@ if (isset($_POST['edit_project'])) {
     }
 
     if (isset($_POST['create_requisitionSlip'])) {
+        $projName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $reqNo = mysqli_real_escape_string($conn, $_POST['reqNo']);
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
@@ -533,8 +633,8 @@ if (isset($_POST['edit_project'])) {
         $approvedBy = mysqli_real_escape_string($conn, $_POST['approvedBy']);
         
         
-        $stmt = $conn->prepare("INSERT INTO requisition (requisition_no, requisition_date, requisition_remarks, requisition_reqBy, requisition_approvedBy) VALUES (?, ?, ?, ?, ?);");
-        $stmt->bind_param("issss", $reqNo, $date, $remarks, $requestedBy, $approvedBy);
+        $stmt = $conn->prepare("INSERT INTO requisition (requisition_no, requisition_date, requisition_remarks, requisition_reqBy, requisition_approvedBy, requisition_project) VALUES (?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("issssi", $reqNo, $date, $remarks, $requestedBy, $approvedBy, $projName);
         $stmt->execute();
         $stmt->close();
         
@@ -548,6 +648,20 @@ if (isset($_POST['edit_project'])) {
         for($x = 0; $x < sizeof($particulars); $x++){
         $stmt = $conn->prepare("INSERT INTO reqmaterial (reqmaterial_requisition, reqmaterial_material, reqmaterial_qty, reqmaterial_areaOfUsage) VALUES (?, ?, ?, ?);");
         $stmt->bind_param("iiis", $requisition_id, $particulars[$x], $quantity[$x], $location[$x]);
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $projName, $particulars[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $projName, $particulars[$x]);
         $stmt->execute();
         $stmt->close();
         }
@@ -572,10 +686,7 @@ if (isset($_POST['edit_project'])) {
         $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
         $date = mysqli_real_escape_string($conn, $_POST['date']);
         $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
-        $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
-        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
-        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
+        $hauledFrom = mysqli_real_escape_string($conn, $_POST['projectName']);
         $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
         $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
         $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
@@ -584,26 +695,126 @@ if (isset($_POST['edit_project'])) {
         $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
         $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
         $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
+        $quantity = $_POST['quantity'];
+        $unit = $_POST['unit'];
+        $articles = $_POST['articles'];
         $status = "To be returned";
+            
+        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("isssssssssiis", $formNo, $date, $deliverTo, $hauledFrom, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        $stmt->execute();
+        $stmt->close();
                             
         $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
-        $stmt->bind_param("s", $unit);
+        $stmt->bind_param("i", $unit);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($unit_id);
         $stmt->fetch();
         
-        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
-        $stmt->bind_param("s", $articles);
+        $stmt = $conn->prepare("SELECT hauling_id FROM hauling WHERE hauling_no = ?;");
+        $stmt->bind_param("i", $formNo);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($mat_id);
+        $stmt->bind_result($hauling_id);
         $stmt->fetch();
-            
-        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        
+        for($x = 0; $x < sizeof($articles); $x++){
+        $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
+        $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
         $stmt->execute();
         $stmt->close();
+        
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->close();
+        }
+        
+        $account_id = "";
+        session_start();
+        if(isset($_SESSION['account_id'])) {
+            $account_id = $_SESSION['account_id'];
+        }
+
+        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
+        $create_haulingtobereturn_date = date("Y-m-d G:i:s");
+        $logs_message = 'Created Hauling Form (To be Returned)';
+        $logs_of = $account_id;
+        $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
+        $stmt->execute();
+        $stmt->close();
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
+    }
+
+    if (isset($_POST['create_permanentHauling'])) {
+        $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
+        $date = mysqli_real_escape_string($conn, $_POST['date']);
+        $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
+        $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
+        $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
+        $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
+        $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
+        $approvedBy = mysqli_real_escape_string($conn, $_POST['approvedBy']);
+        $type = mysqli_real_escape_string($conn, $_POST['type']);
+        $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
+        $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
+        $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
+        $quantity = $_POST['quantity'];
+        $unit = $_POST['unit'];
+        $articles = $_POST['articles'];
+        
+        $status = "Permanently hauled";
+                            
+        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
+        $stmt->bind_param("i", $unit);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($unit_id);
+        $stmt->fetch();
+        
+        $stmt = $conn->prepare("SELECT hauling_id FROM hauling WHERE hauling_no = ?;");
+        $stmt->bind_param("i", $formNo);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($hauling_id);
+        $stmt->fetch();
+            
+        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $stmt->bind_param("isssssssssiis", $formNo, $date, $deliverTo, $hauledFrom, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
+        $stmt->execute();
+        $stmt->close();
+        
+        for($x = 0; $x < sizeof($matName); $x++){
+        
+        $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
+        $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
+        $stmt->execute();
+        $stmt->close();
+        
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity - $quantity[$x];
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $quantity[$x], $hauledFrom, $articles[$x]);
+        $stmt->execute();
+        $stmt->close();
+        }
 
         $account_id = "";
         session_start();
@@ -618,60 +829,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");
-    }
-
-    if (isset($_POST['create_permanentHauling'])) {
-        $formNo = mysqli_real_escape_string($conn, $_POST['formNo']);
-        $date = mysqli_real_escape_string($conn, $_POST['date']);
-        $deliverTo = mysqli_real_escape_string($conn, $_POST['deliverTo']);
-        $hauledFrom = mysqli_real_escape_string($conn, $_POST['hauledFrom']);
-        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-        $unit = mysqli_real_escape_string($conn, $_POST['unit']);
-        $articles = mysqli_real_escape_string($conn, $_POST['articles']);
-        $requestedBy = mysqli_real_escape_string($conn, $_POST['requestedBy']);
-        $hauledBy = mysqli_real_escape_string($conn, $_POST['hauledBy']);
-        $warehouseman = mysqli_real_escape_string($conn, $_POST['warehouseman']);
-        $approvedBy = mysqli_real_escape_string($conn, $_POST['approvedBy']);
-        $type = mysqli_real_escape_string($conn, $_POST['type']);
-        $plateNo = mysqli_real_escape_string($conn, $_POST['plateNo']);
-        $PORS = mysqli_real_escape_string($conn, $_POST['PORS']);
-        $haulerID = mysqli_real_escape_string($conn, $_POST['haulerID']);
-        $status = "Permanently Hauled";
-                            
-        $stmt = $conn->prepare("SELECT unit_id FROM unit WHERE unit_name = ?;");
-        $stmt->bind_param("s", $unit);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($unit_id);
-        $stmt->fetch();
-        
-        $stmt = $conn->prepare("SELECT mat_id FROM materials WHERE mat_name = ?;");
-        $stmt->bind_param("s", $articles);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($mat_id);
-        $stmt->fetch();
-            
-        $stmt = $conn->prepare("INSERT INTO hauling (hauling_no, hauling_date, hauling_deliverTo, hauling_hauledFrom, hauling_quantity, hauling_unit, hauling_matname, hauling_hauledBy, hauling_requestedBy, hauling_warehouseman, hauling_approvedBy, hauling_truckDetailsType, hauling_truckDetailsPlateNo, hauling_truckDetailsPO, hauling_truckDetailsHaulerDR, hauling_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $stmt->bind_param("isssiiissssssiis", $formNo, $date, $deliverTo, $hauledFrom, $quantity, $unit_id, $mat_id, $hauledBy, $requestedBy, $warehouseman, $approvedBy, $type, $plateNo, $PORS, $haulerID, $status);
-        $stmt->execute();
-        $stmt->close();
-
-        $account_id = "";
-        session_start();
-        if(isset($_SESSION['account_id'])) {
-            $account_id = $_SESSION['account_id'];
-        }
-
-        $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
-        $create_haulingpermanent_date = date("Y-m-d G:i:s");
-        $logs_message = 'Created Hauling Form (Permanently Hauled)';
-        $logs_of = $account_id;
-        $stmt->bind_param("ssi", $create_haulingpermanent_date, $logs_message, $logs_of);
-        $stmt->execute();
-        $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/fillouthauling.php");     
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
     }
 
     if (isset($_POST['update_account'])) {
@@ -855,6 +1013,7 @@ if (isset($_POST['edit_project'])) {
     }
 
     if (isset($_POST['create_deliveredin'])) {
+        $projectName = mysqli_real_escape_string($conn, $_POST['projectName']);
         $date = mysqli_real_escape_string($conn, $_POST['deliveredDate']);
         $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
         $receiptNo = mysqli_real_escape_string($conn, $_POST['resibo']);
@@ -863,8 +1022,8 @@ if (isset($_POST['edit_project'])) {
         $articles = $_POST['articles'];
         $suppliedBy = $_POST['suppliedBy'];
 
-        $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_remarks, deliveredin_receiptno) VALUES (?, ?, ?);");
-        $stmt->bind_param("ssi", $date, $remarks, $receiptNo);
+        $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_remarks, deliveredin_receiptno, deliveredin_project) VALUES (?, ?, ?, ?);");
+        $stmt->bind_param("ssii", $date, $remarks, $receiptNo, $projectName);
         $stmt->execute();
         $stmt->close();  
         
@@ -880,7 +1039,22 @@ if (isset($_POST['edit_project'])) {
         $stmt = $conn->prepare("INSERT INTO deliveredmat (deliveredmat_deliveredin, deliveredmat_materials, deliveredmat_qty, suppliedBy) VALUES (?, ?, ?, ?);");
         $stmt->bind_param("iiis", $deliveredin_id, $articles[$x], $quantity[$x], $suppliedBy[$x]);
         $stmt->execute();
-        $stmt->close();        
+        $stmt->close();
+            
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND  matinfo_matname = ?;");
+        $stmt->bind_param("ii", $projectName, $articles[$x]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+            
+        $newQuantity = $currentQuantity + $articles[$x];
+            
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity = ? WHERE matinfo_project = ? AND  matinfo_matname = ?;");
+        $stmt->bind_param("iii", $newQuantity, $projectName, $articles[$x]);
+        $stmt->execute();
+        $stmt->close();
+            
         }
 
         $account_id = "";
@@ -896,7 +1070,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_deliveredin_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/deliveredin.php");   
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewTransactions.php");   
     }
 
     if (isset($_POST['create_todo'])) {
@@ -933,8 +1107,24 @@ if (isset($_POST['edit_project'])) {
 
     if (isset($_POST['view_hauling'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php?hauling_no=$hauling_no");     
+        session_start();
+        $_SESSION['hauling_no'] = $hauling_no;
+        echo $_SESSION['hauling_no'];
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php");     
     }
+
+    if (isset($_POST['open_deliveredin'])) {
+        $delivered_id = mysqli_real_escape_string($conn, $_POST['delivered_id']);
+        $receipt_no = mysqli_real_escape_string($conn, $_POST['receipt_no']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewdeliveredin.php?deliveredin_id=$delivered_id&receipt_no=$receipt_no");     
+    }
+
+    if (isset($_POST['open_requisition'])) {
+        $req_no = mysqli_real_escape_string($conn, $_POST['req_no']);
+        $req_id = mysqli_real_escape_string($conn, $_POST['req_id']);
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewrequisitionslip.php?requisition_no=$req_no&requisition_id=$req_id");     
+    }
+
 
     if (isset($_POST['adding_materials'])) {
 
@@ -967,7 +1157,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_mat_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();*/
-        //header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/addmaterials.php");
     }
 
     if (isset($_POST['update_todo'])) {
@@ -1168,15 +1358,37 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("isi", $returns_id, $date_today, $returningQuantity);
         $stmt->execute();
         $stmt->close();
+
+        $stmt = $conn->prepare("SELECT hauling.hauling_hauledFrom, returns.returns_matname FROM returns INNER JOIN hauling ON returns.returns_hauling_no = hauling.hauling_no WHERE returns.returns_id = ?");
+        $stmt->bind_param("i", $returns_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($hauling_hauledFrom, $returns_matname);
+        $stmt->fetch();
+
+        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("ii", $hauling_hauledFrom, $returns_matname);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($currentQuantity);
+        $stmt->fetch();
+        
+        $currentQuantity = $currentQuantity +$returningQuantity;
+
+        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+        $stmt->bind_param("iii", $returningQuantity, $hauling_hauledFrom, $returns_matname);
+        $stmt->execute();
+        $stmt->close();
+
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
     if (isset($_POST['materialCategories'])) {
         $categories_id = $_POST['categories_id'];
-        $projects_id = $_POST['projects_id'];
 
         session_start();
 
+        $_SESSION['categories_id'] = $categories_id;
         $accounts_id = $_SESSION['account_id'];   
         $sql = "SELECT
                     accounts_type
@@ -1188,11 +1400,30 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_row($result);
         
         if (strcmp($row[0], "Materials Engineer") == 0) {
-            header("location: http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id"); 
+            header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/materialCategories.php");  
         } else {
-            header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php?projects_id=$projects_id&categories_id=$categories_id");  
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/materialCategories.php");  
         }    
     }
+
+    // API
+    header("Access-Control-Allow-Origin: *");
+    if (isset($_GET['category_id'])) {
+        $id = $_GET['category_id'];
+        $sql = "SELECT mat_id, mat_name FROM materials WHERE mat_categ = $id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_all($result);
+        echo json_encode($row);
+    }
+    if (isset($_GET['mat_name'])) {
+        $name = $_GET['mat_name'];
+        $sql = "SELECT unit.unit_name FROM materials INNER JOIN unit ON materials.mat_unit = unit.unit_id WHERE mat_id = '$name'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_all($result);
+        echo json_encode($row);
+    }
+
+     
 
 // <--View Only-->
 ?>

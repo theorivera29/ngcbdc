@@ -95,11 +95,15 @@
                         <label for="firstName" class="label-styles">First Name</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
                             placeholder="Enter first name" required>
+
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="label-styles">Last Name</label>
                         <input name="lastName" id="lastName" type="text" class="form-control"
                             placeholder="Enter last name" required>
+
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
                         <label for="username" class="label-styles">Username</label>
@@ -171,12 +175,10 @@
         <!-- End of confirmation modal -->
 
     </form>
-    
+
     <?php 
         if (isset($_SESSION['create_success'])) {
     ?>
-    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
     <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -190,21 +192,19 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Okay</button>
                 </div>
             </div>
+        </div>
+    </div>
     <?php
             unset($_SESSION['create_success']);
         }
     ?>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#success-modal").modal('show');
+    });
 
-$(document).ready(function(){
-		$("#success-modal").modal('show');
-	});
     function openSlideMenu() {
         document.getElementById('menu').style.width = '15%';
     }
@@ -249,10 +249,8 @@ $(document).ready(function(){
         }, false);
     })();
 
-
-    bootstrapValidate('#firstName', 'alpha:You can only input alphabetic characters.')
-    bootstrapValidate('#lastName', 'alpha:You can only input alphabetic characters.')
-    bootstrapValidate('#username', 'regex:^[A-Za-z0-9._]*$:You can only use alphabetic characters, numbers, period and underscore.')
+    bootstrapValidate('#username',
+        'regex:^[A-Za-z0-9._]*$:You can only use alphabetic characters, numbers, period and underscore.')
     bootstrapValidate('#email', 'email:Enter a valid email address.')
 </script>
 

@@ -215,7 +215,7 @@
                                         FROM 
                                             usagein
                                         INNER JOIN 
-                                            matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                                            matinfo ON usagein.usagein_material = matinfo.matinfo_id
                                         WHERE 
                                             matinfo.matinfo_matname = '$row[0]';";
                                 $result2 = mysqli_query($conn, $sql2);

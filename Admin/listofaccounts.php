@@ -115,13 +115,66 @@
                     <td><?php echo $row[3]?></td>
                     <td><?php echo $row[4]?></td>
                     <td><?php echo $row[5]?></td>
+                    <?php
+                        if (strcmp($row[5],'active') == 0) {
+                    ?>
                     <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                            data-target="#disable-modal-<?php echo $row[0]?>">Disable</button></td>
-
-                    <!-- DAPAT LALABAS LANG TO KAPAG DINISABLE NIYA NA 
+                                data-target="#disable-modal<?php echo $row[0]?>">Disable</button></td>
+                    <?php
+                        } else {
+                    ?>
                     <td><button type="button" class="btn btn-success" data-toggle="modal"
-                                data-target="#enable-modal-<?php echo $row[0]?>">Enable</button></td> 
-                    -->
+                                data-target="#enable-modal<?php echo $row[0]?>">Enable</button></td> 
+                   
+                    <?php
+                        }
+                    ?>
+                    <!-- Start of ENABLE confirmation modal -->
+                    <div class="modal fade" id="enable-modal<?php echo $row[0]?>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to enable <?php echo $row[2]?>'s account?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="../server.php" method="POST">
+                                        <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
+                                        <input type="hidden" name="accounts_username" value="<?php echo $row[1] ;?>">
+                                        <button type="submit" class="btn btn-success" name="enableAccount">Yes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of ENABLE confirmation modal -->
+                    <!-- Start of DISABLE confirmation modal -->
+                    <div class="modal fade" id="disable-modal<?php echo $row[0]?>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to disable <?php echo $row[2]?>'s account</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="../server.php" method="POST">
+                                        <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
+                                        <input type="hidden" name="accounts_username" value="<?php echo $row[1] ;?>">
+                                        <button type="submit" class="btn btn-success" name="disableAccount">Yes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of DISABLE confirmation modal -->
                 </tr>
                 <!-- Start of ENABLE confirmation modal -->
                 <div class="modal fade" id="enable-modal" tabindex="-1" role="dialog"
@@ -172,7 +225,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 
 <script type="text/javascript">

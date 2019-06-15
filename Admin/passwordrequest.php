@@ -115,19 +115,63 @@
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_row($result)) {
                 ?>
-                <form acion="../server.php" method="POST">
                     <tr>
                         <td><?php echo $row[1] ;?></td>
                         <td><?php echo $row[2] ;?></td>
                         <td><?php echo $row[3] ;?></td>
                         <td><?php echo $row[4] ;?></td>
                         <td>
-                            <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
                             <button type="submit" name="requestAccept" class="btn btn-success" data-toggle="modal"
                                 data-target="#accept-modal-<?php echo $row[0] ;?>">Accept</button>
                             <button type="submit" name="requestReject" class="btn btn-danger" data-toggle="modal"
                                 data-target="#reject-modal-<?php echo $row[0] ;?>">Reject</button>
                         </td>
+                        <!-- Start of ACCEPT confirmation modal -->
+                        <div class="modal fade" id="accept-modal<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to accept <?php echo $row[2]?>'s password reset
+                                            request?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="../server.php" method="POST">
+                                            <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
+                                            <button type="submit" name="requestAccept" class="btn btn-success">Yes</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of ACCEPT confirmation modal -->
+                        <!-- Start of REJECT confirmation modal -->
+                        <div class="modal fade" id="reject-modal<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to reject <?php echo $row[2]?>'s password reset
+                                            request?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="../server.php" method="POST">
+                                            <input type="hidden" name="accounts_id" value="<?php echo $row[0] ;?>">
+                                            <button type="submit" name="requestReject" class="btn btn-success">Yes</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of REJECT confirmation modal -->
                     </tr>
                     <!-- Start of ACCEPT confirmation modal -->
                     <div class="modal fade" id="accept-modal-<?php echo $row[0] ;?>" tabindex="-1" role="dialog"
@@ -180,7 +224,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 <script type="text/javascript">
     $(document).ready(function () {

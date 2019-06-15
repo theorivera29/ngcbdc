@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<div id="content">
+    <div id="content">
         <span class="slide">
             <a href="#" class="open" id="sideNav-a" onclick="openSlideMenu()">
                 <i class="fas fa-bars"></i>
@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </div>
-    </span>
-       
+        </span>
+
         <div id="menu" class="navigation sidenav">
             <a href="#" class="close" id="sideNav-a" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i>
@@ -83,8 +83,8 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                            id="sideNav-a">Transactions</a>
+                        <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" id="sideNav-a">Transactions</a>
                         <ul class="collapse list-unstyled" id="transactionSubmenu">
                             <li>
                                 <a href="requisitionslip.php" id="sideNav-a">Material Requisition Slip</a>
@@ -128,41 +128,63 @@
                 <h4>Material Requisition Slip</h4>
             </div>
             <div class="card-body">
-                <form action="../server.php" method="POST">
+                <form action="../server.php" method="POST" class="needs-validation" novalidate>
                     <div class="form-group row date-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="date" name="date" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row formnum-container">
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Material Requisition No.:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="reqNo" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="col-lg-12 col-form-label">Remarks:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="remarks" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
+                            <select class="form-control" name="projectName" required>
+                                <option value="" selected disabled>Choose a project</option>
+                                <?php
+                                                $sql = "SELECT
+                                                    projects_name,
+                                                    projects_id
+                                                FROM
+                                                    projects;";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_row($result)) {
+                                            ?>
 
-                            <select class="form-control" name="project" id="project" required>
-                                <option value="" selected disabled>Choose a Project</option>
+                                <option value="<?php echo $row[1]; ?>">
+                                    <?php echo $row[0]; ?>
+                                </option>
+                                <?php
+                                        }
+                                        ?>
                             </select>
-
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Location:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="location">
+                            <input class="form-control" type="text" name="location" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+
+                        <label class="col-lg-2 col-form-label">Remarks:</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="remarks" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
                     <div class="card">
@@ -171,8 +193,8 @@
                                 <tr>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Particulars</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Location</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="requisitionTable">
@@ -180,13 +202,14 @@
                             <tfoot>
                                 <tr id="requisitionRow">
                                     <td><input class="form-control" name="quantity[]" type="text" id="quantity"
-                                            placeholder="Quantity">
+                                            placeholder="Quantity" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select class="form-control" name="particulars[]" id="particulars">
+                                            <select class="form-control" name="particulars[]" id="particulars" required>
                                                 <option value="" selected disabled>Choose a Particular</option>
-                                             <?php    
+                                                <?php    
                                                 $sql = "SELECT  
                                                         mat_id,
                                                         mat_name
@@ -194,17 +217,21 @@
                                                         materials;";
                                                 $result = mysqli_query($conn, $sql);
                                                 while ($row = mysqli_fetch_row($result)) {
-                                            ?>                                              
-                                            <option value="<?php echo $row[0]?>"><?php echo $row[1]?></option>
-                                            <?php
+                                                ?>
+                                                <option value="<?php echo $row[0]?>">
+                                                    <?php echo $row[1]?>
+                                                </option>
+                                                <?php
                                                 }
                                             ?>
                                             </select>
-                                        </div>
-                                    <td><input class="form-control" name="unit[]" type="text" id="unit"
-                                            placeholder="Unit"></td>
+                                            <div class="invalid-feedback">Please select one particular.</div>
+                                        </div></td>
+                                        <input type="hidden" class="form-control" name="unit[]" type="text" id="unit">
                                     <td><input class="form-control" name="location[]" type="text" id="location"
-                                            placeholder="Location"></td>
+                                            placeholder="Location" required>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </td>
                                     <td colspan="5">
                                         <input type="button" class="btn btn-md btn-outline-secondary add-row"
                                             value="Add Row" />
@@ -218,20 +245,22 @@
                             <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="requestedBy" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" name="approvedBy" required>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                     </div>
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
-                            <input type="button" class="btn btn-primary" value="Save Requisition Slip"
-                                data-toggle="modal" data-target="#save-modal">
-                            <input type=" reset" class="btn btn-danger" value="Cancel">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-modal"
+                                value="Save Changes">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
                         </div>
                     </div>
                     <!-- Start of confirmation modal -->
@@ -240,8 +269,8 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save the
-                                        following?</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to save
+                                        changes?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         &times;
                                     </button>
@@ -255,6 +284,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- End of confirmation modal -->
                 </form>
             </div>
@@ -266,15 +296,14 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
+            var particulars = $("#particulars option:selected").text();
             var unit = $("#unit").val();
-            var particulars = $("#particulars").val();
             var location = $("#location").val();
-            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity +
-                "'/></td><td><input type='text' name="unit[]" class='form-control' value='" + unit +
-                "'/></td><td><input type='text' name="particulars[]" class='form-control' value='" + particulars +
-                "'/></td><td><input type='text' name="location[]" class='form-control' value='" + location +
-                "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-            if ((quantity != '') && (unit != '') && (particulars != '') && (location != '')) {
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
+                quantity + "'/></td><td><input type='text' name='particulars[]' class='form-control' value='"+ particulars + "'/><input type='hidden' name='unit[]' class='form-control' value='" + unit +
+                "'/></td><td><input type='text' name='location[]' class='form-control' value='" +
+                location + "'/></td>><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity != '') && (particulars != '') && (unit != '') && (location != '')) {
                 $("table tbody").append(markup);
                 $("#requisitionRow input[type=text]").val('');
                 $("#requisitionRow select").val('');
@@ -287,6 +316,17 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+
+        $('#particulars').on('change', function () {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this)
+                .children(
+                    'option:selected').val(),
+                function (data) {
+                    var d = JSON.parse(data);
+                    $('#unit').val(d[0][0])
+                });
+        });
     });
 
     function openSlideMenu() {
@@ -297,6 +337,22 @@
         document.getElementById('menu').style.width = '0';
         document.getElementById('content').style.marginLeft = '0';
     }
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 

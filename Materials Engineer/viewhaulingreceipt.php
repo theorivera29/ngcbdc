@@ -68,7 +68,7 @@
                     hauling.hauling_no, 
                     hauling.hauling_date, 
                     hauling.hauling_deliverTo, 
-                    hauling.hauling_hauledFrom, 
+                    projects.projects_name, 
                     hauling.hauling_requestedBy, 
                     hauling.hauling_hauledBy, 
                     hauling.hauling_warehouseman, 
@@ -79,6 +79,8 @@
                     hauling.hauling_truckDetailsHaulerDR 
                 FROM 
                     hauling
+                INNER JOIN 
+                    projects ON projects.projects_id = hauling.hauling_hauledFrom
                 WHERE 
                     hauling.hauling_no = $hauling_no;";
         $result = mysqli_query($conn, $sql);
