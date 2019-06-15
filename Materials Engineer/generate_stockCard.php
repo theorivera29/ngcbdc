@@ -268,6 +268,6 @@
     $pdf->Cell(61,10,'Checked by: ',0,0,'L',true);
     $pdf->Cell(53,10,'Noted by: ',0,0,'L',true);
 
-    $pdf->Output("I");
-
+    //OUTPUT TO PDF
+    $pdf->Output('D', "MATERIAL STOCKCARD OF ".strtoupper($row_item[0]).".pdf");
 ?>
