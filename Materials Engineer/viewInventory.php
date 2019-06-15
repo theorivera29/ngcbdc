@@ -128,7 +128,8 @@
                                                     categories.categories_name,
                                                     matinfo.matinfo_prevStock,
                                                     unit.unit_name,
-                                                    matinfo.matinfo_id
+                                                    matinfo.matinfo_id,
+                                                    matinfo.currentQuantity
                                                 FROM
                                                     materials
                                                 INNER JOIN 
@@ -201,11 +202,7 @@
                                         </td>
                                         <td>
                                             <?php 
-                                                if (($row[3]+$row1[0]-$row2[0]) == 0) {
-                                                    echo 0;
-                                                } else {
-                                                    echo $row[3]+$row1[0]-$row2[0];
-                                                }
+                                                echo $row[6];
                                             ?>
                                         </td>
                                         <td><?php echo $row[4] ;?></td>

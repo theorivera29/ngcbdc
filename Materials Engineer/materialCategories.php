@@ -90,7 +90,8 @@
                             materials.mat_name,
                             categories.categories_name,
                             matinfo.matinfo_prevStock,
-                            unit.unit_name
+                            unit.unit_name,
+                            matinfo.currentQuantity
                         FROM
                             materials
                         INNER JOIN 
@@ -116,8 +117,8 @@
                     $row1 = mysqli_fetch_row($result1);
                     $sql2 = "SELECT 
                                 SUM(usagein.usagein_quantity) FROM usagein
-                                INNER JOIN 
-                                matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
+                            INNER JOIN 
+                                matinfo ON usagein.usagein_material = matinfo.matinfo_id
                             WHERE 
                                 matinfo.matinfo_matname = '$row[0]';";
                     $result2 = mysqli_query($conn, $sql2);
@@ -157,11 +158,7 @@
                     </td>
                     <td>
                         <?php 
-                            if (($row[3]+$row1[0]-$row2[0]) == 0) {
-                                echo 0;
-                            } else {
-                                echo $row[3]+$row1[0]-$row2[0];
-                            }
+                            echo $row[5];
                         ?>
                     </td>
                     <td><?php echo $row[3] ;?></td>

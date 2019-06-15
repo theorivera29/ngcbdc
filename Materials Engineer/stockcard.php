@@ -186,16 +186,44 @@
                                                         matinfo.matinfo_id = $matinfo_id;";
                                         $result_mat = mysqli_query($conn, $sql_mat);
                                         while ($row_mat = mysqli_fetch_row($result_mat)) {
+                                            echo $row_mat[1];
                                             $sql_use = "SELECT
-                                                            usagein_date,
-                                                            usagein_quantity,
-                                                            pulledOutBy,
-                                                            usagein_areaOfUsage,
-                                                            usagein_project
+                                                            requisition.requisition_date,
+                                                            reqmaterial.reqmaterial_qty,
+                                                            requisition.requisition_reqBy,
+                                                            reqmaterial.reqmaterial_areaOfUsage,
+                                                            requisition.requisition_remarks
                                                         FROM
-                                                            usagein
+                                                            requisition
+                                                        INNER JOIN
+                                                            reqmaterial ON reqmaterial.reqmaterial_requisition = requisition.requisition_id
                                                         WHERE
-                                                            usagein_matname = $row_mat[1];";
+                                                            reqmaterial.reqmaterial_material = $row_mat[1];";
+                                            $result_use = mysqli_query($conn, $sql_use);
+                                            while ($row_use = mysqli_fetch_row($result_del)) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row_use[0] ;?></td>
+                                            <td><?php echo $row_use[1] ;?></td>
+                                            <td><?php echo $row_mat[0] ;?></td>
+                                            <td><?php echo $row_use[2] ;?></td>
+                                            <td><?php echo $row_use[3] ;?></td>
+                                            <td><?php echo $row_use[4] ;?></td>
+                                        </tr>
+                                        <?php
+                                                }
+                                                $sql_use = "SELECT
+                                                            hauling.hauling_date,
+                                                            haulingmat.haulingmat_qty,
+                                                            hauling.hauling_requestedBy,
+                                                            hauling.hauling_deliverTo,
+                                                            hauling.hauling_status
+                                                        FROM
+                                                            hauling
+                                                        INNER JOIN
+                                                            haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid
+                                                        WHERE
+                                                            haulingmat.haulingmat_matname = $row_mat[1];";
                                             $result_use = mysqli_query($conn, $sql_use);
                                             while ($row_use = mysqli_fetch_row($result_del)) {
                                         ?>

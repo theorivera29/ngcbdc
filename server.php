@@ -1376,7 +1376,7 @@ if (isset($_POST['edit_project'])) {
         $currentQuantity = $currentQuantity +$returningQuantity;
 
         $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
-        $stmt->bind_param("iii", $returningQuantity, $hauling_hauledFrom, $returns_matname);
+        $stmt->bind_param("iii", $currentQuantity, $hauling_hauledFrom, $returns_matname);
         $stmt->execute();
         $stmt->close();
 

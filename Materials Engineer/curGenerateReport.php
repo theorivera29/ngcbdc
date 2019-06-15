@@ -66,7 +66,8 @@
             materials.mat_name,
             categories.categories_name,
             matinfo.matinfo_prevStock,
-            unit.unit_name
+            unit.unit_name,
+            matinfo.currentQuantity
         FROM
             materials
         INNER JOIN 
@@ -121,7 +122,7 @@
             }
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
             $pdf->Cell(29,10,$row[3]+$row1[0],1,0,'C',true);
-            $pdf->Cell(25,10,($row[3]+$row1[0])-$row2[0],1,0,'C',true);
+            $pdf->Cell(25,10,$row[5],1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
             $pdf->Ln();
         }
