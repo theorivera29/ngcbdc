@@ -230,10 +230,10 @@
                                         <td><?php echo $row[4] ;?></td>
                                         <td>
                                             <?php 
-                                                if (($mat_count_use+$row1[0]) == 0) {
+                                                if ($row1[0] == 0) {
                                                     echo 0;
                                                 } else {
-                                                    echo $mat_count_use+$row1[0];
+                                                    echo $row1[0];
                                                 }
                                             ?>
                                         </td>

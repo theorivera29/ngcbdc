@@ -418,6 +418,10 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['viewStockCard'])) {
         session_start();
         $matinfo_id = $_POST['matinfo_id'];
+        if (isset($_POST['projects_id'])) {
+            $projects_id = $_POST['projects_id'];
+            $_SESSION['projects_id'] = $projects_id;
+        }
         $_SESSION['matinfo_id'] = $matinfo_id;
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/stockcard.php");  
 
@@ -436,7 +440,6 @@ if (isset($_POST['edit_project'])) {
         session_start();
         $projects_id = $_SESSION['projects_id'];
 
-        // echo $matinfo_id[2]."<br />";
         $matt = array();
         $diff = array();
         $sysC = array();
@@ -581,6 +584,10 @@ if (isset($_POST['edit_project'])) {
                     $mat_id, $categ_id, $prev, $unit_id, 
                     $delivered, $use, $accu, 
                     $qty, $projects_id, $year, $month);
+                    $stmt->execute();
+                    $stmt->close();
+                    $stmt = $conn->prepare("UPDATE matinfo SET matinfo_prevStock = ?, currentQuantity = ? WHERE matinfo_id = ?;");
+                    $stmt->bind_param("iii", $qty, $qty, $mat);
                     $stmt->execute();
                     $stmt->close();
                     }

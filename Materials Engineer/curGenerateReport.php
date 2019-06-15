@@ -158,7 +158,11 @@
             }             
             $pdf->Cell(21,10,$mat_count_use,1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
-            $pdf->Cell(29,10,$mat_count_use+$row1[0],1,0,'C',true);
+            if ($row1[0] == 0) {
+                $pdf->Cell(29,10,0,1,0,'C',true);
+            } else {
+                $pdf->Cell(29,10,$row1[0],1,0,'C',true);
+            }
             $pdf->Cell(25,10,$row[5],1,0,'C',true);
             $pdf->Cell(10,10,$row[4],1,0,'C',true);
             $pdf->Ln();
