@@ -288,7 +288,7 @@
     $(document).ready(function () {
         $(".add-row").click(function () {
             var quantity = $("#quantity").val();
-            var articles = $("#articles option:selected").text();
+            var articles = $("#articles option:selected").val();
             var unit = $("#unit").val();
             var suppliedBy = $("#suppliedBy").val();
             var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" +
