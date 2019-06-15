@@ -174,7 +174,7 @@
                                         </div>
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                            <select class="form-control" name="projectName" required>
+                                            <select class="form-control col-lg-9 " name="projectName" required>
                                                 <option value="" selected disabled>Choose a project</option>
                                                 <?php
                                                 $sql = "SELECT
@@ -396,7 +396,7 @@
                                             </div>
                                             <div class="form-group row col-lg-12">
                                                 <label class="col-lg-2 col-form-label">Hauled from:</label>
-                                                <select class="form-control" name="projectName" required>
+                                                <select class="form-control col-lg-9" name="projectName" required>
                                                     <option value="" selected disabled>Choose a project</option>
                                                     <?php
                                                 $sql = "SELECT

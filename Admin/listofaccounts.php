@@ -101,13 +101,13 @@
                 </tr>
             </thead>
             <tbody>
-            <?php 
+                <?php 
                 $sql = "SELECT accounts_id, accounts_username, concat(accounts_fname,' ', accounts_lname) as name,  
                 accounts_email, accounts_type, accounts_status FROM accounts WHERE accounts_deletable = 'yes';";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_row($result)){
             ?>
-            
+
                 <tr>
                     <td><?php echo $row[0]?></td>
                     <td><?php echo $row[1]?></td>
@@ -176,14 +176,55 @@
                     </div>
                     <!-- End of DISABLE confirmation modal -->
                 </tr>
-            
-            <?php
+                <!-- Start of ENABLE confirmation modal -->
+                <div class="modal fade" id="enable-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to enable
+                                <?php echo $row[2]?>'s account?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of ENABLE confirmation modal -->
+                <!-- Start of DISABLE confirmation modal -->
+                <div class="modal fade" id="disable-modal-<?php echo $row[0]?>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to disable
+                                <?php echo $row[2]?>'s account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of DISABLE confirmation modal -->
+
+                <?php
                 }
             ?>
             </tbody>
         </table>
     </div>
-    
 </body>
 
 <script type="text/javascript">
