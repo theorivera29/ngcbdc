@@ -73,7 +73,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="<?php echo $row[1]; ?>" required/>
+                                <input class="form-control" type="date" value="<?php echo $row[1]; ?>" readonly/>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Material Requisition No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="<?php echo $row[0]; ?>" required/>
+                                <input class="form-control" type="text" value="<?php echo $row[0]; ?>" readonly/>
                             </div>
                         </div>
                     </div>
@@ -89,19 +89,19 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="<?php echo $row[2]; ?>">
+                            <input class="form-control" type="text" value="<?php echo $row[2]; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Location:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="<?php echo $row[3]; ?>">
+                            <input class="form-control" type="text" value="<?php echo $row[3]; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Remarks:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" value="<?php echo $row[4]; ?>">
+                            <input class="form-control" type="text" value="<?php echo $row[4]; ?>" readonly>
                         </div>
                     </div>
                     <div class="card">
@@ -135,16 +135,16 @@
                             <tfoot>
                                 <tr id="requisitionRow">
                                     <td>
-                                        <input class="form-control" value="<?php echo $row1[0]; ?>" type="text">
+                                        <input class="form-control" value="<?php echo $row1[0]; ?>" type="text" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control" value="<?php echo $row1[1]; ?>" type="text">
+                                        <input class="form-control" value="<?php echo $row1[1]; ?>" type="text" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control" type="text" value="<?php echo $row1[2]; ?>">
+                                        <input class="form-control" type="text" value="<?php echo $row1[2]; ?>" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control"  type="text" value="<?php echo $row1[3]; ?>">
+                                        <input class="form-control"  type="text" value="<?php echo $row1[3]; ?>" readonly>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -157,13 +157,13 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Requested by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="<?php echo $row[5]; ?>">
+                                <input class="form-control" type="text" value="<?php echo $row[5]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="<?php echo $row[6]; ?>">
+                                <input class="form-control" type="text" value="<?php echo $row[6]; ?>" readonly>
                             </div>
                         </div>
                     </div>

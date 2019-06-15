@@ -134,16 +134,16 @@
                         ?>
                             <tfoot>
                                 <tr id="deliveredRow">
-                                    <td><input class="form-control" value="<?php echo $row1[0]?>" type="text" id="quantity">
+                                    <td><input class="form-control" value="<?php echo $row1[0]?>" type="text" id="quantity" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control" value="<?php echo $row1[1]?>" type="text" id="unit">
+                                        <input class="form-control" value="<?php echo $row1[1]?>" type="text" id="unit" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control" value="<?php echo $row1[2]?>" type="text" id="unit">
+                                        <input class="form-control" value="<?php echo $row1[2]?>" type="text" id="unit" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control" value="<?php echo $row1[3]?>" type="text" id="suppliedBy">
+                                        <input class="form-control" value="<?php echo $row1[3]?>" type="text" id="suppliedBy" readonly>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -152,12 +152,7 @@
                         ?>
                         </table>
                     </div>
-                    <div class="row form-group save-btn-container">
-                        <div class="col-lg-12">
-                            <input type="submit" name="create_deliveredin" class="btn btn-primary" value="Save Changes">
-                            <input type="reset" class="btn btn-danger" value="Cancel">
-                        </div>
-                    </div>
+                    
                 </form>
             </div>
             <?php
