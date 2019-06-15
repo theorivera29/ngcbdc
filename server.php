@@ -969,7 +969,7 @@ if (isset($_POST['edit_project'])) {
         $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $password = mysqli_real_escape_string($conn, $_POST['confpass']);
         $edit_account_date = date("Y-m-d G:i:s");
         $account_id = "";
         session_start();
@@ -1030,11 +1030,11 @@ if (isset($_POST['edit_project'])) {
             $stmt->close();
         }
         
-        if (isset($_POST['password']) && $_POST['password'] != null) {
-            $password = mysqli_real_escape_string($conn, $_POST['password']);
+        if (isset($_POST['confpass']) && $_POST['confpass'] != null) {
+            $password = mysqli_real_escape_string($conn, $_POST['confpass']);
             $hash_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = 1;");
-            $stmt->bind_param("s", $hash_password);
+            $stmt = $conn->prepare("UPDATE accounts SET accounts_password = ? WHERE accounts_id = ?;");
+            $stmt->bind_param("si", $hash_password, $account_id);
             $stmt->execute();
             $stmt->close();
             $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
@@ -1154,9 +1154,10 @@ if (isset($_POST['edit_project'])) {
         $unit = $_POST['unit'];
         $articles = $_POST['articles'];
         $suppliedBy = $_POST['suppliedBy'];
+        echo $receiptNo;
 
         $stmt = $conn->prepare("INSERT INTO deliveredin (deliveredin_date, deliveredin_remarks, deliveredin_receiptno, deliveredin_project) VALUES (?, ?, ?, ?);");
-        $stmt->bind_param("ssii", $date, $remarks, $receiptNo, $projectName);
+        $stmt->bind_param("sssi", $date, $remarks, $receiptNo, $projectName);
         $stmt->execute();
         $stmt->close();  
         
