@@ -1,5 +1,7 @@
 <?php
     include "../session.php";
+
+     $accounts_id =$_SESSION['account_id'];
 ?>
 
 <!DOCTYPE html>
@@ -160,14 +162,18 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Project:</label>
                         <div class="form-group col-lg-9">
-                            <select class="form-control" name="projectName" required>
+                            <select class="form-control" name="projectName" id="projects" required>
                                 <option value="" selected disabled>Choose a project</option>
                                 <?php
-                                                $sql = "SELECT
-                                                    projects_name,
-                                                    projects_id
-                                                FROM
-                                                    projects;";
+                                                $sql = "SELECT 
+                                                    projects_name, projects_id 
+                                                FROM projmateng 
+                                                INNER JOIN projects 
+                                                ON projmateng_project = projects.projects_id 
+                                                INNER JOIN accounts 
+                                                ON  projmateng_mateng = accounts.accounts_id 
+                                                WHERE accounts.accounts_id 
+                                                IN (SELECT projmateng_mateng FROM projmateng WHERE projmateng_mateng = $accounts_id);";
                                                     $result = mysqli_query($conn, $sql);
                                                     while ($row = mysqli_fetch_row($result)) {
                                             ?>
@@ -210,23 +216,6 @@
                                     <td>
                                         <div class="form-group">
                                             <select class="form-control" name="articles[]" id="articles" required>
-                                                <option value="" selected disabled>Choose an Article</option>
-                                                <?php
-                                                $sql = "SELECT
-                                                    mat_name,
-                                                    mat_id
-                                                FROM
-                                                    materials;";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    while ($row = mysqli_fetch_row($result)) {
-                                            ?>
-
-                                                <option value="<?php echo $row[1]; ?>">
-                                                    <?php echo $row[0]; ?>
-                                                </option>
-                                                <?php
-                                        }
-                                        ?>
                                             </select>
                                             <div class="invalid-feedback">Please select one.</div>
                                         </div>
@@ -313,6 +302,19 @@
                 $('#unit').val(d[0][0])
             })
         })
+        
+        $('#projects').on('change', function () {
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?project_id=' + $(this).children(
+                'option:selected').val(), function (data) {
+                var d = JSON.parse(data)
+                var print_options = '';
+                print_options = print_options + `<option disabled selected>Choose your option</option>`
+                d.forEach(function (da) {
+                    print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
+                })
+                $('#articles').html(print_options)
+            })
+        })
 
     });
 
@@ -341,6 +343,8 @@
             });
         }, false);
     })();
+    
+    var projects = $("#projects option:selected");
 
 </script>
 
