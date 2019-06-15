@@ -3,6 +3,45 @@
     include "smtp_connection.php";
 
 // <--System-->>
+    if (isset($_POST['forgotPassword'])) {
+        session_start();
+        $request_username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
+        $stmt = $conn->prepare("SELECT accounts_id FROM accounts WHERE accounts_username = ?");
+        $stmt->bind_param("s", $request_username);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows === 0) {
+            $_SESSION['user_not_exists'] = true;
+        }
+        $stmt->bind_result($accounts_id);
+        $stmt->fetch();
+        $stmt->close();
+        $stmt = $conn->prepare("SELECT * FROM request WHERE req_username = ?");
+        $stmt->bind_param("s", $accounts_id);
+        $stmt->execute();
+        $stmt->store_result();
+        echo $stmt->num_rows;
+        if ($stmt->num_rows === 0) {
+            $stmt->close();
+            $password_request_date = date("Y-m-d");
+            $status = "pending";
+            $stmt = $conn->prepare("INSERT INTO request (req_username, req_date, req_status) VALUES (?, ?, ?)");
+            $stmt->bind_param("iss", $accounts_id, $password_request_date, $status);
+            $stmt->execute();
+            $stmt->close();
+            $password_request_date_logs = date("Y-m-d G:i:s");
+            $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?, ?, ?);");
+            $stmt->bind_param("ssi", $password_request_date_logs, $logs_message, $logs_of);
+            $logs_message = 'Requested to reset password';
+            $logs_of = $accounts_id;
+            $stmt->execute();
+        } else {
+            $_SESSION['request_done'] = true;
+        }
+        $stmt->close();
+        header("location: http://127.0.0.1/NGCBDC/index.php");
+    }
+
     if (isset($_POST['login'])) {
         session_start();
         $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
