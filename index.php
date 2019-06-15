@@ -2,6 +2,10 @@
     include "db_connection.php";
     include "checkReport.php";
     session_start();
+
+    if (isset($_SESSION['request_done']) || isset($_SESSION['user_not_exists'] )) {
+        header("location: http://127.0.0.1/NGCBDC/forgotPassword.php");
+    }
 ?>
 
 <!DOCTYPE html>

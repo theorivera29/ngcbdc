@@ -34,6 +34,22 @@
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div>
+                <p>
+                    <?php
+                        if (isset($_SESSION['request_done'])) {
+                            echo "Request to reset the password has already been made.";
+                            unset($_SESSION['request_done']);
+                        } 
+                        if (isset($_SESSION['user_not_exists'])) {
+                            echo "Username doesn't exists.";
+                            unset($_SESSION['user_not_exists']);
+                        }
+
+                        
+                    ?>
+                </p>
+            </div>
+            <div>
                 <p class="form-group forgot-password-link"><a href="index.php"><i class="fas fa-arrow-left"></i>Back to Login Page</a></p>
             </div>
             <div class="form-group">
@@ -45,7 +61,7 @@
                         }
                     ?>
                 </p>
-                <button type="submit" name="" class="btn btn-primary login-btn">Send</button>
+                <button type="submit" name="forgotPassword" class="btn btn-primary login-btn">Send</button>
             </div>
         </form>
     </div>
