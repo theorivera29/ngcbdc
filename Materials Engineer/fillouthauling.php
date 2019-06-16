@@ -127,21 +127,13 @@
                                 </div>
                                 <form action="../server.php" method="POST" class="needs-validation" novalidate>
                                     <div class="card-body">
-                                        <div class=" col-lg-12">
-                                            <label class="col-lg-12 col-form-label">Form No.:</label>
-                                            <div class="col-lg-12">
-                                                <input class="form-control" type="text" name="formNo" id="formNo" pattern="[0-9]*" title="Input numbers" required>
-                                            </div>
-                                        </div>
-                                        <div lass="form-group row date-container">
-                                            <div class="col-lg-12">
-                                                <label class="col-lg-12 col-form-label">Hauling type:</label>
-                                                <select class="form-control" name="status" required>
-                                                    <option value="" selected disabled>Choose hauling type:</option>
-                                                    <option value="Permanently hauled">Permanently hauled</option>
-                                                    <option value="To be returned">To be returned</option>
+                                        <div class="form-group row date-container">
+                                            <div class=" col-lg-12">
+                                                <label class="col-lg-12 col-form-label">Form No.:</label>
+                                                <div class="col-lg-12">
+                                                    <input class="form-control" type="text" name="formNo" id="formNo" pattern="[0-9]*" title="Input numbers" required>
                                                     <div class="invalid-feedback">Please fill out this field.</div>
-                                                </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row date-container">
@@ -153,6 +145,18 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group row col-lg-12">
+                                            <label class="col-lg-2 col-form-label">Hauling type:</label>
+                                            <div class="col-lg-9">
+                                                <select class="form-control" name="status" required>
+                                                    <option value="" selected disabled>Choose hauling type:</option>
+                                                    <option value="Permanently hauled">Permanently hauled</option>
+                                                    <option value="To be returned">To be returned</option>
+                                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Deliver to:</label>
                                             <div class="col-lg-9">
