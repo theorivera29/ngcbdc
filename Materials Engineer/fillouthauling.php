@@ -160,7 +160,7 @@
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Deliver to:</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="deliverTo" pattern="[A-Za-z\s]*" title="Input letters" required>
+                                                <input class="form-control" type="text" name="deliverTo" pattern="[A-Za-z0-9\s-.#_]*" title="Input letters" required>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                         </div>
@@ -264,7 +264,7 @@
                                                     <div class="card-body form-group row col-lg-12">
                                                         <label class="col-lg-4 col-form-label">Type:</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="type" pattern="[A-Za-z\s]*" title="Input letters" required>
+                                                            <input class="form-control" type="text" name="type" pattern="[A-Za-z0-9\s]*" title="Input letters" required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
 
@@ -277,7 +277,7 @@
                                                         </div>
                                                         <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" type="text" name="PORS" pattern="[A-Za-z0-9\s]*" title="Input letters and numbers" required>
+                                                            <input class="form-control" type="text" name="PORS" pattern="[A-Za-z0-9\s.-]*" title="Input letters and numbers" required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </div>
@@ -409,7 +409,7 @@
                 });
             }, false);
         })();
-        
+
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
 
