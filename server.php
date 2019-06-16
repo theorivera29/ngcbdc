@@ -610,7 +610,7 @@ if (isset($_POST['edit_project'])) {
                         $delivered = $row1[0];
                     }
                     $use = $mat_count_use;
-                    $accu = $delivered + $use;
+                    $accu = $delivered;
                     $qty = $phys;
                     $year = date("Y");
                     $month = date("n");
@@ -627,6 +627,11 @@ if (isset($_POST['edit_project'])) {
                     $stmt->close();
                     $stmt = $conn->prepare("UPDATE matinfo SET matinfo_prevStock = ?, currentQuantity = ? WHERE matinfo_id = ?;");
                     $stmt->bind_param("iii", $qty, $qty, $mat);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    $stmt = $conn->prepare("DELETE FROM reconciliation WHERE reconciliation_matinfo = ?");
+                    $stmt->bind_param("i", $mat);
                     $stmt->execute();
                     $stmt->close();
                     }
@@ -921,31 +926,39 @@ if (isset($_POST['edit_project'])) {
         $stmt->fetch();
         
         for($x = 0; $x < sizeof($articles); $x++){
-        $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
-        $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
-        $stmt->execute();
-        $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO haulingmat (haulingmat_haulingid, haulingmat_matname, haulingmat_qty, haulingmat_unit) VALUES (?, ?, ?, ?);");
+            $stmt->bind_param("iiii", $hauling_id, $articles[$x], $quantity[$x], $unit[$x]);
+            $stmt->execute();
+            $stmt->close();
+                
+            $stmt = $conn->prepare("SELECT hauling_hauledFrom FROM hauling WHERE hauling_id = ?;");
+            $stmt->bind_param("i", $hauling_id);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($project_id);
+            $stmt->fetch();
             
-        $stmt = $conn->prepare("SELECT hauling_hauledFrom FROM hauling WHERE hauling_id = ?;");
-        $stmt->bind_param("i", $hauling_id);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($project_id);
-        $stmt->fetch();
-        
-        $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
-        $stmt->bind_param("ii", $project_id, $articles[$x]);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($currentQuantity);
-        $stmt->fetch();
-        
-        $newQuantity = $currentQuantity - $quantity[$x];
+            $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
+            $stmt->bind_param("ii", $project_id, $articles[$x]);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($currentQuantity);
+            $stmt->fetch();
+            
+            $newQuantity = $currentQuantity - $quantity[$x];
 
-        $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
-        $stmt->bind_param("iii", $newQuantity, $project_id, $articles[$x]);
-        $stmt->execute();
-        $stmt->close();
+            $stmt = $conn->prepare("UPDATE matinfo SET currentQuantity= ? WHERE matinfo_project = ? AND matinfo_matname = ?;");
+            $stmt->bind_param("iii", $newQuantity, $project_id, $articles[$x]);
+            $stmt->execute();
+            $stmt->close();
+
+            if (strcmp($status, "To be returned" ) == 0 ) {
+                $returns_status = "Incomplete";
+                $stmt = $conn->prepare("INSERT INTO returns (returns_hauling_no, returns_matname, returns_status) VALUES (?, ?, ?);");
+                $stmt->bind_param("iis", $formNo, $articles[$x], $returns_status);
+                $stmt->execute();
+                $stmt->close();
+            }
         }
         
         $account_id = "";
@@ -953,7 +966,7 @@ if (isset($_POST['edit_project'])) {
         if(isset($_SESSION['account_id'])) {
             $account_id = $_SESSION['account_id'];
         }
-
+        
         $stmt = $conn->prepare("INSERT INTO logs (logs_datetime, logs_activity, logs_logsOf) VALUES (?,?,?);");
         $create_haulingtobereturn_date = date("Y-m-d G:i:s");
         $logs_message = 'Created Hauling Form (To be Returned)';
@@ -961,6 +974,7 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("ssi", $create_haulingtobereturn_date, $logs_message, $logs_of);
         $stmt->execute();
         $stmt->close();
+        
         header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/hauleditems.php");
     }
 
@@ -1250,7 +1264,10 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['open_deliveredin'])) {
         $delivered_id = mysqli_real_escape_string($conn, $_POST['delivered_id']);
         $receipt_no = mysqli_real_escape_string($conn, $_POST['receipt_no']);
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewdeliveredin.php?deliveredin_id=$delivered_id&receipt_no=$receipt_no");     
+        session_start();
+        $_SESSION['delivered_id'] = $delivered_id;
+        $_SESSION['receipt_no'] = $receipt_no;
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewdeliveredin.php");     
     }
 
     if (isset($_POST['open_requisition'])) {
@@ -1485,6 +1502,8 @@ if (isset($_POST['edit_project'])) {
     
     if (isset($_POST['return_hauling'])) {
         
+        session_start();
+        $hauling_no = $_SESSION['hauling_no'];
         $returningQuantity = mysqli_real_escape_string($conn, $_POST['returningQuantity']);
         $returns_id = $_POST['returns_id']; 
         $date_today = date("Y-m-d");
@@ -1492,12 +1511,13 @@ if (isset($_POST['edit_project'])) {
         $stmt->bind_param("isi", $returns_id, $date_today, $returningQuantity);
         $stmt->execute();
         $stmt->close();
+        
 
-        $stmt = $conn->prepare("SELECT hauling.hauling_hauledFrom, returns.returns_matname FROM returns INNER JOIN hauling ON returns.returns_hauling_no = hauling.hauling_no WHERE returns.returns_id = ?");
-        $stmt->bind_param("i", $returns_id);
+        $stmt = $conn->prepare("SELECT hauling.hauling_hauledFrom, returns.returns_matname, hauling.hauling_id FROM returns INNER JOIN hauling ON returns.returns_hauling_no = hauling.hauling_no WHERE returns.returns_id = ?");
+        $stmt->bind_param("i", $hauling_no);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($hauling_hauledFrom, $returns_matname);
+        $stmt->bind_result($hauling_hauledFrom, $returns_matname, $hauling_id);
         $stmt->fetch();
 
         $stmt = $conn->prepare("SELECT currentQuantity FROM matinfo WHERE matinfo_project = ? AND matinfo_matname = ?;");
@@ -1514,7 +1534,32 @@ if (isset($_POST['edit_project'])) {
         $stmt->execute();
         $stmt->close();
 
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
+        $stmt = $conn->prepare("SELECT haulingmat.haulingmat_qty FROM hauling INNER JOIN haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid WHERE hauling.hauling_no = ?");
+        $stmt->bind_param("i", $hauling_no);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($haulingmat_qty);
+        $stmt->fetch();
+
+        $stmt = $conn->prepare("SELECT SUM(returnhistory_returningqty) FROM returnhistory WHERE returns_id = ?");
+        $stmt->bind_param("i", $returns_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($returnhistory_returningqty);
+        $stmt->fetch();
+
+        echo $haulingmat_qty."<br />";   
+        echo $returnhistory_returningqty."<br />";   
+        
+        if ($haulingmat_qty <= $returnhistory_returningqty) {
+            $returns_status = "Complete";
+            $stmt = $conn->prepare("UPDATE returns SET returns_status= ? WHERE returns_hauling_no = ?;");
+            $stmt->bind_param("si", $returns_status, $hauling_no);
+            $s = $stmt->execute();
+            $stmt->close();
+        }
+
+        // header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/returnHauledMaterial.php");     
     }
 
     if (isset($_POST['materialCategories'])) {

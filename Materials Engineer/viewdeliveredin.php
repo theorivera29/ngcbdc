@@ -1,5 +1,12 @@
 <?php
     include "../session.php";
+    
+    if (isset($_SESSION['delivered_id']) && isset($_SESSION['receipt_no'])) {
+        $delivered_id = $_SESSION['delivered_id'];
+        $receipt_no = $_SESSION['receipt_no'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewTransactions.php");  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +60,6 @@
             </div>
 
             <?php
-            $receipt_no= $_GET['receipt_no'];
             $sql = "SELECT 
             deliveredin.deliveredin_date,
             deliveredin.deliveredin_receiptno, 
@@ -63,7 +69,7 @@
             FROM deliveredin 
             INNER JOIN projects 
             ON deliveredin.deliveredin_project = projects.projects_id 
-            WHERE deliveredin.deliveredin_receiptno = $receipt_no;";
+            WHERE deliveredin.deliveredin_receiptno = '$receipt_no';";
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_row($result)){
             ?>
@@ -118,7 +124,6 @@
                             <tbody id="deliveredTable">
                             </tbody>
                             <?php
-                        $deliveredin_id= $_GET['deliveredin_id'];
                         $sql1 = "SELECT 
                         deliveredmat.deliveredmat_qty, 
                         materials.mat_name, unit.unit_name, 
@@ -128,7 +133,7 @@
                         ON deliveredmat.deliveredmat_materials = materials.mat_id 
                         INNER JOIN unit 
                         ON materials.mat_unit = unit.unit_id 
-                        WHERE deliveredmat.deliveredmat_deliveredin = $deliveredin_id;";
+                        WHERE deliveredmat.deliveredmat_deliveredin = '$delivered_id';";
                         $result1 = mysqli_query($conn, $sql1);
                         while($row1 = mysqli_fetch_row($result1)){
                         ?>

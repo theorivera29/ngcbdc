@@ -202,7 +202,7 @@
                                                 $mat_count_use = $mat_count_use + $row_use[1];
                                                     }
                                                 }
-                                ?>
+                                        ?>
                                     <tr>
                                         <td>
                                             <form action="../server.php" method="POST">
