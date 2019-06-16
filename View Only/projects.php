@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    unset($_SESSION['projects_id']);
 ?>
 
 <!DOCTYPE html>
@@ -119,13 +120,14 @@
                                         <td><?php echo $row[1] ;?></td>
                                         <td><?php echo $row[2] ;?></td>
                                         <td><?php echo $row[3] ;?></td>
-                                        <td><input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
-                                            <button type="submit" class="btn btn-info" id="view-inventory-btn"
-                                                onclick="window.location.href='viewInventory.php'"
-                                                name="viewInventory">View inventory</button>
-                                            <button type="button" class="btn btn-info" id=""
-                                                onclick="window.location.href='addMaterials.php'" name="">Add
-                                                Materials</button></td>
+                                        <td>
+                                            <form action="../server.php" method="POST">
+                                                <input type="hidden" name="projects_id" value="<?php echo $row[4];?>">
+                                                <button type="submit" class="btn btn-info" id="view-inventory-btn" name="viewInventory">
+                                                    View inventory
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <?php
                                         }
