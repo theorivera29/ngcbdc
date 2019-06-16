@@ -1550,9 +1550,19 @@ if (isset($_POST['edit_project'])) {
         echo json_encode($row);
     }
 
+
     if (isset($_GET['project_id'])) {
         $id = $_GET['project_id'];
         $sql = "SELECT matinfo.matinfo_matname, materials.mat_name FROM matinfo INNER JOIN materials ON matinfo_matname = materials.mat_id WHERE matinfo_project = $id;";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_all($result);
+        echo json_encode($row);
+    }
+
+
+    if (isset($_GET['projects_id'])) {
+        $id = $_GET['projects_id'];
+        $sql = "SELECT projects_address FROM projects WHERE projects_id= $id;";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_all($result);
         echo json_encode($row);
