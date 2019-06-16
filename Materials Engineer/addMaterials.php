@@ -73,7 +73,6 @@
         <table class="table adding-materials-table table-striped table-bordered display" id="mydatatable">
             <thead>
                 <tr>
-                    <th>Select</th>
                     <th>Category</th>
                     <th>Material Name</th>
                     <th>Threshold</th>
@@ -104,9 +103,6 @@
                 ?>
                 <tr>
                     <form action="../server.php" method="POST">
-                        <td>
-                            <input type="checkbox" name="mat-row">
-                        </td>
                         <td>
                             <?php echo $row[0]; ?>
                         </td>
