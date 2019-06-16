@@ -167,7 +167,7 @@
                         } else {
                     ?>
                     <div>
-                        <p id="no-task-text">NO TASK FOR TODAY</p>
+                        <p id="no-task-text">NO TASK TO SHOW</p>
                     </div>
                     <?php
                         }
