@@ -382,7 +382,19 @@
             });
 
         })
-        (function() {
+        
+
+
+    function openSlideMenu() {
+        document.getElementById('menu').style.width = '15%';
+    }
+
+    function closeSlideMenu() {
+        document.getElementById('menu').style.width = '0';
+        document.getElementById('content').style.marginLeft = '0';
+    }
+
+    (function() {
             'use strict';
             window.addEventListener('load', function() {
                 var forms = document.getElementsByClassName('needs-validation');
@@ -397,17 +409,7 @@
                 });
             }, false);
         })();
-
-
-    function openSlideMenu() {
-        document.getElementById('menu').style.width = '15%';
-    }
-
-    function closeSlideMenu() {
-        document.getElementById('menu').style.width = '0';
-        document.getElementById('content').style.marginLeft = '0';
-    }
-
+        
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
 
