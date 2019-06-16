@@ -171,12 +171,32 @@
     $preparedBy = $_SESSION['preparedBy'];
     $checkedBy = $_SESSION['checkedBy'];
     $notedBy = $_SESSION['notedBy'];
-    $pdf->SetFontSize(12);
-    $pdf->SetX($pdf->GetX());
-    $pdf->Cell(63,10,'Prepared by: '.$preparedBy,1,0,'L',true);
-    $pdf->Cell(63,10,'Checked by: '.$checkedBy,1,0,'L',true);
-    $pdf->Cell(63,10,'Noted by: '.$notedBy,1,0,'L',true);
+    $pdf->SetFontSize(13);
+    $pdf->Ln();
+    $pdf->SetXY($pdf->GetX(),$pdf->GetY()+10);
+    $pdf->Cell(63,10,$preparedBy,0,0,'C',true);
+    $pdf->Cell(63,10,$checkedBy,0,0,'C',true);
+    $pdf->Cell(63,10,$notedBy,0,0,'C',true);
+    
+    $pdf->Ln();
+    
+    
+    $pdf->SetY($pdf->GetY()-3);
+    $pdf->SetFont('Times','B',11);
+    $pdf->Cell(63,10,'Prepared by: ',0,0,'C',true);
+    $pdf->Cell(63,10,'Checked by: ',0,0,'C',true);
+    $pdf->Cell(63,10,'Noted by: ',0,0,'C',true);
 
+    $pdf->Ln();
+    $pdf->SetXY($pdf->GetX()+4, $pdf->GetY()-9);
+    $pdf->Cell(55,0.1," ",1,0,'C',true);
+    $pdf->SetX($pdf->GetX()+8);
+    $pdf->Cell(55,0.1," ",1,0,'C',true);
+    $pdf->SetX($pdf->GetX()+8);
+    $pdf->Cell(55,0.1," ",1,0,'C',true);
+    
+    $pdf->Ln();
     //OUTPUT TO PDF
-    $pdf->Output('D', "INVENTORY REPORT ".date("F Y").".pdf");
+    // $pdf->Output('D', "INVENTORY REPORT ".date("F Y").".pdf");
+    $pdf->Output("I");
 ?>
