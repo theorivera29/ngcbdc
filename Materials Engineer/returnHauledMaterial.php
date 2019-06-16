@@ -174,6 +174,9 @@
                                         ?>
                                     </td>
                                     <td><?php echo $status ;?></td>
+                                    <?php
+                                        if (strcmp($status, "Incomplete") == 0) {
+                                    ?>
                                     <td>
                                         <input class="form-control" name="returningQuantity" type="text"
                                             id="returningQuantity" placeholder="Returning Quantity" autocomplete="off">
@@ -183,6 +186,16 @@
                                         <input type="submit" name="return_hauling"
                                             class="btn btn-md btn-outline-secondary save-row">
                                     </td>
+                                    <?php
+                                        } else {
+                                            ?>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                            <?php
+                                        }
+                                    ?>
                                 </form>
                             </tr>
                             <?php

@@ -1,5 +1,7 @@
 <?php
     include "../session.php";
+    unset($_SESSION['delivered_id']);
+    unset($_SESSION['receipt_no']);
 ?>
 
 <!DOCTYPE html>
