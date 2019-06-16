@@ -1625,4 +1625,19 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_all($result);
         echo json_encode($row);
     }
-?>
+
+    if (isset($_GET['matinfo_id'])) {
+        $id = $_GET['matinfo_id'];
+        $proj_id = $_GET['matinfo_project'];
+        $sql = "SELECT currentQuantity FROM matinfo WHERE matinfo_matname = $id AND matinfo_project = $proj_id;";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_all($result);
+        echo json_encode($row);
+    }
+
+     
+
+// <--View Only-->
+    if (isset($_POST['view_viewInventory'])) {
+        echo "ASD";
+    }
