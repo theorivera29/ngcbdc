@@ -138,10 +138,10 @@
                     <th class="align-middle">Category</th>
                     <th class="align-middle">Previous Material Stock</th>
                     <th class="align-middle">Unit</th>
-                    <th class="align-middle">Delivered Material as of</th>
-                    <th class="align-middle">Material Pulled Out as of</th>
+                    <th class="align-middle">Delivered Material as of <?php echo date("F Y"); ?></th>
+                    <th class="align-middle">Material Pulled Out as of <?php echo date("F Y"); ?></th>
                     <th class="align-middle">Accumulated Materials Delivered</th>
-                    <th class="align-middle">Material on Site as of</th>
+                    <th class="align-middle">Material on Site as of <?php echo date("F Y"); ?></th>
                     <th class="align-middle">Unit</th>
                     <th class="align-middle">Project</th>
                 </tr>
