@@ -26,7 +26,7 @@
     $pdf->SetFont('Times','',12);
     $pdf->Cell(0,25,'PROJECT : '.strtoupper($row[0]),0,2);
     $pdf->Cell(0,-16,'LOCATION : '.strtoupper($row[1]),0,2);
-    $pdf->Cell(0,26,'SUBJECT : INVENTORY REPORT AS OF '.date("F", mktime(0, 0, 0, $lastmatinfo_month, 10))." ".$lastmatinfo_year,0,2);
+    $pdf->Cell(0,26,'SUBJECT : INVENTORY REPORT AS OF '.strtoupper(date("F", mktime(0, 0, 0, $lastmatinfo_month, 10)))." ".$lastmatinfo_year,0,2);
 
     //SET TABLE BORDER COLOR
     $pdf->SetFont('Times','B',9);
@@ -38,13 +38,13 @@
     $pdf->SetXY($pdf->GetX()+50,$pdf->GetY()-26.67);
     $pdf->MultiCell(22,8.9,utf8_decode('PREVIOUS'.chr(10).'MATERIAL'.chr(10).'STOCK'),1,'C',true);
     $pdf->SetXY($pdf->GetX()+72,$pdf->GetY()-26.67);
-    $pdf->MultiCell(22,6.67,utf8_decode('DELIVERED'.chr(10).'MATERIAL'.chr(10).'AS OF'.chr(10).'April 2019'),1,'C',true);
+    $pdf->MultiCell(22,6.67,utf8_decode('DELIVERED'.chr(10).'MATERIAL'.chr(10).'AS OF '.chr(10)).strtoupper(date("F", mktime(0, 0, 0, $lastmatinfo_month, 10)))." ".$lastmatinfo_year,1,'C',true);
     $pdf->SetXY($pdf->GetX()+94,$pdf->GetY()-26.67);
-    $pdf->MultiCell(31,8.9,utf8_decode('MATERIAL'.chr(10).'PULLED OUT'.chr(10).'AS OF April 2019'),1,'C',true);
+    $pdf->MultiCell(31,8.9,utf8_decode('MATERIAL'.chr(10).'PULLED OUT'.chr(10).'AS OF ').strtoupper(date("F", mktime(0, 0, 0, $lastmatinfo_month, 10)))." ".$lastmatinfo_year,1,'C',true);
     $pdf->SetXY($pdf->GetX()+125,$pdf->GetY()-26.67);
     $pdf->MultiCell(29,8.9,utf8_decode('ACCUMULATED'.chr(10).'MATERIALS'.chr(10).'DELIVERED'),1,'C',true);
     $pdf->SetXY($pdf->GetX()+154,$pdf->GetY()-26.67);
-    $pdf->MultiCell(35,13.33,utf8_decode('MATERIALS ON SITE'.chr(10).'AS OF April 2019'),1,'C',true);
+    $pdf->MultiCell(35,13.33,utf8_decode('MATERIALS ON SITE'.chr(10).'AS OF ').strtoupper(date("F", mktime(0, 0, 0, $lastmatinfo_month, 10)))." ".$lastmatinfo_year,1,'C',true);
   
     //TABLE CONTENT
     $sql_categ = "SELECT DISTINCT

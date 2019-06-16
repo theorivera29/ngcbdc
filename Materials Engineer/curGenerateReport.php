@@ -197,6 +197,5 @@
     
     $pdf->Ln();
     //OUTPUT TO PDF
-    // $pdf->Output('D', "INVENTORY REPORT ".date("F Y").".pdf");
-    $pdf->Output("I");
+    $pdf->Output('D', "INVENTORY REPORT ".date("F Y").".pdf");
 ?>
