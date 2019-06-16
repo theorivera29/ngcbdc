@@ -312,6 +312,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody>
                                 <?php 
                                             $sql = "SELECT
                                                         unit_id,
@@ -322,7 +323,7 @@
                                             $result = mysqli_query($conn, $sql);
                                             while($row = mysqli_fetch_row($result)){
                                         ?>
-                                <tbody>
+                                
 
                                     <tr>
                                         <td>
@@ -361,10 +362,11 @@
                                         </form>
                                     </div>
                                     <!-- End of edit unit modal -->
-                                </tbody>
+                                
                                 <?php
                                             }
                                 ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- End of Unit -->

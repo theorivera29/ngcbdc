@@ -517,6 +517,11 @@ textarea{
 
 }
 
+#generate-stockcard{
+    float: right !important;
+    margin-top: 1% !important;
+}
+
 /*End of Materials Engineer - Stockard*/
 
 /*Start of Materials Engineer- Site Materials*/
