@@ -78,7 +78,7 @@
                 <?php 
                     $sql = "SELECT 
                     accounts_fname, accounts_lname, accounts_username, accounts_email, accounts_password FROM accounts
-                    WHERE accounts_username='materials_engineer';";
+                    WHERE accounts_id = $accounts_id;";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_row($result);
                 ?>

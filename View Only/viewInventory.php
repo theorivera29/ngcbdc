@@ -1,5 +1,20 @@
 <?php
     include "../session.php";
+    if (isset($_SESSION['projects_id'])) {
+        $projects_id = $_SESSION['projects_id'];
+        unset($_SESSION['categories_id']);
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/View%Only/projects.php");  
+    }
+    $sql_name = "SELECT 
+                    projects_name
+                FROM
+                    projects
+                WHERE
+                    projects_id = $projects_id;";
+    $result_name = mysqli_query($conn, $sql_name);
+    $row_name = mysqli_fetch_row($result_name);
+    $projects_name = $row_name[0];
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +103,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $projects_id = $_GET['projects_id'];
                                     $sql_categ = "SELECT DISTINCT
                                                     categories_name
                                                 FROM
@@ -96,9 +110,7 @@
                                                 INNER JOIN
                                                     categories ON categories.categories_id = materials.mat_categ
                                                 INNER JOIN
-                                                    matinfo ON materials.mat_id = matinfo.matinfo_matname
-                                                WHERE
-                                                    matinfo.matinfo_project = $projects_id;";
+                                                    matinfo ON materials.mat_id = matinfo.matinfo_matname;";
                                     $result = mysqli_query($conn, $sql_categ);
                                     $categories = array();
                                     while($row_categ = mysqli_fetch_assoc($result)){
@@ -106,14 +118,16 @@
                                     }
 
                                     foreach($categories as $data) {
-                                        $categ = $data['categories_name'];
-                                        
+                                        $categ = $data['categories_name'];                                        
                                         $sql = "SELECT 
                                                     materials.mat_id,
                                                     materials.mat_name,
                                                     categories.categories_name,
                                                     matinfo.matinfo_prevStock,
-                                                    unit.unit_name
+                                                    unit.unit_name,
+                                                    matinfo.matinfo_id,
+                                                    matinfo.currentQuantity,
+                                                    matinfo.matinfo_id
                                                 FROM
                                                     materials
                                                 INNER JOIN 
@@ -129,22 +143,60 @@
                                                 ORDER BY 1;";
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_row($result)){
+                                            $matinfo_id = $row[7];
                                             $sql1 = "SELECT 
-                                                        SUM(deliveredin.deliveredin_quantity) FROM deliveredin
-                                                    INNER JOIN 
-                                                        matinfo ON deliveredin.deliveredin_matname = matinfo.matinfo_matname
+                                                        SUM(deliveredmat.deliveredmat_qty) 
+                                                    FROM 
+                                                        deliveredmat
                                                     WHERE 
-                                                        matinfo.matinfo_matname = '$row[0]';";
+                                                        deliveredmat.deliveredmat_materials = '$row[0]';";
                                             $result1 = mysqli_query($conn, $sql1);
                                             $row1 = mysqli_fetch_row($result1);
-                                            $sql2 = "SELECT 
-                                                        SUM(usagein.usagein_quantity) FROM usagein
-                                                        INNER JOIN 
-                                                        matinfo ON usagein.usagein_matname = matinfo.matinfo_matname
-                                                    WHERE 
-                                                        matinfo.matinfo_matname = '$row[0]';";
-                                            $result2 = mysqli_query($conn, $sql2);
-                                            $row2 = mysqli_fetch_row($result2);
+                                            $sql_mat = "SELECT
+                                                            unit.unit_name,
+                                                            materials.mat_id
+                                                        FROM
+                                                            materials
+                                                        INNER JOIN
+                                                            unit ON unit.unit_id = materials.mat_unit
+                                                        INNER JOIN
+                                                            matinfo ON matinfo.matinfo_matname = materials.mat_id";
+                                            $result_mat = mysqli_query($conn, $sql_mat);
+                                            $mat_count_use = 0;
+                                            while ($row_mat = mysqli_fetch_row($result_mat)) {
+                                                $sql_use = "SELECT
+                                                                requisition.requisition_date,
+                                                                reqmaterial.reqmaterial_qty,
+                                                                requisition.requisition_reqBy,
+                                                                reqmaterial.reqmaterial_areaOfUsage,
+                                                                requisition.requisition_remarks
+                                                            FROM
+                                                                requisition
+                                                            INNER JOIN
+                                                                reqmaterial ON reqmaterial.reqmaterial_requisition = requisition.requisition_id
+                                                            WHERE
+                                                                reqmaterial.reqmaterial_material = $row_mat[1];";
+                                                $result_use = mysqli_query($conn, $sql_use);
+                                                while ($row_use = mysqli_fetch_row($result_use)) {
+                                                $mat_count_use = $mat_count_use + $row_use[1];
+                                                    }
+                                                $sql_use = "SELECT
+                                                                hauling.hauling_date,
+                                                                haulingmat.haulingmat_qty,
+                                                                hauling.hauling_requestedBy,
+                                                                hauling.hauling_deliverTo,
+                                                                hauling.hauling_status
+                                                            FROM
+                                                                hauling
+                                                            INNER JOIN
+                                                                haulingmat ON hauling.hauling_id = haulingmat.haulingmat_haulingid
+                                                            WHERE
+                                                                haulingmat.haulingmat_matname = $row_mat[1];";
+                                                $result_use = mysqli_query($conn, $sql_use);
+                                                while ($row_use = mysqli_fetch_row($result_use)) {
+                                                $mat_count_use = $mat_count_use + $row_use[1];
+                                                    }
+                                                }
                                 ?>
                                     <tr>
                                         <td><?php echo $row[1] ;?></td>
@@ -152,10 +204,10 @@
                                         <td><?php echo $row[3] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
                                         <td><?php echo $row1[0] ;?></td>
-                                        <td><?php echo $row2[0] ;?></td>
+                                        <td><?php echo $mat_count_use ;?></td>
                                         <td><?php echo $row[4] ;?></td>
-                                        <td><?php echo $row[3]+$row1[0] ;?></td>
-                                        <td><?php echo $row[3]+$row1[0]-$row2[0] ;?></td>
+                                        <td><?php echo $row1[0] ;?></td>
+                                        <td><?php echo $row[6] ;?></td>
                                         <td><?php echo $row[4] ;?></td>
                                     </tr>
                                     <?php
@@ -169,7 +221,7 @@
                             <?php
                                 $sql = "SELECT DISTINCT
                                             categories.categories_id,
-                                            categories_name
+                                            categories.categories_name
                                         FROM
                                             materials
                                         INNER JOIN
@@ -177,7 +229,7 @@
                                         INNER JOIN
                                             matinfo ON materials.mat_id = matinfo.matinfo_matname
                                         WHERE
-                                            matinfo.matinfo_matname = $projects_id;";
+                                            matinfo.matinfo_project = $projects_id;";
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
@@ -186,10 +238,8 @@
                                     <h5 class="card-header"><?php echo $row[1];?></h5>
                                     <div class="card-body">
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
-                                        <input type="hidden" name="projects_id" value="<?php echo $projects_id; ?>">
                                         <button type="submit" name="materialCategories" class="btn btn-info"
-                                            id="open-category-btn"
-                                            onclick="window.location.href='materialCategories.php'">View</button>
+                                            id="open-category-btn" name="materialCategories">View</button>
                                     </div>
                                 </form>
                             </div>

@@ -1,5 +1,10 @@
 <?php
     include "../session.php";
+    if (isset($_SESSION['hauling_no'])) {
+        $hauling_no = $_SESSION['hauling_no'];
+    } else {
+        header("Location:http://127.0.0.1/NGCBDC/View%Only/hauleditems.php");  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -49,18 +54,45 @@
 
     </div>
 
-    <div class="mx-auto mt-5 col-md-9">
-        <div class="card">
+    <div class="mx-auto">
+        <div class="card view-hauling-receipt-container">
             <div class="card-header">
-                <h4>Hauling Receipt</h4>
+                <div class="row col-lg-12">
+                    <div class="col-lg-8">
+                        <h4>Hauling Receipt</h4>
+                    </div>
+                </div>
             </div>
+            <?php
+        $sql = "SELECT 
+                    hauling.hauling_no, 
+                    hauling.hauling_date, 
+                    hauling.hauling_deliverTo, 
+                    projects.projects_name, 
+                    hauling.hauling_requestedBy, 
+                    hauling.hauling_hauledBy, 
+                    hauling.hauling_warehouseman, 
+                    hauling.hauling_approvedBy, 
+                    hauling.hauling_truckDetailsType, 
+                    hauling.hauling_truckDetailsPLateNo, 
+                    hauling.hauling_truckDetailsPO, 
+                    hauling.hauling_truckDetailsHaulerDR 
+                FROM 
+                    hauling
+                INNER JOIN 
+                    projects ON projects.projects_id = hauling.hauling_hauledFrom
+                WHERE 
+                    hauling.hauling_no = $hauling_no;";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_row($result)){
+    ?>
             <div class="card-body">
                 <form class="form">
                     <div class="form-group row formnum-container">
                         <div class=" col-lg-12">
                             <label class="col-lg-12 col-form-label">Form No.:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="<?php echo $row[0]?>" disabled>
                             </div>
                         </div>
                     </div>
@@ -68,20 +100,20 @@
                         <div class="col-lg-12">
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="date" value="">
+                                <input class="form-control" type="date" value="<?php echo $row[1]?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Deliver to:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                        <div class="col-lg-10">
+                            <input class="form-control" type="text" value="<?php echo $row[2]?>" disabled>
                         </div>
                     </div>
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Hauled from:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="text" value="">
+                        <div class="col-lg-10">
+                            <input class="form-control" type="text" value="<?php echo $row[3]?>" disabled>
                         </div>
                     </div>
                     <div class="card">
@@ -94,11 +126,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $sql_item = "SELECT
+                                                    haulingmat.haulingmat_qty,
+                                                    unit.unit_name,
+                                                    materials.mat_name
+                                                FROM
+                                                    haulingmat
+                                                INNER JOIN
+                                                    hauling ON hauling.hauling_id = haulingmat_haulingid
+                                                INNER JOIN 
+                                                    unit ON unit.unit_id = haulingmat.haulingmat_unit
+                                                INNER JOIN 
+                                                    materials ON materials.mat_id = haulingmat.haulingmat_matname
+                                                WHERE
+                                                    hauling.hauling_no = $hauling_no;";
+                                    $result_item = mysqli_query($conn, $sql_item);
+                                    while($row_item = mysqli_fetch_array($result_item)) {
+                                ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $row_item[0] ;?></td>
+                                    <td><?php echo $row_item[1] ;?></td>
+                                    <td><?php echo $row_item[2] ;?></td>
                                 </tr>
+                                <?php
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -106,13 +159,13 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Requested:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="<?php echo $row[4]?>" disabled>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Hauled by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="<?php echo $row[5]?>" disabled>
                             </div>
                         </div>
                     </div>
@@ -120,11 +173,11 @@
                         <div class="form-group col-lg-6">
                             <label class="col-lg-12 col-form-label">Warehouseman:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="<?php echo $row[6]?>" disabled>
                             </div>
                             <label class="col-lg-12 col-form-label">Approved by:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value="<?php echo $row[7]?>" disabled>
                             </div>
                         </div>
 
@@ -135,20 +188,20 @@
                                 </div>
                                 <div class="card-body form-group row col-lg-12">
                                     <label class="col-lg-4 col-form-label">Type:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                    <div class="col-lg-8 form-group">
+                                        <input class="form-control" type="text" value="<?php echo $row[8]?>" disabled>
                                     </div>
-                                    <label class="col-lg-4 col-form-label">Plate #:</label>
+                                    <label class="col-lg-4 form-group col-form-label">Plate #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="<?php echo $row[9]?>" disabled>
                                     </div>
-                                    <label class="col-lg-4 col-form-label">P.O./R.S. #:</label>
+                                    <label class="col-lg-4 form-group col-form-label">P.O./R.S. #:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="<?php echo $row[10]?>" disabled>
                                     </div>
-                                    <label class="col-lg-4 col-form-label">Hauler ID:</label>
+                                    <label class="col-lg-4 form-group col-form-label">Hauler ID:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="">
+                                        <input class="form-control" type="text" value="<?php echo $row[11]?>" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +209,9 @@
                     </div>
                 </form>
             </div>
+            <?php
+        }
+    ?>
         </div>
     </div>
 </body>

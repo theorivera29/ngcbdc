@@ -1257,8 +1257,21 @@ if (isset($_POST['edit_project'])) {
         $hauling_no = mysqli_real_escape_string($conn, $_POST['hauling_no']);
         session_start();
         $_SESSION['hauling_no'] = $hauling_no;
-        echo $_SESSION['hauling_no'];
-        header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php");     
+
+        $accounts_id = $_SESSION['account_id'];   
+        $sql = "SELECT
+                    accounts_type
+                FROM
+                    accounts
+                WHERE 
+                    accounts_id = $accounts_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        if (strcmp($row[0], "Materials Engineer") == 0) {
+            header("Location:http://127.0.0.1/NGCBDC/Materials%20Engineer/viewhaulingreceipt.php");     
+        } else {
+            header("location: http://127.0.0.1/NGCBDC/View%20Only/viewhaulingreceipt.php");  
+        }  
     }
 
     if (isset($_POST['open_deliveredin'])) {
@@ -1616,4 +1629,7 @@ if (isset($_POST['edit_project'])) {
      
 
 // <--View Only-->
+    if (isset($_POST['view_viewInventory'])) {
+        echo "ASD";
+    }
 ?>

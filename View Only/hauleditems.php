@@ -1,5 +1,6 @@
 <?php
     include "../session.php";
+    unset($_SESSION['hauling_no']);
 ?>
 
 <!DOCTYPE html>
@@ -88,14 +89,47 @@
                 </tr>
             </thead>
             <tbody>
+                <?php
+                        $sql = "SELECT 
+                        hauling_no, 
+                        hauling_date, 
+                        projects.projects_name, 
+                        hauling_deliverTo,
+                        hauling_hauledBy, 
+                        hauling_status 
+                        FROM  hauling  
+                        INNER JOIN 
+                            projects ON projects.projects_id = hauling.hauling_hauledFrom;";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_array($result)) {
+                    ?>
+
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td> <button type="submit" class="btn btn-success" id="view-hauled-btn" onclick="window.location.href = 'viewhaulingreceipt.php'">View</button></td>
+                    <form action="../server.php" method="POST">
+                        <td>
+                            <?php echo $row[0]?>
+                        </td>
+                        <td>
+                            <?php echo $row[1]?>
+                        </td>
+                        <td>
+                            <?php echo $row[3]?>
+                        </td>
+                        <td>
+                            <?php echo $row[4]?>
+                        </td>
+                        <td>
+                            <?php echo $row[5]?>
+                        </td>
+                        <td>
+                            <input type="hidden" name="hauling_no" value="<?php echo $row[0]?>">
+                            <button type="submit" class="btn btn-success" name="view_hauling">View</button></td>
+                    </form>
                 </tr>
+
+                <?php
+                        }
+                    ?>
             </tbody>
         </table>
     </div>
