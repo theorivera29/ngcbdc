@@ -218,10 +218,19 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <?php
+                        <table class="table category-table table-striped table-bordered display"
+                                id="mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
                                 $sql = "SELECT DISTINCT
                                             categories.categories_id,
-                                            categories.categories_name
+                                            categories_name
                                         FROM
                                             materials
                                         INNER JOIN
@@ -233,19 +242,24 @@
                                 $result = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_row($result)){
                             ?>
-                            <div class="card ">
-                                <form action="../server.php" method="POST">
-                                    <h5 class="card-header"><?php echo $row[1];?></h5>
-                                    <div class="card-body">
+                                    <tr>
+                                        <form action="../server.php" method="POST">
+                                        <td><?php echo $row[1] ;?></button>
+                                        </td>
+                                        <td>
                                         <input type="hidden" name="categories_id" value="<?php echo $row[0]; ?>">
-                                        <button type="submit" name="materialCategories" class="btn btn-info"
-                                            id="open-category-btn" name="materialCategories">View</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <?php
-                                }
-                            ?>
+                                        <button type="submit" name="materialCategories" class="btn btn-info" id="open-category-btn">View</button>
+
+                                        </td>
+                                        </form>
+                                    </tr>
+                                    <?php
+                                        }
+                                ?>
+                                </tbody>
+                            </table>
+
+                        </div>
                         </div>
                     </div>
                 </div>
