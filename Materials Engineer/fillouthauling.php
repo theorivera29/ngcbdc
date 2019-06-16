@@ -384,14 +384,13 @@
         $('#articles').on('change', function() {
             var projects_id = $("#projects").val();
             $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?matinfo_id=' + $(this).children(
-                'option:selected').val()+ '&matinfo_project=' + projects_id , function(data) {
+                'option:selected').val() + '&matinfo_project=' + projects_id, function(data) {
                 var d = JSON.parse(data)
                 var print_options = '';
-                d.forEach(function(da) {
-                    console.log(da)
-                    print_options = print_options + `<input class="form-control" name="quantity[]" pattern="[0-9]*" min="0" max="${da[0]}" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>`
-                })
-                $('#quantity').html(print_options)
+                $('#quantity').attr({
+                    "max": d[0][0],
+                    "min": 0
+                });
             })
         });
 

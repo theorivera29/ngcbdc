@@ -1641,4 +1641,3 @@ if (isset($_POST['edit_project'])) {
     if (isset($_POST['view_viewInventory'])) {
         echo "ASD";
     }
-?>
