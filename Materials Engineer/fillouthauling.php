@@ -156,7 +156,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group row col-lg-12">
                                             <label class="col-lg-2 col-form-label">Deliver to:</label>
                                             <div class="col-lg-9">
@@ -204,7 +204,7 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr id="returnHaulingRow">
-                                                        <td><input class="form-control" name="quantity[]" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>
+                                                        <td><input id="quantity" class="form-control" name="quantity[]" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>
                                                             <div class="invalid-feedback">Please fill out this field.
                                                             </div>
                                                         </td>
@@ -329,60 +329,74 @@
 <script type="text/javascript">
     var i = 1;
     $(document).ready(function() {
-            $(".add-row").click(function() {
-                var quantity = $("#quantity").val();
-                var articles = $("#articles option:selected");
-                var unit = $("#unit").val();
-                var units = $("#units").val();
-                var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='articles[]' id='articles" + i + "' value='" + articles.val() + "' readonly><option value='" + articles.val() + "' selected readonly>" + articles.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' readonly/><input type='hidden' class='form-control' name='unit[]' value='" + unit + "'></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
-                if ((quantity != '') && (articles != '') && (unit != '')) {
-                    $("#table1 tbody").append(markup);
-                    $("#returnHaulingRow input[type=text]").val('');
-                    $("#returnHaulingRow select").val('');
-                }
-                i++;
-            });
+        $(".add-row").click(function() {
+            var quantity = $("#quantity").val();
+            var articles = $("#articles option:selected");
+            var unit = $("#unit").val();
+            var units = $("#units").val();
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='articles[]' id='articles" + i + "' value='" + articles.val() + "' readonly><option value='" + articles.val() + "' selected readonly>" + articles.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' readonly/><input type='hidden' class='form-control' name='unit[]' value='" + unit + "'></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            if ((quantity != '') && (articles != '') && (unit != '')) {
+                $("#table1 tbody").append(markup);
+                $("#returnHaulingRow input[type=text]").val('');
+                $("#returnHaulingRow select").val('');
+            }
+            i++;
+        });
 
-            $("#returnHaulingTable").on('click', '.delete-row', function() {
-                $(this).closest('tr').remove();
-            });
+        $("#returnHaulingTable").on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
+        });
 
 
-            $("#permanentHaulingTable").on('click', '.delete-row', function() {
-                $(this).closest('tr').remove();
-            });
+        $("#permanentHaulingTable").on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
+        });
 
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
-            });
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
 
-            $('#articles').on('change', function() {
-                console.log($(this).children('option:selected').val())
-                $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this)
-                    .children(
-                        'option:selected').val(),
-                    function(data) {
-                        var d = JSON.parse(data);
-                        $('#unit').val(d[0][0])
-                        $('#units').val(d[0][1])
-                    });
-            })
-        
-            $('#projects').on('change', function() {
-                $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?project_id=' + $(this).children(
-                    'option:selected').val(), function(data) {
-                    var d = JSON.parse(data)
-                    var print_options = '';
-                    print_options = print_options + `<option disabled selected>Choose your option</option>`
-                    d.forEach(function(da) {
-                        print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
-                    })
-                    $('#articles').html(print_options)
-                })
-            });
-
+        $('#articles').on('change', function() {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?mat_name=' + $(this)
+                .children(
+                    'option:selected').val(),
+                function(data) {
+                    var d = JSON.parse(data);
+                    $('#unit').val(d[0][0])
+                    $('#units').val(d[0][1])
+                });
         })
-        
+
+        $('#projects').on('change', function() {
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?project_id=' + $(this).children(
+                'option:selected').val(), function(data) {
+                var d = JSON.parse(data)
+                var print_options = '';
+                print_options = print_options + `<option disabled selected>Choose your option</option>`
+                d.forEach(function(da) {
+                    print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
+                })
+                $('#articles').html(print_options)
+            })
+        });
+
+        $('#articles').on('change', function() {
+            var projects_id = $("#projects").val();
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?matinfo_id=' + $(this).children(
+                'option:selected').val()+ '&matinfo_project=' + projects_id , function(data) {
+                var d = JSON.parse(data)
+                var print_options = '';
+                d.forEach(function(da) {
+                    console.log(da)
+                    print_options = print_options + `<input class="form-control" name="quantity[]" pattern="[0-9]*" min="0" max="${da[0]}" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>`
+                })
+                $('#quantity').html(print_options)
+            })
+        });
+
+    })
+
 
 
     function openSlideMenu() {
@@ -395,20 +409,20 @@
     }
 
     (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
     bootstrapValidate('#formNo', 'numeric:You can only input numeric characters.')
     bootstrapValidate('#formNo1', 'numeric:You can only input numeric characters.')
