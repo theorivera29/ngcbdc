@@ -204,8 +204,10 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr id="returnHaulingRow">
-                                                        <td><input class="form-control" name="quantity[]" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>
-                                                            <div class="invalid-feedback">Please fill out this field.
+                                                        <td>
+                                                            <input class="form-control" name="quantity[]" pattern="[0-9]*" title="Input numbers" type="text" id="quantity" placeholder="Quantity" required>
+                                                            <div class="invalid-feedback">
+                                                                Please fill out this field.
                                                             </div>
                                                         </td>
                                                         <td>
