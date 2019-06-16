@@ -75,11 +75,11 @@
                     <th scope="col">Particulars</th>
                     <th scope="col">Previous Material Stock</th>
                     <th scope="col">Unit</th>
-                    <th scope="col">Delivered Material as of Month</th>
-                    <th scope="col">Material Pulled out as of Month</th>
+                    <th scope="col">Delivered Material as of <?php echo date("F Y"); ?></th>
+                    <th scope="col">Material Pulled out as of <?php echo date("F Y"); ?></th>
                     <th scope="col">Unit</th>
                     <th scope="col">Accumulated Materials Delivered</th>
-                    <th scope="col">Materials on site as of Month</th>
+                    <th scope="col">Materials on site as of <?php echo date("F Y"); ?></th>
                     <th scope="col">Unit</th>
                 </tr>
             </thead>
