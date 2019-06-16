@@ -174,7 +174,7 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Location:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="location" required>
+                            <input id="location" class="form-control" type="text" name="location" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
@@ -316,6 +316,16 @@
                     print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
                 })
                 $('#particulars').html(print_options)
+            })
+        })
+
+        $('#projects').on('change', function() {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?projects_id=' + $(this).children(
+                'option:selected').val(), function(data) {
+                var d = JSON.parse(data);
+                console.log(d);
+                $('#location').val(d)
             })
         })
     });

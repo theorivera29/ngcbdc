@@ -191,7 +191,7 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-lg-2 col-form-label">Location:</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="location" required>
+                            <input id="location" class="form-control" type="text" name="location" required>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
 
 </body>
 <script type="text/javascript">
-    var i=1;
+    var i = 1;
     $(document).ready(function() {
         $(".add-row").click(function() {
             var quantity = $("#quantity").val();
@@ -275,7 +275,7 @@
             var unit = $("#unit").val();
             var units = $("#units").val();
             var suppliedBy = $("#suppliedBy").val();
-            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='articles[]' id='articles" + i +"' value='" + articles.val() + "' readonly><option value='" + articles.val() + "' selected readonly>" + articles.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' /><input type='hidden' class='form-control' name='unit[]' value='" + unit + "'></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" + suppliedBy + "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
+            var markup = "<tr><td><input type='text' name='quantity[]' class='form-control' value='" + quantity + "' /></td><td><select class='form-control' name='articles[]' id='articles" + i + "' value='" + articles.val() + "' readonly><option value='" + articles.val() + "' selected readonly>" + articles.text() + "</option></select></td><td><input type='text' class='form-control' value='" + units + "' /><input type='hidden' class='form-control' name='unit[]' value='" + unit + "'></td><td><input type='text' name='suppliedBy[]' class='form-control' value='" + suppliedBy + "' /></td><td><input type='button' class='btn btn-sm btn-outline-secondary delete-row' value='Delete' /></td></tr>";
 
             if ((quantity != '') && (articles != '') && (unit != '') && (suppliedBy != '')) {
                 $("table tbody").append(markup);
@@ -302,14 +302,24 @@
                 $('#unit').val(d[0][0])
             })
         })
-        
-        $('#projects').on('change', function () {
+
+        $('#projects').on('change', function() {
+            console.log($(this).children('option:selected').val())
+            $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?projects_id=' + $(this).children(
+                'option:selected').val(), function(data) {
+                var d = JSON.parse(data);
+                console.log(d);
+                $('#location').val(d)
+            })
+        })
+
+        $('#projects').on('change', function() {
             $.get('http://localhost/NGCBDC/Materials%20Engineer/../server.php?project_id=' + $(this).children(
-                'option:selected').val(), function (data) {
+                'option:selected').val(), function(data) {
                 var d = JSON.parse(data)
                 var print_options = '';
                 print_options = print_options + `<option disabled selected>Choose your option</option>`
-                d.forEach(function (da) {
+                d.forEach(function(da) {
                     print_options = print_options + `<option value="${da[0]}">${da[1]}</option>`
                 })
                 $('#articles').html(print_options)
@@ -343,7 +353,7 @@
             });
         }, false);
     })();
-    
+
     var projects = $("#projects option:selected");
 
 </script>
