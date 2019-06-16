@@ -1625,11 +1625,4 @@ if (isset($_POST['edit_project'])) {
         $row = mysqli_fetch_all($result);
         echo json_encode($row);
     }
-
-     
-
-// <--View Only-->
-    if (isset($_POST['view_viewInventory'])) {
-        echo "ASD";
-    }
 ?>
