@@ -242,7 +242,7 @@
                     <div class="row form-group save-btn-container">
                         <div class="col-lg-12">
                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-modal" value="Save Changes">
-                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                            <input type="reset" class="btn btn-danger" value="Cancel">
                         </div>
                     </div>
                     <!-- Start of confirmation modal -->
